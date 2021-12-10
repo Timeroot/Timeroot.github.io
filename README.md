@@ -1,4 +1,15 @@
-## Welcome to GitHub Pages
+## Hello!
+
+I'm a PhD candidate at [UC Santa Barbara](https://www.physics.ucsb.edu/) studying algorithms for quantum physics. I am interested in a good variety of the different ways that quantum physics, information and complexity theory, and pure math intersect. I outline below my more successful pursuits. You can also check out [my blog](http://blog.ohaithe.re) or <script>alert("Hi")</script>Test <a id="email_button">email me</a>.
+
+
+
+
+
+
+
+
+
 
 You can use the [editor on GitHub](https://github.com/Timeroot/Timeroot.github.io/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
 
