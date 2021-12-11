@@ -2,7 +2,7 @@
 
 I'm a PhD candidate at [UC Santa Barbara](https://www.physics.ucsb.edu/) studying algorithms for quantum physics. I am interested in a good variety of the different ways that quantum physics, information and complexity theory, and pure math intersect. I am advised by [Bela Bauer](https://scholar.google.com/citations?user=38AoAQ8AAAAJ&hl=en) and my research is funded my [Microsoft Station Q](https://www.microsoft.com/en-us/research/people/belabaue/). My undergrad was at Caltech where I earned a dual B.S. in Math and Physics.
 
-Below I've gathered my more successful pursuits. You can also check out [my blog](http://blog.ohaithe.re) or <a href='javascript:;' id='email_button' onclick='document.getElementById("email_button").innerHTML=atob("ZW1haWwgbWU6IGFsZXhAb2hhaXRoZS5yZSwgb3IgYW1laWJ1cmdAdWNzYi5lZHU=");'>email me (click to show)</a>.
+Below I've gathered my more successful pursuits. You can also check out [my blog](http://blog.ohaithe.re) or <a href='javascript:;' id='email_button' onclick='document.getElementById("email_button").outerHTML=atob("ZW1haWwgbWU6IGFsZXhAb2hhaXRoZS5yZSwgb3IgYW1laWJ1cmdAdWNzYi5lZHU=");'>email me (click to show)</a>.
 
 ### Academic Works
  * In 2016, I learned interested in the CSP Dichotomy Conjecture, which was actually proved independently by [Zhuk](https://arxiv.org/abs/1704.01914) and [Bulatov](https://arxiv.org/abs/1703.03021) at essentially the same time in 2017. This states that all constraint problems are in **P**  or are **NP-Complete**. Since quantum constraint problems were known to include at least the additional cases of **QMA_1**, and **MA**, I wanted to know what other possibilities there were -- the obvious one being **BQP**, the problems efficiently solvable by a quantum computer. I successfully [showed this in 2021](https://arxiv.org/abs/2101.08381), also getting the cases **QCMA** and **coRP** in the priocess.
@@ -14,7 +14,7 @@ Below I've gathered my more successful pursuits. You can also check out [my blog
 
 ### Computer Security
 
-In high school I co-founded 1064CBread, a [competitive computer-hacking team](Link to description of CTF). We won first place in PicoCTF 201X, which was aimed at high schoolers, then decided to aim higher at the college-level [CSAW CTF]. To our surprise, we qualified, and go to partake in the finals. After that we had a decently successful run, becoming finalists or winners in quite a number of competitions and winning prize money here and there. Although we've been less active in recent years, we were finalists in [Hack-A-Sat 2020], an Air Force competition about satellite hacking, where _**we won $10k and a satellite**_.
+In high school I co-founded 1064CBread, a [competitive computer-hacking team](https://www.hackthebox.com/blog/what-is-ctf). We won first place in [PicoCTF 2013](https://picoctf.org/about), which was aimed at high schoolers. We then decided to aim higher at the college-level [CSAW CTF](https://www.csaw.io/ctf). To our surprise, we qualified for the finals, and got to fly across the country to NYC. After that we had a decently successful run, becoming finalists or winners in quite a number of competitions and winning prize money here and there. Although we've been less active in recent years, we were finalists in [Hack-A-Sat 2020](https://www.hackasat.com/hackasat1), an Air Force competition about satellite hacking, where _**we won $10k and a satellite**_.
 
 You can [find a lot of my writeups on my blog](https://blog.ohaithe.re/search/ctf). The team also has [a Github repo](https://github.com/1064CBread), and [a CTFTime page](https://ctftime.org/team/5320).
 
@@ -22,7 +22,7 @@ I've also played with UCSB's team [Shellphish](https://shellphish.net/index.html
 
 ### Finance
 
-I've enjoyed applying my math knowledge to win some money with [Quantiacs]. My code has managed several million USD for them over the years, and [they came to Caltech and did an inteview with me](https://quantiacs.com/community/topic/19/interview-with-alex-trust-the-numbers). It's given me a useful side-income. I think that a worrying large fraction of quantitative finance is essentially numerology, and that approaches should either rely on news and principals (which I will readily I admit I know nothing about) or principled mathematical foundations - _not_ just drawing lines on a graph or magic numbers.
+I've enjoyed applying my math knowledge to win some money with [Quantiacs](https://quantiacs.com/). My code has managed several million USD for them over the years, and [they came to Caltech and did an inteview with me](https://quantiacs.com/community/topic/19/interview-with-alex-trust-the-numbers). It's given me a useful side-income. I think that a worrying large fraction of quantitative finance is essentially numerology, and that approaches should either rely on news and principals (which I will readily I admit I know nothing about) or principled mathematical foundations - _not_ just drawing lines on a graph or magic numbers.
 
 Here are some examples of "explanations" that I think are, frankly, garbage: [1](https://www.fxstreet.com/education/lessons-from-the-pros-forex-201106280000), [2](https://www.tradingview.com/chart/TVIX/wAzZ5VBq-TVIX-Futures-Pivotal-Point/), [3](https://www.kotaksecurities.com/blog/intelligence/technical-funda/heres-how-to-use-golden-ratio-and-fibonacci-sequence-in-trading.html).
 
