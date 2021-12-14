@@ -20,6 +20,14 @@ You can [find a lot of my writeups on my blog](https://blog.ohaithe.re/search/ct
 
 I've also played with UCSB's team [Shellphish](https://shellphish.net/index.html) a few times, although I've never been a core member by any means.
 
+#### Bugs
+
+In 2016, I found a security vulnerability in Facebook Messenger and received a bug bounty for reporting it. They promptly fixed it.
+
+In 2012 I found a trivially exploitable vulnerability in a popular online education platform. They have still have not patched it, despite a few reminders on my part.
+
+In 2020 I found a vulnerability in a popular online cloud computing platform. It was patched quicky, but sadly I did not receive a bounty, and they've expressed that they would prefer I not talk about it publically -- as some users likely using old versions of the software locally and could remain vulnerable.
+
 ### Finance
 
 I've enjoyed applying my math knowledge to win some money with [Quantiacs](https://quantiacs.com/). My code has managed several million USD for them over the years, and [they came to Caltech and did an inteview with me](https://quantiacs.com/community/topic/19/interview-with-alex-trust-the-numbers). It's given me a useful side-income. I think that a worrying large fraction of quantitative finance is essentially numerology, and that approaches should either rely on news and principals (which I will readily I admit I know nothing about) or principled mathematical foundations - _not_ just drawing lines on a graph or magic numbers.
