@@ -11,7 +11,7 @@
 `>` [Wikipedia Userpage](https://en.wikipedia.org/wiki/User:Timeroot)<br />
 `> >` [Wikipedia Edits](https://en.wikipedia.org/wiki/Special:Contributions/Timeroot)
 
-`>` [My ontributions to the Online Encyclopedia of Integer Sequences](http://oeis.org/search?q=Meiburg)
+`>` [My contributions to the Online Encyclopedia of Integer Sequences](http://oeis.org/search?q=Meiburg)
 
 `>` [Facebook page about open problems](https://www.facebook.com/NotThereQuiteYet/) that I run
 
