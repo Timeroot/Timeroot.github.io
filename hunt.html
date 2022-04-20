@@ -2,7 +2,7 @@
 <html>
 <body>
 
-<p>Click the button to begin.</p>
+<p>Click the button to begin.[2]</p>
 
 <button onclick="tryInit()">Start</button>
 
@@ -38,7 +38,7 @@ function getLocation() {
   if (navigator.geolocation) {
     x.innerHTML = "Loading...";
     navigator.geolocation.watchPosition(posHandler);
-    window.addEventListener('deviceorientation', oriHandler);
+    window.addEventListener(isIOS ? 'deviceorientation' : 'deviceorientationabsolute', oriHandler, true);
   } else { 
     x.innerHTML = "Geolocation is not supported by this browser.";
   }
