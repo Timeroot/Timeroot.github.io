@@ -2,7 +2,7 @@
 <html>
 <body>
 
-<p>Click the button to begin.[2]</p>
+<p>Click the button to begin.[3]</p>
 
 <button onclick="tryInit()">Start</button>
 
@@ -55,7 +55,7 @@ function posHandler(position) {
 function oriHandler(event) {
   msg = "[" + event.alpha + ' : ' + event.beta + ' : ' + event.gamma + "]";
   msg += "\n<br>Absolute? " + event.absolute;
-  msg += "\n<br>Heading " + event.webkitCompassHeading;
+  msg += "\n<br>Heading " + (isIOS ? event.webkitCompassHeading : event.alpha);
   console.log("ORI "+msg);
   y.innerHTML = msg;
 }
