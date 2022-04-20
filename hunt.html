@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>Click the button to begin.</p>
+
+<button onclick="getLocation()">Start</button>
+
+<p id="output"></p>
+
+<script>
+var x = document.getElementById("output");
+
+function getLocation() {
+  if (navigator.geolocation) {
+    x.innerHTML = "Loading...";
+    navigator.geolocation.watchPosition(handler);
+  } else { 
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+function handler(position) {
+  msg = "Latitude: " + position.coords.latitude + 
+  "\n<br>Longitude: " + position.coords.longitude +
+  "\n<br>Heading: " + position.coords.heading;
+  console.log(msg);
+  x.innerHTML = msg;
+}
+</script>
+
+</body>
+</html>
+
+
