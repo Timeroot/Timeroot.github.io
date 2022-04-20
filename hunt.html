@@ -2,28 +2,35 @@
 <html>
 <body>
 
-<p>Click the button to begin.[4]</p>
+<p>Click the button to begin.[1]</p>
 
 <button onclick="tryInit()">Start</button>
+<button onclick="nextDest()">Next</button>
 
 <p id="output"></p>
 <p id="output2"></p>
 
 <script>
-var x = document.getElementById("output");
-var y = document.getElementById("output2");
+var o1 = document.getElementById("output");
+var o2 = document.getElementById("output2");
 var compass = 0;
 var lat = 0;
 var lon = 0;
 var arrows = ["↑","↗","→","↘","↓","↙","←","↖"];
+var locs = [[34.417492,-119.8696039],[34.4188664,-119.8647699],[34.4072202,-119.8487242],[34.9161467,-120.4600407]];
+var destOpt = 0;
 
 isIOS = (
   navigator.userAgent.match(/(iPod|iPhone|iPad)/) &&
   navigator.userAgent.match(/AppleWebKit/)
 );
 
+function nextDest(){
+	destOpt = (destOpt+1)%locs.length;
+}
+
 function tryInit() {
-if (isIOS) {
+  if (isIOS) {
     DeviceOrientationEvent.requestPermission()
       .then((response) => {
         if (response === "granted") {
@@ -40,11 +47,11 @@ if (isIOS) {
 
 function getLocation() {
   if (navigator.geolocation) {
-    x.innerHTML = "Loading...";
+    o1.innerHTML = "Loading...";
     navigator.geolocation.watchPosition(posHandler);
     window.addEventListener(isIOS ? 'deviceorientation' : 'deviceorientationabsolute', oriHandler, true);
   } else { 
-    x.innerHTML = "Geolocation is not supported by this browser.";
+    o1.innerHTML = "Geolocation is not supported by this browser.";
   }
 }
 
@@ -55,7 +62,7 @@ function posHandler(position) {
   console.log("POS "+msg);
   lat = position.coords.latitude;
   lon = position.coords.longitude;
-//x.innerHTML = msg;
+//o1.innerHTML = msg;
   updateDir();
 }
 
@@ -68,14 +75,44 @@ function oriHandler(event) {
   msg += "\n<br>Absolute? " + event.absolute;
   msg += "\n<br>Heading " + compass;
   console.log("ORI "+msg);
-//y.innerHTML = msg;
+//o2.innerHTML = msg;
 
   updateDir();
 }
 
 function updateDir() {
+	o1.innerHTML = "North:" + arrows[Math.floor(compass/45)];
 //      compassCircle.style.transform = `translate(-50%, -50%) rotate(${-compass}deg)`;
-	x.innerHTML = arrows[compass/45];   
+	
+	const dest = locs[0];
+	
+	const lat1 = lat;
+	const lat2 = dest[0]
+	const lon1 = lon;
+	const lon2 = dest[1];
+	
+	const R = 6371e3; // metres
+	const φ1 = lat1 * Math.PI/180; // φ, λ in radians
+	const φ2 = lat2 * Math.PI/180;
+	const λ1 = lon1 * Math.PI/180;
+	const λ2 = lon2 * Math.PI/180;
+	const Δφ = (lat2-lat1) * Math.PI/180;
+	const Δλ = (lon2-lon1) * Math.PI/180;
+	
+	const a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+		  Math.cos(φ1) * Math.cos(φ2) *
+		  Math.sin(Δλ/2) * Math.sin(Δλ/2);
+	const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+	const d = R * c;
+	
+	const y = Math.sin(λ2-λ1) * Math.cos(φ2);
+	const x = Math.cos(φ1)*Math.sin(φ2) - Math.sin(φ1)*Math.cos(φ2)*Math.cos(λ2-λ1);
+	const θ = Math.atan2(y, x);
+	const brng = (θ*180/Math.PI + 360) % 360; // in degrees
+	
+	const rel_brng = brng - compass;
+	
+	o2.innerHTML = "Goal:"+arrows[Math.floor(rel_brng/45)]+"\n<br>Dist: "+d+"m";
 }
 
 
