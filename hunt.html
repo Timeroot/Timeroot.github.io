@@ -27,6 +27,7 @@ isIOS = (
 
 function nextDest(){
 	destOpt = (destOpt+1)%locs.length;
+	updateDir();
 }
 
 function tryInit() {
@@ -80,11 +81,18 @@ function oriHandler(event) {
   updateDir();
 }
 
+function dirToArrow(ang) {
+	ang += 22.5;
+	ang = (ang + 720)%360;
+	return arrows[Math.floor(ang/45)];
+}
+
+
 function updateDir() {
-	o1.innerHTML = "North:" + arrows[Math.floor(compass/45)];
+	o1.innerHTML = "North:" + dirToArrow(-compass);
 //      compassCircle.style.transform = `translate(-50%, -50%) rotate(${-compass}deg)`;
 	
-	const dest = locs[0];
+	const dest = locs[destOpt];
 	
 	const lat1 = lat;
 	const lat2 = dest[0]
@@ -112,7 +120,7 @@ function updateDir() {
 	
 	const rel_brng = brng - compass;
 	
-	o2.innerHTML = "Goal:"+arrows[Math.floor(rel_brng/45)]+"\n<br>Dist: "+d+"m";
+	o2.innerHTML = "Goal:"+dirToArrow(rel_brng)+"\n<br>Dist: "+d+"m";
 }
 
 
