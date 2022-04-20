@@ -4,32 +4,64 @@
 
 <p>Click the button to begin.</p>
 
-<button onclick="getLocation()">Start</button>
+<button onclick="tryInit()">Start</button>
 
 <p id="output"></p>
+<p id="output2"></p>
 
 <script>
 var x = document.getElementById("output");
+var y = document.getElementById("output2");
+
+isIOS = (
+  navigator.userAgent.match(/(iPod|iPhone|iPad)/) &&
+  navigator.userAgent.match(/AppleWebKit/)
+);
+
+function tryInit() {
+if (isIOS) {
+    DeviceOrientationEvent.requestPermission()
+      .then((response) => {
+        if (response === "granted") {
+          getLocation();
+        } else {
+          alert("has to be allowed!");
+        }
+      })
+      .catch(() => alert("not supported"));
+  } else {
+    getLocation();
+  }
+}
 
 function getLocation() {
   if (navigator.geolocation) {
     x.innerHTML = "Loading...";
-    navigator.geolocation.watchPosition(handler);
+    navigator.geolocation.watchPosition(posHandler);
+    window.addEventListener('deviceorientation', oriHandler);
   } else { 
     x.innerHTML = "Geolocation is not supported by this browser.";
   }
 }
 
-function handler(position) {
+function posHandler(position) {
   msg = "Latitude: " + position.coords.latitude + 
   "\n<br>Longitude: " + position.coords.longitude +
   "\n<br>Heading: " + position.coords.heading;
-  console.log(msg);
+  console.log("POS "+msg);
   x.innerHTML = msg;
 }
+
+function oriHandler(event) {
+  msg = "[" + event.alpha + ' : ' + event.beta + ' : ' + event.gamma + "]";
+  msg += "\n<br>Absolute? " + event.absolute;
+  msg += "\n<br>Heading " + event.webkitCompassHeading;
+  console.log("ORI "+msg);
+  y.innerHTML = msg;
+}
+
 </script>
 
 </body>
 </html>
-
 
