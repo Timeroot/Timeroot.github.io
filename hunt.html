@@ -2,10 +2,10 @@
 <html>
 <body>
 
-<p>Click the button to begin.[1]</p>
+<p>Click the button to begin.[2]</p>
 
-<button onclick="tryInit()">Start</button>
-<button onclick="nextDest()">Next</button>
+<button onclick="tryInit()" style="height:100px;width:200px;font-size:30px">Start</button>
+<button onclick="nextDest()" style="height:100px;width:200px;font-size:30px">Next</button>
 
 <p id="output"></p>
 <p id="output2"></p>
@@ -84,7 +84,8 @@ function oriHandler(event) {
 function dirToArrow(ang) {
 	ang += 22.5;
 	ang = (ang + 720)%360;
-	return arrows[Math.floor(ang/45)];
+	//return arrows[Math.floor(ang/45)];
+	return `<p style='transform:rotate(${ang}deg);transform-origin:0 0;'>↑</p>`
 }
 
 
