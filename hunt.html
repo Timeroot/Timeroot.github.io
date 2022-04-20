@@ -2,7 +2,7 @@
 <html>
 <body>
 
-<p>Click the button to begin.[3]</p>
+<p>Click the button to begin.[4]</p>
 
 <button onclick="tryInit()">Start</button>
 
@@ -12,6 +12,10 @@
 <script>
 var x = document.getElementById("output");
 var y = document.getElementById("output2");
+var compass = 0;
+var lat = 0;
+var lon = 0;
+var arrows = ["↑","↗","→","↘","↓","↙","←","↖"];
 
 isIOS = (
   navigator.userAgent.match(/(iPod|iPhone|iPad)/) &&
@@ -49,16 +53,31 @@ function posHandler(position) {
   "\n<br>Longitude: " + position.coords.longitude +
   "\n<br>Heading: " + position.coords.heading;
   console.log("POS "+msg);
-  x.innerHTML = msg;
+  lat = position.coords.latitude;
+  lon = position.coords.longitude;
+//x.innerHTML = msg;
+  updateDir();
 }
 
 function oriHandler(event) {
+  compass = (isIOS ? event.webkitCompassHeading : Math.abs(event.alpha - 360));
+  if(compass < 0) compass += 360;
+  compass = compass % 360;
+  
   msg = "[" + event.alpha + ' : ' + event.beta + ' : ' + event.gamma + "]";
   msg += "\n<br>Absolute? " + event.absolute;
-  msg += "\n<br>Heading " + (isIOS ? event.webkitCompassHeading : event.alpha);
+  msg += "\n<br>Heading " + compass;
   console.log("ORI "+msg);
-  y.innerHTML = msg;
+//y.innerHTML = msg;
+
+  updateDir();
 }
+
+function updateDir() {
+//      compassCircle.style.transform = `translate(-50%, -50%) rotate(${-compass}deg)`;
+	x.innerHTML = arrows[compass/45];   
+}
+
 
 </script>
 
