@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table, th, td {
+  border: 2px solid;
+  padding: 2px;
+  border-collapse: collapse;
+}
+
+.cardzoom {
+  position:relative;
+}
+
+.cardzoom img {
+  position:absolute;left:0;top:0;
+}
+</style>
+</head
+<body>
+
+<h2>Scryfall Search in My Collection</h2>
+
+<div id="form">
+  <label for="query">Search quey: 
+  <input type="text" id="query" name="query"><br><br></label>
+  <button type="button" onclick="doScryfall()">Search</button>
+</div>
+
+<div id="status" style="color:darkgrey; font-size:12px; padding:10px;">
+</div>
+
+<div id="results">
+</div>
+
+<script>
+//First load our collection list
+collection = null;
+{
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      collection = this.responseText;
+      collection = JSON.parse(collection);
+      //what the heck...
+      //https://dev.to/devtronic/javascript-map-an-array-of-objects-to-a-dictionary-3f42
+      collection = Object.assign({}, ...collection.map(x => ({[x["Card Name"]]: x})));
+    }
+  };
+  req_url = "https://ohaithe.re/MTG.json";
+  xhttp.open("GET", req_url, true);
+  xhttp.send();
+}
+
+statusdiv = document.getElementById("status");
+resdiv = document.getElementById("results");
+query_el = document.getElementById("query");
+
+scry_cards = null;
+
+function chain_search(url, page) {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4) {
+     if(this.status == 200) {
+	      scry_response = this.responseText;
+	      scry_obj = JSON.parse(scry_response);
+	      
+	      if(scry_obj.has_more) {
+		chain_search(scry_obj.next_page, page+1);
+		statusdiv.innerHTML = "Loaded Page "+page+"...";
+		scry_cards = scry_cards.concat(scry_obj.data);
+	      } else {
+	      	statusdiv.innerHTML = "Loaded Page "+page+", done.";
+		scry_cards = scry_cards.concat(scry_obj.data);
+		display_response();
+	      }
+      } else {//404 error (or similar
+        errmsg = JSON.parse(this.responseText).details || "No error message";
+        statusdiv.innerHTML = "Scryfall gave 404: "+errmsg;
+      }
+    }//not ready tet
+  };
+  xhttp.open("GET", url, true);
+  xhttp.send();
+}
+
+function doScryfall() {
+  scry_cards = [];
+  search_url = "https://api.scryfall.com/cards/search?q="+encodeURIComponent(query_el.value);
+  chain_search(search_url, 1);
+}
+
+//displays response using scry_cards and collection
+function display_response(){
+  count = 0;
+  html_res = "<table>";
+  html_res += "<tr><th>Name</th><th>Copies</th><th>Used</th><th>Notes</th></tr>";
+  for(c of scry_cards){
+   if(c.name in collection){
+     count++;
+     
+     collected = collection[c.name]
+     total_copies = collected["Total Copies"]
+     in_use = collected["In Use"]
+     notes = ""
+     notes += collected["Unnamed: 3"] || ""
+     notes += collected["Unnamed: 4"] ? "; "+collected["Unnamed: 4"] : ""
+     notes += collected["Unnamed: 5"] ? "; "+collected["Unnamed: 5"] : ""
+     notes += collected["Unnamed: 6"] ? "; "+collected["Unnamed: 6"] : ""
+     
+     html_res += "<tr><td onmouseover='showCard(\""+c.id+"\")' onmouseout='hideCard(\""+c.id+"\")'>";
+     html_res += "<a href='"+c.scryfall_uri+"'>"+c.name+"</a></td>";
+     html_res += "<td><div class='cardzoom' style='display:none' id='img"+c.id+"'><img width=300 src='"+c.image_uris.normal+"' /></div>"; //image
+     html_res += total_copies+"</td><td>"+in_use+"</td><td>"+notes+"</td>"; //info
+     html_res += "</tr>";
+   }
+  }
+  html_res += "</table>";
+  html_res = count+" matches found in collection<br />" + html_res;
+  resdiv.innerHTML = html_res; 
+}
+
+//Trigger on Enter key instead of button
+query_el.addEventListener("keydown", function (e) {
+    if (e.code === "Enter") {
+        doScryfall(e);
+    }
+});
+
+function showCard(idName){
+  document.getElementById('img'+idName).style.display = "";
+}
+
+function hideCard(idName){
+  document.getElementById('img'+idName).style.display = "none";
+}
+
+
+</script>
+
+
+</body>
+</html>
+
