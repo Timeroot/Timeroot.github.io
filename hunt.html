@@ -1,23 +1,84 @@
 <!DOCTYPE html>
 <html>
+<head>
+<style>
+table, th, td {
+  border: 2px solid;
+  padding: 2px;
+  border-collapse: collapse;
+}
+</style>
+</head>
 <body>
 
 <p>Click the button to begin.[2]</p>
 
-<button onclick="tryInit()" style="height:100px;width:200px;font-size:30px">Start</button>
-<button onclick="nextDest()" style="height:100px;width:200px;font-size:30px">Next</button>
+<button onclick="tryInit()" style="height:100px;width:200px;font-size:30px" id='start'>Start</button>
+<button onclick="nextDest()" style="height:100px;width:200px;font-size:30px;display:none" id='next'>Next</button>
+
+<p id="code_p" style="display:none">Card: <input id='code' style="width:200px;" /> </p>
 
 <p id="output"></p>
 <p id="output2"></p>
 
+<div id='tab_hold' style="display:none">
+Your collected cards:
+<table id="tab"><tr><th>Name</th><th>Mana Value</th><th>Flavor Text</th>
+<tr><td>True Love's Kiss</td><td>4</td><td>“Be careful, dear. Some people deserve their curses.” —Marawen, barrow witch’</td></tr>
+</table>
+</div>
+
 <script>
+
+var code_el = document.getElementById("code");
+var code_p = document.getElementById("code_p");
+var tab = document.getElementById("tab");
+code_el.addEventListener("keydown", function (e) {
+    if (e.code === "Enter") {
+        nextDest();
+    }
+});
+code_el.addEventListener("focus", function (e) {
+    code_el.value = "";
+});
+
 var o1 = document.getElementById("output");
 var o2 = document.getElementById("output2");
 var compass = 0;
 var lat = 0;
 var lon = 0;
 var arrows = ["↑","↗","→","↘","↓","↙","←","↖"];
-var locs = [[34.417492,-119.8696039],[34.4188664,-119.8647699],[34.4072202,-119.8487242],[34.9161467,-120.4600407]];
+
+var cards = [["True Love's Kiss","“Be careful, dear. Some people deserve their curses.” —Marawen, barrow witch’",4],
+["Elspeth's Devotee","“For her, I would gladly die again.”",4],
+["Tidal Force","“Do not speak the name of the sea, for if it should hear you and rise up, no fortress in the world could hide you.” —Gimara of Halimar",8],
+["Purphoros's Intervention","“I bring a fire to recast all the world.”",1],
+["Meddling Mage","“Some defy the laws of nature. I dare nature to defy me.”",2],
+["Aegis of the Gods","Athreos cares little for the other gods’ conflict with mortals. He is concerned only with safe passage for the dead.",2],
+["Scrap Mastery","“Where a lesser mind sees junk, I see infinite potential.”",5],
+["Spirit Away","The fear of slipping from the geist’s tenuous grip overwhelmed Tolo’s joy at his first flight.",7],
+["Brisela, Voice of Nightmares","Upon discovering what had become of her sisters, Sigarda could only weep.",11],
+["Demotion","There’s no greater honor than joining your chosen guild, and no greater shame than failing it.",1],
+["Drana, Liberator of Malakir","“I will not live as a slave. If you would be free, then fight alongside me.”",3],
+["Temporal Trespass","Few truly live in the moment.",11],
+["Crucible of Fire","“The dragon is a perfect marriage of power and the will to use it.” —Sarkhan Vol",4],
+["Horror of Horrors","“And a horror of outer darkness after,/ And dust returneth to dust again.” —Adam Lindsay Gordon, The Swimmer",6]];
+
+var locs = [
+	{a:0,o:0,t:"Time to play with some legos, maybe?"},//in legos
+	{a:0,o:0,t:"Or maybe think about Christmas decorations?"},//closet upstairs
+	{a:34.422062710593224,o:-119.86195992603427,t:"Time to go see a woman"},//woman statue
+	{a:34.42365569480575,o:-119.86615402277084,t:"Hidden in citrus"},//under tree in front of other apts
+	{a:34.42134645767828,o:-119.8667708889258,t:"In the gardens"},//northtern intersection, vernal pools
+	{a:34.4311777596594,o:-119.8740452047805,t:"Time for tea? (Bring a car)"},//hochaya
+	{a:34.43384431334586,p:-119.92296253969458,t:"A Japanese general fell on a cactus"},//haskell pier
+	{a:34.42348438660834,o:-119.88969502754809,t:"You always give me butterflies <3"},//entrance to Ellwood
+	{a:34.420290229576835,o:-119.8929739223807,t:"Do you hear a ringing? Phone call!"},//wind phone
+	{a:34.44265755543354,o:-119.85242241898415,t:"I'll never leave you benched (but I love railing you, and you always light my fire)"},//railroad museum benches
+	{a:34.437476679559744,o:-119.74840925139326,t:"Since you're collecting these cards..."},//dw/sonoma
+	{a:34.4133788463,o:-119.7330625421998,t:"South from the basketball hoop"},//south from Eling's basketball hoop
+	{a:34.4125898662514,o:-119.73327657588555,t:"Under a hexagon"},//gazebo
+	];
 var destOpt = 0;
 
 isIOS = (
@@ -26,7 +87,13 @@ isIOS = (
 );
 
 function nextDest(){
-	destOpt = (destOpt+1)%locs.length;
+	if(code.value != cards[destOpt+1][0]){
+	  code.value = "Incorrect!";
+	  return;
+	}
+	destOpt = (destOpt+1);
+	code.value = "";
+	tab.innerHTML += "<tr><td>"+cards[destOpt][0]+"</td><td>"+cards[destOpt][2]+"</td><td>"+cards[destOpt][1]+"</td></tr>";
 	updateDir();
 }
 
@@ -44,11 +111,16 @@ function tryInit() {
   } else {
     getLocation();
   }
+  document.getElementById('start').style.display = "none";
+  document.getElementById('next').style.display = "";
+  document.getElementById('code_p').style.display = "";
+  document.getElementById('tab_hold').style.display = "";
+  o2.innerHTML = locs[0].t
 }
 
 function getLocation() {
   if (navigator.geolocation) {
-    o1.innerHTML = "Loading...";
+    o1.innerHTML = "";//Loading...";
     navigator.geolocation.watchPosition(posHandler);
     window.addEventListener(isIOS ? 'deviceorientation' : 'deviceorientationabsolute', oriHandler, true);
   } else { 
@@ -90,43 +162,56 @@ function dirToArrow(ang) {
 
 
 function updateDir() {
+  if(destOpt <= 1)
+    return;
+  if(destOpt == 13){
+   o1.innerHTML = "";
+   o2.innerHTML = "";
+   return;
+  }
+    
 	o1.innerHTML = "North:" + dirToArrow(-compass);
 //      compassCircle.style.transform = `translate(-50%, -50%) rotate(${-compass}deg)`;
 	
 	const dest = locs[destOpt];
 	
 	const lat1 = lat;
-	const lat2 = dest[0]
+	const lat2 = dest.a;
 	const lon1 = lon;
-	const lon2 = dest[1];
+	const lon2 = dest.o;
 	
 	const R = 6371e3; // metres
-	const φ1 = lat1 * Math.PI/180; // φ, λ in radians
-	const φ2 = lat2 * Math.PI/180;
-	const λ1 = lon1 * Math.PI/180;
-	const λ2 = lon2 * Math.PI/180;
-	const Δφ = (lat2-lat1) * Math.PI/180;
-	const Δλ = (lon2-lon1) * Math.PI/180;
+	const phi1 = lat1 * Math.PI/180; // phi, lam in radians
+	const phi2 = lat2 * Math.PI/180;
+	const lam1 = lon1 * Math.PI/180;
+	const lam2 = lon2 * Math.PI/180;
+	const Dphi = (lat2-lat1) * Math.PI/180;
+	const Dlam = (lon2-lon1) * Math.PI/180;
 	
-	const a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
-		  Math.cos(φ1) * Math.cos(φ2) *
-		  Math.sin(Δλ/2) * Math.sin(Δλ/2);
+	const a = Math.sin(Dphi/2) * Math.sin(Dphi/2) +
+		  Math.cos(phi1) * Math.cos(phi2) *
+		  Math.sin(Dlam/2) * Math.sin(Dlam/2);
 	const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 	const d = R * c;
 	
-	const y = Math.sin(λ2-λ1) * Math.cos(φ2);
-	const x = Math.cos(φ1)*Math.sin(φ2) - Math.sin(φ1)*Math.cos(φ2)*Math.cos(λ2-λ1);
-	const θ = Math.atan2(y, x);
-	const brng = (θ*180/Math.PI + 360) % 360; // in degrees
+	const y = Math.sin(lam2-lam1) * Math.cos(phi2);
+	const x = Math.cos(phi1)*Math.sin(phi2) - Math.sin(phi1)*Math.cos(phi2)*Math.cos(lam2-lam1);
+	const theta = Math.atan2(y, x);
+	const brng = (theta*180/Math.PI + 360) % 360; // in degrees
 	
 	const rel_brng = brng - compass;
 	
-	o2.innerHTML = "Goal:"+dirToArrow(rel_brng)+"\n<br>Dist: "+d+"m";
+	text = dest.t;
+	o2.innerHTML = "Goal:"+dirToArrow(rel_brng)+"\n<br />Dist: "+d+"m<br />"+text;
 }
 
-
+function autofill(){
+ for(var i=1; i<13; i++){
+   code_el.value = cards[i][0];
+   nextDest();
+ }
+}
 </script>
 
 </body>
 </html>
-
