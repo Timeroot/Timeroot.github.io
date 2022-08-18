@@ -94,7 +94,7 @@ function doScryfall() {
 function display_response(){
   count = 0;
   html_res = "<table>";
-  html_res += "<tr><th>Name</th><th>Copies</th><th>Used</th><th>Notes</th></tr>";
+  html_res += "<tr><th>Name</th><th>Copies</th><th>Used</th><th>Prints</th><th>Decks</th><th>Storage</th><th>Notes</th></tr>";
   for(c of scry_cards){
    if(c.name in collection){
      count++;
@@ -102,16 +102,16 @@ function display_response(){
      collected = collection[c.name]
      total_copies = collected["Total Copies"]
      in_use = collected["In Use"]
-     notes = ""
-     notes += collected["Prints"] || ""
-     notes += collected["Decks"] ? " | "+collected["Decks"] : ""
-     notes += collected["Storage"] ? " | "+collected["Storage"] : ""
-     notes += collected["Notes"] ? " | "+collected["Notes"] : ""
+     prints = collected["LinkPrints"];
+     decks = collected["Decks"];
+     storage = collected["Storage"];
+     notes = collected["Notes"];
      
      html_res += "<tr><td onmouseover='showCard(\""+c.id+"\")' onmouseout='hideCard(\""+c.id+"\")'>";
      html_res += "<a href='"+c.scryfall_uri+"'>"+c.name+"</a></td>";
      html_res += "<td><div class='cardzoom' style='display:none' id='img"+c.id+"'><img width=300 src='"+c.image_uris.normal+"' /></div>"; //image
-     html_res += total_copies+"</td><td>"+in_use+"</td><td>"+notes+"</td>"; //info
+     html_res += total_copies+"</td><td>"+in_use+"</td><td>"+prints+"</td>";
+     html_res += decks+"</td><td>"+storage+"</td><td>"+notes+"</td>";
      html_res += "</tr>";
    }
   }
@@ -141,4 +141,5 @@ function hideCard(idName){
 
 </body>
 </html>
+
 
