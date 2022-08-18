@@ -103,10 +103,10 @@ function display_response(){
      total_copies = collected["Total Copies"]
      in_use = collected["In Use"]
      notes = ""
-     notes += collected["Unnamed: 3"] || ""
-     notes += collected["Unnamed: 4"] ? "; "+collected["Unnamed: 4"] : ""
-     notes += collected["Unnamed: 5"] ? "; "+collected["Unnamed: 5"] : ""
-     notes += collected["Unnamed: 6"] ? "; "+collected["Unnamed: 6"] : ""
+     notes += collected["Prints"] || ""
+     notes += collected["Decks"] ? " | "+collected["Decks"] : ""
+     notes += collected["Storage"] ? " | "+collected["Storage"] : ""
+     notes += collected["Notes"] ? " | "+collected["Notes"] : ""
      
      html_res += "<tr><td onmouseover='showCard(\""+c.id+"\")' onmouseout='hideCard(\""+c.id+"\")'>";
      html_res += "<a href='"+c.scryfall_uri+"'>"+c.name+"</a></td>";
