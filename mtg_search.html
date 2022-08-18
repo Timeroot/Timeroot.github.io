@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
 <style>
@@ -111,7 +112,7 @@ function display_response(){
      html_res += "<a href='"+c.scryfall_uri+"'>"+c.name+"</a></td>";
      html_res += "<td><div class='cardzoom' style='display:none' id='img"+c.id+"'><img width=300 src='"+c.image_uris.normal+"' /></div>"; //image
      html_res += total_copies+"</td><td>"+in_use+"</td><td>"+prints+"</td>";
-     html_res += decks+"</td><td>"+storage+"</td><td>"+notes+"</td>";
+     html_res += "<td>"+decks+"</td><td>"+storage+"</td><td>"+notes+"</td>";
      html_res += "</tr>";
    }
   }
