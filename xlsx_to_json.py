@@ -87,21 +87,24 @@ def fix_sheet(sheet):
 
 delta_price = 0
 
+#replace the name with the official name
+#e.g. "Devoted Grafkeeper" -> "Devoted Grafkeeper // Departed Soulkeeper", 
+# "Beanstalk Giant" -> "Beanstalk Giant // Fertile Footsteps"
+def canonicalize_names(sheet):
+  for ind, row in sheet.iterrows():
+    xlsx_name = row['Card Name']
+    official_name = get_scry_json(xlsx_name)[0]['name']
+    if xlsx_name != official_name:
+      if PRINT_CANONICALIZE:
+        print("Canonicalizing ",xlsx_name," to ",official_name)
+      sheet.loc[ind, 'Card Name'] = official_name
+      row['Card Name'] = official_name
+
 #Read through the Google sheet, doing sanity checks and so on
 def parse_rows(sheet):
 	global delta_price
 	sheet['LinkPrints'] = None
 	for ind, row in sheet.iterrows():
-		#replace the name with the official name
-		#e.g. "Devoted Grafkeeper" -> "Devoted Grafkeeper // Departed Soulkeeper", 
-		# "Beanstalk Giant" -> "Beanstalk Giant // Fertile Footsteps"
-		xlsx_name = row['Card Name']
-		official_name = get_scry_json(xlsx_name)[0]['name']
-		if xlsx_name != official_name:
-		  if PRINT_CANONICALIZE:
-		    print("Canonicalizing ",xlsx_name," to ",official_name)
-		  sheet.loc[ind, 'Card Name'] = official_name
-		  row['Card Name'] = official_name
 		#Check that the decks + storage info are reasonable
 		owned = row['Total Copies']
 		used = row['In Use']
@@ -214,21 +217,25 @@ file = pd.read_excel("MTG Ultimate List.xlsx", sheet_name=None)
 good_sheet_names = ["White","Black","Blue","Red","Green","Multicolored","Colorless","Land"]
 good_sheets = [file[color] for color in good_sheet_names]
 
-merge_sheet = pd.concat(good_sheets)
+merge_sheet = pd.concat(good_sheets).reset_index()
+
+#Clean up the sheet
+merge_sheet = fix_sheet(merge_sheet)
+
+#fix names
+canonicalize_names(merge_sheet)
 
 #Check for duplicates
 dups = merge_sheet.duplicated(subset="Card Name")
 
 if len(merge_sheet[dups]) > 0:
-        print("Duplicates in spreadsheet, can't continue")
+        print("Duplicates in spreadsheet")
         print(merge_sheet[dups])
         exit()
 
 if INCLUDE_PENNY_CUBE:
-  merge_sheet = pd.concat([merge_sheet, file["Penny Cube"]])
-
-#Clean up the sheet
-merge_sheet = fix_sheet(merge_sheet)
+  merge_sheet = pd.concat([merge_sheet, file["Penny Cube"]]).reset_index()
+  merge_sheet = fix_sheet(merge_sheet)
 
 if INCLUDE_PENNY_CUBE:
   smart_join = lambda delim: lambda ss: delim.join(s for s in ss if len(s.strip()) > 0)
