@@ -91,6 +91,18 @@ function doScryfall() {
   chain_search(search_url, 1);
 }
 
+function get_img(card_json) {
+  if(card_json['image_uris'] != undefined) {
+   //single-face card
+   return "<img width=300 src='"+c.image_uris.normal+"' />";
+  } else {
+   //dual-face card
+   uri1 = c['card_faces'][0].image_uris.normal
+   uri2 = c['card_faces'][1].image_uris.normal
+   return "<img width=300 src='"+uri1+"' /><img width=300 style='position: absolute; left: 300px;' src='"+uri2+"' />";
+ }
+}
+
 //displays response using scry_cards and collection
 function display_response(){
   count = 0;
@@ -110,7 +122,7 @@ function display_response(){
      
      html_res += "<tr><td onmouseover='showCard(\""+c.id+"\")' onmouseout='hideCard(\""+c.id+"\")'>";
      html_res += "<a href='"+c.scryfall_uri+"'>"+c.name+"</a></td>";
-     html_res += "<td><div class='cardzoom' style='display:none' id='img"+c.id+"'><img width=300 src='"+c.image_uris.normal+"' /></div>"; //image
+     html_res += "<td><div class='cardzoom' style='display:none' id='img"+c.id+"'>"+get_img(c)+"</div>"; //image
      html_res += total_copies+"</td><td>"+in_use+"</td><td>"+prints+"</td>";
      html_res += "<td>"+decks+"</td><td>"+storage+"</td><td>"+notes+"</td>";
      html_res += "</tr>";
