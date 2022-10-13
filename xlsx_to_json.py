@@ -197,10 +197,10 @@ def parse_rows(sheet):
 		sheet.loc[ind, "LinkPrints"] = prints_with_links
 
 
-known_decks = ["Chatterfang","Anje","Silverquill","Rakdos","Augustin","Queza","Slivers","Trelasarra","Karametra","Adrix and Nev","Kudro"]
+known_decks = ["Chatterfang","Anje","Silverquill","Rakdos","Augustin","Queza","Slivers","Trelasarra","Karametra","Adrix and Nev","Kudro","Zangief"]
 known_decks += [s+" Sideboard" for s in known_decks]
 
-known_storage = ["Black Binder", "Pink Binder", "Rare Box", "Eldrazi Bag", "Lesson Bag", "Art Box", "Teferi Box", "Secret Lair", "Werewolf Bag", "Elf Bag", "Penny Cube"]
+known_storage = ["Black Binder", "Pink Binder", "Rare Box", "Eldrazi Bag", "Lesson Bag", "Art Box", "Teferi Box", "Secret Lair", "Werewolf Bag", "Elf Bag", "Penny Cube", "Proposal"]
 
 #Download sheet from
 #https://docs.google.com/spreadsheets/d/16PGYqRC3ZkD7fj1u6864EibV97iQGhuuijnm3aMsCug/export?format=xlsx&id=16PGYqRC3ZkD7fj1u6864EibV97iQGhuuijnm3aMsCug
