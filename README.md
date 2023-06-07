@@ -20,9 +20,9 @@ In the likely event that this page is out of date (Last Updated: Dec 2021), you 
 
 #### Presentations
 
-You can see my [PhD defense](./papers_presentations/phd_defense_presentation.mp4) and [accompanying slides](./papers_presentations/Thesis_Defense.pdf). There's also my [advancement to candidacy](./papers_presentations/Advancement to Candidacy Presentation.pdf) presentation, which was on the BQP-complete constraint problems.
+You can see my [PhD defense](./papers_presentations/phd_defense_presentation.mp4) and [accompanying slides](./papers_presentations/Thesis_Defense.pdf). There's also my [advancement to candidacy](./papers_presentations/Advancement%20to%20Candidacy%20Presentation.pdf) presentation, which was on the BQP-complete constraint problems.
 
-[This](./papers_presentations/APS March 2022_ GFMPS gHF.pdf) was my presentation on generalized Hartree-Fock, for APS March Meeting 2022.
+[This](./papers_presentations/APS%20March%202022_%20GFMPS%20gHF.pdf) was my presentation on generalized Hartree-Fock, for APS March Meeting 2022.
 
 [This](./papers_presentations/Permanents__FOCS22_presentation.pdf) was my presentations on PSD permanent hardness for FOCS 2022.
 
