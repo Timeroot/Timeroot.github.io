@@ -2,9 +2,7 @@
 
 Hi! My name's Alex Meiburg.
 
-In June 2023, I got my physics PhD at [UC Santa Barbara](https://www.physics.ucsb.edu/). My interests generally consist of quantum information and quantum complexity theory. Starting in September, I'll be a postdoc jointly at [University of Waterloo's IQC](https://uwaterloo.ca/institute-for-quantum-computing/) and the [Perimeter Institute](https://perimeterinstitute.ca/).
-
-My PhD was advised by [Bela Bauer](https://scholar.google.com/citations?user=38AoAQ8AAAAJ&hl=en), funded by [Microsoft Station Q](https://www.microsoft.com/en-us/research/people/belabaue/). My undergrad was at Caltech where I earned a dual B.S. in Math and Physics.
+I'm at postdoc at [University of Waterloo's IQC](https://uwaterloo.ca/institute-for-quantum-computing/) and the [Perimeter Institute](https://perimeterinstitute.ca/). My interests generally consist of quantum information and quantum complexity theory. I got my physics PhD at [UC Santa Barbara](https://www.physics.ucsb.edu/) in June 2023, advised by [Bela Bauer](https://scholar.google.com/citations?user=38AoAQ8AAAAJ&hl=en), funded by [Microsoft Station Q](https://www.microsoft.com/en-us/research/people/belabaue/). My undergrad was at Caltech where I earned a dual B.S. in Math and Physics.
 
 Below I've gathered my more successful pursuits. You can also check out [my blog](http://blog.ohaithe.re), <a href='javascript:;' id='email_button' onclick='document.getElementById("email_button").outerHTML=atob("ZW1haWwgbWU6IGFsZXhAb2hhaXRoZS5yZSwgb3IgYW1laWJ1cmdAdWNzYi5lZHU=");'>email me (click to show)</a>, or look at [other links](/links.html).  Here's a link to [my resume](resume.pdf).
 
