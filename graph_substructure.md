@@ -21,7 +21,6 @@ These are operations that combine two graphs into a larger one. The table also d
 | Lexicographical Product[^lexiconame]   | `G1[G2]`. [Defn.](https://en.wikipedia.org/wiki/Lexicographical_product_of_graphs) | `V1 * V2` | `V1*E2 + E1*V2^2` | ❌ | ✅ | `K1`[^3]
 | Homomorphic Product   | `G1⋉G2`. [Defn.](https://en.wikipedia.org/wiki/Graph_product) | `V1 * V2` | `V1 * (V2^2-V2)/2 + E1 * V2^2 - 2*E1*E2` | ❌ | ❌ | `K1`[^2]
 | Corona Product   | `G1○G2`. [Defn.](https://link.springer.com/article/10.1007/BF01844162) | `V1 * (1 + V2)` | `E1 + V1*E2 + V1*V2` | ❌ | ❌ | ❌/`K0`[^corona_id]
-| ----------- | ----------- | --------- | --------- | -- | -- | -- |
 | **Sum-like** |
 | Disjoint Union[^disjointname] | `G1+G2` or `G1⊕G2`| `V1+V2` | `E1+E2` | ✅ | ✅ | `K0`
 | Graph Join | `Comp(G̅1⊕G̅1)` | `V1+V2` | `E1+E2+V1*V2` | ✅ | ✅ | `K0`
@@ -57,23 +56,29 @@ These are actions that may often be some kind of simplification.
 
 ## Graph Parameters
 
+These are different numerical graph parameters that can be computed. They range from very simple (vertex count) to difficult (Shannon capacity). Some are integer, some are real valued.
+
+I try to give the complexity of computing them: P or [NPC](## "NP-Complete"), mostly. I also try to give their parameterized complexity and their complexity of approximation. When the complexity is already P, I mark the other two complexity columns with `-` to show that it's pretty irrelevant[^approxing_p].
+
+"Monotonic" means "how does this change when you add edges?". ⬆️ means it's weakly increasing with edge additions, ⬇️ means it weakly decreasing with edges, and ❌ means that it isn't monotonic.
+
 The "relationship" column is purely subjective: it's the one relationship (to other parameters) that I view as most important in summarizing their relationship to each other. There's certainly room to build this out.
 
-| Name | Notation | Integer? | Complexity | Parameterized | Approximation | Relationship |
-| ---- | -------- | -------- | ---------- | ------------- | ------------- | ------------ |
+| Name | Notation | Integer? | Complexity | Parameterized | Approximation | Monotonic | Relationship |
+| ---- | -------- | -------- | ---------- | ------------- | ------------- | ----------| ------------ |
 | **Sizes** |
-| Order | V(G) | Y | P | - | - | - |
-| Size | E(G) | Y | P | - | - | `E <= V*(V-1)/2` |
-| Max Degree | Δ(G)
-| Min Degree |  δ(G)
+| Order | V(G) | Y | P | - | - | - | = | |
+| Size | E(G) | Y | P | - | - | ⬆️ | `E <= V*(V-1)/2` |
+| Max Degree | Δ(G) | Y | P | - | - | ⬆️ | |
+| Min Degree |  δ(G) | Y | P | - | - | ⬆️ | |
 | **Constraint-Based** |
-| Clique No. | ω(G) | Y | NPC | W[1]C | ? | `ceil(V^2/(V^2 - 2*E)) <= ω`[^8] |
-| Chromatic No. | χ(G) | Y | NPC | paraNPC[^4] | ... | ω <= χ |
-| Independence No. | α(G) | Y | NPC | ? | ? | α(G) = ω(G̅) |
-| Domination No. | γ(G) | Y | NPC | W[2]C | LogAPXC | γ <= α |
-| Independent domination No. | i(G) | Y | ? | ? | ? | γ <= i <= α |
-| [Intersection No.](https://en.wikipedia.org/wiki/Intersection_number_(graph_theory)) | ? | Y | NPC | FPT | NPC?[^9] | ... |
-| [Minimum Vertex Cover](https://en.wikipedia.org/wiki/Vertex_cover) |  β(G) | ....... |
+| Clique No. | ω(G) | Y | NPC | W[1]C | ? | ⬆️ | `ceil(V^2/(V^2 - 2*E)) <= ω`[^8] |
+| Chromatic No. | χ(G) | Y | NPC | paraNPC[^4] | ... | ⬆️ | ω <= χ |
+| Independence No. | α(G) | Y | NPC | ? | ? | ⬇️ | α(G) = ω(G̅) |
+| Domination No. | γ(G) | Y | NPC | W[2]C | LogAPXC | ⬆️ | γ <= α |
+| Independent domination No. | i(G) | Y | ? | ? | ? | ? | γ <= i <= α |
+| [Intersection No.](https://en.wikipedia.org/wiki/Intersection_number_(graph_theory)) | ? | Y | NPC | FPT | NPC?[^9] | ? | ... |
+| [Minimum Vertex Cover](https://en.wikipedia.org/wiki/Vertex_cover) |  β(G) | |
 | **Connectivity** |
 | Crossing number | cr(G) |
 | [Hadwiger number](https://en.wikipedia.org/wiki/Hadwiger_number) | h(G) |
@@ -82,29 +87,33 @@ The "relationship" column is purely subjective: it's the one relationship (to ot
 | [Verdière's invariant](https://en.wikipedia.org/wiki/Colin_de_Verdi%C3%A8re_graph_invariant) | μ(G)
 | [Minimum rank](https://en.wikipedia.org/wiki/Minimum_rank_of_a_graph) | mr(G)
 | **Approximations** |
-| [Lovasz No.](https://en.wikipedia.org/wiki/Lov%C3%A1sz_number) | ϑ(G) | N | P | - | - | ω(G) <= ϑ(G̅) <= χ(G) | 
-| [Shannon Capacity](https://en.wikipedia.org/wiki/Lov%C3%A1sz_number) | ϴ(G) | N | ?[^5] | - | - | α <= ϴ <= ϑ |
-| [Hajós No.](https://en.wikipedia.org/wiki/Haj%C3%B3s_construction#The_Haj%C3%B3s_number) | h(G) | Y | ?[^6] | - | - | `h <= 2^(V^2/3 - E + 1)`[^6] |
-| ["Beta Parameter"](https://arxiv.org/pdf/2308.00753.pdf)[^betaname] | β(G) | N | P? | - | - | α <= β <= ϑ
+| [Lovasz No.](https://en.wikipedia.org/wiki/Lov%C3%A1sz_number) | ϑ(G) | N | P | - | - | ? | ω(G) <= ϑ(G̅) <= χ(G) | 
+| [Shannon Capacity](https://en.wikipedia.org/wiki/Lov%C3%A1sz_number) | ϴ(G) | N | ?[^5] | - | - | ⬇️ | α <= ϴ <= ϑ |
+| [Hajós No.](https://en.wikipedia.org/wiki/Haj%C3%B3s_construction#The_Haj%C3%B3s_number) | h(G) | Y | ?[^6] | - | - | ? | `h <= 2^(V^2/3 - E + 1)`[^6] |
+| ["Beta Parameter"](https://arxiv.org/pdf/2308.00753.pdf)[^betaname] | β(G) | N | P? | - | - | ⬇️ | α <= β <= ϑ
 
+[^approxing_p]: It would be an interesting question to see if there are parameters in P that can be efficiently approximated much faster. Spectral radius is an obvious candidate, as current SOTA algorithms compute it in O(n^2.38), which might be slow for some people's tastes. Something like "average pairwise distance" can be computed in O(n^3) time but maybe approximated better. The Lovasz number can be efficiently computed with an SDP but that's moderately slow. Have at it, ye lovers of the [fine-grained](http://people.csail.mit.edu/virgi/6.s078/)!
 [^betaname]: I'd personally propose naming this the "quantum independence radius". The authors simply call it the "beta parameter".
 
 ## Parameters and binary operations
 
 This table describes how parameters change under operations. V and E are omitted, as those are already discussed above.
 
-| ↓ Op \ Parameter → | ω | χ | α | γ | i | ϑ | ϴ | β |
+| Parameter → <br /> ↓ Op| ω | χ | α | γ | i | ϑ | ϴ | β |
 | -------------------| - | - | - | - | - | - | - | - |
-| Cartesian Prod     | ? | =Max | [some bounds](https://en.wikipedia.org/wiki/Cartesian_product_of_graphs#Properties) | [Vizing's conjecture](https://en.wikipedia.org/wiki/Vizing%27s_conjecture) | ? | ? | ? | ? |
-| Tensor Prod        | ? | [Hedetniemi's_conjecture](https://en.wikipedia.org/wiki/Hedetniemi%27s_conjecture) is false. <= min. | ? | ? | ? | ? | ? | ? |
+| Cartesian Prod     | ? | = Max | [some bounds](https://en.wikipedia.org/wiki/Cartesian_product_of_graphs#Properties) | [Vizing's conjecture](https://en.wikipedia.org/wiki/Vizing%27s_conjecture) | ? | ? | ? | ? |
+| Tensor Prod        | ? | <= Min[^hedet] | ? | ? | ? | ? | ? | ? |
 | Strong Prod        | ? | ? | ? | ? | ? | ? | ? | ? |
 | Conormal Prod      | ? | ? | ? | ? | ? | ? | ? | ? |
 | Modular Prod       | ? | ? | ? | ? | ? | ? | ? | = Prod |
 | Lexico. Prod       | ? | ? | ? | ? | ? | ? | ? | >= Prod |
 | Homomorphic Prod   | ? | ? | ? | ? | ? | ? | ? | ? |
 | Disjoint Union     | ? | ? | = Sum| ? | ? | ? | ? | ? |
+| **Unary** |[Hedetniemi's_conjecture](https://en.wikipedia.org/wiki/Hedetniemi%27s_conjecture) is false.
 | Graph Join         | ? | ? | = Max| ? | ? | ? | ? | ? |
 | Mycielskian        | ? | +1| ? | ? | ? | ? | ? | ? |
+
+[^hedet]: It was believed that the chromatic number of tensor product was _exatly_ the minimum of the chromatic number of the factors, known as [Hedetniemi's_conjecture](https://en.wikipedia.org/wiki/Hedetniemi%27s_conjecture). It is easy to see that it is at _most_ the minimum of the factors. In 2019 the conjecture was disproved, that the `< Min` case can occur too.
 
 ## Operations and automorphism groups
 
@@ -161,4 +170,4 @@ Various "quantum homomorphism" and "chromatic" numbers
 [^tensorname]: Also called the _categorical_ product, because it forms the natural product in the category of graphs under graph homomorphisms.
 [^deftwin]: Vertices are false twins if they have the same open neighborhood (their neighbors, but not including themselves). They are true twins if they have the same closed neighborhod (their neighbors, plus themselves).
 [^conductance_name]: Conductance is also often called the [Cheeger constant](https://en.wikipedia.org/wiki/Cheeger_constant_(graph_theory)), which is more typical for unweighted graphs. In those contexts, it is written h(G). We use the conductance notation of ϕ(G) to minimize collision with the Hadwiger number.
-[^bipartite_is_double]: The bipartite double cover is equivalently a tensor product with K2. 
+[^bipartite_is_tensor]: The bipartite double cover is equivalently a tensor product with K2. 
