@@ -10,8 +10,6 @@ This page is focused on statements about **unlabelled, simple graphs**. Self-edg
 
 These are operations that combine two graphs into a larger one. The table also describes how the number of vertices and edges grows; whether the operation is commutative and/or associative; what the identity graph is; and then, later maybe, some information about how it affects graph properties. We call our input graphs `G1` and `G2`, and say they have `V1`/`E1` and `V2`/`E2` vertices and edges, respectively.
 
-<div style="color:red" class="yupyupok"> Blah?
-
 | Operation   | Notation, definition | V(f(G,H)) | E(f(G,H)) | Comm? | Assoc? | Id |
 | ----------- | ----------- | --------- | --------- | -- | -- | -- |
 | **Product-like** |
@@ -19,7 +17,7 @@ These are operations that combine two graphs into a larger one. The table also d
 | Tensor Product[^tensorname]    | `G1⨯G2`. [Defn.](https://en.wikipedia.org/wiki/Tensor_product_of_graphs) | `V1 * V2` | `2*E1*E2` | ✅ | ✅ | ❌[^1]
 | Strong Product    | `G1⊠G2`. [Defn.](https://en.wikipedia.org/wiki/Strong_product_of_graphs) - Union of cartesian product with tensor product. | `V1 * V2` | `V1*E2 + V2*E1 + 2*E1*E2` | ✅ | ✅ | `K1`
 | Co-normal Product | No standard notation. Union of `G1[G2]` and `G2[G1]` (lexicographical products) | `V1 * V2` | `V1^2 * E2 + V2^2 * E1 - 2*E1*E2` | ✅ | ✅ | `K1`
-| Modular Product   | [Defn.](https://en.wikipedia.org/wiki/Modular_product_of_graphs) - Union of tensor product with tensor product of complements. | `V1 * V2` | `E1*E2 + ((V1^2-V1)/2 - E1)*((V2^2-V2)/2 - E2)` | ✅ | ✅ | ❌[^1]
+| Modular Product   | [Defn.](https://en.wikipedia.org/wiki/Modular_product_of_graphs) - Union of tensor product with tensor product of complements. | `V1 * V2` | `E1*E2 + ((V1^2-V1)/2 - E1)*((V2^2-V2)/2 - E2)` {style="white-space:nowrap"} | ✅ | ✅ | ❌[^1]
 | Lexicographical Product[^lexiconame]   | `G1[G2]`. [Defn.](https://en.wikipedia.org/wiki/Lexicographical_product_of_graphs) | `V1 * V2` | `V1*E2 + E1*V2^2` | ❌ | ✅ | `K1`[^3]
 | Homomorphic Product   | `G1⋉G2`. [Defn.](https://en.wikipedia.org/wiki/Graph_product) | `V1 * V2` | `V1 * (V2^2-V2)/2 + E1 * V2^2 - 2*E1*E2` | ❌ | ❌ | `K1`[^2]
 | Corona Product   | `G1○G2`. [Defn.](https://link.springer.com/article/10.1007/BF01844162) | `V1 * (1 + V2)` | `E1 + V1*E2 + V1*V2` | ❌ | ❌ | ❌/`K0`[^corona_id]
@@ -27,14 +25,11 @@ These are operations that combine two graphs into a larger one. The table also d
 | Disjoint Union[^disjointname] | `G1+G2` or `G1⊕G2`| `V1+V2` | `E1+E2` | ✅ | ✅ | `K0`
 | Graph Join | `Comp(G̅1⊕G̅1)` | `V1+V2` | `E1+E2+V1*V2` | ✅ | ✅ | `K0`
 
-</div>
-
 | Hello | Yes |
 | ----- | --- |
 | Hi {. ok} | yes |
 | No {style="color:blue" colspan=2} |
 | Yes
-{title="hello!"}
 
 Somewhat notable operations absent from this list include the [rooted product](https://en.wikipedia.org/wiki/Rooted_product_of_graphs), [zigzag product](https://en.wikipedia.org/wiki/Zig-zag_product), [replacement product](https://en.wikipedia.org/wiki/Replacement_product), [series-parallel composition](https://en.wikipedia.org/wiki/Series%E2%80%93parallel_graph), and the [Hajós construction](https://en.wikipedia.org/wiki/Haj%C3%B3s_construction) which require other "information" about the graphs, or only apply to certain graphs.
 
