@@ -10,6 +10,8 @@ This page is focused on statements about **unlabelled, simple graphs**. Self-edg
 
 These are operations that combine two graphs into a larger one. The table also describes how the number of vertices and edges grows; whether the operation is commutative and/or associative; what the identity graph is; and then, later maybe, some information about how it affects graph properties. We call our input graphs `G1` and `G2`, and say they have `V1`/`E1` and `V2`/`E2` vertices and edges, respectively.
 
+<div style="color:red" class="yupyupok"> Blah?
+
 | Operation   | Notation, definition | V(f(G,H)) | E(f(G,H)) | Comm? | Assoc? | Id |
 | ----------- | ----------- | --------- | --------- | -- | -- | -- |
 | **Product-like** |
@@ -25,6 +27,14 @@ These are operations that combine two graphs into a larger one. The table also d
 | Disjoint Union[^disjointname] | `G1+G2` or `G1⊕G2`| `V1+V2` | `E1+E2` | ✅ | ✅ | `K0`
 | Graph Join | `Comp(G̅1⊕G̅1)` | `V1+V2` | `E1+E2+V1*V2` | ✅ | ✅ | `K0`
 
+</div>
+
+| Hello | Yes |
+| ----- | --- |
+| Hi {. ok} | yes |
+| No {style="color:blue" colspan=2} |
+| Yes
+{title="hello!"}
 
 Somewhat notable operations absent from this list include the [rooted product](https://en.wikipedia.org/wiki/Rooted_product_of_graphs), [zigzag product](https://en.wikipedia.org/wiki/Zig-zag_product), [replacement product](https://en.wikipedia.org/wiki/Replacement_product), [series-parallel composition](https://en.wikipedia.org/wiki/Series%E2%80%93parallel_graph), and the [Hajós construction](https://en.wikipedia.org/wiki/Haj%C3%B3s_construction) which require other "information" about the graphs, or only apply to certain graphs.
 
@@ -67,7 +77,7 @@ The "relationship" column is purely subjective: it's the one relationship (to ot
 | Name | Notation | Integer? | Complexity | Parameterized | Approximation | Monotonic | Relationship |
 | ---- | -------- | -------- | ---------- | ------------- | ------------- | ----------| ------------ |
 | **Sizes** |
-| Order | V(G) | Y | P | - | - | - | = | |
+| Order | V(G) | Y | P | - | - | = | |
 | Size | E(G) | Y | P | - | - | ⬆️ | `E <= V*(V-1)/2` |
 | Max Degree | Δ(G) | Y | P | - | - | ⬆️ | |
 | Min Degree |  δ(G) | Y | P | - | - | ⬆️ | |
@@ -109,7 +119,7 @@ This table describes how parameters change under operations. V and E are omitted
 | Lexico. Prod       | ? | ? | ? | ? | ? | ? | ? | >= Prod |
 | Homomorphic Prod   | ? | ? | ? | ? | ? | ? | ? | ? |
 | Disjoint Union     | ? | ? | = Sum| ? | ? | ? | ? | ? |
-| **Unary** |[Hedetniemi's_conjecture](https://en.wikipedia.org/wiki/Hedetniemi%27s_conjecture) is false.
+| **Unary** |
 | Graph Join         | ? | ? | = Max| ? | ? | ? | ? | ? |
 | Mycielskian        | ? | +1| ? | ? | ? | ? | ? | ? |
 
