@@ -12,7 +12,7 @@ These are operations that combine two graphs into a larger one. The table also d
 
 | Operation   | Notation, definition | V(f(G,H)) | E(f(G,H)) | Comm? | Assoc? | Id |
 | ----------- | ----------- | --------- | --------- | -- | -- | -- |
-| **Product-like** |
+| **Product-like**|{:style="color:green"} Hi |
 | Cartesian Product | `G1□G2`. [Defn.](https://en.wikipedia.org/wiki/Cartesian_product_of_graphs) | `V1 * V2` | `V1*E2 + V2*E1` | ✅ | ✅ | `K1`
 | Tensor Product[^tensorname]    | `G1⨯G2`. [Defn.](https://en.wikipedia.org/wiki/Tensor_product_of_graphs) | `V1 * V2` | `2*E1*E2` | ✅ | ✅ | ❌[^1]
 | Strong Product    | `G1⊠G2`. [Defn.](https://en.wikipedia.org/wiki/Strong_product_of_graphs) - Union of cartesian product with tensor product. | `V1 * V2` | `V1*E2 + V2*E1 + 2*E1*E2` | ✅ | ✅ | `K1`
