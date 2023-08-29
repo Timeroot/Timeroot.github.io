@@ -58,3 +58,23 @@ See [this](https://en.wikipedia.org/wiki/Induced_path#Algorithms_and_complexity)
 Average distance-ish things: [Wiener](https://mathworld.wolfram.com/WienerIndex.html), [Wiener Sum](https://mathworld.wolfram.com/WienerSumIndex.html), [Balaban](https://mathworld.wolfram.com/BalabanIndex.html), [Kirckhoff](https://mathworld.wolfram.com/KirchhoffIndex.html) 
 
 [Algebraic connectivity](https://en.wikipedia.org/wiki/Algebraic_connectivity) describes mixing time. It has good relationships and bounds. Unfortunately, standards are a bit of a mess of _which_ Laplacian matrix you use. See [MathWorld](https://mathworld.wolfram.com/FiedlerVector.html) too.
+
+### Mathjax testing
+
+$$ Hi $$
+
+It's $ 5^3 $ and $2_5$. I can write in $ \mathbb{r} \bf{r} \nabla_\boldsymbol{r}$
+
+$$\begin{aligned}
+E = mc^2
+\end{aligned}$$
+
+And I can try \[ 3 + 5 \] here
+
+{% raw %}
+  $$a^2 + b^2 = c^2$$ --> note that all equations between these tags will not need escaping! 
+ {% endraw %}
+ 
+{% raw %}
+\\[ \frac{1}{n^{2}} \\]
+ {% endraw %}
