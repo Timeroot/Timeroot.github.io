@@ -63,18 +63,22 @@ Average distance-ish things: [Wiener](https://mathworld.wolfram.com/WienerIndex.
 
 $$ Hi $$
 
-It's $ 5^3 $ and $2_5$. I can write in $ \mathbb{r} \bf{r} \nabla_\boldsymbol{r}$
+It's $ 5^3 $ and $2\_5$. I can write in $ \mathbb{r} \bf{r} \nabla\_\boldsymbol{r}$
 
 $$\begin{aligned}
 E = mc^2
 \end{aligned}$$
 
-And I can try \[ 3 + 5 \] here
+And I can try \\[ 3 + 5 \\] here and $ 3+5 $ or $3^5$. Symbols:
+
+$$\nabla \delta \Delta \Gamma \gamma \epsilon \varepsilon \times \square \circ \Circle \otimes \oplus$$
 
 {% raw %}
+
   $$a^2 + b^2 = c^2$$ --> note that all equations between these tags will not need escaping! 
+
  {% endraw %}
  
 {% raw %}
-\\[ \frac{1}{n^{2}} \\]
+[ \frac{1}{n^{2}} ]
  {% endraw %}
