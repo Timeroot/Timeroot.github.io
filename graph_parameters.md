@@ -88,7 +88,7 @@ I have a [todo list](./graph_todo) for this page.
 
 [^cliquebound]: This is an equivalent way of writing [Turán's theorem](https://en.wikipedia.org/wiki/Tur%C3%A1n%27s_theorem).
 [^npcapprox]: If I write that something is "NPC" to approximate, this means that I've come across a statement that it's "NP-hard to approximate" and haven't investigated as to _how_ hard to approximate.
-[^paranpc]: Deciding a fixed parameter (e.g. k=3 -- is the graph 3-colorable?) is already NP-Complete, this gives the parameterized class para-NP-complete, or paraNPC.
+[^paranpc]: ParaNPC means that deciding a fixed parameter (e.g. k=3 -- is the graph 3-colorable?) is already NP-Complete, this gives the parameterized class para-NP-complete, or paraNPC.
 [^hajos]: Proving that `h <= poly(V)` would imply that NP=coNP, see the discussion [here](https://en.wikipedia.org/wiki/Haj%C3%B3s_construction#The_Haj%C3%B3s_number). Little is know about how hard `h` is to compute, except that (trivially) it's in `NEXP` because of the exponential bounds on its size.
 [^hedet]: It was believed that the chromatic number of tensor product was _exatly_ the minimum of the chromatic number of the factors, known as [Hedetniemi's_conjecture](https://en.wikipedia.org/wiki/Hedetniemi%27s_conjecture). It is easy to see that it is at _most_ the minimum of the factors. In 2019 the conjecture was disproved, that the `< Min` case can occur too.
 [^joindomination]: The domination number of a graph join is always exactly two (by taking one vertex from each half of the join), _unless_ either factor has a universal vertex (i.e. has a domination number of one), in which case the domination number is one; _unless_ both addends are the empty graph, in which case the domination number is zero.
