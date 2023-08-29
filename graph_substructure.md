@@ -47,6 +47,7 @@ Simple ways to alter a graph. These are "nonspecific": they take a graph and giv
 | [Mycielskian](https://en.wikipedia.org/wiki/Mycielskian) | `2V+1` | `3E+V`
 | [Double graph](https://mathworld.wolfram.com/DoubleGraph.html) | `2V` | `4E`
 | [Bipartite double](https://mathworld.wolfram.com/BipartiteDoubleGraph.html)[^bipartite_is_tensor] | `2V` | `2E`
+| Graph square | V | - | |
 
 ## Modifications
 These are moderately "atomic" actions that act a single location. They are defined here primarily so that we can then discus which other things _respect_ these modifications: for instance, "H is a subgraph of G" respect edge _deletion_ on H, but not edge _contraction_. If you replace "subgraph" with "induced subgraph", then edge deletion is no longer compatible; if you use "minor", then edge contraction is also compatible.
@@ -66,7 +67,7 @@ These are moderately "atomic" actions that act a single location. They are defin
 | Δ-Y | Triangle | Remove the edges (v,w), (v,x) and (w,x), add a new vertex u, and add edges (u,v), (u,w), (u,x). | Inverse of Y-Δ, exept that in settings without multiedges this can lose edges that were "doubled up" during the Y-Δ.
 | Detwinning | Twin pair | Given a pair of true twins[^deftwin] u and v, delete v. |
 
-[^dissolution_name]: _Dissolution_ is also called _Smoothing_
+[^dissolution_name]: _Dissolution_ is also called _Smoothing_. "Dissolution" is unfortunately both the name of the operation (on one vertex) and a relationship between graphs G and H, if H is formed from G by repeated dissolution.
 [^subdivision_name]: _Subdivision_ is also called _Expansion_
 [^lifting_p3]: Lifting targets a `P_3`, or path graph on 3-vertices: two edges (u,v) and (v,w) that share a common endpoint.
 
@@ -76,7 +77,7 @@ There are a lot of different ways to say that a graph G "contains a copy" of H. 
 
 The first is by modifications. We would say that G contains H if we can follow a list of permitted operations on G to eventually reach a graph isomorphic with H. (Dually, we could give allowed operations to _grow_ H into G.) For example, "induced subgraph" is defined by vertex deletions, while "subgraph" also allows edge deletions.
 
-The second way to define a substructure by a mapping. There we would say that G contains H if there's a map f<sub>V</sub> : V(H) → V(G), and possibly a map for f<sub>E</sub> as well, obeying some kind of morphism-like condition. For example, "subgraph" is defined by injective maps f<sub>V</sub> that preserve adjacency. "Induced subgraph" requires that f<sub>V</sub> also preserves _non_-adjacency. Where possible, this table tries to describe substructure both ways.
+The second way to define a substructure by a mapping. There we would say that G contains H if there's a map $f_V : V(H) \to V(G)$, and possibly a map for $f_E$ as well, obeying some kind of morphism-like condition. For example, "subgraph" is defined by injective maps f<sub>V</sub> that preserve adjacency. "Induced subgraph" requires that f<sub>V</sub> also preserves _non_-adjacency. Where possible, this table tries to describe substructure both ways. It may be necessary that f<sub>V</sub> maps a vertex in H to a whole _set_ of vertices in G, or vice versa, or likewise for f<sub>E</sub>.
 
 For each notion of substructure, one key aspect is its order structure: does it obey the descending chain condition (or the _ascending_ chain condition)? Is it well quasi ordered? Is it, in fact, an equivalence class? These get their own columns, with an ❌ or ✅. For those with an ❌, a comment like `K_n` means that the complete graphs form a counterexample[^wqo_counter].
 
@@ -88,51 +89,39 @@ The last question is, how computationally difficult is to recognize inclusion? W
 [^paranpc]: ParaNPC means that deciding a fixed parameter (e.g. k=3 -- is the graph 3-colorable?) is already NP-Complete, this gives the parameterized class para-NP-complete, or paraNPC.
 [^difficulty_example]: Cliques are a "classic" example of (induced) subgraph recognition being NP-complete, because MAX-CLIQUE is an NP-complete problem. For another example, cycles are an example of why "spanning subgraph" is hard to check, because a cycle that is a spanning subgraph of G is a Hamiltonian cycle, and Hamiltonian cycle checking is NP-complete.
 
-| Name | Reductions | Map f: H → G | DCC | ACC | WQO | Equiv | Complexity | Parameterized |
+| Name | Operations | Map $f_V : H \to G$ | DCC | ACC | WQO | Equiv | Complexity | Parameterized |
 | ---- | ---------- | -------------- | --- | --- | --- | ----- | ---------- | ------------- |
-| Graph Isomorphism | _None_ | E(u,v) ↔ E(f(u), f(v))<br />f<sub>V</sub> bijective | ✅ | ✅ | ❌<br />K<sub>n</sub> | ✅ | GIC <br /> e<sup>O(log<sup>3</sup> G)</sup> [Ref](https://cstheory.stackexchange.com/a/40373/12211)  | _trivially_ FPT |
+| Graph Isomorphism | _None_ | $u\sim v \iff f(u) \sim f(v)$<br />$<sub>V</sub> bijective | ✅ | ✅ | ❌<br />$K_n$ | ✅ | GIC | _trivially_ FPT<br />Fixed vertex count |
+| Induced Subgraph[^induced_name] | Vertex deletion | $u\sim v \iff f(u) \sim f(v)$<br />f<sub>V</sub> injective | ✅ | ❌<br />$K_n$ | ❌<br />$C_n$ | ❌ | NPC <br /> $H=K_n$, Max-clique | W\[1\]C <br /> $K_n$ |
+| Subgraph | Vertex deletion <br /> Edge deletion | $u\sim v \implies f(u) \sim f(v)$<br />f<sub>V</sub> injective | ✅ | ❌<br />$K_n$ | ❌<br />$C_n$ | ❌ | NPC <br /> $K_n$ | W\[1\]C <br /> $K_n$ |
+| Spanning Subgraph | Edge deletion | $u\sim v \implies f(u) \sim f(v)$<br />f<sub>V</sub> bijective | ✅ | ✅ | ❌<br />$C_n$ | ❌ | NPC <br /> $C_n$, Hamiltonian cycle | _trivially_ FPT<br />Fixed vertex count |
+| Dissolution[^dissol_dual] | Dissolution | $f_V$ injective <br /> $f_E$ takes edges in H to degree-2 _paths_ in G<br />$f_E$ bijective | ✅ | ❌<br />$K_n$ | ❌<br />$K_n$ | ❌ | NPC <br /> [^dissol_npc_ref] | FPT<br />[^dissol_fpt_explanation]
+| Homeomorphism | Dissolution <br /> Subdivision | f | d | a | w | ❌ | c | p |
+| Induced Topological Minor | Vertex deletion <br />Smoothing<br />(Multiedges?) | f | d | a | w | ❌ | c | p |
+| Topological Minor | Vertex deletion<br />Edge deletion<br />Smoothing | f | d | a | w | ❌ | c | p |
+| Induced Minor | Vertex deletion<br />Contraction<br />(Multiedges?) | f | d | a | w | ❌ | c | p |
+| Minor | Vertex deletion<br />Edge deleition<br />Contraction | f | d | a | w | ❌ | c | p |
+| Induced Immersion | Vertex deletion<br />Lifting<br />(Multiedges?) | f | d | a | w | ❌ | c | p |
+| Immersion | Vertex deletion<br />Edge deletion<br />Lifting<br />(Multiedges?) | f | d | a | w | ❌ | c | p |
+| Weak Immersion | Vertex deletion<br />Edge deletion<br />Lifting<br />Subdivision<br />(Multiedges? Smoothing?) | f | d | a | w | ❌ | c | p |
+| Strong Immersion | o | f | d | a | w | ❌ | c | p |
+| Homomorphism | o | $u\sim v \implies f(u) \sim f(v)$<br />f<sub>V</sub> may be many-to-one | d | a | w | ❌ | c | p |
+| Homomorphic Equivalence | o | Homomorphism from G to H<br />Homomorphism from H to G | d | a | w | ✅ | c | p |
+| Faithful Homomorphism | o | $u\sim v \implies f(u) \sim f(v)$<br />$f(u) \sim f(v) \implies \exists x,y: x\sim y \wedge f(x)=f(u) \wedge f(y)=f(v)$[^faithful_explanation]<br />f<sub>V</sub> may be many-to-one | d | a | w | ❌ | c | p |
+| Full Homomorphism[^full_homo_name] | o | $u\sim v \implies f(u) \sim f(v)$<br />$u \not\sim y \implies f(u) \not\sim f(v)$<br />f<sub>V</sub> may be many-to-one | d | a | w | ❌ | c | p |
+| Epimorphism[^epimorphism_name] | o | f | d | a | w | ❌ | c | p |
+| Monomorphism[^monomorphism_name] | o | f | d | a | w | ❌ | c | p |
+
+[^induced_name]: We could say, H is an induced subgraph of G iff there is an injective homomorphism that preserves adjacency and non-adjacency. From the perspective of a graph as a relational structure (with the only relation between adjacency), "induced subgraph" is then the same as the notion of [embedding](https://en.wikipedia.org/wiki/Embedding#Universal_algebra_and_model_theory) used in universal algebra and logic. So, occasionally the relationship of graphs is referred to as "embedding", or the mapping as "the embedding". But this should not be confused with the notion of [Graph embedding](https://en.wikipedia.org/wiki/Graph_embedding), which studies ways to put graphs on surfaces of different genera, or crossing numbers and the like.
+[^dissol_dual]: While H is a _dissolution_ of G if G can be reduced to H by repeatedly dissolving degree-2 vertices, the dual relationship is that G is a _subdivision_ of H, by repeatedly subdividing the edges of H.
+[^dissol_npc_ref]: NP-Hardness was originally "observed" in [On the complexity of finding iso-and other morphisms for partial k-trees](https://www.sciencedirect.com/science/article/pii/0012365X9290687B) by J. Matoušek, R. Thomas, although the reduction is somewhat nontrivial and doesn't seem to be written down anywhere.
+[^dissol_fpt_explanation]: There is a simple FPT algorithm for dissolution checking. We'll say that a vertex is a _branchpoint_ if it has degree 3 or more. Dissolution preserves the number of branchpoints in a graph, so first check that G and H have the same number of branchpoints. There are at most $k=V(H)$ many branchpoints in H, and so at most $k$ many branchpoints in G as well. Then just check each of the $k!$ different ways to map the branchpoints of H to those of G. A map is a valid solution if the paths a given pair of branchpoints in G are longer than the paths between the corresponding branchpoints in H. So each map can be checked in $O(n)$ time, and the dissolution can be checked in $O(k^k n)$ time.
+[^faithful_explanation]: The difference between an ordinary homomorphism, _faithful_ homomorphism, and _full_ homomorphism is as follows. All of them agree that edges must map to edges. A full homomorphism requires that non-edges map to non-edges, or we could equivalently say that only "necessary" edges appear in the image. A faithful homomorphism says for each edge in the image, _at least one_ edge in the preimage must map there, so it's a weaker notion of what a "necessary" edge is. There's more discussion [here](https://math.stackexchange.com/a/2705649/127777).
+[^full_homo_name]: _Full homomorphism_ is also known as _Strong homomorphism_, especially from the perspective of universal algebra and mathematical logic.
+[^epimorphism_name]: _Epimorphism_ is also known as _Surjective homomorphism_.
+[^monomorphism_name]: _Monomorphism_ is also known as _Injective homomorphism_.
 
 <div style="display:none">
-|-
-|| '''Induced Subgraph'''
-| Vertex deletion || '''E'''(u,v) ↔ '''E'''(''f''(u), ''f''(v))<br />''f''<sub>V</sub> injective || Not WQO (e.g. Cn)<br />DCC || NP-Complete (cliques) <br /> G<sup>H+2</sup> <br /> 2<sup>o(G)</sup> || W[1]-Complete (cliques) <br /> G<sup>H+2</sup> <br /> f(H)G<sup>o(H)</sup>
-|-
-|| '''Subgraph'''
-| Vertex deletion, Edge deletion || '''E'''(u,v)  → '''E'''(''f''(u), ''f''(v))<br />''f''<sub>V</sub> injective || Not WQO (e.g. Cn)<br />DCC || NP-Complete (cliques) <br /> G<sup>H+2</sup> <br /> 2<sup>o(G)</sup> || W[1]-Complete (cliques) <br /> G<sup>H+2</sup> <br /> f(H)G<sup>o(H)</sup>
-|-
-|| '''Spanning Subgraph'''
-| Edge deletion || '''E'''(u,v)  → '''E'''(''f''(u), ''f''(v))<br />''f''<sub>V</sub> bijective || Not WQO (e.g. Cn)<br />DCC, ACC || NP-Complete (Hamiltonian cycle) <br /> G<sup>H+2</sup> <br /> 2<sup>o(G)</sup> || ''Trivial'' <br />(Fixed vertex count; ACC)
-|-
-|| '''Dissolution''' <br />Dual to '''Subdivision'''
-| Vertex Dissolution || ''f''<sub>V</sub> injective<br />''f''<sub>E</sub> carries edges to distinct induced paths || Not WQO (e.g. Kn)<br />DCC || NP-Complete ''[2]'' <br /> G<sup>H+2</sup> <br /> 2<sup>o(G)</sup> || FPT<br />H<sup>H</sup>G<br />2<sup>o(H)</sup>G ''[3]''
-|-
-|| '''Homeomorphism''' 
-| Dissolution, Subdivision
-|-
-|| '''Induced Topological Minor''' 
-| Vertex deletion, smoothing<br />(Multiedge simplification?)
-|-
-|| '''Topological Minor''' 
-| Vertex deletion, edge deletion, smoothing
-|-
-|| '''Induced Minor''' 
-| Vertex deletion, contraction<br />(Multiedge simplification?)
-|-
-|| '''Minor''' 
-| Vertex deletion, edge deletion, contraction
-|-
-|| '''Induced Immersion''' 
-| Vertex deletion, lifting<br />(Multiedge simplification?)
-|-
-|| '''Immersion''' 
-| Vertex deletion, edge deletion, lifting
-|-
-|| '''Weak Immersion''' 
-| Vertex deletion, edge deletion, lifting, subdivision<br />(smoothing?)
-|-
-|| '''Strong Immersion''' 
-| ...complicated...
-|-
 || '''Homomorphism''' 
 | Vertex identification, multiedge simplification<br />vertex addition, edge addition
 |-
