@@ -1,3 +1,6 @@
+---
+title: Fun Math Terms
+---
 Mathematicians and physicists like to name things in very silly ways. This is a great motivator: I will often read about something just because of a fun name. I'm going to try to gather some of them here, please amuse yourself! (Contrived acronyms, especially those in astronomy and machine learning to name specific projects, are excluded. They are both too common, and usually name a particular _work_; I am more interested in pure mathematical _objects_
 that have been named something funny.)
 
