@@ -1,0 +1,377 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="icon" href="../../.././favicon.svg"></link><link rel="mask-icon" href="../../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>QuantumInfo.Finite.CPTPMap.CP</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="QuantumInfo.Finite.CPTPMap.CP";</script><script type="module" src="../../.././jump-src.js"></script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././expand-nav.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">QuantumInfo</span>.<span class="name">Finite</span>.<span class="name">CPTPMap</span>.<span class="name">CP</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/9b5d076611dae3a1f1147d92145d27dde288b9ad/QuantumInfo/Finite/CPTPMap/CP.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././QuantumInfo/Finite/CPTPMap/MatrixMap.html">QuantumInfo.Finite.CPTPMap.MatrixMap</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-QuantumInfo.Finite.CPTPMap.CP" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#MatrixMap.IsHermitianPreserving"><span class="name">MatrixMap</span>.<span class="name">IsHermitianPreserving</span></a></div><div class="nav_link"><a class="break_within" href="#MatrixMap.IsPositive"><span class="name">MatrixMap</span>.<span class="name">IsPositive</span></a></div><div class="nav_link"><a class="break_within" href="#MatrixMap.IsCompletelyPositive"><span class="name">MatrixMap</span>.<span class="name">IsCompletelyPositive</span></a></div><div class="nav_link"><a class="break_within" href="#MatrixMap.IsHermitianPreserving.id"><span class="name">MatrixMap</span>.<span class="name">IsHermitianPreserving</span>.<span class="name">id</span></a></div><div class="nav_link"><a class="break_within" href="#MatrixMap.IsHermitianPreserving.comp"><span class="name">MatrixMap</span>.<span class="name">IsHermitianPreserving</span>.<span class="name">comp</span></a></div><div class="nav_link"><a class="break_within" href="#MatrixMap.IsPositive.IsHermitianPreserving"><span class="name">MatrixMap</span>.<span class="name">IsPositive</span>.<span class="name">IsHermitianPreserving</span></a></div><div class="nav_link"><a class="break_within" href="#MatrixMap.IsPositive.comp"><span class="name">MatrixMap</span>.<span class="name">IsPositive</span>.<span class="name">comp</span></a></div><div class="nav_link"><a class="break_within" href="#MatrixMap.IsPositive.id"><span class="name">MatrixMap</span>.<span class="name">IsPositive</span>.<span class="name">id</span></a></div><div class="nav_link"><a class="break_within" href="#MatrixMap.IsPositive.add"><span class="name">MatrixMap</span>.<span class="name">IsPositive</span>.<span class="name">add</span></a></div><div class="nav_link"><a class="break_within" href="#MatrixMap.IsPositive.smul"><span class="name">MatrixMap</span>.<span class="name">IsPositive</span>.<span class="name">smul</span></a></div><div class="nav_link"><a class="break_within" href="#MatrixMap.IsCompletelyPositive.def_Fintype"><span class="name">MatrixMap</span>.<span class="name">IsCompletelyPositive</span>.<span class="name">def_Fintype</span></a></div><div class="nav_link"><a class="break_within" href="#MatrixMap.IsCompletelyPositive.IsPositive"><span class="name">MatrixMap</span>.<span class="name">IsCompletelyPositive</span>.<span class="name">IsPositive</span></a></div><div class="nav_link"><a class="break_within" href="#MatrixMap.IsCompletelyPositive.comp"><span class="name">MatrixMap</span>.<span class="name">IsCompletelyPositive</span>.<span class="name">comp</span></a></div><div class="nav_link"><a class="break_within" href="#MatrixMap.IsCompletelyPositive.id"><span class="name">MatrixMap</span>.<span class="name">IsCompletelyPositive</span>.<span class="name">id</span></a></div><div class="nav_link"><a class="break_within" href="#MatrixMap.IsCompletelyPositive.add"><span class="name">MatrixMap</span>.<span class="name">IsCompletelyPositive</span>.<span class="name">add</span></a></div><div class="nav_link"><a class="break_within" href="#MatrixMap.IsCompletelyPositive.smul"><span class="name">MatrixMap</span>.<span class="name">IsCompletelyPositive</span>.<span class="name">smul</span></a></div><div class="nav_link"><a class="break_within" href="#MatrixMap.choi_PSD_iff_CP_map"><span class="name">MatrixMap</span>.<span class="name">choi_PSD_iff_CP_map</span></a></div><div class="nav_link"><a class="break_within" href="#MatrixMap.IsCompletelyPositive.kron"><span class="name">MatrixMap</span>.<span class="name">IsCompletelyPositive</span>.<span class="name">kron</span></a></div><div class="nav_link"><a class="break_within" href="#MatrixMap.IsCompletelyPositive.piKron"><span class="name">MatrixMap</span>.<span class="name">IsCompletelyPositive</span>.<span class="name">piKron</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Completely-Positive-maps">Completely Positive maps <a class="hover-link" href="#Completely-Positive-maps">#</a></h1><p>Building on <code><a href="../../.././QuantumInfo/Finite/CPTPMap/MatrixMap.html#MatrixMap">MatrixMap</a></code>s, this defines <code><a href="../../.././QuantumInfo/Finite/CPTPMap/CP.html#MatrixMap.IsHermitianPreserving">IsHermitianPreserving</a></code>, <code><a href="../../.././QuantumInfo/Finite/CPTPMap/CP.html#MatrixMap.IsPositive">IsPositive</a></code>
+and <code><a href="../../.././QuantumInfo/Finite/CPTPMap/CP.html#MatrixMap.IsCompletelyPositive">IsCompletelyPositive</a></code> maps. They have basic facts such as closure under composition,
+addition, and scaling.</p></div><div class="decl" id="MatrixMap.IsHermitianPreserving"><div class="def"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/9b5d076611dae3a1f1147d92145d27dde288b9ad/QuantumInfo/Finite/CPTPMap/CP.lean#L22-L23">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/Finite/CPTPMap/CP.html#MatrixMap.IsHermitianPreserving"><span class="name">MatrixMap</span>.<span class="name">IsHermitianPreserving</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(M : <span class="fn"><a href="../../.././QuantumInfo/Finite/CPTPMap/MatrixMap.html#MatrixMap">MatrixMap</a> <span class="fn">A</span> <span class="fn">B</span> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../.././foundational_types.html">Prop</a></div></div><p>A linear matrix map is <em>Hermitian preserving</em> if it maps <code>IsHermitian</code> matrices to <code>IsHermitian</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><span class="fn">M</span>.IsHermitianPreserving</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">∀ {<span class="fn">x</span> : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">A</span> <span class="fn">A</span> <span class="fn">R</span></span>}, <span class="fn"><span class="fn"><span class="fn">x</span>.IsHermitian</span> → <span class="fn"><span class="fn">(<span class="fn">M</span> <span class="fn">x</span>)</span>.IsHermitian</span></span></span></span></li></ul></details><details id="instances-for-list-MatrixMap.IsHermitianPreserving" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="MatrixMap.IsPositive"><div class="def"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/9b5d076611dae3a1f1147d92145d27dde288b9ad/QuantumInfo/Finite/CPTPMap/CP.lean#L26-L27">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/Finite/CPTPMap/CP.html#MatrixMap.IsPositive"><span class="name">MatrixMap</span>.<span class="name">IsPositive</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(M : <span class="fn"><a href="../../.././QuantumInfo/Finite/CPTPMap/MatrixMap.html#MatrixMap">MatrixMap</a> <span class="fn">A</span> <span class="fn">B</span> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../.././foundational_types.html">Prop</a></div></div><p>A linear matrix map is <em>positive</em> if it maps <code>PosSemidef</code> matrices to <code>PosSemidef</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><span class="fn">M</span>.IsPositive</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">∀ {<span class="fn">x</span> : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">A</span> <span class="fn">A</span> <span class="fn">R</span></span>}, <span class="fn"><span class="fn"><span class="fn">x</span>.PosSemidef</span> → <span class="fn"><span class="fn">(<span class="fn">M</span> <span class="fn">x</span>)</span>.PosSemidef</span></span></span></span></li></ul></details><details id="instances-for-list-MatrixMap.IsPositive" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="MatrixMap.IsCompletelyPositive"><div class="def"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/9b5d076611dae3a1f1147d92145d27dde288b9ad/QuantumInfo/Finite/CPTPMap/CP.lean#L31-L32">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/Finite/CPTPMap/CP.html#MatrixMap.IsCompletelyPositive"><span class="name">MatrixMap</span>.<span class="name">IsCompletelyPositive</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(M : <span class="fn"><a href="../../.././QuantumInfo/Finite/CPTPMap/MatrixMap.html#MatrixMap">MatrixMap</a> <span class="fn">A</span> <span class="fn">B</span> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../.././foundational_types.html">Prop</a></div></div><p>A linear matrix map is <em>completely positive</em> if, for any integer n, the tensor product
+with <code>I(n)</code> is positive.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><span class="fn">M</span>.IsCompletelyPositive</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">∀ (<span class="fn">n</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn">(<span class="fn"><span class="fn">M</span>.kron</span> <span class="fn">LinearMap.id</span>)</span>.IsPositive</span></span></span></li></ul></details><details id="instances-for-list-MatrixMap.IsCompletelyPositive" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="MatrixMap.IsHermitianPreserving.id"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/9b5d076611dae3a1f1147d92145d27dde288b9ad/QuantumInfo/Finite/CPTPMap/CP.lean#L38-L39">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/Finite/CPTPMap/CP.html#MatrixMap.IsHermitianPreserving.id"><span class="name">MatrixMap</span>.<span class="name">IsHermitianPreserving</span>.<span class="name">id</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<a href="../../.././QuantumInfo/Finite/CPTPMap/MatrixMap.html#MatrixMap.id">MatrixMap.id</a> <span class="fn">A</span> <span class="fn">R</span>)</span>.IsPositive</span></div></div><p>The identity MatrixMap IsHermitianPreserving.</p></div></div><div class="decl" id="MatrixMap.IsHermitianPreserving.comp"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/9b5d076611dae3a1f1147d92145d27dde288b9ad/QuantumInfo/Finite/CPTPMap/CP.lean#L42-L44">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/Finite/CPTPMap/CP.html#MatrixMap.IsHermitianPreserving.comp"><span class="name">MatrixMap</span>.<span class="name">IsHermitianPreserving</span>.<span class="name">comp</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₁ : <span class="fn"><a href="../../.././QuantumInfo/Finite/CPTPMap/MatrixMap.html#MatrixMap">MatrixMap</a> <span class="fn">A</span> <span class="fn">B</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₂ : <span class="fn"><a href="../../.././QuantumInfo/Finite/CPTPMap/MatrixMap.html#MatrixMap">MatrixMap</a> <span class="fn">B</span> <span class="fn">C</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn">M₁</span>.IsHermitianPreserving</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn"><span class="fn">M₂</span>.IsHermitianPreserving</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././QuantumInfo/Finite/CPTPMap/CP.html#MatrixMap.IsHermitianPreserving">MatrixMap.IsHermitianPreserving</a> <span class="fn">(<span class="fn">M₂</span> ∘ₗ <span class="fn">M₁</span>)</span></span></div></div><p>The composition of IsHermitianPreserving maps is also Hermitian preserving.</p></div></div><div class="decl" id="MatrixMap.IsPositive.IsHermitianPreserving"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/9b5d076611dae3a1f1147d92145d27dde288b9ad/QuantumInfo/Finite/CPTPMap/CP.lean#L52-L58">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/Finite/CPTPMap/CP.html#MatrixMap.IsPositive.IsHermitianPreserving"><span class="name">MatrixMap</span>.<span class="name">IsPositive</span>.<span class="name">IsHermitianPreserving</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(M : <span class="fn"><a href="../../.././QuantumInfo/Finite/CPTPMap/MatrixMap.html#MatrixMap">MatrixMap</a> <span class="fn">A</span> <span class="fn">B</span> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hM : <span class="fn"><span class="fn">M</span>.IsPositive</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">M</span>.IsHermitianPreserving</span></div></div></div></div><div class="decl" id="MatrixMap.IsPositive.comp"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/9b5d076611dae3a1f1147d92145d27dde288b9ad/QuantumInfo/Finite/CPTPMap/CP.lean#L61-L63">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/Finite/CPTPMap/CP.html#MatrixMap.IsPositive.comp"><span class="name">MatrixMap</span>.<span class="name">IsPositive</span>.<span class="name">comp</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₁ : <span class="fn"><a href="../../.././QuantumInfo/Finite/CPTPMap/MatrixMap.html#MatrixMap">MatrixMap</a> <span class="fn">A</span> <span class="fn">B</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₂ : <span class="fn"><a href="../../.././QuantumInfo/Finite/CPTPMap/MatrixMap.html#MatrixMap">MatrixMap</a> <span class="fn">B</span> <span class="fn">C</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn">M₁</span>.IsPositive</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn"><span class="fn">M₂</span>.IsPositive</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././QuantumInfo/Finite/CPTPMap/CP.html#MatrixMap.IsPositive">MatrixMap.IsPositive</a> <span class="fn">(<span class="fn">M₂</span> ∘ₗ <span class="fn">M₁</span>)</span></span></div></div><p>The composition of IsPositive maps is also positive.</p></div></div><div class="decl" id="MatrixMap.IsPositive.id"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/9b5d076611dae3a1f1147d92145d27dde288b9ad/QuantumInfo/Finite/CPTPMap/CP.lean#L67-L68">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/Finite/CPTPMap/CP.html#MatrixMap.IsPositive.id"><span class="name">MatrixMap</span>.<span class="name">IsPositive</span>.<span class="name">id</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<a href="../../.././QuantumInfo/Finite/CPTPMap/MatrixMap.html#MatrixMap.id">MatrixMap.id</a> <span class="fn">A</span> <span class="fn">R</span>)</span>.IsPositive</span></div></div><p>The identity MatrixMap IsPositive.</p></div></div><div class="decl" id="MatrixMap.IsPositive.add"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/9b5d076611dae3a1f1147d92145d27dde288b9ad/QuantumInfo/Finite/CPTPMap/CP.lean#L71-L73">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/Finite/CPTPMap/CP.html#MatrixMap.IsPositive.add"><span class="name">MatrixMap</span>.<span class="name">IsPositive</span>.<span class="name">add</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₁ : <span class="fn"><a href="../../.././QuantumInfo/Finite/CPTPMap/MatrixMap.html#MatrixMap">MatrixMap</a> <span class="fn">A</span> <span class="fn">B</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₂ : <span class="fn"><a href="../../.././QuantumInfo/Finite/CPTPMap/MatrixMap.html#MatrixMap">MatrixMap</a> <span class="fn">A</span> <span class="fn">B</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn">M₁</span>.IsPositive</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn"><span class="fn">M₂</span>.IsPositive</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn">M₁</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">M₂</span>)</span>.IsPositive</span></div></div><p>Sums of IsPositive maps are IsPositive.</p></div></div><div class="decl" id="MatrixMap.IsPositive.smul"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/9b5d076611dae3a1f1147d92145d27dde288b9ad/QuantumInfo/Finite/CPTPMap/CP.lean#L76-L78">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/Finite/CPTPMap/CP.html#MatrixMap.IsPositive.smul"><span class="name">MatrixMap</span>.<span class="name">IsPositive</span>.<span class="name">smul</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <span class="fn"><a href="../../.././QuantumInfo/Finite/CPTPMap/MatrixMap.html#MatrixMap">MatrixMap</a> <span class="fn">A</span> <span class="fn">B</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hM : <span class="fn"><span class="fn">M</span>.IsPositive</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hx : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn">x</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">M</span>)</span>.IsPositive</span></div></div><p>Nonnegative scalings of IsPositive maps are IsPositive.</p></div></div><div class="decl" id="MatrixMap.IsCompletelyPositive.def_Fintype"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/9b5d076611dae3a1f1147d92145d27dde288b9ad/QuantumInfo/Finite/CPTPMap/CP.lean#L86-L89">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/Finite/CPTPMap/CP.html#MatrixMap.IsCompletelyPositive.def_Fintype"><span class="name">MatrixMap</span>.<span class="name">IsCompletelyPositive</span>.<span class="name">def_Fintype</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <span class="fn"><a href="../../.././QuantumInfo/Finite/CPTPMap/MatrixMap.html#MatrixMap">MatrixMap</a> <span class="fn">A</span> <span class="fn">B</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">M</span>.IsCompletelyPositive</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(T : <a href="../../.././foundational_types.html">Type</a> u_5)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">T</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">T</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">M</span>.kron</span> <span class="fn">LinearMap.id</span>)</span>.IsPositive</span></div></div><p>Definition of a CP map, but with <code><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> T</code> in the definition instead of a <code><a href="../../.././Init/Prelude.html#Fin">Fin</a> n</code>.</p></div></div><div class="decl" id="MatrixMap.IsCompletelyPositive.IsPositive"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/9b5d076611dae3a1f1147d92145d27dde288b9ad/QuantumInfo/Finite/CPTPMap/CP.lean#L92-L98">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/Finite/CPTPMap/CP.html#MatrixMap.IsCompletelyPositive.IsPositive"><span class="name">MatrixMap</span>.<span class="name">IsCompletelyPositive</span>.<span class="name">IsPositive</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <span class="fn"><a href="../../.././QuantumInfo/Finite/CPTPMap/MatrixMap.html#MatrixMap">MatrixMap</a> <span class="fn">A</span> <span class="fn">B</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hM : <span class="fn"><span class="fn">M</span>.IsCompletelyPositive</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">M</span>.IsPositive</span></div></div></div></div><div class="decl" id="MatrixMap.IsCompletelyPositive.comp"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/9b5d076611dae3a1f1147d92145d27dde288b9ad/QuantumInfo/Finite/CPTPMap/CP.lean#L101-L104">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/Finite/CPTPMap/CP.html#MatrixMap.IsCompletelyPositive.comp"><span class="name">MatrixMap</span>.<span class="name">IsCompletelyPositive</span>.<span class="name">comp</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₁ : <span class="fn"><a href="../../.././QuantumInfo/Finite/CPTPMap/MatrixMap.html#MatrixMap">MatrixMap</a> <span class="fn">A</span> <span class="fn">B</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₂ : <span class="fn"><a href="../../.././QuantumInfo/Finite/CPTPMap/MatrixMap.html#MatrixMap">MatrixMap</a> <span class="fn">B</span> <span class="fn">C</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn">M₁</span>.IsCompletelyPositive</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn"><span class="fn">M₂</span>.IsCompletelyPositive</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././QuantumInfo/Finite/CPTPMap/CP.html#MatrixMap.IsCompletelyPositive">MatrixMap.IsCompletelyPositive</a> <span class="fn">(<span class="fn">M₂</span> ∘ₗ <span class="fn">M₁</span>)</span></span></div></div><p>The composition of IsCompletelyPositive maps is also completely positive.</p></div></div><div class="decl" id="MatrixMap.IsCompletelyPositive.id"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/9b5d076611dae3a1f1147d92145d27dde288b9ad/QuantumInfo/Finite/CPTPMap/CP.lean#L107-L109">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/Finite/CPTPMap/CP.html#MatrixMap.IsCompletelyPositive.id"><span class="name">MatrixMap</span>.<span class="name">IsCompletelyPositive</span>.<span class="name">id</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<a href="../../.././QuantumInfo/Finite/CPTPMap/MatrixMap.html#MatrixMap.id">MatrixMap.id</a> <span class="fn">A</span> <span class="fn">R</span>)</span>.IsCompletelyPositive</span></div></div><p>The identity MatrixMap IsCompletelyPositive.</p></div></div><div class="decl" id="MatrixMap.IsCompletelyPositive.add"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/9b5d076611dae3a1f1147d92145d27dde288b9ad/QuantumInfo/Finite/CPTPMap/CP.lean#L112-L115">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/Finite/CPTPMap/CP.html#MatrixMap.IsCompletelyPositive.add"><span class="name">MatrixMap</span>.<span class="name">IsCompletelyPositive</span>.<span class="name">add</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₁ : <span class="fn"><a href="../../.././QuantumInfo/Finite/CPTPMap/MatrixMap.html#MatrixMap">MatrixMap</a> <span class="fn">A</span> <span class="fn">B</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₂ : <span class="fn"><a href="../../.././QuantumInfo/Finite/CPTPMap/MatrixMap.html#MatrixMap">MatrixMap</a> <span class="fn">A</span> <span class="fn">B</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn">M₁</span>.IsCompletelyPositive</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn"><span class="fn">M₂</span>.IsCompletelyPositive</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn">M₁</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">M₂</span>)</span>.IsCompletelyPositive</span></div></div><p>Sums of IsCompletelyPositive maps are IsCompletelyPositive.</p></div></div><div class="decl" id="MatrixMap.IsCompletelyPositive.smul"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/9b5d076611dae3a1f1147d92145d27dde288b9ad/QuantumInfo/Finite/CPTPMap/CP.lean#L118-L120">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/Finite/CPTPMap/CP.html#MatrixMap.IsCompletelyPositive.smul"><span class="name">MatrixMap</span>.<span class="name">IsCompletelyPositive</span>.<span class="name">smul</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <span class="fn"><a href="../../.././QuantumInfo/Finite/CPTPMap/MatrixMap.html#MatrixMap">MatrixMap</a> <span class="fn">A</span> <span class="fn">B</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hM : <span class="fn"><span class="fn">M</span>.IsCompletelyPositive</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hx : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn">x</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">M</span>)</span>.IsCompletelyPositive</span></div></div><p>Nonnegative scalings of IsPositive maps are IsPositive.</p></div></div><div class="decl" id="MatrixMap.choi_PSD_iff_CP_map"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/9b5d076611dae3a1f1147d92145d27dde288b9ad/QuantumInfo/Finite/CPTPMap/CP.lean#L123-L125">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/Finite/CPTPMap/CP.html#MatrixMap.choi_PSD_iff_CP_map"><span class="name">MatrixMap</span>.<span class="name">choi_PSD_iff_CP_map</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(M : <span class="fn"><a href="../../.././QuantumInfo/Finite/CPTPMap/MatrixMap.html#MatrixMap">MatrixMap</a> <span class="fn">A</span> <span class="fn">B</span> <a href="../../.././Mathlib/Data/Complex/Basic.html#Complex">ℂ</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">M</span>.IsCompletelyPositive</span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">M</span>.choi_matrix</span>.PosSemidef</span></span></div></div><p>Choi's theorem on completely positive maps: A map <code><a href="../../.././QuantumInfo/Finite/CPTPMap/CP.html#MatrixMap.IsCompletelyPositive">IsCompletelyPositive</a></code> iff its Choi Matrix is PSD.</p></div></div><div class="decl" id="MatrixMap.IsCompletelyPositive.kron"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/9b5d076611dae3a1f1147d92145d27dde288b9ad/QuantumInfo/Finite/CPTPMap/CP.lean#L128-L144">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/Finite/CPTPMap/CP.html#MatrixMap.IsCompletelyPositive.kron"><span class="name">MatrixMap</span>.<span class="name">IsCompletelyPositive</span>.<span class="name">kron</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₁ : <span class="fn"><a href="../../.././QuantumInfo/Finite/CPTPMap/MatrixMap.html#MatrixMap">MatrixMap</a> <span class="fn">A</span> <span class="fn">B</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₂ : <span class="fn"><a href="../../.././QuantumInfo/Finite/CPTPMap/MatrixMap.html#MatrixMap">MatrixMap</a> <span class="fn">C</span> <span class="fn">D</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn">M₁</span>.IsCompletelyPositive</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn"><span class="fn">M₂</span>.IsCompletelyPositive</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">M₁</span>.kron</span> <span class="fn">M₂</span>)</span>.IsCompletelyPositive</span></div></div><p>The Kronecker product of IsCompletelyPositive maps is also completely positive.</p></div></div><div class="decl" id="MatrixMap.IsCompletelyPositive.piKron"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/9b5d076611dae3a1f1147d92145d27dde288b9ad/QuantumInfo/Finite/CPTPMap/CP.lean#L153-L155">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/Finite/CPTPMap/CP.html#MatrixMap.IsCompletelyPositive.piKron"><span class="name">MatrixMap</span>.<span class="name">IsCompletelyPositive</span>.<span class="name">piKron</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[fι : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{dI : <span class="fn"><span class="fn">ι</span> → <a href="../../.././foundational_types.html">Type</a> v</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn">(<span class="fn">i</span> : <span class="fn">ι</span>) → <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">(<span class="fn">dI</span> <span class="fn">i</span>)</span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn">(<span class="fn">i</span> : <span class="fn">ι</span>) → <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">(<span class="fn">dI</span> <span class="fn">i</span>)</span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{dO : <span class="fn"><span class="fn">ι</span> → <a href="../../.././foundational_types.html">Type</a> w</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn">(<span class="fn">i</span> : <span class="fn">ι</span>) → <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">(<span class="fn">dO</span> <span class="fn">i</span>)</span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn">(<span class="fn">i</span> : <span class="fn">ι</span>) → <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">(<span class="fn">dO</span> <span class="fn">i</span>)</span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Λi : <span class="fn">(<span class="fn">i</span> : <span class="fn">ι</span>) → <span class="fn"><a href="../../.././QuantumInfo/Finite/CPTPMap/MatrixMap.html#MatrixMap">MatrixMap</a> <span class="fn">(<span class="fn">dI</span> <span class="fn">i</span>)</span> <span class="fn">(<span class="fn">dO</span> <span class="fn">i</span>)</span> <span class="fn">R</span></span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h₁ : <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">ι</span>), <span class="fn"><span class="fn">(<span class="fn">Λi</span> <span class="fn">i</span>)</span>.IsCompletelyPositive</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<a href="../../.././QuantumInfo/Finite/CPTPMap/MatrixMap.html#MatrixMap.piKron">MatrixMap.piKron</a> <span class="fn">Λi</span>)</span>.IsCompletelyPositive</span></div></div><p>The <code><a href="../../.././QuantumInfo/Finite/CPTPMap/CP.html#MatrixMap.IsCompletelyPositive.piKron">piKron</a></code> product of IsCompletelyPositive maps is also completely positive.</p></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

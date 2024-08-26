@@ -1,0 +1,984 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="icon" href="../../.././favicon.svg"></link><link rel="mask-icon" href="../../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Algebra.CharP.ExpChar</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.Algebra.CharP.ExpChar";</script><script type="module" src="../../.././jump-src.js"></script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././expand-nav.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Algebra</span>.<span class="name">CharP</span>.<span class="name">ExpChar</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/Algebra/CharP/Algebra.html">Mathlib.Algebra.CharP.Algebra</a></li><li><a href="../../.././Mathlib/Algebra/CharP/Basic.html">Mathlib.Algebra.CharP.Basic</a></li><li><a href="../../.././Mathlib/Data/Nat/Prime/Defs.html">Mathlib.Data.Nat.Prime.Defs</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Algebra.CharP.ExpChar" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#ExpChar"><span class="name">ExpChar</span></a></div><div class="nav_link"><a class="break_within" href="#expChar_prime"><span class="name">expChar_prime</span></a></div><div class="nav_link"><a class="break_within" href="#expChar_zero"><span class="name">expChar_zero</span></a></div><div class="nav_link"><a class="break_within" href="#instExpCharProd"><span class="name">instExpCharProd</span></a></div><div class="nav_link"><a class="break_within" href="#ExpChar.eq"><span class="name">ExpChar</span>.<span class="name">eq</span></a></div><div class="nav_link"><a class="break_within" href="#ExpChar.congr"><span class="name">ExpChar</span>.<span class="name">congr</span></a></div><div class="nav_link"><a class="break_within" href="#ringExpChar"><span class="name">ringExpChar</span></a></div><div class="nav_link"><a class="break_within" href="#ringExpChar.eq"><span class="name">ringExpChar</span>.<span class="name">eq</span></a></div><div class="nav_link"><a class="break_within" href="#ringExpChar.eq_one"><span class="name">ringExpChar</span>.<span class="name">eq_one</span></a></div><div class="nav_link"><a class="break_within" href="#expChar_one_of_char_zero"><span class="name">expChar_one_of_char_zero</span></a></div><div class="nav_link"><a class="break_within" href="#char_eq_expChar_iff"><span class="name">char_eq_expChar_iff</span></a></div><div class="nav_link"><a class="break_within" href="#expChar_is_prime_or_one"><span class="name">expChar_is_prime_or_one</span></a></div><div class="nav_link"><a class="break_within" href="#expChar_pos"><span class="name">expChar_pos</span></a></div><div class="nav_link"><a class="break_within" href="#expChar_pow_pos"><span class="name">expChar_pow_pos</span></a></div><div class="nav_link"><a class="break_within" href="#char_zero_of_expChar_one"><span class="name">char_zero_of_expChar_one</span></a></div><div class="nav_link"><a class="break_within" href="#charZero_of_expChar_one'"><span class="name">charZero_of_expChar_one'</span></a></div><div class="nav_link"><a class="break_within" href="#expChar_one_iff_char_zero"><span class="name">expChar_one_iff_char_zero</span></a></div><div class="nav_link"><a class="break_within" href="#char_prime_of_ne_zero"><span class="name">char_prime_of_ne_zero</span></a></div><div class="nav_link"><a class="break_within" href="#ExpChar.exists"><span class="name">ExpChar</span>.<span class="name">exists</span></a></div><div class="nav_link"><a class="break_within" href="#ExpChar.exists_unique"><span class="name">ExpChar</span>.<span class="name">exists_unique</span></a></div><div class="nav_link"><a class="break_within" href="#ringExpChar.expChar"><span class="name">ringExpChar</span>.<span class="name">expChar</span></a></div><div class="nav_link"><a class="break_within" href="#ringExpChar.of_eq"><span class="name">ringExpChar</span>.<span class="name">of_eq</span></a></div><div class="nav_link"><a class="break_within" href="#ringExpChar.eq_iff"><span class="name">ringExpChar</span>.<span class="name">eq_iff</span></a></div><div class="nav_link"><a class="break_within" href="#expChar_of_injective_ringHom"><span class="name">expChar_of_injective_ringHom</span></a></div><div class="nav_link"><a class="break_within" href="#RingHom.expChar"><span class="name">RingHom</span>.<span class="name">expChar</span></a></div><div class="nav_link"><a class="break_within" href="#RingHom.expChar_iff"><span class="name">RingHom</span>.<span class="name">expChar_iff</span></a></div><div class="nav_link"><a class="break_within" href="#expChar_of_injective_algebraMap"><span class="name">expChar_of_injective_algebraMap</span></a></div><div class="nav_link"><a class="break_within" href="#add_pow_expChar_of_commute"><span class="name">add_pow_expChar_of_commute</span></a></div><div class="nav_link"><a class="break_within" href="#add_pow_expChar_pow_of_commute"><span class="name">add_pow_expChar_pow_of_commute</span></a></div><div class="nav_link"><a class="break_within" href="#sub_pow_expChar_of_commute"><span class="name">sub_pow_expChar_of_commute</span></a></div><div class="nav_link"><a class="break_within" href="#sub_pow_expChar_pow_of_commute"><span class="name">sub_pow_expChar_pow_of_commute</span></a></div><div class="nav_link"><a class="break_within" href="#add_pow_expChar"><span class="name">add_pow_expChar</span></a></div><div class="nav_link"><a class="break_within" href="#add_pow_expChar_pow"><span class="name">add_pow_expChar_pow</span></a></div><div class="nav_link"><a class="break_within" href="#sub_pow_expChar"><span class="name">sub_pow_expChar</span></a></div><div class="nav_link"><a class="break_within" href="#sub_pow_expChar_pow"><span class="name">sub_pow_expChar_pow</span></a></div><div class="nav_link"><a class="break_within" href="#ExpChar.neg_one_pow_expChar"><span class="name">ExpChar</span>.<span class="name">neg_one_pow_expChar</span></a></div><div class="nav_link"><a class="break_within" href="#ExpChar.neg_one_pow_expChar_pow"><span class="name">ExpChar</span>.<span class="name">neg_one_pow_expChar_pow</span></a></div><div class="nav_link"><a class="break_within" href="#frobenius"><span class="name">frobenius</span></a></div><div class="nav_link"><a class="break_within" href="#iterateFrobenius"><span class="name">iterateFrobenius</span></a></div><div class="nav_link"><a class="break_within" href="#frobenius_def"><span class="name">frobenius_def</span></a></div><div class="nav_link"><a class="break_within" href="#iterateFrobenius_def"><span class="name">iterateFrobenius_def</span></a></div><div class="nav_link"><a class="break_within" href="#iterate_frobenius"><span class="name">iterate_frobenius</span></a></div><div class="nav_link"><a class="break_within" href="#coe_iterateFrobenius"><span class="name">coe_iterateFrobenius</span></a></div><div class="nav_link"><a class="break_within" href="#iterateFrobenius_one_apply"><span class="name">iterateFrobenius_one_apply</span></a></div><div class="nav_link"><a class="break_within" href="#iterateFrobenius_one"><span class="name">iterateFrobenius_one</span></a></div><div class="nav_link"><a class="break_within" href="#iterateFrobenius_zero_apply"><span class="name">iterateFrobenius_zero_apply</span></a></div><div class="nav_link"><a class="break_within" href="#iterateFrobenius_zero"><span class="name">iterateFrobenius_zero</span></a></div><div class="nav_link"><a class="break_within" href="#iterateFrobenius_add_apply"><span class="name">iterateFrobenius_add_apply</span></a></div><div class="nav_link"><a class="break_within" href="#iterateFrobenius_add"><span class="name">iterateFrobenius_add</span></a></div><div class="nav_link"><a class="break_within" href="#iterateFrobenius_mul_apply"><span class="name">iterateFrobenius_mul_apply</span></a></div><div class="nav_link"><a class="break_within" href="#coe_iterateFrobenius_mul"><span class="name">coe_iterateFrobenius_mul</span></a></div><div class="nav_link"><a class="break_within" href="#frobenius_mul"><span class="name">frobenius_mul</span></a></div><div class="nav_link"><a class="break_within" href="#frobenius_one"><span class="name">frobenius_one</span></a></div><div class="nav_link"><a class="break_within" href="#MonoidHom.map_frobenius"><span class="name">MonoidHom</span>.<span class="name">map_frobenius</span></a></div><div class="nav_link"><a class="break_within" href="#RingHom.map_frobenius"><span class="name">RingHom</span>.<span class="name">map_frobenius</span></a></div><div class="nav_link"><a class="break_within" href="#MonoidHom.map_iterate_frobenius"><span class="name">MonoidHom</span>.<span class="name">map_iterate_frobenius</span></a></div><div class="nav_link"><a class="break_within" href="#RingHom.map_iterate_frobenius"><span class="name">RingHom</span>.<span class="name">map_iterate_frobenius</span></a></div><div class="nav_link"><a class="break_within" href="#MonoidHom.iterate_map_frobenius"><span class="name">MonoidHom</span>.<span class="name">iterate_map_frobenius</span></a></div><div class="nav_link"><a class="break_within" href="#RingHom.iterate_map_frobenius"><span class="name">RingHom</span>.<span class="name">iterate_map_frobenius</span></a></div><div class="nav_link"><a class="break_within" href="#LinearMap.frobenius"><span class="name">LinearMap</span>.<span class="name">frobenius</span></a></div><div class="nav_link"><a class="break_within" href="#LinearMap.iterateFrobenius"><span class="name">LinearMap</span>.<span class="name">iterateFrobenius</span></a></div><div class="nav_link"><a class="break_within" href="#LinearMap.frobenius_def"><span class="name">LinearMap</span>.<span class="name">frobenius_def</span></a></div><div class="nav_link"><a class="break_within" href="#LinearMap.iterateFrobenius_def"><span class="name">LinearMap</span>.<span class="name">iterateFrobenius_def</span></a></div><div class="nav_link"><a class="break_within" href="#frobenius_zero"><span class="name">frobenius_zero</span></a></div><div class="nav_link"><a class="break_within" href="#frobenius_add"><span class="name">frobenius_add</span></a></div><div class="nav_link"><a class="break_within" href="#frobenius_natCast"><span class="name">frobenius_natCast</span></a></div><div class="nav_link"><a class="break_within" href="#frobenius_nat_cast"><span class="name">frobenius_nat_cast</span></a></div><div class="nav_link"><a class="break_within" href="#list_sum_pow_char"><span class="name">list_sum_pow_char</span></a></div><div class="nav_link"><a class="break_within" href="#multiset_sum_pow_char"><span class="name">multiset_sum_pow_char</span></a></div><div class="nav_link"><a class="break_within" href="#sum_pow_char"><span class="name">sum_pow_char</span></a></div><div class="nav_link"><a class="break_within" href="#list_sum_pow_char_pow"><span class="name">list_sum_pow_char_pow</span></a></div><div class="nav_link"><a class="break_within" href="#multiset_sum_pow_char_pow"><span class="name">multiset_sum_pow_char_pow</span></a></div><div class="nav_link"><a class="break_within" href="#sum_pow_char_pow"><span class="name">sum_pow_char_pow</span></a></div><div class="nav_link"><a class="break_within" href="#frobenius_neg"><span class="name">frobenius_neg</span></a></div><div class="nav_link"><a class="break_within" href="#frobenius_sub"><span class="name">frobenius_sub</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Exponential-characteristic">Exponential characteristic <a class="hover-link" href="#Exponential-characteristic">#</a></h1><p>This file defines the exponential characteristic, which is defined to be 1 for a ring with
+characteristic 0 and the same as the ordinary characteristic, if the ordinary characteristic is
+prime. This concept is useful to simplify some theorem statements.
+This file establishes a few basic results relating it to the (ordinary characteristic).
+The definition is stated for a semiring, but the actual results are for nontrivial rings
+(as far as exponential characteristic one is concerned), respectively a ring without zero-divisors
+(for prime characteristic).</p><h2 class="markdown-heading" id="Main-results">Main results <a class="hover-link" href="#Main-results">#</a></h2><ul>
+<li><code><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a></code>: the definition of exponential characteristic</li>
+<li><code><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#expChar_is_prime_or_one">expChar_is_prime_or_one</a></code>: the exponential characteristic is a prime or one</li>
+<li><code><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#char_eq_expChar_iff">char_eq_expChar_iff</a></code>: the characteristic equals the exponential characteristic iff the
+characteristic is prime</li>
+</ul><h2 class="markdown-heading" id="Tags">Tags <a class="hover-link" href="#Tags">#</a></h2><p>exponential characteristic, characteristic</p></div><div class="decl" id="ExpChar"><div class="class"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L41-L43">source</a></div><div class="decl_header"><span class="decl_kind">class inductive</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar"><span class="name">ExpChar</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Init/Prelude.html#Nat">ℕ</a> → <a href="../../.././foundational_types.html">Prop</a></span></div></div><p>The definition of the exponential characteristic of a semiring.</p><ul class="constructors"><li class="constructor" id="ExpChar.zero">zero: <span class="fn">∀ {<span class="fn">R</span> : <a href="../../.././foundational_types.html">Type</a> u} [<span class="fn">inst</span> : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>] [<span class="fn">inst_1</span> : <span class="fn"><a href="../../.././Mathlib/Algebra/CharZero/Defs.html#CharZero">CharZero</a> <span class="fn">R</span></span>], <span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">1</span></span></span></li><li class="constructor" id="ExpChar.prime">prime: <span class="fn">∀ {<span class="fn">R</span> : <a href="../../.././foundational_types.html">Type</a> u} [<span class="fn">inst</span> : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>] {<span class="fn">q</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}, <span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/Nat/Prime/Defs.html#Nat.Prime">Nat.Prime</a> <span class="fn">q</span></span> → <span class="fn">∀ [<span class="fn">hchar</span> : <span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">q</span></span>], <span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">q</span></span></span></span></span></li></ul><details class="instances"><summary>Instances</summary><ul id="instances-list-ExpChar" class="instances-list"></ul></details></div></div><div class="decl" id="expChar_prime"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L45-L45">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#expChar_prime"><span class="name">expChar_prime</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Logic/Basic.html#Fact">Fact</a> <span class="fn">(<a href="../../.././Mathlib/Data/Nat/Prime/Defs.html#Nat.Prime">Nat.Prime</a> <span class="fn">p</span>)</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">p</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="expChar_zero"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L46-L46">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#expChar_zero"><span class="name">expChar_zero</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharZero/Defs.html#CharZero">CharZero</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">1</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="instExpCharProd"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L48-L53">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#instExpCharProd"><span class="name">instExpCharProd</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(S : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">S</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">(<span class="fn">R</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">S</span>)</span> <span class="fn">p</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="ExpChar.eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L57-L63">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar.eq"><span class="name">ExpChar</span>.<span class="name">eq</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hp : <span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">p</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hq : <span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">q</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">p</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">q</span></span></div></div><p>The exponential characteristic is unique.</p></div></div><div class="decl" id="ExpChar.congr"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L65-L65">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar.congr"><span class="name">ExpChar</span>.<span class="name">congr</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(q : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[hq : <span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">q</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">q</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">p</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">p</span></span></div></div></div></div><div class="decl" id="ringExpChar"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L68-L68">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ringExpChar"><span class="name">ringExpChar</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#NonAssocSemiring">NonAssocSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><a href="../../.././Init/Prelude.html#Nat">ℕ</a></div></div><p>Noncomputable function that outputs the unique exponential characteristic of a semiring.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ringExpChar">ringExpChar</a> <span class="fn">R</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Prelude.html#Max.max">max</a> <span class="fn">(<a href="../../.././Mathlib/Algebra/CharP/Defs.html#ringChar">ringChar</a> <span class="fn">R</span>)</span> <span class="fn">1</span></span></span></li></ul></details><details id="instances-for-list-ringExpChar" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="ringExpChar.eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L70-L75">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ringExpChar.eq"><span class="name">ringExpChar</span>.<span class="name">eq</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(q : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[h : <span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">q</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ringExpChar">ringExpChar</a> <span class="fn">R</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">q</span></span></div></div></div></div><div class="decl" id="ringExpChar.eq_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L78-L79">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ringExpChar.eq_one"><span class="name">ringExpChar</span>.<span class="name">eq_one</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#NonAssocSemiring">NonAssocSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharZero/Defs.html#CharZero">CharZero</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ringExpChar">ringExpChar</a> <span class="fn">R</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span></div></div></div></div><div class="decl" id="expChar_one_of_char_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L82-L85">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#expChar_one_of_char_zero"><span class="name">expChar_one_of_char_zero</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(q : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[hp : <span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">0</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hq : <span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">q</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">q</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span></div></div><p>The exponential characteristic is one if the characteristic is zero.</p></div></div><div class="decl" id="char_eq_expChar_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L88-L92">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#char_eq_expChar_iff"><span class="name">char_eq_expChar_iff</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(q : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[hp : <span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hq : <span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">q</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">p</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">q</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../.././Mathlib/Data/Nat/Prime/Defs.html#Nat.Prime">Nat.Prime</a> <span class="fn">p</span></span></span></div></div><p>The characteristic equals the exponential characteristic iff the former is prime.</p></div></div><div class="decl" id="expChar_is_prime_or_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L96-L99">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#expChar_is_prime_or_one"><span class="name">expChar_is_prime_or_one</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(q : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[hq : <span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">q</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/Nat/Prime/Defs.html#Nat.Prime">Nat.Prime</a> <span class="fn">q</span></span> <a href="../../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn">q</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span></span></div></div><p>The exponential characteristic is a prime number or one.
+See also <code><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP.char_is_prime_or_zero">CharP.char_is_prime_or_zero</a></code>.</p></div></div><div class="decl" id="expChar_pos"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L102-L104">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#expChar_pos"><span class="name">expChar_pos</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(q : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">q</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn">q</span></span></div></div><p>The exponential characteristic is positive.</p></div></div><div class="decl" id="expChar_pow_pos"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L107-L108">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#expChar_pow_pos"><span class="name">expChar_pow_pos</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(q : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">q</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt;</a> <span class="fn"><span class="fn">q</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></div></div><p>Any power of the exponential characteristic is positive.</p></div></div><div class="decl" id="char_zero_of_expChar_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L115-L118">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#char_zero_of_expChar_one"><span class="name">char_zero_of_expChar_one</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[hp : <span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hq : <span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">1</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">p</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div><p>The exponential characteristic is one if the characteristic is zero.</p></div></div><div class="decl" id="charZero_of_expChar_one'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L122-L125">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#charZero_of_expChar_one'"><span class="name">charZero_of_expChar_one'</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hq : <span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">1</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/CharZero/Defs.html#CharZero">CharZero</a> <span class="fn">R</span></span></div></div><p>The characteristic is zero if the exponential characteristic is one.</p></div></div><div class="decl" id="expChar_one_iff_char_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L128-L133">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#expChar_one_iff_char_zero"><span class="name">expChar_one_iff_char_zero</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(q : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">q</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">q</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">p</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span></div></div><p>The exponential characteristic is one iff the characteristic is zero.</p></div></div><div class="decl" id="char_prime_of_ne_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L140-L143">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#char_prime_of_ne_zero"><span class="name">char_prime_of_ne_zero</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Logic/Nontrivial/Defs.html#Nontrivial">Nontrivial</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#NoZeroDivisors">NoZeroDivisors</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hp : <span class="fn"><a href="../../.././Mathlib/Algebra/CharP/Defs.html#CharP">CharP</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p_ne_zero : <span class="fn"><span class="fn">p</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Data/Nat/Prime/Defs.html#Nat.Prime">Nat.Prime</a> <span class="fn">p</span></span></div></div><p>A helper lemma: the characteristic is prime if it is non-zero.</p></div></div><div class="decl" id="ExpChar.exists"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L151-L153">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar.exists"><span class="name">ExpChar</span>.<span class="name">exists</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#IsDomain">IsDomain</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ (<span class="fn">q</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">q</span></span></span></div></div></div></div><div class="decl" id="ExpChar.exists_unique"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L155-L157">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar.exists_unique"><span class="name">ExpChar</span>.<span class="name">exists_unique</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#IsDomain">IsDomain</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃! <span class="fn">q</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>, <span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">q</span></span></span></div></div></div></div><div class="decl" id="ringExpChar.expChar"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L159-L161">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ringExpChar.expChar"><span class="name">ringExpChar</span>.<span class="name">expChar</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#IsDomain">IsDomain</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">(<a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ringExpChar">ringExpChar</a> <span class="fn">R</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="ringExpChar.of_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L164-L165">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ringExpChar.of_eq"><span class="name">ringExpChar</span>.<span class="name">of_eq</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#IsDomain">IsDomain</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ringExpChar">ringExpChar</a> <span class="fn">R</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">q</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">q</span></span></div></div></div></div><div class="decl" id="ringExpChar.eq_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L168-L169">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ringExpChar.eq_iff"><span class="name">ringExpChar</span>.<span class="name">eq_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#IsDomain">IsDomain</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ringExpChar">ringExpChar</a> <span class="fn">R</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">q</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">q</span></span></span></div></div></div></div><div class="decl" id="expChar_of_injective_ringHom"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L173-L178">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#expChar_of_injective_ringHom"><span class="name">expChar_of_injective_ringHom</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">R</span> <a href="../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">A</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Logic/Function/Defs.html#Function.Injective">Function.Injective</a> <span class="fn">⇑<span class="fn">f</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(q : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[hR : <span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">q</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">A</span> <span class="fn">q</span></span></div></div><p>If a ring homomorphism <code>R →+* A</code> is injective then <code>A</code> has the same exponential characteristic
+as <code>R</code>.</p></div></div><div class="decl" id="RingHom.expChar"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L182-L186">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#RingHom.expChar"><span class="name">RingHom</span>.<span class="name">expChar</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">R</span> <a href="../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">A</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(H : <span class="fn"><a href="../../.././Mathlib/Logic/Function/Defs.html#Function.Injective">Function.Injective</a> <span class="fn">⇑<span class="fn">f</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">A</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">p</span></span></div></div><p>If <code>R →+* A</code> is injective, and <code>A</code> is of exponential characteristic <code>p</code>, then <code>R</code> is also of
+exponential characteristic <code>p</code>. Similar to <code><a href="../../.././Mathlib/Algebra/CharZero/Lemmas.html#RingHom.charZero">RingHom.charZero</a></code>.</p></div></div><div class="decl" id="RingHom.expChar_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L190-L192">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#RingHom.expChar_iff"><span class="name">RingHom</span>.<span class="name">expChar_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">R</span> <a href="../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">A</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(H : <span class="fn"><a href="../../.././Mathlib/Logic/Function/Defs.html#Function.Injective">Function.Injective</a> <span class="fn">⇑<span class="fn">f</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">p</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">A</span> <span class="fn">p</span></span></span></div></div><p>If <code>R →+* A</code> is injective, then <code>R</code> is of exponential characteristic <code>p</code> if and only if <code>A</code> is
+also of exponential characteristic <code>p</code>. Similar to <code><a href="../../.././Mathlib/Algebra/CharZero/Lemmas.html#RingHom.charZero_iff">RingHom.charZero_iff</a></code>.</p></div></div><div class="decl" id="expChar_of_injective_algebraMap"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L196-L198">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#expChar_of_injective_algebraMap"><span class="name">expChar_of_injective_algebraMap</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Logic/Function/Defs.html#Function.Injective">Function.Injective</a> <span class="fn">⇑<span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">R</span> <span class="fn">A</span>)</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(q : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">q</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">A</span> <span class="fn">q</span></span></div></div><p>If the algebra map <code>R →+* A</code> is injective then <code>A</code> has the same exponential characteristic
+as <code>R</code>.</p></div></div><div class="decl" id="add_pow_expChar_of_commute"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L200-L204">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#add_pow_expChar_of_commute"><span class="name">add_pow_expChar_of_commute</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hR : <span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">q</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">R</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(y : <span class="fn">R</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Commute/Defs.html#Commute">Commute</a> <span class="fn">x</span> <span class="fn">y</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn">x</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">y</span>)</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">q</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">q</span></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">y</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">q</span></span></span></span></div></div></div></div><div class="decl" id="add_pow_expChar_pow_of_commute"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L206-L210">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#add_pow_expChar_pow_of_commute"><span class="name">add_pow_expChar_pow_of_commute</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hR : <span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">R</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(y : <span class="fn">R</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Commute/Defs.html#Commute">Commute</a> <span class="fn">x</span> <span class="fn">y</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn">x</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">y</span>)</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn"><span class="fn">q</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn"><span class="fn">q</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">y</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn"><span class="fn">q</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></span></span></div></div></div></div><div class="decl" id="sub_pow_expChar_of_commute"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L212-L216">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#sub_pow_expChar_of_commute"><span class="name">sub_pow_expChar_of_commute</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hR : <span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">q</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">R</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(y : <span class="fn">R</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Commute/Defs.html#Commute">Commute</a> <span class="fn">x</span> <span class="fn">y</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn">x</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">y</span>)</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">q</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">q</span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">y</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">q</span></span></span></span></div></div></div></div><div class="decl" id="sub_pow_expChar_pow_of_commute"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L218-L222">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#sub_pow_expChar_pow_of_commute"><span class="name">sub_pow_expChar_pow_of_commute</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hR : <span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">R</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(y : <span class="fn">R</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Commute/Defs.html#Commute">Commute</a> <span class="fn">x</span> <span class="fn">y</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn">x</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">y</span>)</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn"><span class="fn">q</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn"><span class="fn">q</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">y</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn"><span class="fn">q</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></span></span></div></div></div></div><div class="decl" id="add_pow_expChar"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L224-L228">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#add_pow_expChar"><span class="name">add_pow_expChar</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hR : <span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">q</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">R</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(y : <span class="fn">R</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn">x</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">y</span>)</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">q</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">q</span></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">y</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">q</span></span></span></span></div></div></div></div><div class="decl" id="add_pow_expChar_pow"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L230-L234">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#add_pow_expChar_pow"><span class="name">add_pow_expChar_pow</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hR : <span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">R</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(y : <span class="fn">R</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn">x</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">y</span>)</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn"><span class="fn">q</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn"><span class="fn">q</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">y</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn"><span class="fn">q</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></span></span></div></div></div></div><div class="decl" id="sub_pow_expChar"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L236-L240">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#sub_pow_expChar"><span class="name">sub_pow_expChar</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hR : <span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">q</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">R</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(y : <span class="fn">R</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn">x</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">y</span>)</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">q</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">q</span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">y</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">q</span></span></span></span></div></div></div></div><div class="decl" id="sub_pow_expChar_pow"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L242-L246">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#sub_pow_expChar_pow"><span class="name">sub_pow_expChar_pow</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hR : <span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">R</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(y : <span class="fn">R</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn">x</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">y</span>)</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn"><span class="fn">q</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn"><span class="fn">q</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">y</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn"><span class="fn">q</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></span></span></div></div></div></div><div class="decl" id="ExpChar.neg_one_pow_expChar"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L248-L252">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar.neg_one_pow_expChar"><span class="name">ExpChar</span>.<span class="name">neg_one_pow_expChar</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(q : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[hR : <span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">q</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(-<span class="fn">1</span>)</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">q</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">-<span class="fn">1</span></span></span></div></div></div></div><div class="decl" id="ExpChar.neg_one_pow_expChar_pow"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L254-L258">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar.neg_one_pow_expChar_pow"><span class="name">ExpChar</span>.<span class="name">neg_one_pow_expChar_pow</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(q : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[hR : <span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">q</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(-<span class="fn">1</span>)</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn"><span class="fn">q</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">-<span class="fn">1</span></span></span></div></div></div></div><div class="decl" id="frobenius"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L268-L271">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#frobenius"><span class="name">frobenius</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">R</span> <a href="../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">R</span></span></div></div><p>The frobenius map that sends x to x^p</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#frobenius">frobenius</a> <span class="fn">R</span> <span class="fn">p</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">let <span class="fn">__spread.0</span> := <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Hom/Basic.html#powMonoidHom">powMonoidHom</a> <span class="fn">p</span></span>;
+  <span class="fn">{ <span class="fn">toMonoidHom</span> := <span class="fn">__spread.0</span>, <span class="fn">map_zero'</span> := <span class="fn">⋯</span>, <span class="fn">map_add'</span> := <span class="fn">⋯</span> }</span></span></span></li></ul></details><details id="instances-for-list-frobenius" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="iterateFrobenius"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L274-L277">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#iterateFrobenius"><span class="name">iterateFrobenius</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">R</span> <a href="../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">R</span></span></div></div><p>The iterated frobenius map sending x to x^p^n</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#iterateFrobenius">iterateFrobenius</a> <span class="fn">R</span> <span class="fn">p</span> <span class="fn">n</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">let <span class="fn">__spread.0</span> := <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Hom/Basic.html#powMonoidHom">powMonoidHom</a> <span class="fn">(<span class="fn">p</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span>)</span></span>;
+  <span class="fn">{ <span class="fn">toMonoidHom</span> := <span class="fn">__spread.0</span>, <span class="fn">map_zero'</span> := <span class="fn">⋯</span>, <span class="fn">map_add'</span> := <span class="fn">⋯</span> }</span></span></span></li></ul></details><details id="instances-for-list-iterateFrobenius" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="frobenius_def"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L281-L281">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#frobenius_def"><span class="name">frobenius_def</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">R</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#frobenius">frobenius</a> <span class="fn">R</span> <span class="fn">p</span>)</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">p</span></span></span></div></div></div></div><div class="decl" id="iterateFrobenius_def"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L283-L283">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#iterateFrobenius_def"><span class="name">iterateFrobenius_def</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">R</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#iterateFrobenius">iterateFrobenius</a> <span class="fn">R</span> <span class="fn">p</span> <span class="fn">n</span>)</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn"><span class="fn">p</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></span></div></div></div></div><div class="decl" id="iterate_frobenius"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L285-L285">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#iterate_frobenius"><span class="name">iterate_frobenius</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">R</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(⇑<span class="fn">(<a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#frobenius">frobenius</a> <span class="fn">R</span> <span class="fn">p</span>)</span>)</span><a href="../../.././Mathlib/Logic/Function/Iterate.html#Nat.iterate">^[</a><span class="fn">n</span><a href="../../.././Mathlib/Logic/Function/Iterate.html#Nat.iterate">]</a></span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn"><span class="fn">p</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></span></div></div></div></div><div class="decl" id="coe_iterateFrobenius"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L289-L290">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#coe_iterateFrobenius"><span class="name">coe_iterateFrobenius</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">⇑<span class="fn">(<a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#iterateFrobenius">iterateFrobenius</a> <span class="fn">R</span> <span class="fn">p</span> <span class="fn">n</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(⇑<span class="fn">(<a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#frobenius">frobenius</a> <span class="fn">R</span> <span class="fn">p</span>)</span>)</span><a href="../../.././Mathlib/Logic/Function/Iterate.html#Nat.iterate">^[</a><span class="fn">n</span><a href="../../.././Mathlib/Logic/Function/Iterate.html#Nat.iterate">]</a></span></span></div></div></div></div><div class="decl" id="iterateFrobenius_one_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L292-L293">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#iterateFrobenius_one_apply"><span class="name">iterateFrobenius_one_apply</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">R</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#iterateFrobenius">iterateFrobenius</a> <span class="fn">R</span> <span class="fn">p</span> <span class="fn">1</span>)</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">p</span></span></span></div></div></div></div><div class="decl" id="iterateFrobenius_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L296-L297">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#iterateFrobenius_one"><span class="name">iterateFrobenius_one</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#iterateFrobenius">iterateFrobenius</a> <span class="fn">R</span> <span class="fn">p</span> <span class="fn">1</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#frobenius">frobenius</a> <span class="fn">R</span> <span class="fn">p</span></span></span></div></div></div></div><div class="decl" id="iterateFrobenius_zero_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L299-L300">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#iterateFrobenius_zero_apply"><span class="name">iterateFrobenius_zero_apply</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">R</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#iterateFrobenius">iterateFrobenius</a> <span class="fn">R</span> <span class="fn">p</span> <span class="fn">0</span>)</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">x</span></span></div></div></div></div><div class="decl" id="iterateFrobenius_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L303-L304">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#iterateFrobenius_zero"><span class="name">iterateFrobenius_zero</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#iterateFrobenius">iterateFrobenius</a> <span class="fn">R</span> <span class="fn">p</span> <span class="fn">0</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom.id">RingHom.id</a> <span class="fn">R</span></span></span></div></div></div></div><div class="decl" id="iterateFrobenius_add_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L306-L308">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#iterateFrobenius_add_apply"><span class="name">iterateFrobenius_add_apply</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(m : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">R</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#iterateFrobenius">iterateFrobenius</a> <span class="fn">R</span> <span class="fn">p</span> <span class="fn">(<span class="fn">m</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">n</span>)</span>)</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#iterateFrobenius">iterateFrobenius</a> <span class="fn">R</span> <span class="fn">p</span> <span class="fn">m</span>)</span> <span class="fn">(<span class="fn">(<a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#iterateFrobenius">iterateFrobenius</a> <span class="fn">R</span> <span class="fn">p</span> <span class="fn">n</span>)</span> <span class="fn">x</span>)</span></span></span></div></div></div></div><div class="decl" id="iterateFrobenius_add"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L310-L312">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#iterateFrobenius_add"><span class="name">iterateFrobenius_add</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(m : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#iterateFrobenius">iterateFrobenius</a> <span class="fn">R</span> <span class="fn">p</span> <span class="fn">(<span class="fn">m</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">n</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#iterateFrobenius">iterateFrobenius</a> <span class="fn">R</span> <span class="fn">p</span> <span class="fn">m</span>)</span>.comp</span> <span class="fn">(<a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#iterateFrobenius">iterateFrobenius</a> <span class="fn">R</span> <span class="fn">p</span> <span class="fn">n</span>)</span></span></span></div></div></div></div><div class="decl" id="iterateFrobenius_mul_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L314-L316">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#iterateFrobenius_mul_apply"><span class="name">iterateFrobenius_mul_apply</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(m : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">R</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#iterateFrobenius">iterateFrobenius</a> <span class="fn">R</span> <span class="fn">p</span> <span class="fn">(<span class="fn">m</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">n</span>)</span>)</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">(⇑<span class="fn">(<a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#iterateFrobenius">iterateFrobenius</a> <span class="fn">R</span> <span class="fn">p</span> <span class="fn">m</span>)</span>)</span><a href="../../.././Mathlib/Logic/Function/Iterate.html#Nat.iterate">^[</a><span class="fn">n</span><a href="../../.././Mathlib/Logic/Function/Iterate.html#Nat.iterate">]</a></span> <span class="fn">x</span></span></span></div></div></div></div><div class="decl" id="coe_iterateFrobenius_mul"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L318-L319">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#coe_iterateFrobenius_mul"><span class="name">coe_iterateFrobenius_mul</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(m : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">⇑<span class="fn">(<a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#iterateFrobenius">iterateFrobenius</a> <span class="fn">R</span> <span class="fn">p</span> <span class="fn">(<span class="fn">m</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">n</span>)</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(⇑<span class="fn">(<a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#iterateFrobenius">iterateFrobenius</a> <span class="fn">R</span> <span class="fn">p</span> <span class="fn">m</span>)</span>)</span><a href="../../.././Mathlib/Logic/Function/Iterate.html#Nat.iterate">^[</a><span class="fn">n</span><a href="../../.././Mathlib/Logic/Function/Iterate.html#Nat.iterate">]</a></span></span></div></div></div></div><div class="decl" id="frobenius_mul"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L323-L324">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#frobenius_mul"><span class="name">frobenius_mul</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">R</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(y : <span class="fn">R</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#frobenius">frobenius</a> <span class="fn">R</span> <span class="fn">p</span>)</span> <span class="fn">(<span class="fn">x</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">y</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#frobenius">frobenius</a> <span class="fn">R</span> <span class="fn">p</span>)</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#frobenius">frobenius</a> <span class="fn">R</span> <span class="fn">p</span>)</span> <span class="fn">y</span></span></span></span></div></div></div></div><div class="decl" id="frobenius_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L326-L327">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#frobenius_one"><span class="name">frobenius_one</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#frobenius">frobenius</a> <span class="fn">R</span> <span class="fn">p</span>)</span> <span class="fn">1</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span></div></div></div></div><div class="decl" id="MonoidHom.map_frobenius"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L329-L330">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#MonoidHom.map_frobenius"><span class="name">MonoidHom</span>.<span class="name">map_frobenius</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">R</span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#MonoidHom">→*</a> <span class="fn">S</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">S</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">R</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">(<a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#frobenius">frobenius</a> <span class="fn">R</span> <span class="fn">p</span>)</span> <span class="fn">x</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#frobenius">frobenius</a> <span class="fn">S</span> <span class="fn">p</span>)</span> <span class="fn">(<span class="fn">f</span> <span class="fn">x</span>)</span></span></span></div></div></div></div><div class="decl" id="RingHom.map_frobenius"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L332-L333">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#RingHom.map_frobenius"><span class="name">RingHom</span>.<span class="name">map_frobenius</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">R</span> <a href="../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">S</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">S</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">R</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">g</span> <span class="fn">(<span class="fn">(<a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#frobenius">frobenius</a> <span class="fn">R</span> <span class="fn">p</span>)</span> <span class="fn">x</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#frobenius">frobenius</a> <span class="fn">S</span> <span class="fn">p</span>)</span> <span class="fn">(<span class="fn">g</span> <span class="fn">x</span>)</span></span></span></div></div></div></div><div class="decl" id="MonoidHom.map_iterate_frobenius"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L335-L337">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#MonoidHom.map_iterate_frobenius"><span class="name">MonoidHom</span>.<span class="name">map_iterate_frobenius</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">R</span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#MonoidHom">→*</a> <span class="fn">S</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">S</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">R</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn"><span class="fn">(⇑<span class="fn">(<a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#frobenius">frobenius</a> <span class="fn">R</span> <span class="fn">p</span>)</span>)</span><a href="../../.././Mathlib/Logic/Function/Iterate.html#Nat.iterate">^[</a><span class="fn">n</span><a href="../../.././Mathlib/Logic/Function/Iterate.html#Nat.iterate">]</a></span> <span class="fn">x</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">(⇑<span class="fn">(<a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#frobenius">frobenius</a> <span class="fn">S</span> <span class="fn">p</span>)</span>)</span><a href="../../.././Mathlib/Logic/Function/Iterate.html#Nat.iterate">^[</a><span class="fn">n</span><a href="../../.././Mathlib/Logic/Function/Iterate.html#Nat.iterate">]</a></span> <span class="fn">(<span class="fn">f</span> <span class="fn">x</span>)</span></span></span></div></div></div></div><div class="decl" id="RingHom.map_iterate_frobenius"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L339-L341">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#RingHom.map_iterate_frobenius"><span class="name">RingHom</span>.<span class="name">map_iterate_frobenius</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">R</span> <a href="../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">S</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">S</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">R</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">g</span> <span class="fn">(<span class="fn"><span class="fn">(⇑<span class="fn">(<a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#frobenius">frobenius</a> <span class="fn">R</span> <span class="fn">p</span>)</span>)</span><a href="../../.././Mathlib/Logic/Function/Iterate.html#Nat.iterate">^[</a><span class="fn">n</span><a href="../../.././Mathlib/Logic/Function/Iterate.html#Nat.iterate">]</a></span> <span class="fn">x</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">(⇑<span class="fn">(<a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#frobenius">frobenius</a> <span class="fn">S</span> <span class="fn">p</span>)</span>)</span><a href="../../.././Mathlib/Logic/Function/Iterate.html#Nat.iterate">^[</a><span class="fn">n</span><a href="../../.././Mathlib/Logic/Function/Iterate.html#Nat.iterate">]</a></span> <span class="fn">(<span class="fn">g</span> <span class="fn">x</span>)</span></span></span></div></div></div></div><div class="decl" id="MonoidHom.iterate_map_frobenius"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L343-L345">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#MonoidHom.iterate_map_frobenius"><span class="name">MonoidHom</span>.<span class="name">iterate_map_frobenius</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">R</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">R</span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#MonoidHom">→*</a> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(⇑<span class="fn">f</span>)</span><a href="../../.././Mathlib/Logic/Function/Iterate.html#Nat.iterate">^[</a><span class="fn">n</span><a href="../../.././Mathlib/Logic/Function/Iterate.html#Nat.iterate">]</a></span> <span class="fn">(<span class="fn">(<a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#frobenius">frobenius</a> <span class="fn">R</span> <span class="fn">p</span>)</span> <span class="fn">x</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#frobenius">frobenius</a> <span class="fn">R</span> <span class="fn">p</span>)</span> <span class="fn">(<span class="fn"><span class="fn">(⇑<span class="fn">f</span>)</span><a href="../../.././Mathlib/Logic/Function/Iterate.html#Nat.iterate">^[</a><span class="fn">n</span><a href="../../.././Mathlib/Logic/Function/Iterate.html#Nat.iterate">]</a></span> <span class="fn">x</span>)</span></span></span></div></div></div></div><div class="decl" id="RingHom.iterate_map_frobenius"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L347-L349">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#RingHom.iterate_map_frobenius"><span class="name">RingHom</span>.<span class="name">iterate_map_frobenius</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">R</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">R</span> <a href="../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(⇑<span class="fn">f</span>)</span><a href="../../.././Mathlib/Logic/Function/Iterate.html#Nat.iterate">^[</a><span class="fn">n</span><a href="../../.././Mathlib/Logic/Function/Iterate.html#Nat.iterate">]</a></span> <span class="fn">(<span class="fn">(<a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#frobenius">frobenius</a> <span class="fn">R</span> <span class="fn">p</span>)</span> <span class="fn">x</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#frobenius">frobenius</a> <span class="fn">R</span> <span class="fn">p</span>)</span> <span class="fn">(<span class="fn"><span class="fn">(⇑<span class="fn">f</span>)</span><a href="../../.././Mathlib/Logic/Function/Iterate.html#Nat.iterate">^[</a><span class="fn">n</span><a href="../../.././Mathlib/Logic/Function/Iterate.html#Nat.iterate">]</a></span> <span class="fn">x</span>)</span></span></span></div></div></div></div><div class="decl" id="LinearMap.frobenius"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L354-L357">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#LinearMap.frobenius"><span class="name">LinearMap</span>.<span class="name">frobenius</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(S : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">S</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">S</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">→ₛₗ[</a><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#frobenius">frobenius</a> <span class="fn">R</span> <span class="fn">p</span></span><a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">]</a> <span class="fn">S</span></span></div></div><p>The frobenius map of an algebra as a frobenius-semilinear map.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#LinearMap.frobenius">LinearMap.frobenius</a> <span class="fn">R</span> <span class="fn">S</span> <span class="fn">p</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">let <span class="fn">__spread.0</span> := <span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#frobenius">frobenius</a> <span class="fn">S</span> <span class="fn">p</span></span>;
+  <span class="fn">{ <span class="fn">toFun</span> := <span class="fn"><span class="fn">(↑<span class="fn">↑<span class="fn">__spread.0</span></span>)</span>.toFun</span>, <span class="fn">map_add'</span> := <span class="fn">⋯</span>, <span class="fn">map_smul'</span> := <span class="fn">⋯</span> }</span></span></span></li></ul></details><details id="instances-for-list-LinearMap.frobenius" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="LinearMap.iterateFrobenius"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L360-L363">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#LinearMap.iterateFrobenius"><span class="name">LinearMap</span>.<span class="name">iterateFrobenius</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(S : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">S</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">S</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">→ₛₗ[</a><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#iterateFrobenius">iterateFrobenius</a> <span class="fn">R</span> <span class="fn">p</span> <span class="fn">n</span></span><a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">]</a> <span class="fn">S</span></span></div></div><p>The iterated frobenius map of an algebra as a iterated-frobenius-semilinear map.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#LinearMap.iterateFrobenius">LinearMap.iterateFrobenius</a> <span class="fn">R</span> <span class="fn">S</span> <span class="fn">p</span> <span class="fn">n</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">let <span class="fn">__spread.0</span> := <span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#iterateFrobenius">iterateFrobenius</a> <span class="fn">S</span> <span class="fn">p</span> <span class="fn">n</span></span>;
+  <span class="fn">{ <span class="fn">toFun</span> := <span class="fn"><span class="fn">(↑<span class="fn">↑<span class="fn">__spread.0</span></span>)</span>.toFun</span>, <span class="fn">map_add'</span> := <span class="fn">⋯</span>, <span class="fn">map_smul'</span> := <span class="fn">⋯</span> }</span></span></span></li></ul></details><details id="instances-for-list-LinearMap.iterateFrobenius" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="LinearMap.frobenius_def"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L365-L365">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#LinearMap.frobenius_def"><span class="name">LinearMap</span>.<span class="name">frobenius_def</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(S : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">S</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">S</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#LinearMap.frobenius">LinearMap.frobenius</a> <span class="fn">R</span> <span class="fn">S</span> <span class="fn">p</span>)</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">p</span></span></span></div></div></div></div><div class="decl" id="LinearMap.iterateFrobenius_def"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L367-L368">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#LinearMap.iterateFrobenius_def"><span class="name">LinearMap</span>.<span class="name">iterateFrobenius_def</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(S : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">S</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">S</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#LinearMap.iterateFrobenius">LinearMap.iterateFrobenius</a> <span class="fn">R</span> <span class="fn">S</span> <span class="fn">p</span> <span class="fn">n</span>)</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn"><span class="fn">p</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></span></div></div></div></div><div class="decl" id="frobenius_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L370-L371">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#frobenius_zero"><span class="name">frobenius_zero</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#frobenius">frobenius</a> <span class="fn">R</span> <span class="fn">p</span>)</span> <span class="fn">0</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="frobenius_add"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L373-L374">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#frobenius_add"><span class="name">frobenius_add</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">R</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(y : <span class="fn">R</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#frobenius">frobenius</a> <span class="fn">R</span> <span class="fn">p</span>)</span> <span class="fn">(<span class="fn">x</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">y</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#frobenius">frobenius</a> <span class="fn">R</span> <span class="fn">p</span>)</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#frobenius">frobenius</a> <span class="fn">R</span> <span class="fn">p</span>)</span> <span class="fn">y</span></span></span></span></div></div></div></div><div class="decl" id="frobenius_natCast"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L376-L377">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#frobenius_natCast"><span class="name">frobenius_natCast</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#frobenius">frobenius</a> <span class="fn">R</span> <span class="fn">p</span>)</span> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">n</span></span></span></div></div></div></div><div class="decl" id="frobenius_nat_cast"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L379-L380">source</a></div><div class="attributes">@[deprecated frobenius_natCast]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#frobenius_nat_cast"><span class="name">frobenius_nat_cast</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#frobenius">frobenius</a> <span class="fn">R</span> <span class="fn">p</span>)</span> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">n</span></span></span></div></div><p><strong>Alias</strong> of <code><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#frobenius_natCast">frobenius_natCast</a></code>.</p></div></div><div class="decl" id="list_sum_pow_char"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L384-L385">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#list_sum_pow_char"><span class="name">list_sum_pow_char</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(l : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">l</span>.sum</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">p</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<a href="../../.././Init/Data/List/Basic.html#List.map">List.map</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">R</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">p</span></span>)</span> <span class="fn">l</span>)</span>.sum</span></span></div></div></div></div><div class="decl" id="multiset_sum_pow_char"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L387-L388">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#multiset_sum_pow_char"><span class="name">multiset_sum_pow_char</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../.././Mathlib/Data/Multiset/Basic.html#Multiset">Multiset</a> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">s</span>.sum</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">p</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<a href="../../.././Mathlib/Data/Multiset/Basic.html#Multiset.map">Multiset.map</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">R</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">p</span></span>)</span> <span class="fn">s</span>)</span>.sum</span></span></div></div></div></div><div class="decl" id="sum_pow_char"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L390-L392">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#sum_pow_char"><span class="name">sum_pow_char</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">ι</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">ι</span> → <span class="fn">R</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(∑ <span class="fn">i</span> ∈ <span class="fn">s</span>, <span class="fn"><span class="fn">f</span> <span class="fn">i</span></span>)</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">p</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">∑ <span class="fn">i</span> ∈ <span class="fn">s</span>, <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">i</span></span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">p</span></span></span></span></div></div></div></div><div class="decl" id="list_sum_pow_char_pow"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L396-L397">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#list_sum_pow_char_pow"><span class="name">list_sum_pow_char_pow</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(l : <span class="fn"><a href="../../.././Init/Prelude.html#List">List</a> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">l</span>.sum</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn"><span class="fn">p</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<a href="../../.././Init/Data/List/Basic.html#List.map">List.map</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">R</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn"><span class="fn">p</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span>)</span> <span class="fn">l</span>)</span>.sum</span></span></div></div></div></div><div class="decl" id="multiset_sum_pow_char_pow"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L399-L401">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#multiset_sum_pow_char_pow"><span class="name">multiset_sum_pow_char_pow</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../.././Mathlib/Data/Multiset/Basic.html#Multiset">Multiset</a> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">s</span>.sum</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn"><span class="fn">p</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<a href="../../.././Mathlib/Data/Multiset/Basic.html#Multiset.map">Multiset.map</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">R</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn"><span class="fn">p</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span>)</span> <span class="fn">s</span>)</span>.sum</span></span></div></div></div></div><div class="decl" id="sum_pow_char_pow"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L403-L405">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#sum_pow_char_pow"><span class="name">sum_pow_char_pow</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">ι</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">ι</span> → <span class="fn">R</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(∑ <span class="fn">i</span> ∈ <span class="fn">s</span>, <span class="fn"><span class="fn">f</span> <span class="fn">i</span></span>)</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn"><span class="fn">p</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">∑ <span class="fn">i</span> ∈ <span class="fn">s</span>, <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">i</span></span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn"><span class="fn">p</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></span></span></div></div></div></div><div class="decl" id="frobenius_neg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L413-L414">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#frobenius_neg"><span class="name">frobenius_neg</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">R</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#frobenius">frobenius</a> <span class="fn">R</span> <span class="fn">p</span>)</span> <span class="fn">(<a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">x</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#frobenius">frobenius</a> <span class="fn">R</span> <span class="fn">p</span>)</span> <span class="fn">x</span></span></span></span></div></div></div></div><div class="decl" id="frobenius_sub"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/2cae7592690a4c19f4efd62d7d860eaf719eaa93/Mathlib/Algebra/CharP/ExpChar.lean#L416-L417">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/CharP/ExpChar.html#frobenius_sub"><span class="name">frobenius_sub</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#ExpChar">ExpChar</a> <span class="fn">R</span> <span class="fn">p</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">R</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(y : <span class="fn">R</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#frobenius">frobenius</a> <span class="fn">R</span> <span class="fn">p</span>)</span> <span class="fn">(<span class="fn">x</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">y</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#frobenius">frobenius</a> <span class="fn">R</span> <span class="fn">p</span>)</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/CharP/ExpChar.html#frobenius">frobenius</a> <span class="fn">R</span> <span class="fn">p</span>)</span> <span class="fn">y</span></span></span></span></div></div></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>
