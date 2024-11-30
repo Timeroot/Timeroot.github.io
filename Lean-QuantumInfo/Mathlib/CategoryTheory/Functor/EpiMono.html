@@ -1,0 +1,715 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="icon" href="../../.././favicon.svg"></link><link rel="mask-icon" href="../../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.CategoryTheory.Functor.EpiMono</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.CategoryTheory.Functor.EpiMono";</script><script type="module" src="../../.././jump-src.js"></script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././expand-nav.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">EpiMono</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/EpiMono.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/CategoryTheory/EpiMono.html">Mathlib.CategoryTheory.EpiMono</a></li><li><a href="../../.././Mathlib/CategoryTheory/LiftingProperties/Adjunction.html">Mathlib.CategoryTheory.LiftingProperties.Adjunction</a></li><li><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/StrongEpi.html">Mathlib.CategoryTheory.Limits.Shapes.StrongEpi</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.CategoryTheory.Functor.EpiMono" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.PreservesMonomorphisms"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">PreservesMonomorphisms</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.map_mono"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">map_mono</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.PreservesEpimorphisms"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">PreservesEpimorphisms</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.map_epi"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">map_epi</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.ReflectsMonomorphisms"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">ReflectsMonomorphisms</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.mono_of_mono_map"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">mono_of_mono_map</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.ReflectsEpimorphisms"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">ReflectsEpimorphisms</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.epi_of_epi_map"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">epi_of_epi_map</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.preservesMonomorphisms_comp"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">preservesMonomorphisms_comp</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.preservesEpimorphisms_comp"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">preservesEpimorphisms_comp</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.reflectsMonomorphisms_comp"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">reflectsMonomorphisms_comp</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.reflectsEpimorphisms_comp"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">reflectsEpimorphisms_comp</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.preservesEpimorphisms_of_preserves_of_reflects"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">preservesEpimorphisms_of_preserves_of_reflects</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.preservesMonomorphisms_of_preserves_of_reflects"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">preservesMonomorphisms_of_preserves_of_reflects</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.reflectsEpimorphisms_of_preserves_of_reflects"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">reflectsEpimorphisms_of_preserves_of_reflects</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.reflectsMonomorphisms_of_preserves_of_reflects"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">reflectsMonomorphisms_of_preserves_of_reflects</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.preservesMonomorphisms.of_iso"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">preservesMonomorphisms</span>.<span class="name">of_iso</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.preservesMonomorphisms.iso_iff"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">preservesMonomorphisms</span>.<span class="name">iso_iff</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.preservesEpimorphisms.of_iso"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">preservesEpimorphisms</span>.<span class="name">of_iso</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.preservesEpimorphisms.iso_iff"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">preservesEpimorphisms</span>.<span class="name">iso_iff</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.reflectsMonomorphisms.of_iso"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">reflectsMonomorphisms</span>.<span class="name">of_iso</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.reflectsMonomorphisms.iso_iff"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">reflectsMonomorphisms</span>.<span class="name">iso_iff</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.reflectsEpimorphisms.of_iso"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">reflectsEpimorphisms</span>.<span class="name">of_iso</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.reflectsEpimorphisms.iso_iff"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">reflectsEpimorphisms</span>.<span class="name">iso_iff</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.preservesEpimorphsisms_of_adjunction"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">preservesEpimorphsisms_of_adjunction</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.preservesEpimorphisms_of_isLeftAdjoint"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">preservesEpimorphisms_of_isLeftAdjoint</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.preservesMonomorphisms_of_adjunction"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">preservesMonomorphisms_of_adjunction</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.preservesMonomorphisms_of_isRightAdjoint"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">preservesMonomorphisms_of_isRightAdjoint</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.reflectsMonomorphisms_of_faithful"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">reflectsMonomorphisms_of_faithful</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.reflectsEpimorphisms_of_faithful"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">reflectsEpimorphisms_of_faithful</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.splitEpiEquiv"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">splitEpiEquiv</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.isSplitEpi_iff"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">isSplitEpi_iff</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.splitMonoEquiv"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">splitMonoEquiv</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.isSplitMono_iff"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">isSplitMono_iff</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.epi_map_iff_epi"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">epi_map_iff_epi</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.mono_map_iff_mono"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">mono_map_iff_mono</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.splitEpiCategoryImpOfIsEquivalence"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">splitEpiCategoryImpOfIsEquivalence</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Adjunction.strongEpi_map_of_strongEpi"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">strongEpi_map_of_strongEpi</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Adjunction.strongEpi_map_of_isEquivalence"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">strongEpi_map_of_isEquivalence</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Adjunction.instMonoCoeEquivHomObjHomEquivOfReflectsMonomorphisms"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">instMonoCoeEquivHomObjHomEquivOfReflectsMonomorphisms</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.strongEpi_map_iff_strongEpi_of_isEquivalence"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">strongEpi_map_iff_strongEpi_of_isEquivalence</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Preservation-and-reflection-of-monomorphisms-and-epimorphisms">Preservation and reflection of monomorphisms and epimorphisms <a class="hover-link" href="#Preservation-and-reflection-of-monomorphisms-and-epimorphisms">#</a></h1><p>We provide typeclasses that state that a functor preserves or reflects monomorphisms or
+epimorphisms.</p></div><div class="decl" id="CategoryTheory.Functor.PreservesMonomorphisms"><div class="class"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/EpiMono.lean#L27-L30">source</a></div><div class="decl_header"><span class="decl_kind">class</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/EpiMono.html#CategoryTheory.Functor.PreservesMonomorphisms"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">PreservesMonomorphisms</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../.././foundational_types.html">Prop</a></div></div><p>A functor preserves monomorphisms if it maps monomorphisms to monomorphisms.</p><ul class="structure_fields" id="CategoryTheory.Functor.PreservesMonomorphisms.mk"><li id="CategoryTheory.Functor.PreservesMonomorphisms.preserves" class="structure_field"><div class="structure_field_info">preserves : <span class="fn">∀ {<span class="fn">X </span><span class="fn">Y</span> : <span class="fn">C</span>} (<span class="fn">f</span> : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>) [<span class="fn">inst</span> : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Mono">CategoryTheory.Mono</a> <span class="fn">f</span></span>], <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Mono">CategoryTheory.Mono</a> <span class="fn">(<span class="fn"><span class="fn">F</span>.map</span> <span class="fn">f</span>)</span></span></span></div><div class="structure_field_doc"><p>A functor preserves monomorphisms if it maps monomorphisms to monomorphisms.</p></div></li></ul><details class="instances"><summary>Instances</summary><ul id="instances-list-CategoryTheory.Functor.PreservesMonomorphisms" class="instances-list"></ul></details></div></div><div class="decl" id="CategoryTheory.Functor.map_mono"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/EpiMono.lean#L32-L34">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/EpiMono.html#CategoryTheory.Functor.map_mono"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">map_mono</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">F</span>.PreservesMonomorphisms</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X Y : <span class="fn">C</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Mono">CategoryTheory.Mono</a> <span class="fn">f</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Mono">CategoryTheory.Mono</a> <span class="fn">(<span class="fn"><span class="fn">F</span>.map</span> <span class="fn">f</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="CategoryTheory.Functor.PreservesEpimorphisms"><div class="class"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/EpiMono.lean#L36-L39">source</a></div><div class="decl_header"><span class="decl_kind">class</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/EpiMono.html#CategoryTheory.Functor.PreservesEpimorphisms"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">PreservesEpimorphisms</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../.././foundational_types.html">Prop</a></div></div><p>A functor preserves epimorphisms if it maps epimorphisms to epimorphisms.</p><ul class="structure_fields" id="CategoryTheory.Functor.PreservesEpimorphisms.mk"><li id="CategoryTheory.Functor.PreservesEpimorphisms.preserves" class="structure_field"><div class="structure_field_info">preserves : <span class="fn">∀ {<span class="fn">X </span><span class="fn">Y</span> : <span class="fn">C</span>} (<span class="fn">f</span> : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>) [<span class="fn">inst</span> : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Epi">CategoryTheory.Epi</a> <span class="fn">f</span></span>], <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Epi">CategoryTheory.Epi</a> <span class="fn">(<span class="fn"><span class="fn">F</span>.map</span> <span class="fn">f</span>)</span></span></span></div><div class="structure_field_doc"><p>A functor preserves epimorphisms if it maps epimorphisms to epimorphisms.</p></div></li></ul><details class="instances"><summary>Instances</summary><ul id="instances-list-CategoryTheory.Functor.PreservesEpimorphisms" class="instances-list"></ul></details></div></div><div class="decl" id="CategoryTheory.Functor.map_epi"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/EpiMono.lean#L41-L43">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/EpiMono.html#CategoryTheory.Functor.map_epi"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">map_epi</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">F</span>.PreservesEpimorphisms</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X Y : <span class="fn">C</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Epi">CategoryTheory.Epi</a> <span class="fn">f</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Epi">CategoryTheory.Epi</a> <span class="fn">(<span class="fn"><span class="fn">F</span>.map</span> <span class="fn">f</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="CategoryTheory.Functor.ReflectsMonomorphisms"><div class="class"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/EpiMono.lean#L45-L50">source</a></div><div class="decl_header"><span class="decl_kind">class</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/EpiMono.html#CategoryTheory.Functor.ReflectsMonomorphisms"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">ReflectsMonomorphisms</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../.././foundational_types.html">Prop</a></div></div><p>A functor reflects monomorphisms if morphisms that are mapped to monomorphisms are themselves
+monomorphisms.</p><ul class="structure_fields" id="CategoryTheory.Functor.ReflectsMonomorphisms.mk"><li id="CategoryTheory.Functor.ReflectsMonomorphisms.reflects" class="structure_field"><div class="structure_field_info">reflects : <span class="fn">∀ {<span class="fn">X </span><span class="fn">Y</span> : <span class="fn">C</span>} (<span class="fn">f</span> : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>), <span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Mono">CategoryTheory.Mono</a> <span class="fn">(<span class="fn"><span class="fn">F</span>.map</span> <span class="fn">f</span>)</span></span> → <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Mono">CategoryTheory.Mono</a> <span class="fn">f</span></span></span></span></div><div class="structure_field_doc"><p>A functor reflects monomorphisms if morphisms that are mapped to monomorphisms are themselves
+monomorphisms.</p></div></li></ul><details class="instances"><summary>Instances</summary><ul id="instances-list-CategoryTheory.Functor.ReflectsMonomorphisms" class="instances-list"></ul></details></div></div><div class="decl" id="CategoryTheory.Functor.mono_of_mono_map"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/EpiMono.lean#L52-L54">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/EpiMono.html#CategoryTheory.Functor.mono_of_mono_map"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">mono_of_mono_map</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">F</span>.ReflectsMonomorphisms</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X Y : <span class="fn">C</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Mono">CategoryTheory.Mono</a> <span class="fn">(<span class="fn"><span class="fn">F</span>.map</span> <span class="fn">f</span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Mono">CategoryTheory.Mono</a> <span class="fn">f</span></span></div></div></div></div><div class="decl" id="CategoryTheory.Functor.ReflectsEpimorphisms"><div class="class"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/EpiMono.lean#L56-L61">source</a></div><div class="decl_header"><span class="decl_kind">class</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/EpiMono.html#CategoryTheory.Functor.ReflectsEpimorphisms"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">ReflectsEpimorphisms</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../.././foundational_types.html">Prop</a></div></div><p>A functor reflects epimorphisms if morphisms that are mapped to epimorphisms are themselves
+epimorphisms.</p><ul class="structure_fields" id="CategoryTheory.Functor.ReflectsEpimorphisms.mk"><li id="CategoryTheory.Functor.ReflectsEpimorphisms.reflects" class="structure_field"><div class="structure_field_info">reflects : <span class="fn">∀ {<span class="fn">X </span><span class="fn">Y</span> : <span class="fn">C</span>} (<span class="fn">f</span> : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>), <span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Epi">CategoryTheory.Epi</a> <span class="fn">(<span class="fn"><span class="fn">F</span>.map</span> <span class="fn">f</span>)</span></span> → <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Epi">CategoryTheory.Epi</a> <span class="fn">f</span></span></span></span></div><div class="structure_field_doc"><p>A functor reflects epimorphisms if morphisms that are mapped to epimorphisms are themselves
+epimorphisms.</p></div></li></ul><details class="instances"><summary>Instances</summary><ul id="instances-list-CategoryTheory.Functor.ReflectsEpimorphisms" class="instances-list"></ul></details></div></div><div class="decl" id="CategoryTheory.Functor.epi_of_epi_map"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/EpiMono.lean#L63-L65">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/EpiMono.html#CategoryTheory.Functor.epi_of_epi_map"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">epi_of_epi_map</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">F</span>.ReflectsEpimorphisms</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X Y : <span class="fn">C</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Epi">CategoryTheory.Epi</a> <span class="fn">(<span class="fn"><span class="fn">F</span>.map</span> <span class="fn">f</span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Epi">CategoryTheory.Epi</a> <span class="fn">f</span></span></div></div></div></div><div class="decl" id="CategoryTheory.Functor.preservesMonomorphisms_comp"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/EpiMono.lean#L67-L71">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/EpiMono.html#CategoryTheory.Functor.preservesMonomorphisms_comp"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">preservesMonomorphisms_comp</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u₃}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">E</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">F</span>.PreservesMonomorphisms</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">G</span>.PreservesMonomorphisms</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">F</span>.comp</span> <span class="fn">G</span>)</span>.PreservesMonomorphisms</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="CategoryTheory.Functor.preservesEpimorphisms_comp"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/EpiMono.lean#L73-L77">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/EpiMono.html#CategoryTheory.Functor.preservesEpimorphisms_comp"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">preservesEpimorphisms_comp</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u₃}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">E</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">F</span>.PreservesEpimorphisms</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">G</span>.PreservesEpimorphisms</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">F</span>.comp</span> <span class="fn">G</span>)</span>.PreservesEpimorphisms</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="CategoryTheory.Functor.reflectsMonomorphisms_comp"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/EpiMono.lean#L79-L81">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/EpiMono.html#CategoryTheory.Functor.reflectsMonomorphisms_comp"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">reflectsMonomorphisms_comp</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u₃}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">E</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">F</span>.ReflectsMonomorphisms</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">G</span>.ReflectsMonomorphisms</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">F</span>.comp</span> <span class="fn">G</span>)</span>.ReflectsMonomorphisms</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="CategoryTheory.Functor.reflectsEpimorphisms_comp"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/EpiMono.lean#L83-L85">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/EpiMono.html#CategoryTheory.Functor.reflectsEpimorphisms_comp"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">reflectsEpimorphisms_comp</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u₃}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">E</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">F</span>.ReflectsEpimorphisms</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">G</span>.ReflectsEpimorphisms</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">F</span>.comp</span> <span class="fn">G</span>)</span>.ReflectsEpimorphisms</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="CategoryTheory.Functor.preservesEpimorphisms_of_preserves_of_reflects"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/EpiMono.lean#L87-L89">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/EpiMono.html#CategoryTheory.Functor.preservesEpimorphisms_of_preserves_of_reflects"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">preservesEpimorphisms_of_preserves_of_reflects</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u₃}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">E</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">(<span class="fn"><span class="fn">F</span>.comp</span> <span class="fn">G</span>)</span>.PreservesEpimorphisms</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">G</span>.ReflectsEpimorphisms</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">F</span>.PreservesEpimorphisms</span></div></div></div></div><div class="decl" id="CategoryTheory.Functor.preservesMonomorphisms_of_preserves_of_reflects"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/EpiMono.lean#L91-L93">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/EpiMono.html#CategoryTheory.Functor.preservesMonomorphisms_of_preserves_of_reflects"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">preservesMonomorphisms_of_preserves_of_reflects</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u₃}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">E</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">(<span class="fn"><span class="fn">F</span>.comp</span> <span class="fn">G</span>)</span>.PreservesMonomorphisms</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">G</span>.ReflectsMonomorphisms</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">F</span>.PreservesMonomorphisms</span></div></div></div></div><div class="decl" id="CategoryTheory.Functor.reflectsEpimorphisms_of_preserves_of_reflects"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/EpiMono.lean#L95-L97">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/EpiMono.html#CategoryTheory.Functor.reflectsEpimorphisms_of_preserves_of_reflects"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">reflectsEpimorphisms_of_preserves_of_reflects</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u₃}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">E</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">G</span>.PreservesEpimorphisms</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">(<span class="fn"><span class="fn">F</span>.comp</span> <span class="fn">G</span>)</span>.ReflectsEpimorphisms</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">F</span>.ReflectsEpimorphisms</span></div></div></div></div><div class="decl" id="CategoryTheory.Functor.reflectsMonomorphisms_of_preserves_of_reflects"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/EpiMono.lean#L99-L101">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/EpiMono.html#CategoryTheory.Functor.reflectsMonomorphisms_of_preserves_of_reflects"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">reflectsMonomorphisms_of_preserves_of_reflects</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u₃}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">E</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">G</span>.PreservesMonomorphisms</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">(<span class="fn"><span class="fn">F</span>.comp</span> <span class="fn">G</span>)</span>.ReflectsMonomorphisms</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">F</span>.ReflectsMonomorphisms</span></div></div></div></div><div class="decl" id="CategoryTheory.Functor.preservesMonomorphisms.of_iso"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/EpiMono.lean#L103-L107">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/EpiMono.html#CategoryTheory.Functor.preservesMonomorphisms.of_iso"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">preservesMonomorphisms</span>.<span class="name">of_iso</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F G : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">F</span>.PreservesMonomorphisms</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(α : <span class="fn"><span class="fn">F</span> <a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.Iso">≅</a> <span class="fn">G</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">G</span>.PreservesMonomorphisms</span></div></div></div></div><div class="decl" id="CategoryTheory.Functor.preservesMonomorphisms.iso_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/EpiMono.lean#L109-L111">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/EpiMono.html#CategoryTheory.Functor.preservesMonomorphisms.iso_iff"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">preservesMonomorphisms</span>.<span class="name">iso_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F G : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(α : <span class="fn"><span class="fn">F</span> <a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.Iso">≅</a> <span class="fn">G</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">F</span>.PreservesMonomorphisms</span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">G</span>.PreservesMonomorphisms</span></span></div></div></div></div><div class="decl" id="CategoryTheory.Functor.preservesEpimorphisms.of_iso"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/EpiMono.lean#L113-L117">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/EpiMono.html#CategoryTheory.Functor.preservesEpimorphisms.of_iso"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">preservesEpimorphisms</span>.<span class="name">of_iso</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F G : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">F</span>.PreservesEpimorphisms</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(α : <span class="fn"><span class="fn">F</span> <a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.Iso">≅</a> <span class="fn">G</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">G</span>.PreservesEpimorphisms</span></div></div></div></div><div class="decl" id="CategoryTheory.Functor.preservesEpimorphisms.iso_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/EpiMono.lean#L119-L121">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/EpiMono.html#CategoryTheory.Functor.preservesEpimorphisms.iso_iff"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">preservesEpimorphisms</span>.<span class="name">iso_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F G : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(α : <span class="fn"><span class="fn">F</span> <a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.Iso">≅</a> <span class="fn">G</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">F</span>.PreservesEpimorphisms</span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">G</span>.PreservesEpimorphisms</span></span></div></div></div></div><div class="decl" id="CategoryTheory.Functor.reflectsMonomorphisms.of_iso"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/EpiMono.lean#L123-L128">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/EpiMono.html#CategoryTheory.Functor.reflectsMonomorphisms.of_iso"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">reflectsMonomorphisms</span>.<span class="name">of_iso</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F G : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">F</span>.ReflectsMonomorphisms</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(α : <span class="fn"><span class="fn">F</span> <a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.Iso">≅</a> <span class="fn">G</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">G</span>.ReflectsMonomorphisms</span></div></div></div></div><div class="decl" id="CategoryTheory.Functor.reflectsMonomorphisms.iso_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/EpiMono.lean#L130-L132">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/EpiMono.html#CategoryTheory.Functor.reflectsMonomorphisms.iso_iff"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">reflectsMonomorphisms</span>.<span class="name">iso_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F G : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(α : <span class="fn"><span class="fn">F</span> <a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.Iso">≅</a> <span class="fn">G</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">F</span>.ReflectsMonomorphisms</span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">G</span>.ReflectsMonomorphisms</span></span></div></div></div></div><div class="decl" id="CategoryTheory.Functor.reflectsEpimorphisms.of_iso"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/EpiMono.lean#L134-L139">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/EpiMono.html#CategoryTheory.Functor.reflectsEpimorphisms.of_iso"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">reflectsEpimorphisms</span>.<span class="name">of_iso</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F G : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">F</span>.ReflectsEpimorphisms</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(α : <span class="fn"><span class="fn">F</span> <a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.Iso">≅</a> <span class="fn">G</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">G</span>.ReflectsEpimorphisms</span></div></div></div></div><div class="decl" id="CategoryTheory.Functor.reflectsEpimorphisms.iso_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/EpiMono.lean#L141-L143">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/EpiMono.html#CategoryTheory.Functor.reflectsEpimorphisms.iso_iff"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">reflectsEpimorphisms</span>.<span class="name">iso_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F G : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(α : <span class="fn"><span class="fn">F</span> <a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.Iso">≅</a> <span class="fn">G</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">F</span>.ReflectsEpimorphisms</span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">G</span>.ReflectsEpimorphisms</span></span></div></div></div></div><div class="decl" id="CategoryTheory.Functor.preservesEpimorphsisms_of_adjunction"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/EpiMono.lean#L145-L152">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/EpiMono.html#CategoryTheory.Functor.preservesEpimorphsisms_of_adjunction"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">preservesEpimorphsisms_of_adjunction</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(adj : <span class="fn"><span class="fn">F</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">G</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">F</span>.PreservesEpimorphisms</span></div></div></div></div><div class="decl" id="CategoryTheory.Functor.preservesEpimorphisms_of_isLeftAdjoint"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/EpiMono.lean#L154-L156">source</a></div><div class="attributes">@[instance 100]</div>
+<div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/EpiMono.html#CategoryTheory.Functor.preservesEpimorphisms_of_isLeftAdjoint"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">preservesEpimorphisms_of_isLeftAdjoint</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">F</span>.IsLeftAdjoint</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">F</span>.PreservesEpimorphisms</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="CategoryTheory.Functor.preservesMonomorphisms_of_adjunction"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/EpiMono.lean#L158-L165">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/EpiMono.html#CategoryTheory.Functor.preservesMonomorphisms_of_adjunction"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">preservesMonomorphisms_of_adjunction</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(adj : <span class="fn"><span class="fn">F</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">G</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">G</span>.PreservesMonomorphisms</span></div></div></div></div><div class="decl" id="CategoryTheory.Functor.preservesMonomorphisms_of_isRightAdjoint"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/EpiMono.lean#L167-L169">source</a></div><div class="attributes">@[instance 100]</div>
+<div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/EpiMono.html#CategoryTheory.Functor.preservesMonomorphisms_of_isRightAdjoint"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">preservesMonomorphisms_of_isRightAdjoint</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">F</span>.IsRightAdjoint</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">F</span>.PreservesMonomorphisms</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="CategoryTheory.Functor.reflectsMonomorphisms_of_faithful"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/EpiMono.lean#L171-L175">source</a></div><div class="attributes">@[instance 100]</div>
+<div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/EpiMono.html#CategoryTheory.Functor.reflectsMonomorphisms_of_faithful"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">reflectsMonomorphisms_of_faithful</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">F</span>.Faithful</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">F</span>.ReflectsMonomorphisms</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="CategoryTheory.Functor.reflectsEpimorphisms_of_faithful"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/EpiMono.lean#L177-L181">source</a></div><div class="attributes">@[instance 100]</div>
+<div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/EpiMono.html#CategoryTheory.Functor.reflectsEpimorphisms_of_faithful"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">reflectsEpimorphisms_of_faithful</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">F</span>.Faithful</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">F</span>.ReflectsEpimorphisms</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="CategoryTheory.Functor.splitEpiEquiv"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/EpiMono.lean#L187-L195">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/EpiMono.html#CategoryTheory.Functor.splitEpiEquiv"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">splitEpiEquiv</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{X Y : <span class="fn">C</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">F</span>.Full</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">F</span>.Faithful</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/EpiMono.html#CategoryTheory.SplitEpi">CategoryTheory.SplitEpi</a> <span class="fn">f</span></span> <a href="../../.././Mathlib/Logic/Equiv/Defs.html#Equiv">≃</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/EpiMono.html#CategoryTheory.SplitEpi">CategoryTheory.SplitEpi</a> <span class="fn">(<span class="fn"><span class="fn">F</span>.map</span> <span class="fn">f</span>)</span></span></span></div></div><p>If <code>F</code> is a fully faithful functor, split epimorphisms are preserved and reflected by <code>F</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-CategoryTheory.Functor.splitEpiEquiv" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="CategoryTheory.Functor.isSplitEpi_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/EpiMono.lean#L197-L203">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/EpiMono.html#CategoryTheory.Functor.isSplitEpi_iff"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">isSplitEpi_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{X Y : <span class="fn">C</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">F</span>.Full</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">F</span>.Faithful</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/EpiMono.html#CategoryTheory.IsSplitEpi">CategoryTheory.IsSplitEpi</a> <span class="fn">(<span class="fn"><span class="fn">F</span>.map</span> <span class="fn">f</span>)</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/EpiMono.html#CategoryTheory.IsSplitEpi">CategoryTheory.IsSplitEpi</a> <span class="fn">f</span></span></span></div></div></div></div><div class="decl" id="CategoryTheory.Functor.splitMonoEquiv"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/EpiMono.lean#L205-L213">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/EpiMono.html#CategoryTheory.Functor.splitMonoEquiv"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">splitMonoEquiv</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{X Y : <span class="fn">C</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">F</span>.Full</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">F</span>.Faithful</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/EpiMono.html#CategoryTheory.SplitMono">CategoryTheory.SplitMono</a> <span class="fn">f</span></span> <a href="../../.././Mathlib/Logic/Equiv/Defs.html#Equiv">≃</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/EpiMono.html#CategoryTheory.SplitMono">CategoryTheory.SplitMono</a> <span class="fn">(<span class="fn"><span class="fn">F</span>.map</span> <span class="fn">f</span>)</span></span></span></div></div><p>If <code>F</code> is a fully faithful functor, split monomorphisms are preserved and reflected by <code>F</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-CategoryTheory.Functor.splitMonoEquiv" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="CategoryTheory.Functor.isSplitMono_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/EpiMono.lean#L215-L221">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/EpiMono.html#CategoryTheory.Functor.isSplitMono_iff"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">isSplitMono_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{X Y : <span class="fn">C</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">F</span>.Full</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">F</span>.Faithful</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/EpiMono.html#CategoryTheory.IsSplitMono">CategoryTheory.IsSplitMono</a> <span class="fn">(<span class="fn"><span class="fn">F</span>.map</span> <span class="fn">f</span>)</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/EpiMono.html#CategoryTheory.IsSplitMono">CategoryTheory.IsSplitMono</a> <span class="fn">f</span></span></span></div></div></div></div><div class="decl" id="CategoryTheory.Functor.epi_map_iff_epi"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/EpiMono.lean#L223-L229">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/EpiMono.html#CategoryTheory.Functor.epi_map_iff_epi"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">epi_map_iff_epi</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{X Y : <span class="fn">C</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[hF₁ : <span class="fn"><span class="fn">F</span>.PreservesEpimorphisms</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hF₂ : <span class="fn"><span class="fn">F</span>.ReflectsEpimorphisms</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Epi">CategoryTheory.Epi</a> <span class="fn">(<span class="fn"><span class="fn">F</span>.map</span> <span class="fn">f</span>)</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Epi">CategoryTheory.Epi</a> <span class="fn">f</span></span></span></div></div></div></div><div class="decl" id="CategoryTheory.Functor.mono_map_iff_mono"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/EpiMono.lean#L231-L237">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/EpiMono.html#CategoryTheory.Functor.mono_map_iff_mono"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">mono_map_iff_mono</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{X Y : <span class="fn">C</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[hF₁ : <span class="fn"><span class="fn">F</span>.PreservesMonomorphisms</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hF₂ : <span class="fn"><span class="fn">F</span>.ReflectsMonomorphisms</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Mono">CategoryTheory.Mono</a> <span class="fn">(<span class="fn"><span class="fn">F</span>.map</span> <span class="fn">f</span>)</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Mono">CategoryTheory.Mono</a> <span class="fn">f</span></span></span></div></div></div></div><div class="decl" id="CategoryTheory.Functor.splitEpiCategoryImpOfIsEquivalence"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/EpiMono.lean#L239-L246">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/EpiMono.html#CategoryTheory.Functor.splitEpiCategoryImpOfIsEquivalence"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">splitEpiCategoryImpOfIsEquivalence</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">F</span>.IsEquivalence</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/EpiMono.html#CategoryTheory.SplitEpiCategory">CategoryTheory.SplitEpiCategory</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/EpiMono.html#CategoryTheory.SplitEpiCategory">CategoryTheory.SplitEpiCategory</a> <span class="fn">D</span></span></div></div><p>If <code>F : C ⥤ D</code> is an equivalence of categories and <code>C</code> is a <code>split_epi_category</code>,
+then <code>D</code> also is.</p></div></div><div class="decl" id="CategoryTheory.Adjunction.strongEpi_map_of_strongEpi"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/EpiMono.lean#L256-L261">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/EpiMono.html#CategoryTheory.Adjunction.strongEpi_map_of_strongEpi"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">strongEpi_map_of_strongEpi</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{u_3, u_1}</a>      <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{u_4, u_2}</a>      <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F' : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A B : <span class="fn">C</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(adj : <span class="fn"><span class="fn">F</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">F'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">A</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">B</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">F'</span>.PreservesMonomorphisms</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">F</span>.PreservesEpimorphisms</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/StrongEpi.html#CategoryTheory.StrongEpi">CategoryTheory.StrongEpi</a> <span class="fn">f</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/StrongEpi.html#CategoryTheory.StrongEpi">CategoryTheory.StrongEpi</a> <span class="fn">(<span class="fn"><span class="fn">F</span>.map</span> <span class="fn">f</span>)</span></span></div></div></div></div><div class="decl" id="CategoryTheory.Adjunction.strongEpi_map_of_isEquivalence"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/EpiMono.lean#L263-L265">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/EpiMono.html#CategoryTheory.Adjunction.strongEpi_map_of_isEquivalence"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">strongEpi_map_of_isEquivalence</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{u_3, u_1}</a>      <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{u_4, u_2}</a>      <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A B : <span class="fn">C</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">F</span>.IsEquivalence</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">A</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">B</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[_h : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/StrongEpi.html#CategoryTheory.StrongEpi">CategoryTheory.StrongEpi</a> <span class="fn">f</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/StrongEpi.html#CategoryTheory.StrongEpi">CategoryTheory.StrongEpi</a> <span class="fn">(<span class="fn"><span class="fn">F</span>.map</span> <span class="fn">f</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="CategoryTheory.Adjunction.instMonoCoeEquivHomObjHomEquivOfReflectsMonomorphisms"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/EpiMono.lean#L267-L271">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/EpiMono.html#CategoryTheory.Adjunction.instMonoCoeEquivHomObjHomEquivOfReflectsMonomorphisms"><span class="name">CategoryTheory</span>.<span class="name">Adjunction</span>.<span class="name">instMonoCoeEquivHomObjHomEquivOfReflectsMonomorphisms</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{u_3, u_1}</a>      <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{u_4, u_2}</a>      <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F' : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(adj : <span class="fn"><span class="fn">F</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">F'</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn">C</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn">D</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn"><span class="fn"><span class="fn">F</span>.obj</span> <span class="fn">X</span></span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[hf : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Mono">CategoryTheory.Mono</a> <span class="fn">f</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">F</span>.ReflectsMonomorphisms</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Mono">CategoryTheory.Mono</a> <span class="fn">(<span class="fn">(<span class="fn"><span class="fn">adj</span>.homEquiv</span> <span class="fn">X</span> <span class="fn">Y</span>)</span> <span class="fn">f</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="CategoryTheory.Functor.strongEpi_map_iff_strongEpi_of_isEquivalence"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/EpiMono.lean#L279-L289">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/EpiMono.html#CategoryTheory.Functor.strongEpi_map_iff_strongEpi_of_isEquivalence"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">strongEpi_map_iff_strongEpi_of_isEquivalence</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{u_3, u_1}</a>      <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{u_4, u_2}</a>      <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A B : <span class="fn">C</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">A</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">B</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">F</span>.IsEquivalence</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/StrongEpi.html#CategoryTheory.StrongEpi">CategoryTheory.StrongEpi</a> <span class="fn">(<span class="fn"><span class="fn">F</span>.map</span> <span class="fn">f</span>)</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/StrongEpi.html#CategoryTheory.StrongEpi">CategoryTheory.StrongEpi</a> <span class="fn">f</span></span></span></div></div></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

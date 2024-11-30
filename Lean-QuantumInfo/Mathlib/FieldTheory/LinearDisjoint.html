@@ -1,0 +1,763 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../.././style.css"></link><link rel="icon" href="../.././favicon.svg"></link><link rel="mask-icon" href="../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.FieldTheory.LinearDisjoint</title><script defer="true" src="../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../.././";</script><script>const MODULE_NAME="Mathlib.FieldTheory.LinearDisjoint";</script><script type="module" src="../.././jump-src.js"></script><script type="module" src="../.././search.js"></script><script type="module" src="../.././expand-nav.js"></script><script type="module" src="../.././how-about.js"></script><script type="module" src="../.././instances.js"></script><script type="module" src="../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">FieldTheory</span>.<span class="name">LinearDisjoint</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/FieldTheory/LinearDisjoint.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../.././Init.html">Init</a></li><li><a href="../.././Mathlib/FieldTheory/Adjoin.html">Mathlib.FieldTheory.Adjoin</a></li><li><a href="../.././Mathlib/RingTheory/LinearDisjoint.html">Mathlib.RingTheory.LinearDisjoint</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.FieldTheory.LinearDisjoint" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#IntermediateField.LinearDisjoint"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span></a></div><div class="nav_link"><a class="break_within" href="#IntermediateField.linearDisjoint_iff"><span class="name">IntermediateField</span>.<span class="name">linearDisjoint_iff</span></a></div><div class="nav_link"><a class="break_within" href="#IntermediateField.linearDisjoint_iff'"><span class="name">IntermediateField</span>.<span class="name">linearDisjoint_iff'</span></a></div><div class="nav_link"><a class="break_within" href="#IntermediateField.LinearDisjoint.symm"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">symm</span></a></div><div class="nav_link"><a class="break_within" href="#IntermediateField.linearDisjoint_comm"><span class="name">IntermediateField</span>.<span class="name">linearDisjoint_comm</span></a></div><div class="nav_link"><a class="break_within" href="#IntermediateField.LinearDisjoint.self_right"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">self_right</span></a></div><div class="nav_link"><a class="break_within" href="#IntermediateField.LinearDisjoint.bot_right"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">bot_right</span></a></div><div class="nav_link"><a class="break_within" href="#IntermediateField.LinearDisjoint.bot_left"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">bot_left</span></a></div><div class="nav_link"><a class="break_within" href="#IntermediateField.LinearDisjoint.linearIndependent_left"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">linearIndependent_left</span></a></div><div class="nav_link"><a class="break_within" href="#IntermediateField.LinearDisjoint.of_basis_left"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">of_basis_left</span></a></div><div class="nav_link"><a class="break_within" href="#IntermediateField.LinearDisjoint.linearIndependent_right"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">linearIndependent_right</span></a></div><div class="nav_link"><a class="break_within" href="#IntermediateField.LinearDisjoint.of_basis_right"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">of_basis_right</span></a></div><div class="nav_link"><a class="break_within" href="#IntermediateField.LinearDisjoint.linearIndependent_right'"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">linearIndependent_right'</span></a></div><div class="nav_link"><a class="break_within" href="#IntermediateField.LinearDisjoint.of_basis_right'"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">of_basis_right'</span></a></div><div class="nav_link"><a class="break_within" href="#IntermediateField.LinearDisjoint.linearIndependent_mul"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">linearIndependent_mul</span></a></div><div class="nav_link"><a class="break_within" href="#IntermediateField.LinearDisjoint.linearIndependent_mul'"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">linearIndependent_mul'</span></a></div><div class="nav_link"><a class="break_within" href="#IntermediateField.LinearDisjoint.of_basis_mul"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">of_basis_mul</span></a></div><div class="nav_link"><a class="break_within" href="#IntermediateField.LinearDisjoint.of_basis_mul'"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">of_basis_mul'</span></a></div><div class="nav_link"><a class="break_within" href="#IntermediateField.LinearDisjoint.of_le_left"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">of_le_left</span></a></div><div class="nav_link"><a class="break_within" href="#IntermediateField.LinearDisjoint.of_le_right"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">of_le_right</span></a></div><div class="nav_link"><a class="break_within" href="#IntermediateField.LinearDisjoint.of_le_right'"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">of_le_right'</span></a></div><div class="nav_link"><a class="break_within" href="#IntermediateField.LinearDisjoint.of_le"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">of_le</span></a></div><div class="nav_link"><a class="break_within" href="#IntermediateField.LinearDisjoint.of_le'"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">of_le'</span></a></div><div class="nav_link"><a class="break_within" href="#IntermediateField.LinearDisjoint.inf_eq_bot"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">inf_eq_bot</span></a></div><div class="nav_link"><a class="break_within" href="#IntermediateField.LinearDisjoint.eq_bot_of_self"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">eq_bot_of_self</span></a></div><div class="nav_link"><a class="break_within" href="#IntermediateField.LinearDisjoint.rank_sup_of_isAlgebraic"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">rank_sup_of_isAlgebraic</span></a></div><div class="nav_link"><a class="break_within" href="#IntermediateField.LinearDisjoint.finrank_sup"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">finrank_sup</span></a></div><div class="nav_link"><a class="break_within" href="#IntermediateField.LinearDisjoint.of_finrank_sup"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">of_finrank_sup</span></a></div><div class="nav_link"><a class="break_within" href="#IntermediateField.LinearDisjoint.of_finrank_coprime"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">of_finrank_coprime</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Linearly-disjoint-fields">Linearly disjoint fields <a class="hover-link" href="#Linearly-disjoint-fields">#</a></h1><p>This file contains basics about the linearly disjoint fields.</p><h2 class="markdown-heading" id="Linear-disjoint-intermediate-fields">Linear disjoint intermediate fields <a class="hover-link" href="#Linear-disjoint-intermediate-fields">#</a></h2><p>We adapt the definitions in <a href="https://en.wikipedia.org/wiki/Linearly_disjoint">https://en.wikipedia.org/wiki/Linearly_disjoint</a>.
+See the file <code><a href="../.././Mathlib/LinearAlgebra/LinearDisjoint.html">Mathlib/LinearAlgebra/LinearDisjoint.lean</a></code> for details.</p><h3 class="markdown-heading" id="Main-definitions">Main definitions <a class="hover-link" href="#Main-definitions">#</a></h3><ul>
+<li><code><a href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.LinearDisjoint">IntermediateField.LinearDisjoint</a></code>: an intermediate field <code>A</code> of <code>E / F</code>
+and an abstract field <code>L</code> between <code>E / F</code>
+(as a special case, two intermediate fields) are linearly disjoint over <code>F</code>,
+if they are linearly disjoint as subalgebras (<code><a href="../.././Mathlib/RingTheory/LinearDisjoint.html#Subalgebra.LinearDisjoint">Subalgebra.LinearDisjoint</a></code>).</li>
+</ul><h3 class="markdown-heading" id="Implementation-notes">Implementation notes <a class="hover-link" href="#Implementation-notes">#</a></h3><p>The <code><a href="../.././Mathlib/RingTheory/LinearDisjoint.html#Subalgebra.LinearDisjoint">Subalgebra.LinearDisjoint</a></code> is stated for two <code><a href="../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Subalgebra">Subalgebra</a></code>s. The original design of
+<code><a href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.LinearDisjoint">IntermediateField.LinearDisjoint</a></code> is also stated for two <code><a href="../.././Mathlib/FieldTheory/IntermediateField/Basic.html#IntermediateField">IntermediateField</a></code>s
+(see <code><a href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.linearDisjoint_iff'">IntermediateField.linearDisjoint_iff'</a></code> for the original statement).
+But it's probably useful if one of them can be generalized to an abstract field
+(see <a href="https://github.com/leanprover-community/mathlib4/pull/9651#discussion_r1464070324">https://github.com/leanprover-community/mathlib4/pull/9651#discussion_r1464070324</a>).
+This leads to the current design of <code><a href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.LinearDisjoint">IntermediateField.LinearDisjoint</a></code>
+which is for one <code><a href="../.././Mathlib/FieldTheory/IntermediateField/Basic.html#IntermediateField">IntermediateField</a></code> and one abstract field.
+It is not generalized to two abstract fields as this will break the dot notation.</p><h3 class="markdown-heading" id="Main-results">Main results <a class="hover-link" href="#Main-results">#</a></h3><p>Equivalent characterization of linear disjointness:</p><ul>
+<li><p><code><a href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.LinearDisjoint.linearIndependent_left">IntermediateField.LinearDisjoint.linearIndependent_left</a></code>:
+if <code>A</code> and <code>L</code> are linearly disjoint, then any <code>F</code>-linearly independent family on <code>A</code> remains
+linearly independent over <code>L</code>.</p>
+</li>
+<li><p><code><a href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.LinearDisjoint.of_basis_left">IntermediateField.LinearDisjoint.of_basis_left</a></code>:
+conversely, if there exists an <code>F</code>-basis of <code>A</code> which remains linearly independent over <code>L</code>, then
+<code>A</code> and <code>L</code> are linearly disjoint.</p>
+</li>
+<li><p><code><a href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.LinearDisjoint.linearIndependent_right">IntermediateField.LinearDisjoint.linearIndependent_right</a></code>:
+<code><a href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.LinearDisjoint.linearIndependent_right'">IntermediateField.LinearDisjoint.linearIndependent_right'</a></code>:
+if <code>A</code> and <code>L</code> are linearly disjoint, then any <code>F</code>-linearly independent family on <code>L</code> remains
+linearly independent over <code>A</code>.</p>
+</li>
+<li><p><code><a href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.LinearDisjoint.of_basis_right">IntermediateField.LinearDisjoint.of_basis_right</a></code>:
+<code><a href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.LinearDisjoint.of_basis_right'">IntermediateField.LinearDisjoint.of_basis_right'</a></code>:
+conversely, if there exists an <code>F</code>-basis of <code>L</code> which remains linearly independent over <code>A</code>, then
+<code>A</code> and <code>L</code> are linearly disjoint.</p>
+</li>
+<li><p><code><a href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.LinearDisjoint.linearIndependent_mul">IntermediateField.LinearDisjoint.linearIndependent_mul</a></code>:
+<code><a href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.LinearDisjoint.linearIndependent_mul'">IntermediateField.LinearDisjoint.linearIndependent_mul'</a></code>:
+if <code>A</code> and <code>L</code> are linearly disjoint, then for any family of
+<code>F</code>-linearly independent elements <code>{ a_i }</code> of <code>A</code>, and any family of
+<code>F</code>-linearly independent elements <code>{ b_j }</code> of <code>L</code>, the family <code>{ a_i * b_j }</code> in <code>S</code> is
+also <code>F</code>-linearly independent.</p>
+</li>
+<li><p><code><a href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.LinearDisjoint.of_basis_mul">IntermediateField.LinearDisjoint.of_basis_mul</a></code>:
+<code><a href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.LinearDisjoint.of_basis_mul'">IntermediateField.LinearDisjoint.of_basis_mul'</a></code>:
+conversely, if <code>{ a_i }</code> is an <code>F</code>-basis of <code>A</code>, if <code>{ b_j }</code> is an <code>F</code>-basis of <code>L</code>,
+such that the family <code>{ a_i * b_j }</code> in <code>E</code> is <code>F</code>-linearly independent,
+then <code>A</code> and <code>L</code> are linearly disjoint.</p>
+</li>
+</ul><p>Other main results:</p><ul>
+<li><p><code><a href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.LinearDisjoint.symm">IntermediateField.LinearDisjoint.symm</a></code>, <code><a href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.linearDisjoint_comm">IntermediateField.linearDisjoint_comm</a></code>:
+linear disjointness is symmetric.</p>
+</li>
+<li><p><code><a href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.LinearDisjoint.rank_sup_of_isAlgebraic">IntermediateField.LinearDisjoint.rank_sup_of_isAlgebraic</a></code>,
+<code><a href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.LinearDisjoint.finrank_sup">IntermediateField.LinearDisjoint.finrank_sup</a></code>:
+if <code>A</code> and <code>B</code> are linearly disjoint,
+then the rank of <code>A ⊔ B</code> is equal to the product of the rank of <code>A</code> and <code>B</code>.</p>
+<p><strong>TODO:</strong> remove the algebraic assumptions (the proof becomes complicated).</p>
+</li>
+<li><p><code><a href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.LinearDisjoint.of_finrank_sup">IntermediateField.LinearDisjoint.of_finrank_sup</a></code>:
+conversely, if <code>A</code> and <code>B</code> are finite extensions,
+such that rank of <code>A ⊔ B</code> is equal to the product of the rank of <code>A</code> and <code>B</code>,
+then <code>A</code> and <code>B</code> are linearly disjoint.</p>
+</li>
+<li><p><code><a href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.LinearDisjoint.of_finrank_coprime">IntermediateField.LinearDisjoint.of_finrank_coprime</a></code>:
+if the rank of <code>A</code> and <code>B</code> are coprime,
+then <code>A</code> and <code>B</code> are linearly disjoint.</p>
+</li>
+<li><p><code><a href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.LinearDisjoint.inf_eq_bot">IntermediateField.LinearDisjoint.inf_eq_bot</a></code>:
+if <code>A</code> and <code>B</code> are linearly disjoint, then they are disjoint.</p>
+</li>
+</ul><h2 class="markdown-heading" id="Tags">Tags <a class="hover-link" href="#Tags">#</a></h2><p>linearly disjoint, linearly independent, tensor product</p></div><div class="decl" id="IntermediateField.LinearDisjoint"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/FieldTheory/LinearDisjoint.lean#L119-L123">source</a></div><div class="attributes">@[reducible, inline]</div>
+<div class="decl_header"><span class="decl_kind">abbrev</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.LinearDisjoint"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(A : <span class="fn"><a href="../.././Mathlib/FieldTheory/IntermediateField/Basic.html#IntermediateField">IntermediateField</a> <span class="fn">F</span> <span class="fn">E</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(L : <a href="../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">L</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">F</span> <span class="fn">L</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><a href="../.././foundational_types.html">Prop</a></div></div><p>If <code>A</code> is an intermediate field of <code>E / F</code>, and <code>E / L / F</code> is a field extension tower,
+then <code>A</code> and <code>L</code> are linearly disjoint, if they are linearly disjoint as subalgebras of <code>E</code>
+(<code><a href="../.././Mathlib/RingTheory/LinearDisjoint.html#Subalgebra.LinearDisjoint">Subalgebra.LinearDisjoint</a></code>).</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><span class="fn"><span class="fn">A</span>.LinearDisjoint</span> <span class="fn">L</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">A</span>.LinearDisjoint</span> <span class="fn"><span class="fn">(<a href="../.././Mathlib/Algebra/Algebra/Tower.html#IsScalarTower.toAlgHom">IsScalarTower.toAlgHom</a> <span class="fn">F</span> <span class="fn">L</span> <span class="fn">E</span>)</span>.range</span></span></span></li></ul></details><details id="instances-for-list-IntermediateField.LinearDisjoint" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="IntermediateField.linearDisjoint_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/FieldTheory/LinearDisjoint.lean#L125-L127">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.linearDisjoint_iff"><span class="name">IntermediateField</span>.<span class="name">linearDisjoint_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(A : <span class="fn"><a href="../.././Mathlib/FieldTheory/IntermediateField/Basic.html#IntermediateField">IntermediateField</a> <span class="fn">F</span> <span class="fn">E</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(L : <a href="../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">L</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">F</span> <span class="fn">L</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">A</span>.LinearDisjoint</span> <span class="fn">L</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">A</span>.LinearDisjoint</span> <span class="fn"><span class="fn">(<a href="../.././Mathlib/Algebra/Algebra/Tower.html#IsScalarTower.toAlgHom">IsScalarTower.toAlgHom</a> <span class="fn">F</span> <span class="fn">L</span> <span class="fn">E</span>)</span>.range</span></span></span></div></div></div></div><div class="decl" id="IntermediateField.linearDisjoint_iff'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/FieldTheory/LinearDisjoint.lean#L131-L137">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.linearDisjoint_iff'"><span class="name">IntermediateField</span>.<span class="name">linearDisjoint_iff'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A B : <span class="fn"><a href="../.././Mathlib/FieldTheory/IntermediateField/Basic.html#IntermediateField">IntermediateField</a> <span class="fn">F</span> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">A</span>.LinearDisjoint</span> <span class="fn">↥<span class="fn">B</span></span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">A</span>.LinearDisjoint</span> <span class="fn"><span class="fn">B</span>.toSubalgebra</span></span></span></div></div><p>Two intermediate fields are linearly disjoint if and only if
+they are linearly disjoint as subalgebras.</p></div></div><div class="decl" id="IntermediateField.LinearDisjoint.symm"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/FieldTheory/LinearDisjoint.lean#L139-L141">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.LinearDisjoint.symm"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">symm</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A B : <span class="fn"><a href="../.././Mathlib/FieldTheory/IntermediateField/Basic.html#IntermediateField">IntermediateField</a> <span class="fn">F</span> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(H : <span class="fn"><span class="fn"><span class="fn">A</span>.LinearDisjoint</span> <span class="fn">↥<span class="fn">B</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">B</span>.LinearDisjoint</span> <span class="fn">↥<span class="fn">A</span></span></span></div></div><p>Linear disjointness is symmetric.</p></div></div><div class="decl" id="IntermediateField.linearDisjoint_comm"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/FieldTheory/LinearDisjoint.lean#L143-L145">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.linearDisjoint_comm"><span class="name">IntermediateField</span>.<span class="name">linearDisjoint_comm</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A B : <span class="fn"><a href="../.././Mathlib/FieldTheory/IntermediateField/Basic.html#IntermediateField">IntermediateField</a> <span class="fn">F</span> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">A</span>.LinearDisjoint</span> <span class="fn">↥<span class="fn">B</span></span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">B</span>.LinearDisjoint</span> <span class="fn">↥<span class="fn">A</span></span></span></span></div></div><p>Linear disjointness is symmetric.</p></div></div><div class="decl" id="IntermediateField.LinearDisjoint.self_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/FieldTheory/LinearDisjoint.lean#L150-L150">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.LinearDisjoint.self_right"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">self_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(A : <span class="fn"><a href="../.././Mathlib/FieldTheory/IntermediateField/Basic.html#IntermediateField">IntermediateField</a> <span class="fn">F</span> <span class="fn">E</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">A</span>.LinearDisjoint</span> <span class="fn">F</span></span></div></div></div></div><div class="decl" id="IntermediateField.LinearDisjoint.bot_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/FieldTheory/LinearDisjoint.lean#L153-L154">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.LinearDisjoint.bot_right"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">bot_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(A : <span class="fn"><a href="../.././Mathlib/FieldTheory/IntermediateField/Basic.html#IntermediateField">IntermediateField</a> <span class="fn">F</span> <span class="fn">E</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">A</span>.LinearDisjoint</span> <span class="fn">↥<a href="../.././Mathlib/Order/Notation.html#Bot.bot">⊥</a></span></span></div></div></div></div><div class="decl" id="IntermediateField.LinearDisjoint.bot_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/FieldTheory/LinearDisjoint.lean#L157-L158">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.LinearDisjoint.bot_left"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">bot_left</span></a></span><span class="decl_args">
+<span class="fn">(F : <a href="../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(E : <a href="../.././foundational_types.html">Type</a> v)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(L : <a href="../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">L</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">F</span> <span class="fn">L</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Order/Notation.html#Bot.bot">⊥</a>.LinearDisjoint</span> <span class="fn">L</span></span></div></div></div></div><div class="decl" id="IntermediateField.LinearDisjoint.linearIndependent_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/FieldTheory/LinearDisjoint.lean#L160-L166">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.LinearDisjoint.linearIndependent_left"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">linearIndependent_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../.././Mathlib/FieldTheory/IntermediateField/Basic.html#IntermediateField">IntermediateField</a> <span class="fn">F</span> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <a href="../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">L</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">F</span> <span class="fn">L</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(H : <span class="fn"><span class="fn"><span class="fn">A</span>.LinearDisjoint</span> <span class="fn">L</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn"><span class="fn">ι</span> → <span class="fn">↥<span class="fn">A</span></span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/LinearIndependent.html#LinearIndependent">LinearIndependent</a> <span class="fn">F</span> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/LinearAlgebra/LinearIndependent.html#LinearIndependent">LinearIndependent</a> <span class="fn">L</span> <span class="fn">(<span class="fn">⇑<span class="fn"><span class="fn">A</span>.val</span></span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">a</span>)</span></span></div></div><p>If <code>A</code> and <code>L</code> are linearly disjoint, then any <code>F</code>-linearly independent family on <code>A</code> remains
+linearly independent over <code>L</code>.</p></div></div><div class="decl" id="IntermediateField.LinearDisjoint.of_basis_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/FieldTheory/LinearDisjoint.lean#L168-L174">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.LinearDisjoint.of_basis_left"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">of_basis_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../.././Mathlib/FieldTheory/IntermediateField/Basic.html#IntermediateField">IntermediateField</a> <span class="fn">F</span> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <a href="../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">L</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">F</span> <span class="fn">L</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Basis/Defs.html#Basis">Basis</a> <span class="fn">ι</span> <span class="fn">F</span> <span class="fn">↥<span class="fn">A</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(H : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/LinearIndependent.html#LinearIndependent">LinearIndependent</a> <span class="fn">L</span> <span class="fn">(<span class="fn">⇑<span class="fn"><span class="fn">A</span>.val</span></span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">⇑<span class="fn">a</span></span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">A</span>.LinearDisjoint</span> <span class="fn">L</span></span></div></div><p>If there exists an <code>F</code>-basis of <code>A</code> which remains linearly independent over <code>L</code>, then
+<code>A</code> and <code>L</code> are linearly disjoint.</p></div></div><div class="decl" id="IntermediateField.LinearDisjoint.linearIndependent_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/FieldTheory/LinearDisjoint.lean#L176-L180">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.LinearDisjoint.linearIndependent_right"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">linearIndependent_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A B : <span class="fn"><a href="../.././Mathlib/FieldTheory/IntermediateField/Basic.html#IntermediateField">IntermediateField</a> <span class="fn">F</span> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(H : <span class="fn"><span class="fn"><span class="fn">A</span>.LinearDisjoint</span> <span class="fn">↥<span class="fn">B</span></span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn"><span class="fn">ι</span> → <span class="fn">↥<span class="fn">B</span></span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hb : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/LinearIndependent.html#LinearIndependent">LinearIndependent</a> <span class="fn">F</span> <span class="fn">b</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/LinearAlgebra/LinearIndependent.html#LinearIndependent">LinearIndependent</a> <span class="fn">(↥<span class="fn">A</span>)</span> <span class="fn">(<span class="fn">⇑<span class="fn"><span class="fn">B</span>.val</span></span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">b</span>)</span></span></div></div><p>If <code>A</code> and <code>B</code> are linearly disjoint, then any <code>F</code>-linearly independent family on <code>B</code> remains
+linearly independent over <code>A</code>.</p></div></div><div class="decl" id="IntermediateField.LinearDisjoint.of_basis_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/FieldTheory/LinearDisjoint.lean#L182-L186">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.LinearDisjoint.of_basis_right"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">of_basis_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A B : <span class="fn"><a href="../.././Mathlib/FieldTheory/IntermediateField/Basic.html#IntermediateField">IntermediateField</a> <span class="fn">F</span> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="decl_args">
+<span class="fn">(b : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Basis/Defs.html#Basis">Basis</a> <span class="fn">ι</span> <span class="fn">F</span> <span class="fn">↥<span class="fn">B</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(H : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/LinearIndependent.html#LinearIndependent">LinearIndependent</a> <span class="fn">(↥<span class="fn">A</span>)</span> <span class="fn">(<span class="fn">⇑<span class="fn"><span class="fn">B</span>.val</span></span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">⇑<span class="fn">b</span></span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">A</span>.LinearDisjoint</span> <span class="fn">↥<span class="fn">B</span></span></span></div></div><p>If there exists an <code>F</code>-basis of <code>B</code> which remains linearly independent over <code>A</code>, then
+<code>A</code> and <code>B</code> are linearly disjoint.</p></div></div><div class="decl" id="IntermediateField.LinearDisjoint.linearIndependent_right'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/FieldTheory/LinearDisjoint.lean#L188-L193">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.LinearDisjoint.linearIndependent_right'"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">linearIndependent_right'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../.././Mathlib/FieldTheory/IntermediateField/Basic.html#IntermediateField">IntermediateField</a> <span class="fn">F</span> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <a href="../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">L</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">F</span> <span class="fn">L</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(H : <span class="fn"><span class="fn"><span class="fn">A</span>.LinearDisjoint</span> <span class="fn">L</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn"><span class="fn">ι</span> → <span class="fn">L</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hb : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/LinearIndependent.html#LinearIndependent">LinearIndependent</a> <span class="fn">F</span> <span class="fn">b</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/LinearAlgebra/LinearIndependent.html#LinearIndependent">LinearIndependent</a> <span class="fn">(↥<span class="fn">A</span>)</span> <span class="fn">(<span class="fn">⇑<span class="fn">(<a href="../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">L</span> <span class="fn">E</span>)</span></span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">b</span>)</span></span></div></div><p>If <code>A</code> and <code>L</code> are linearly disjoint, then any <code>F</code>-linearly independent family on <code>L</code> remains
+linearly independent over <code>A</code>.</p></div></div><div class="decl" id="IntermediateField.LinearDisjoint.of_basis_right'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/FieldTheory/LinearDisjoint.lean#L195-L200">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.LinearDisjoint.of_basis_right'"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">of_basis_right'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../.././Mathlib/FieldTheory/IntermediateField/Basic.html#IntermediateField">IntermediateField</a> <span class="fn">F</span> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <a href="../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">L</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">F</span> <span class="fn">L</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="decl_args">
+<span class="fn">(b : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Basis/Defs.html#Basis">Basis</a> <span class="fn">ι</span> <span class="fn">F</span> <span class="fn">L</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(H : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/LinearIndependent.html#LinearIndependent">LinearIndependent</a> <span class="fn">(↥<span class="fn">A</span>)</span> <span class="fn">(<span class="fn">⇑<span class="fn">(<a href="../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">L</span> <span class="fn">E</span>)</span></span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">⇑<span class="fn">b</span></span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">A</span>.LinearDisjoint</span> <span class="fn">L</span></span></div></div><p>If there exists an <code>F</code>-basis of <code>L</code> which remains linearly independent over <code>A</code>, then
+<code>A</code> and <code>L</code> are linearly disjoint.</p></div></div><div class="decl" id="IntermediateField.LinearDisjoint.linearIndependent_mul"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/FieldTheory/LinearDisjoint.lean#L202-L208">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.LinearDisjoint.linearIndependent_mul"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">linearIndependent_mul</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A B : <span class="fn"><a href="../.././Mathlib/FieldTheory/IntermediateField/Basic.html#IntermediateField">IntermediateField</a> <span class="fn">F</span> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(H : <span class="fn"><span class="fn"><span class="fn">A</span>.LinearDisjoint</span> <span class="fn">↥<span class="fn">B</span></span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{κ : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn"><span class="fn">κ</span> → <span class="fn">↥<span class="fn">A</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn"><span class="fn">ι</span> → <span class="fn">↥<span class="fn">B</span></span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/LinearIndependent.html#LinearIndependent">LinearIndependent</a> <span class="fn">F</span> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hb : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/LinearIndependent.html#LinearIndependent">LinearIndependent</a> <span class="fn">F</span> <span class="fn">b</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/LinearAlgebra/LinearIndependent.html#LinearIndependent">LinearIndependent</a> <span class="fn">F</span> <span class="fn">fun (<span class="fn">i</span> : <span class="fn"><span class="fn">κ</span> <a href="../.././Init/Prelude.html#Prod">×</a> <span class="fn">ι</span></span>) =&gt; <span class="fn"><span class="fn">↑<span class="fn">(<span class="fn">a</span> <span class="fn"><span class="fn">i</span>.1</span>)</span></span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">↑<span class="fn">(<span class="fn">b</span> <span class="fn"><span class="fn">i</span>.2</span>)</span></span></span></span></span></div></div><p>If <code>A</code> and <code>B</code> are linearly disjoint, then for any <code>F</code>-linearly independent families
+<code>{ u_i }</code>, <code>{ v_j }</code> of <code>A</code>, <code>B</code>, the products <code>{ u_i * v_j }</code>
+are linearly independent over <code>F</code>.</p></div></div><div class="decl" id="IntermediateField.LinearDisjoint.linearIndependent_mul'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/FieldTheory/LinearDisjoint.lean#L210-L217">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.LinearDisjoint.linearIndependent_mul'"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">linearIndependent_mul'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../.././Mathlib/FieldTheory/IntermediateField/Basic.html#IntermediateField">IntermediateField</a> <span class="fn">F</span> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <a href="../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">L</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">F</span> <span class="fn">L</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(H : <span class="fn"><span class="fn"><span class="fn">A</span>.LinearDisjoint</span> <span class="fn">L</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{κ : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn"><span class="fn">κ</span> → <span class="fn">↥<span class="fn">A</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn"><span class="fn">ι</span> → <span class="fn">L</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/LinearIndependent.html#LinearIndependent">LinearIndependent</a> <span class="fn">F</span> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hb : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/LinearIndependent.html#LinearIndependent">LinearIndependent</a> <span class="fn">F</span> <span class="fn">b</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/LinearAlgebra/LinearIndependent.html#LinearIndependent">LinearIndependent</a> <span class="fn">F</span> <span class="fn">fun (<span class="fn">i</span> : <span class="fn"><span class="fn">κ</span> <a href="../.././Init/Prelude.html#Prod">×</a> <span class="fn">ι</span></span>) =&gt; <span class="fn"><span class="fn">↑<span class="fn">(<span class="fn">a</span> <span class="fn"><span class="fn">i</span>.1</span>)</span></span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">(<a href="../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">L</span> <span class="fn">E</span>)</span> <span class="fn">(<span class="fn">b</span> <span class="fn"><span class="fn">i</span>.2</span>)</span></span></span></span></span></div></div><p>If <code>A</code> and <code>L</code> are linearly disjoint, then for any <code>F</code>-linearly independent families
+<code>{ u_i }</code>, <code>{ v_j }</code> of <code>A</code>, <code>L</code>, the products <code>{ u_i * v_j }</code>
+are linearly independent over <code>F</code>.</p></div></div><div class="decl" id="IntermediateField.LinearDisjoint.of_basis_mul"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/FieldTheory/LinearDisjoint.lean#L219-L223">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.LinearDisjoint.of_basis_mul"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">of_basis_mul</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A B : <span class="fn"><a href="../.././Mathlib/FieldTheory/IntermediateField/Basic.html#IntermediateField">IntermediateField</a> <span class="fn">F</span> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{κ : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Basis/Defs.html#Basis">Basis</a> <span class="fn">κ</span> <span class="fn">F</span> <span class="fn">↥<span class="fn">A</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Basis/Defs.html#Basis">Basis</a> <span class="fn">ι</span> <span class="fn">F</span> <span class="fn">↥<span class="fn">B</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(H : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/LinearIndependent.html#LinearIndependent">LinearIndependent</a> <span class="fn">F</span> <span class="fn">fun (<span class="fn">i</span> : <span class="fn"><span class="fn">κ</span> <a href="../.././Init/Prelude.html#Prod">×</a> <span class="fn">ι</span></span>) =&gt; <span class="fn"><span class="fn">↑<span class="fn">(<span class="fn">a</span> <span class="fn"><span class="fn">i</span>.1</span>)</span></span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">↑<span class="fn">(<span class="fn">b</span> <span class="fn"><span class="fn">i</span>.2</span>)</span></span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">A</span>.LinearDisjoint</span> <span class="fn">↥<span class="fn">B</span></span></span></div></div><p>If there are <code>F</code>-bases <code>{ u_i }</code>, <code>{ v_j }</code> of <code>A</code>, <code>B</code>, such that the products
+<code>{ u_i * v_j }</code> are linearly independent over <code>F</code>, then <code>A</code> and <code>B</code> are linearly disjoint.</p></div></div><div class="decl" id="IntermediateField.LinearDisjoint.of_basis_mul'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/FieldTheory/LinearDisjoint.lean#L225-L231">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.LinearDisjoint.of_basis_mul'"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">of_basis_mul'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../.././Mathlib/FieldTheory/IntermediateField/Basic.html#IntermediateField">IntermediateField</a> <span class="fn">F</span> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <a href="../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">L</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">F</span> <span class="fn">L</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{κ : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Basis/Defs.html#Basis">Basis</a> <span class="fn">κ</span> <span class="fn">F</span> <span class="fn">↥<span class="fn">A</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Basis/Defs.html#Basis">Basis</a> <span class="fn">ι</span> <span class="fn">F</span> <span class="fn">L</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(H : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/LinearIndependent.html#LinearIndependent">LinearIndependent</a> <span class="fn">F</span> <span class="fn">fun (<span class="fn">i</span> : <span class="fn"><span class="fn">κ</span> <a href="../.././Init/Prelude.html#Prod">×</a> <span class="fn">ι</span></span>) =&gt; <span class="fn"><span class="fn">↑<span class="fn">(<span class="fn">a</span> <span class="fn"><span class="fn">i</span>.1</span>)</span></span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">(<a href="../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">L</span> <span class="fn">E</span>)</span> <span class="fn">(<span class="fn">b</span> <span class="fn"><span class="fn">i</span>.2</span>)</span></span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">A</span>.LinearDisjoint</span> <span class="fn">L</span></span></div></div><p>If there are <code>F</code>-bases <code>{ u_i }</code>, <code>{ v_j }</code> of <code>A</code>, <code>L</code>, such that the products
+<code>{ u_i * v_j }</code> are linearly independent over <code>F</code>, then <code>A</code> and <code>L</code> are linearly disjoint.</p></div></div><div class="decl" id="IntermediateField.LinearDisjoint.of_le_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/FieldTheory/LinearDisjoint.lean#L233-L235">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.LinearDisjoint.of_le_left"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">of_le_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../.././Mathlib/FieldTheory/IntermediateField/Basic.html#IntermediateField">IntermediateField</a> <span class="fn">F</span> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <a href="../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">L</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">F</span> <span class="fn">L</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A' : <span class="fn"><a href="../.././Mathlib/FieldTheory/IntermediateField/Basic.html#IntermediateField">IntermediateField</a> <span class="fn">F</span> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(H : <span class="fn"><span class="fn"><span class="fn">A</span>.LinearDisjoint</span> <span class="fn">L</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">A'</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">A</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">A'</span>.LinearDisjoint</span> <span class="fn">L</span></span></div></div></div></div><div class="decl" id="IntermediateField.LinearDisjoint.of_le_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/FieldTheory/LinearDisjoint.lean#L237-L239">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.LinearDisjoint.of_le_right"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">of_le_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A B B' : <span class="fn"><a href="../.././Mathlib/FieldTheory/IntermediateField/Basic.html#IntermediateField">IntermediateField</a> <span class="fn">F</span> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(H : <span class="fn"><span class="fn"><span class="fn">A</span>.LinearDisjoint</span> <span class="fn">↥<span class="fn">B</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">B'</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">B</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">A</span>.LinearDisjoint</span> <span class="fn">↥<span class="fn">B'</span></span></span></div></div></div></div><div class="decl" id="IntermediateField.LinearDisjoint.of_le_right'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/FieldTheory/LinearDisjoint.lean#L241-L247">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.LinearDisjoint.of_le_right'"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">of_le_right'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../.././Mathlib/FieldTheory/IntermediateField/Basic.html#IntermediateField">IntermediateField</a> <span class="fn">F</span> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <a href="../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">L</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">F</span> <span class="fn">L</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(H : <span class="fn"><span class="fn"><span class="fn">A</span>.LinearDisjoint</span> <span class="fn">L</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(L' : <a href="../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">L'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">L'</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">F</span> <span class="fn">L'</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">L'</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">F</span> <span class="fn">L'</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">L'</span> <span class="fn">L</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">A</span>.LinearDisjoint</span> <span class="fn">L'</span></span></div></div><p>Similar to <code><a href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.LinearDisjoint.of_le_right">IntermediateField.LinearDisjoint.of_le_right</a></code> but this is for abstract fields.</p></div></div><div class="decl" id="IntermediateField.LinearDisjoint.of_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/FieldTheory/LinearDisjoint.lean#L249-L253">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.LinearDisjoint.of_le"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">of_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A B A' B' : <span class="fn"><a href="../.././Mathlib/FieldTheory/IntermediateField/Basic.html#IntermediateField">IntermediateField</a> <span class="fn">F</span> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(H : <span class="fn"><span class="fn"><span class="fn">A</span>.LinearDisjoint</span> <span class="fn">↥<span class="fn">B</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hA : <span class="fn"><span class="fn">A'</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">A</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hB : <span class="fn"><span class="fn">B'</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">B</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">A'</span>.LinearDisjoint</span> <span class="fn">↥<span class="fn">B'</span></span></span></div></div><p>If <code>A</code> and <code>B</code> are linearly disjoint, <code>A'</code> and <code>B'</code> are contained in <code>A</code> and <code>B</code>,
+respectively, then <code>A'</code> and <code>B'</code> are also linearly disjoint.</p></div></div><div class="decl" id="IntermediateField.LinearDisjoint.of_le'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/FieldTheory/LinearDisjoint.lean#L255-L260">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.LinearDisjoint.of_le'"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">of_le'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../.././Mathlib/FieldTheory/IntermediateField/Basic.html#IntermediateField">IntermediateField</a> <span class="fn">F</span> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <a href="../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">L</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">F</span> <span class="fn">L</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A' : <span class="fn"><a href="../.././Mathlib/FieldTheory/IntermediateField/Basic.html#IntermediateField">IntermediateField</a> <span class="fn">F</span> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(H : <span class="fn"><span class="fn"><span class="fn">A</span>.LinearDisjoint</span> <span class="fn">L</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hA : <span class="fn"><span class="fn">A'</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">A</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(L' : <a href="../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">L'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">L'</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">F</span> <span class="fn">L'</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">L'</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">F</span> <span class="fn">L'</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">L'</span> <span class="fn">L</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">A'</span>.LinearDisjoint</span> <span class="fn">L'</span></span></div></div><p>Similar to <code><a href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.LinearDisjoint.of_le">IntermediateField.LinearDisjoint.of_le</a></code> but this is for abstract fields.</p></div></div><div class="decl" id="IntermediateField.LinearDisjoint.inf_eq_bot"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/FieldTheory/LinearDisjoint.lean#L262-L264">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.LinearDisjoint.inf_eq_bot"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">inf_eq_bot</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A B : <span class="fn"><a href="../.././Mathlib/FieldTheory/IntermediateField/Basic.html#IntermediateField">IntermediateField</a> <span class="fn">F</span> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(H : <span class="fn"><span class="fn"><span class="fn">A</span>.LinearDisjoint</span> <span class="fn">↥<span class="fn">B</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">A</span> <a href="../.././Init/Prelude.html#Min.min">⊓</a> <span class="fn">B</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/Notation.html#Bot.bot">⊥</a></span></div></div><p>If <code>A</code> and <code>B</code> are linearly disjoint over <code>F</code>, then their intersection is equal to <code>F</code>.</p></div></div><div class="decl" id="IntermediateField.LinearDisjoint.eq_bot_of_self"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/FieldTheory/LinearDisjoint.lean#L266-L268">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.LinearDisjoint.eq_bot_of_self"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">eq_bot_of_self</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../.././Mathlib/FieldTheory/IntermediateField/Basic.html#IntermediateField">IntermediateField</a> <span class="fn">F</span> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(H : <span class="fn"><span class="fn"><span class="fn">A</span>.LinearDisjoint</span> <span class="fn">↥<span class="fn">A</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">A</span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/Notation.html#Bot.bot">⊥</a></span></div></div><p>If <code>A</code> and <code>A</code> itself are linearly disjoint over <code>F</code>, then it is equal to <code>F</code>.</p></div></div><div class="decl" id="IntermediateField.LinearDisjoint.rank_sup_of_isAlgebraic"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/FieldTheory/LinearDisjoint.lean#L270-L279">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.LinearDisjoint.rank_sup_of_isAlgebraic"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">rank_sup_of_isAlgebraic</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A B : <span class="fn"><a href="../.././Mathlib/FieldTheory/IntermediateField/Basic.html#IntermediateField">IntermediateField</a> <span class="fn">F</span> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(H : <span class="fn"><span class="fn"><span class="fn">A</span>.LinearDisjoint</span> <span class="fn">↥<span class="fn">B</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(halg : <span class="fn"><span class="fn"><a href="../.././Mathlib/RingTheory/Algebraic.html#Algebra.IsAlgebraic">Algebra.IsAlgebraic</a> <span class="fn">F</span> <span class="fn">↥<span class="fn">A</span></span></span> <a href="../.././Init/Prelude.html#Or">∨</a> <span class="fn"><a href="../.././Mathlib/RingTheory/Algebraic.html#Algebra.IsAlgebraic">Algebra.IsAlgebraic</a> <span class="fn">F</span> <span class="fn">↥<span class="fn">B</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/LinearAlgebra/Dimension/Basic.html#Module.rank">Module.rank</a> <span class="fn">F</span> <span class="fn">↥<span class="fn">(<span class="fn">A</span> <a href="../.././Init/Prelude.html#Max.max">⊔</a> <span class="fn">B</span>)</span></span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><a href="../.././Mathlib/LinearAlgebra/Dimension/Basic.html#Module.rank">Module.rank</a> <span class="fn">F</span> <span class="fn">↥<span class="fn">A</span></span></span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Dimension/Basic.html#Module.rank">Module.rank</a> <span class="fn">F</span> <span class="fn">↥<span class="fn">B</span></span></span></span></span></div></div><p>If <code>A</code> and <code>B</code> are linearly disjoint over <code>F</code>, and at least one them are algebraic, then the
+rank of <code>A ⊔ B</code> is equal to the product of that of <code>A</code> and <code>B</code>. Note that this result is
+also true without algebraic assumption, but the proof becomes very complicated.</p></div></div><div class="decl" id="IntermediateField.LinearDisjoint.finrank_sup"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/FieldTheory/LinearDisjoint.lean#L281-L291">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.LinearDisjoint.finrank_sup"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">finrank_sup</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A B : <span class="fn"><a href="../.././Mathlib/FieldTheory/IntermediateField/Basic.html#IntermediateField">IntermediateField</a> <span class="fn">F</span> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(H : <span class="fn"><span class="fn"><span class="fn">A</span>.LinearDisjoint</span> <span class="fn">↥<span class="fn">B</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/LinearAlgebra/Dimension/Finrank.html#Module.finrank">Module.finrank</a> <span class="fn">F</span> <span class="fn">↥<span class="fn">(<span class="fn">A</span> <a href="../.././Init/Prelude.html#Max.max">⊔</a> <span class="fn">B</span>)</span></span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><a href="../.././Mathlib/LinearAlgebra/Dimension/Finrank.html#Module.finrank">Module.finrank</a> <span class="fn">F</span> <span class="fn">↥<span class="fn">A</span></span></span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Dimension/Finrank.html#Module.finrank">Module.finrank</a> <span class="fn">F</span> <span class="fn">↥<span class="fn">B</span></span></span></span></span></div></div><p>If <code>A</code> and <code>B</code> are linearly disjoint over <code>F</code>, then the <code><a href="../.././Mathlib/LinearAlgebra/Dimension/Finrank.html#Module.finrank">Module.finrank</a></code> of
+<code>A ⊔ B</code> is equal to the product of that of <code>A</code> and <code>B</code>.</p></div></div><div class="decl" id="IntermediateField.LinearDisjoint.of_finrank_sup"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/FieldTheory/LinearDisjoint.lean#L293-L298">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.LinearDisjoint.of_finrank_sup"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">of_finrank_sup</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A B : <span class="fn"><a href="../.././Mathlib/FieldTheory/IntermediateField/Basic.html#IntermediateField">IntermediateField</a> <span class="fn">F</span> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/LinearAlgebra/FiniteDimensional/Defs.html#FiniteDimensional">FiniteDimensional</a> <span class="fn">F</span> <span class="fn">↥<span class="fn">A</span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/LinearAlgebra/FiniteDimensional/Defs.html#FiniteDimensional">FiniteDimensional</a> <span class="fn">F</span> <span class="fn">↥<span class="fn">B</span></span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(H : <span class="fn"><span class="fn"><a href="../.././Mathlib/LinearAlgebra/Dimension/Finrank.html#Module.finrank">Module.finrank</a> <span class="fn">F</span> <span class="fn">↥<span class="fn">(<span class="fn">A</span> <a href="../.././Init/Prelude.html#Max.max">⊔</a> <span class="fn">B</span>)</span></span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><a href="../.././Mathlib/LinearAlgebra/Dimension/Finrank.html#Module.finrank">Module.finrank</a> <span class="fn">F</span> <span class="fn">↥<span class="fn">A</span></span></span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Dimension/Finrank.html#Module.finrank">Module.finrank</a> <span class="fn">F</span> <span class="fn">↥<span class="fn">B</span></span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">A</span>.LinearDisjoint</span> <span class="fn">↥<span class="fn">B</span></span></span></div></div><p>If <code>A</code> and <code>B</code> are finite extensions of <code>F</code>,
+such that rank of <code>A ⊔ B</code> is equal to the product of the rank of <code>A</code> and <code>B</code>,
+then <code>A</code> and <code>B</code> are linearly disjoint.</p></div></div><div class="decl" id="IntermediateField.LinearDisjoint.of_finrank_coprime"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/FieldTheory/LinearDisjoint.lean#L300-L306">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/FieldTheory/LinearDisjoint.html#IntermediateField.LinearDisjoint.of_finrank_coprime"><span class="name">IntermediateField</span>.<span class="name">LinearDisjoint</span>.<span class="name">of_finrank_coprime</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../.././Mathlib/FieldTheory/IntermediateField/Basic.html#IntermediateField">IntermediateField</a> <span class="fn">F</span> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <a href="../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">L</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">F</span> <span class="fn">L</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(H : <span class="fn"><span class="fn"><span class="fn">(<a href="../.././Mathlib/LinearAlgebra/Dimension/Finrank.html#Module.finrank">Module.finrank</a> <span class="fn">F</span> <span class="fn">↥<span class="fn">A</span></span>)</span>.Coprime</span> <span class="fn">(<a href="../.././Mathlib/LinearAlgebra/Dimension/Finrank.html#Module.finrank">Module.finrank</a> <span class="fn">F</span> <span class="fn">L</span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">A</span>.LinearDisjoint</span> <span class="fn">L</span></span></div></div><p>If <code>A</code> and <code>L</code> have coprime degree over <code>F</code>, then they are linearly disjoint.</p></div></div></main>
+<nav class="nav"><iframe src="../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

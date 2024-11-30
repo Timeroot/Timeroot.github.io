@@ -1,0 +1,839 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="icon" href="../../.././favicon.svg"></link><link rel="mask-icon" href="../../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.CategoryTheory.Functor.Currying</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.CategoryTheory.Functor.Currying";</script><script type="module" src="../../.././jump-src.js"></script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././expand-nav.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">Currying</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/Currying.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/CategoryTheory/EqToHom.html">Mathlib.CategoryTheory.EqToHom</a></li><li><a href="../../.././Mathlib/CategoryTheory/Products/Basic.html">Mathlib.CategoryTheory.Products.Basic</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.CategoryTheory.Functor.Currying" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.uncurry"><span class="name">CategoryTheory</span>.<span class="name">uncurry</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.uncurry_obj_map"><span class="name">CategoryTheory</span>.<span class="name">uncurry_obj_map</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.uncurry_obj_obj"><span class="name">CategoryTheory</span>.<span class="name">uncurry_obj_obj</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.uncurry_map_app"><span class="name">CategoryTheory</span>.<span class="name">uncurry_map_app</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.curryObj"><span class="name">CategoryTheory</span>.<span class="name">curryObj</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.curry"><span class="name">CategoryTheory</span>.<span class="name">curry</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.curry_obj_obj_map"><span class="name">CategoryTheory</span>.<span class="name">curry_obj_obj_map</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.curry_obj_obj_obj"><span class="name">CategoryTheory</span>.<span class="name">curry_obj_obj_obj</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.curry_obj_map_app"><span class="name">CategoryTheory</span>.<span class="name">curry_obj_map_app</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.curry_map_app_app"><span class="name">CategoryTheory</span>.<span class="name">curry_map_app_app</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.currying"><span class="name">CategoryTheory</span>.<span class="name">currying</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.currying_inverse_obj_obj_obj"><span class="name">CategoryTheory</span>.<span class="name">currying_inverse_obj_obj_obj</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.currying_inverse_map_app_app"><span class="name">CategoryTheory</span>.<span class="name">currying_inverse_map_app_app</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.currying_unitIso_inv_app_app_app"><span class="name">CategoryTheory</span>.<span class="name">currying_unitIso_inv_app_app_app</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.currying_unitIso_hom_app_app_app"><span class="name">CategoryTheory</span>.<span class="name">currying_unitIso_hom_app_app_app</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.currying_functor_obj_obj"><span class="name">CategoryTheory</span>.<span class="name">currying_functor_obj_obj</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.currying_functor_map_app"><span class="name">CategoryTheory</span>.<span class="name">currying_functor_map_app</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.currying_inverse_obj_obj_map"><span class="name">CategoryTheory</span>.<span class="name">currying_inverse_obj_obj_map</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.currying_inverse_obj_map_app"><span class="name">CategoryTheory</span>.<span class="name">currying_inverse_obj_map_app</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.currying_functor_obj_map"><span class="name">CategoryTheory</span>.<span class="name">currying_functor_obj_map</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.currying_counitIso_inv_app_app"><span class="name">CategoryTheory</span>.<span class="name">currying_counitIso_inv_app_app</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.currying_counitIso_hom_app_app"><span class="name">CategoryTheory</span>.<span class="name">currying_counitIso_hom_app_app</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.flipIsoCurrySwapUncurry"><span class="name">CategoryTheory</span>.<span class="name">flipIsoCurrySwapUncurry</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.flipIsoCurrySwapUncurry_inv_app_app"><span class="name">CategoryTheory</span>.<span class="name">flipIsoCurrySwapUncurry_inv_app_app</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.flipIsoCurrySwapUncurry_hom_app_app"><span class="name">CategoryTheory</span>.<span class="name">flipIsoCurrySwapUncurry_hom_app_app</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.uncurryObjFlip"><span class="name">CategoryTheory</span>.<span class="name">uncurryObjFlip</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.uncurryObjFlip_inv_app"><span class="name">CategoryTheory</span>.<span class="name">uncurryObjFlip_inv_app</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.uncurryObjFlip_hom_app"><span class="name">CategoryTheory</span>.<span class="name">uncurryObjFlip_hom_app</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.whiskeringRight₂"><span class="name">CategoryTheory</span>.<span class="name">whiskeringRight₂</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.whiskeringRight₂_obj_map_app_app"><span class="name">CategoryTheory</span>.<span class="name">whiskeringRight₂_obj_map_app_app</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.whiskeringRight₂_obj_obj_map_app"><span class="name">CategoryTheory</span>.<span class="name">whiskeringRight₂_obj_obj_map_app</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.whiskeringRight₂_obj_obj_obj_map"><span class="name">CategoryTheory</span>.<span class="name">whiskeringRight₂_obj_obj_obj_map</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.whiskeringRight₂_map_app_app_app"><span class="name">CategoryTheory</span>.<span class="name">whiskeringRight₂_map_app_app_app</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.whiskeringRight₂_obj_obj_obj_obj"><span class="name">CategoryTheory</span>.<span class="name">whiskeringRight₂_obj_obj_obj_obj</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.uncurry_obj_curry_obj"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">uncurry_obj_curry_obj</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.curry_obj_injective"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">curry_obj_injective</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.curry_obj_uncurry_obj"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">curry_obj_uncurry_obj</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.uncurry_obj_injective"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">uncurry_obj_injective</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.flip_flip"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">flip_flip</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.flip_injective"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">flip_injective</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.uncurry_obj_curry_obj_flip_flip"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">uncurry_obj_curry_obj_flip_flip</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.uncurry_obj_curry_obj_flip_flip'"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">uncurry_obj_curry_obj_flip_flip'</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Curry-and-uncurry-as-functors">Curry and uncurry, as functors. <a class="hover-link" href="#Curry-and-uncurry-as-functors">#</a></h1><p>We define <code><a href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.curry">curry</a> : ((C × D) ⥤ E) ⥤ (C ⥤ (D ⥤ E))</code> and <code><a href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.uncurry">uncurry</a> : (C ⥤ (D ⥤ E)) ⥤ ((C × D) ⥤ E)</code>,
+and verify that they provide an equivalence of categories
+<code><a href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.currying">currying</a> : (C ⥤ (D ⥤ E)) ≌ ((C × D) ⥤ E)</code>.</p></div><div class="decl" id="CategoryTheory.uncurry"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/Currying.lean#L26-L45">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.uncurry"><span class="name">CategoryTheory</span>.<span class="name">uncurry</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₃}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u₄}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₄, u₄}</a>     <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">E</span>)</span>)</span> <span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">(<span class="fn">C</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">D</span>)</span> <span class="fn">E</span>)</span></span></div></div><p>The uncurrying functor, taking a functor <code>C ⥤ (D ⥤ E)</code> and producing a functor <code>(C × D) ⥤ E</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-CategoryTheory.uncurry" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="CategoryTheory.uncurry_obj_map"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/Currying.lean#L28-L28">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.uncurry_obj_map"><span class="name">CategoryTheory</span>.<span class="name">uncurry_obj_map</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₃}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u₄}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₄, u₄}</a>     <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">E</span>)</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{X Y : <span class="fn"><span class="fn">C</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">D</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">CategoryTheory.uncurry</span>.obj</span> <span class="fn">F</span>)</span>.map</span> <span class="fn">f</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">CategoryTheory.CategoryStruct.comp</a> <span class="fn">(<span class="fn"><span class="fn">(<span class="fn"><span class="fn">F</span>.map</span> <span class="fn"><span class="fn">f</span>.1</span>)</span>.app</span> <span class="fn"><span class="fn">X</span>.2</span>)</span> <span class="fn">(<span class="fn"><span class="fn">(<span class="fn"><span class="fn">F</span>.obj</span> <span class="fn"><span class="fn">Y</span>.1</span>)</span>.map</span> <span class="fn"><span class="fn">f</span>.2</span>)</span></span></span></div></div></div></div><div class="decl" id="CategoryTheory.uncurry_obj_obj"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/Currying.lean#L28-L28">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.uncurry_obj_obj"><span class="name">CategoryTheory</span>.<span class="name">uncurry_obj_obj</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₃}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u₄}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₄, u₄}</a>     <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">E</span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(X : <span class="fn"><span class="fn">C</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">D</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">CategoryTheory.uncurry</span>.obj</span> <span class="fn">F</span>)</span>.obj</span> <span class="fn">X</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">F</span>.obj</span> <span class="fn"><span class="fn">X</span>.1</span>)</span>.obj</span> <span class="fn"><span class="fn">X</span>.2</span></span></span></div></div></div></div><div class="decl" id="CategoryTheory.uncurry_map_app"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/Currying.lean#L28-L28">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.uncurry_map_app"><span class="name">CategoryTheory</span>.<span class="name">uncurry_map_app</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₃}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u₄}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₄, u₄}</a>     <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X✝ Y✝ : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">E</span>)</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(T : <span class="fn"><span class="fn">X✝</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y✝</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(X : <span class="fn"><span class="fn">C</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">D</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">CategoryTheory.uncurry</span>.map</span> <span class="fn">T</span>)</span>.app</span> <span class="fn">X</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">T</span>.app</span> <span class="fn"><span class="fn">X</span>.1</span>)</span>.app</span> <span class="fn"><span class="fn">X</span>.2</span></span></span></div></div></div></div><div class="decl" id="CategoryTheory.curryObj"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/Currying.lean#L47-L59">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.curryObj"><span class="name">CategoryTheory</span>.<span class="name">curryObj</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₃}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u₄}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₄, u₄}</a>     <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">(<span class="fn">C</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">D</span>)</span> <span class="fn">E</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">E</span>)</span></span></div></div><p>The object level part of the currying functor. (See <code><a href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.curry">curry</a></code> for the functorial version.)</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-CategoryTheory.curryObj" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="CategoryTheory.curry"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/Currying.lean#L61-L74">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.curry"><span class="name">CategoryTheory</span>.<span class="name">curry</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₃}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u₄}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₄, u₄}</a>     <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">(<span class="fn">C</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">D</span>)</span> <span class="fn">E</span>)</span> <span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">E</span>)</span>)</span></span></div></div><p>The currying functor, taking a functor <code>(C × D) ⥤ E</code> and producing a functor <code>C ⥤ (D ⥤ E)</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-CategoryTheory.curry" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="CategoryTheory.curry_obj_obj_map"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/Currying.lean#L63-L63">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.curry_obj_obj_map"><span class="name">CategoryTheory</span>.<span class="name">curry_obj_obj_map</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₃}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u₄}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₄, u₄}</a>     <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">(<span class="fn">C</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">D</span>)</span> <span class="fn">E</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(X : <span class="fn">C</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{X✝ Y✝ : <span class="fn">D</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">X✝</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y✝</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">(<span class="fn"><span class="fn">CategoryTheory.curry</span>.obj</span> <span class="fn">F</span>)</span>.obj</span> <span class="fn">X</span>)</span>.map</span> <span class="fn">g</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">F</span>.map</span> <span class="fn">(<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.id">CategoryTheory.CategoryStruct.id</a> <span class="fn">X</span></span>, <span class="fn">g</span>)</span></span></span></div></div></div></div><div class="decl" id="CategoryTheory.curry_obj_obj_obj"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/Currying.lean#L63-L63">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.curry_obj_obj_obj"><span class="name">CategoryTheory</span>.<span class="name">curry_obj_obj_obj</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₃}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u₄}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₄, u₄}</a>     <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">(<span class="fn">C</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">D</span>)</span> <span class="fn">E</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(X : <span class="fn">C</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(Y : <span class="fn">D</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">(<span class="fn"><span class="fn">CategoryTheory.curry</span>.obj</span> <span class="fn">F</span>)</span>.obj</span> <span class="fn">X</span>)</span>.obj</span> <span class="fn">Y</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">F</span>.obj</span> <span class="fn">(<span class="fn">X</span>, <span class="fn">Y</span>)</span></span></span></div></div></div></div><div class="decl" id="CategoryTheory.curry_obj_map_app"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/Currying.lean#L63-L63">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.curry_obj_map_app"><span class="name">CategoryTheory</span>.<span class="name">curry_obj_map_app</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₃}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u₄}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₄, u₄}</a>     <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">(<span class="fn">C</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">D</span>)</span> <span class="fn">E</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{X✝ Y✝ : <span class="fn">C</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X✝</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y✝</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(Y : <span class="fn">D</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">(<span class="fn"><span class="fn">CategoryTheory.curry</span>.obj</span> <span class="fn">F</span>)</span>.map</span> <span class="fn">f</span>)</span>.app</span> <span class="fn">Y</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">F</span>.map</span> <span class="fn">(<span class="fn">f</span>, <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.id">CategoryTheory.CategoryStruct.id</a> <span class="fn">Y</span></span>)</span></span></span></div></div></div></div><div class="decl" id="CategoryTheory.curry_map_app_app"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/Currying.lean#L63-L63">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.curry_map_app_app"><span class="name">CategoryTheory</span>.<span class="name">curry_map_app_app</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₃}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u₄}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₄, u₄}</a>     <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X✝ Y✝ : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">(<span class="fn">C</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">D</span>)</span> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(T : <span class="fn"><span class="fn">X✝</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y✝</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(X : <span class="fn">C</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(Y : <span class="fn">D</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">(<span class="fn"><span class="fn">CategoryTheory.curry</span>.map</span> <span class="fn">T</span>)</span>.app</span> <span class="fn">X</span>)</span>.app</span> <span class="fn">Y</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">T</span>.app</span> <span class="fn">(<span class="fn">X</span>, <span class="fn">Y</span>)</span></span></span></div></div></div></div><div class="decl" id="CategoryTheory.currying"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/Currying.lean#L77-L89">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.currying"><span class="name">CategoryTheory</span>.<span class="name">currying</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₃}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u₄}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₄, u₄}</a>     <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">E</span>)</span></span> <a href="../../.././Mathlib/CategoryTheory/Equivalence.html#CategoryTheory.Equivalence">≌</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">(<span class="fn">C</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">D</span>)</span> <span class="fn">E</span></span></span></div></div><p>The equivalence of functor categories given by currying/uncurrying.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-CategoryTheory.currying" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="CategoryTheory.currying_inverse_obj_obj_obj"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/Currying.lean#L79-L79">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.currying_inverse_obj_obj_obj"><span class="name">CategoryTheory</span>.<span class="name">currying_inverse_obj_obj_obj</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₃}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u₄}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₄, u₄}</a>     <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">(<span class="fn">C</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">D</span>)</span> <span class="fn">E</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(X : <span class="fn">C</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(Y : <span class="fn">D</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">(<span class="fn"><span class="fn"><span class="fn">CategoryTheory.currying</span>.inverse</span>.obj</span> <span class="fn">F</span>)</span>.obj</span> <span class="fn">X</span>)</span>.obj</span> <span class="fn">Y</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">F</span>.obj</span> <span class="fn">(<span class="fn">X</span>, <span class="fn">Y</span>)</span></span></span></div></div></div></div><div class="decl" id="CategoryTheory.currying_inverse_map_app_app"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/Currying.lean#L79-L79">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.currying_inverse_map_app_app"><span class="name">CategoryTheory</span>.<span class="name">currying_inverse_map_app_app</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₃}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u₄}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₄, u₄}</a>     <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X✝ Y✝ : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">(<span class="fn">C</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">D</span>)</span> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(T : <span class="fn"><span class="fn">X✝</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y✝</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(X : <span class="fn">C</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(Y : <span class="fn">D</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">(<span class="fn"><span class="fn"><span class="fn">CategoryTheory.currying</span>.inverse</span>.map</span> <span class="fn">T</span>)</span>.app</span> <span class="fn">X</span>)</span>.app</span> <span class="fn">Y</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">T</span>.app</span> <span class="fn">(<span class="fn">X</span>, <span class="fn">Y</span>)</span></span></span></div></div></div></div><div class="decl" id="CategoryTheory.currying_unitIso_inv_app_app_app"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/Currying.lean#L79-L79">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.currying_unitIso_inv_app_app_app"><span class="name">CategoryTheory</span>.<span class="name">currying_unitIso_inv_app_app_app</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₃}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u₄}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₄, u₄}</a>     <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(X : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">E</span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(X✝ : <span class="fn">C</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(X✝ : <span class="fn">D</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">(<span class="fn"><span class="fn"><span class="fn"><span class="fn">CategoryTheory.currying</span>.unitIso</span>.inv</span>.app</span> <span class="fn">X</span>)</span>.app</span> <span class="fn">X✝</span>)</span>.app</span> <span class="fn">X✝</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.id">CategoryTheory.CategoryStruct.id</a> <span class="fn">(<span class="fn"><span class="fn">(<span class="fn"><span class="fn">X</span>.obj</span> <span class="fn">X✝</span>)</span>.obj</span> <span class="fn">X✝</span>)</span></span></span></div></div></div></div><div class="decl" id="CategoryTheory.currying_unitIso_hom_app_app_app"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/Currying.lean#L79-L79">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.currying_unitIso_hom_app_app_app"><span class="name">CategoryTheory</span>.<span class="name">currying_unitIso_hom_app_app_app</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₃}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u₄}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₄, u₄}</a>     <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(X : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">E</span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(X✝ : <span class="fn">C</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(X✝ : <span class="fn">D</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">(<span class="fn"><span class="fn"><span class="fn"><span class="fn">CategoryTheory.currying</span>.unitIso</span>.hom</span>.app</span> <span class="fn">X</span>)</span>.app</span> <span class="fn">X✝</span>)</span>.app</span> <span class="fn">X✝</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.id">CategoryTheory.CategoryStruct.id</a> <span class="fn">(<span class="fn"><span class="fn">(<span class="fn"><span class="fn">X</span>.obj</span> <span class="fn">X✝</span>)</span>.obj</span> <span class="fn">X✝</span>)</span></span></span></div></div></div></div><div class="decl" id="CategoryTheory.currying_functor_obj_obj"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/Currying.lean#L79-L79">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.currying_functor_obj_obj"><span class="name">CategoryTheory</span>.<span class="name">currying_functor_obj_obj</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₃}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u₄}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₄, u₄}</a>     <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">E</span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(X : <span class="fn"><span class="fn">C</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">D</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn"><span class="fn">CategoryTheory.currying</span>.functor</span>.obj</span> <span class="fn">F</span>)</span>.obj</span> <span class="fn">X</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">F</span>.obj</span> <span class="fn"><span class="fn">X</span>.1</span>)</span>.obj</span> <span class="fn"><span class="fn">X</span>.2</span></span></span></div></div></div></div><div class="decl" id="CategoryTheory.currying_functor_map_app"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/Currying.lean#L79-L79">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.currying_functor_map_app"><span class="name">CategoryTheory</span>.<span class="name">currying_functor_map_app</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₃}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u₄}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₄, u₄}</a>     <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X✝ Y✝ : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">E</span>)</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(T : <span class="fn"><span class="fn">X✝</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y✝</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(X : <span class="fn"><span class="fn">C</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">D</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn"><span class="fn">CategoryTheory.currying</span>.functor</span>.map</span> <span class="fn">T</span>)</span>.app</span> <span class="fn">X</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">T</span>.app</span> <span class="fn"><span class="fn">X</span>.1</span>)</span>.app</span> <span class="fn"><span class="fn">X</span>.2</span></span></span></div></div></div></div><div class="decl" id="CategoryTheory.currying_inverse_obj_obj_map"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/Currying.lean#L79-L79">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.currying_inverse_obj_obj_map"><span class="name">CategoryTheory</span>.<span class="name">currying_inverse_obj_obj_map</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₃}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u₄}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₄, u₄}</a>     <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">(<span class="fn">C</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">D</span>)</span> <span class="fn">E</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(X : <span class="fn">C</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{X✝ Y✝ : <span class="fn">D</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">X✝</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y✝</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">(<span class="fn"><span class="fn"><span class="fn">CategoryTheory.currying</span>.inverse</span>.obj</span> <span class="fn">F</span>)</span>.obj</span> <span class="fn">X</span>)</span>.map</span> <span class="fn">g</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">F</span>.map</span> <span class="fn">(<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.id">CategoryTheory.CategoryStruct.id</a> <span class="fn">X</span></span>, <span class="fn">g</span>)</span></span></span></div></div></div></div><div class="decl" id="CategoryTheory.currying_inverse_obj_map_app"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/Currying.lean#L79-L79">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.currying_inverse_obj_map_app"><span class="name">CategoryTheory</span>.<span class="name">currying_inverse_obj_map_app</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₃}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u₄}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₄, u₄}</a>     <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">(<span class="fn">C</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">D</span>)</span> <span class="fn">E</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{X✝ Y✝ : <span class="fn">C</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X✝</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y✝</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(Y : <span class="fn">D</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">(<span class="fn"><span class="fn"><span class="fn">CategoryTheory.currying</span>.inverse</span>.obj</span> <span class="fn">F</span>)</span>.map</span> <span class="fn">f</span>)</span>.app</span> <span class="fn">Y</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">F</span>.map</span> <span class="fn">(<span class="fn">f</span>, <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.id">CategoryTheory.CategoryStruct.id</a> <span class="fn">Y</span></span>)</span></span></span></div></div></div></div><div class="decl" id="CategoryTheory.currying_functor_obj_map"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/Currying.lean#L79-L79">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.currying_functor_obj_map"><span class="name">CategoryTheory</span>.<span class="name">currying_functor_obj_map</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₃}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u₄}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₄, u₄}</a>     <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">E</span>)</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{X Y : <span class="fn"><span class="fn">C</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">D</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn"><span class="fn">CategoryTheory.currying</span>.functor</span>.obj</span> <span class="fn">F</span>)</span>.map</span> <span class="fn">f</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">CategoryTheory.CategoryStruct.comp</a> <span class="fn">(<span class="fn"><span class="fn">(<span class="fn"><span class="fn">F</span>.map</span> <span class="fn"><span class="fn">f</span>.1</span>)</span>.app</span> <span class="fn"><span class="fn">X</span>.2</span>)</span> <span class="fn">(<span class="fn"><span class="fn">(<span class="fn"><span class="fn">F</span>.obj</span> <span class="fn"><span class="fn">Y</span>.1</span>)</span>.map</span> <span class="fn"><span class="fn">f</span>.2</span>)</span></span></span></div></div></div></div><div class="decl" id="CategoryTheory.currying_counitIso_inv_app_app"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/Currying.lean#L79-L79">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.currying_counitIso_inv_app_app"><span class="name">CategoryTheory</span>.<span class="name">currying_counitIso_inv_app_app</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₃}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u₄}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₄, u₄}</a>     <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(X : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">(<span class="fn">C</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">D</span>)</span> <span class="fn">E</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(X✝ : <span class="fn"><span class="fn">C</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">D</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn"><span class="fn"><span class="fn">CategoryTheory.currying</span>.counitIso</span>.inv</span>.app</span> <span class="fn">X</span>)</span>.app</span> <span class="fn">X✝</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.id">CategoryTheory.CategoryStruct.id</a> <span class="fn">(<span class="fn"><span class="fn">X</span>.obj</span> <span class="fn">(<span class="fn"><span class="fn">X✝</span>.1</span>, <span class="fn"><span class="fn">X✝</span>.2</span>)</span>)</span></span></span></div></div></div></div><div class="decl" id="CategoryTheory.currying_counitIso_hom_app_app"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/Currying.lean#L79-L79">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.currying_counitIso_hom_app_app"><span class="name">CategoryTheory</span>.<span class="name">currying_counitIso_hom_app_app</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₃}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u₄}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₄, u₄}</a>     <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(X : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">(<span class="fn">C</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">D</span>)</span> <span class="fn">E</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(X✝ : <span class="fn"><span class="fn">C</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">D</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn"><span class="fn"><span class="fn">CategoryTheory.currying</span>.counitIso</span>.hom</span>.app</span> <span class="fn">X</span>)</span>.app</span> <span class="fn">X✝</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.id">CategoryTheory.CategoryStruct.id</a> <span class="fn">(<span class="fn"><span class="fn">X</span>.obj</span> <span class="fn">(<span class="fn"><span class="fn">X✝</span>.1</span>, <span class="fn"><span class="fn">X✝</span>.2</span>)</span>)</span></span></span></div></div></div></div><div class="decl" id="CategoryTheory.flipIsoCurrySwapUncurry"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/Currying.lean#L91-L94">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.flipIsoCurrySwapUncurry"><span class="name">CategoryTheory</span>.<span class="name">flipIsoCurrySwapUncurry</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₃}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u₄}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₄, u₄}</a>     <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">E</span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">F</span>.flip</span> <a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.Iso">≅</a> <span class="fn"><span class="fn"><span class="fn">CategoryTheory.curry</span>.obj</span> <span class="fn">(<span class="fn"><span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Products/Basic.html#CategoryTheory.Prod.swap">CategoryTheory.Prod.swap</a> <span class="fn">D</span> <span class="fn">C</span>)</span>.comp</span> <span class="fn">(<span class="fn"><span class="fn">CategoryTheory.uncurry</span>.obj</span> <span class="fn">F</span>)</span>)</span></span></span></div></div><p><code>F.<a href="../../.././Init/Core.html#flip">flip</a></code> is isomorphic to uncurrying <code>F</code>, swapping the variables, and currying.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-CategoryTheory.flipIsoCurrySwapUncurry" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="CategoryTheory.flipIsoCurrySwapUncurry_inv_app_app"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/Currying.lean#L92-L92">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.flipIsoCurrySwapUncurry_inv_app_app"><span class="name">CategoryTheory</span>.<span class="name">flipIsoCurrySwapUncurry_inv_app_app</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₃}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u₄}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₄, u₄}</a>     <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">E</span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(X : <span class="fn">D</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(X✝ : <span class="fn">C</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.flipIsoCurrySwapUncurry">CategoryTheory.flipIsoCurrySwapUncurry</a> <span class="fn">F</span>)</span>.inv</span>.app</span> <span class="fn">X</span>)</span>.app</span> <span class="fn">X✝</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.id">CategoryTheory.CategoryStruct.id</a> <span class="fn">(<span class="fn"><span class="fn">(<span class="fn"><span class="fn">F</span>.obj</span> <span class="fn">X✝</span>)</span>.obj</span> <span class="fn">X</span>)</span></span></span></div></div></div></div><div class="decl" id="CategoryTheory.flipIsoCurrySwapUncurry_hom_app_app"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/Currying.lean#L92-L92">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.flipIsoCurrySwapUncurry_hom_app_app"><span class="name">CategoryTheory</span>.<span class="name">flipIsoCurrySwapUncurry_hom_app_app</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₃}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u₄}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₄, u₄}</a>     <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">E</span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(X : <span class="fn">D</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(X✝ : <span class="fn">C</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.flipIsoCurrySwapUncurry">CategoryTheory.flipIsoCurrySwapUncurry</a> <span class="fn">F</span>)</span>.hom</span>.app</span> <span class="fn">X</span>)</span>.app</span> <span class="fn">X✝</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.id">CategoryTheory.CategoryStruct.id</a> <span class="fn">(<span class="fn"><span class="fn">(<span class="fn"><span class="fn">F</span>.obj</span> <span class="fn">X✝</span>)</span>.obj</span> <span class="fn">X</span>)</span></span></span></div></div></div></div><div class="decl" id="CategoryTheory.uncurryObjFlip"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/Currying.lean#L96-L100">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.uncurryObjFlip"><span class="name">CategoryTheory</span>.<span class="name">uncurryObjFlip</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₃}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u₄}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₄, u₄}</a>     <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">E</span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">CategoryTheory.uncurry</span>.obj</span> <span class="fn"><span class="fn">F</span>.flip</span></span> <a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.Iso">≅</a> <span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Products/Basic.html#CategoryTheory.Prod.swap">CategoryTheory.Prod.swap</a> <span class="fn">D</span> <span class="fn">C</span>)</span>.comp</span> <span class="fn">(<span class="fn"><span class="fn">CategoryTheory.uncurry</span>.obj</span> <span class="fn">F</span>)</span></span></span></div></div><p>The uncurrying of <code>F.<a href="../../.././Init/Core.html#flip">flip</a></code> is isomorphic to
+swapping the factors followed by the uncurrying of <code>F</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.uncurryObjFlip">CategoryTheory.uncurryObjFlip</a> <span class="fn">F</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../../.././Mathlib/CategoryTheory/NatIso.html#CategoryTheory.NatIso.ofComponents">CategoryTheory.NatIso.ofComponents</a>
+    <span class="fn">(fun (<span class="fn">x</span> : <span class="fn"><span class="fn">D</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">C</span></span>) =&gt; <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.Iso.refl">CategoryTheory.Iso.refl</a> <span class="fn">(<span class="fn"><span class="fn">(<span class="fn"><span class="fn">CategoryTheory.uncurry</span>.obj</span> <span class="fn"><span class="fn">F</span>.flip</span>)</span>.obj</span> <span class="fn">x</span>)</span></span>)</span> <span class="fn">⋯</span></span></span></li></ul></details><details id="instances-for-list-CategoryTheory.uncurryObjFlip" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="CategoryTheory.uncurryObjFlip_inv_app"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/Currying.lean#L98-L98">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.uncurryObjFlip_inv_app"><span class="name">CategoryTheory</span>.<span class="name">uncurryObjFlip_inv_app</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₃}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u₄}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₄, u₄}</a>     <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">E</span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(X : <span class="fn"><span class="fn">D</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">C</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.uncurryObjFlip">CategoryTheory.uncurryObjFlip</a> <span class="fn">F</span>)</span>.inv</span>.app</span> <span class="fn">X</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.id">CategoryTheory.CategoryStruct.id</a> <span class="fn">(<span class="fn"><span class="fn">(<span class="fn"><span class="fn">F</span>.obj</span> <span class="fn"><span class="fn">X</span>.2</span>)</span>.obj</span> <span class="fn"><span class="fn">X</span>.1</span>)</span></span></span></div></div></div></div><div class="decl" id="CategoryTheory.uncurryObjFlip_hom_app"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/Currying.lean#L98-L98">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.uncurryObjFlip_hom_app"><span class="name">CategoryTheory</span>.<span class="name">uncurryObjFlip_hom_app</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₃}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u₄}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₄, u₄}</a>     <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">E</span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(X : <span class="fn"><span class="fn">D</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">C</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.uncurryObjFlip">CategoryTheory.uncurryObjFlip</a> <span class="fn">F</span>)</span>.hom</span>.app</span> <span class="fn">X</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.id">CategoryTheory.CategoryStruct.id</a> <span class="fn">(<span class="fn"><span class="fn">(<span class="fn"><span class="fn">F</span>.obj</span> <span class="fn"><span class="fn">X</span>.2</span>)</span>.obj</span> <span class="fn"><span class="fn">X</span>.1</span>)</span></span></span></div></div></div></div><div class="decl" id="CategoryTheory.whiskeringRight₂"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/Currying.lean#L104-L110">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.whiskeringRight₂"><span class="name">CategoryTheory</span>.<span class="name">whiskeringRight₂</span></a></span><span class="decl_args">
+<span class="fn">(B : <a href="../../.././foundational_types.html">Type</a> u₁)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">B</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(C : <a href="../../.././foundational_types.html">Type</a> u₂)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(D : <a href="../../.././foundational_types.html">Type</a> u₃)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(E : <a href="../../.././foundational_types.html">Type</a> u₄)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₄, u₄}</a>     <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">E</span>)</span>)</span>
+  <span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">B</span> <span class="fn">C</span>)</span>
+    <span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">B</span> <span class="fn">D</span>)</span> <span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">B</span> <span class="fn">E</span>)</span>)</span>)</span></span></div></div><p>A version of <code><a href="../../.././Mathlib/CategoryTheory/Whiskering.html#CategoryTheory.whiskeringRight">CategoryTheory.whiskeringRight</a></code> for bifunctors, obtained by uncurrying,
+applying <code>whiskeringRight</code> and currying back</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-CategoryTheory.whiskeringRight₂" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="CategoryTheory.whiskeringRight₂_obj_map_app_app"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/Currying.lean#L107-L107">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.whiskeringRight₂_obj_map_app_app"><span class="name">CategoryTheory</span>.<span class="name">whiskeringRight₂_obj_map_app_app</span></a></span><span class="decl_args">
+<span class="fn">(B : <a href="../../.././foundational_types.html">Type</a> u₁)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">B</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(C : <a href="../../.././foundational_types.html">Type</a> u₂)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(D : <a href="../../.././foundational_types.html">Type</a> u₃)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(E : <a href="../../.././foundational_types.html">Type</a> u₄)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₄, u₄}</a>     <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(X : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">E</span>)</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{X✝ Y✝ : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">B</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X✝</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y✝</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(Y : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">B</span> <span class="fn">D</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(X✝¹ : <span class="fn">B</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">(<span class="fn"><span class="fn">(<span class="fn"><span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.whiskeringRight₂">CategoryTheory.whiskeringRight₂</a> <span class="fn">B</span> <span class="fn">C</span> <span class="fn">D</span> <span class="fn">E</span>)</span>.obj</span> <span class="fn">X</span>)</span>.map</span> <span class="fn">f</span>)</span>.app</span> <span class="fn">Y</span>)</span>.app</span> <span class="fn">X✝¹</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">X</span>.map</span> <span class="fn">(<span class="fn"><span class="fn">f</span>.app</span> <span class="fn">X✝¹</span>)</span>)</span>.app</span> <span class="fn">(<span class="fn"><span class="fn">Y</span>.obj</span> <span class="fn">X✝¹</span>)</span></span></span></div></div></div></div><div class="decl" id="CategoryTheory.whiskeringRight₂_obj_obj_map_app"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/Currying.lean#L107-L107">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.whiskeringRight₂_obj_obj_map_app"><span class="name">CategoryTheory</span>.<span class="name">whiskeringRight₂_obj_obj_map_app</span></a></span><span class="decl_args">
+<span class="fn">(B : <a href="../../.././foundational_types.html">Type</a> u₁)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">B</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(C : <a href="../../.././foundational_types.html">Type</a> u₂)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(D : <a href="../../.././foundational_types.html">Type</a> u₃)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(E : <a href="../../.././foundational_types.html">Type</a> u₄)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₄, u₄}</a>     <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(X : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">E</span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(X✝ : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">B</span> <span class="fn">C</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{X✝¹ Y✝ : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">B</span> <span class="fn">D</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">X✝¹</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y✝</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(X✝ : <span class="fn">B</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">(<span class="fn"><span class="fn">(<span class="fn"><span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.whiskeringRight₂">CategoryTheory.whiskeringRight₂</a> <span class="fn">B</span> <span class="fn">C</span> <span class="fn">D</span> <span class="fn">E</span>)</span>.obj</span> <span class="fn">X</span>)</span>.obj</span> <span class="fn">X✝</span>)</span>.map</span> <span class="fn">g</span>)</span>.app</span> <span class="fn">X✝</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">X</span>.obj</span> <span class="fn">(<span class="fn"><span class="fn">X✝</span>.obj</span> <span class="fn">X✝</span>)</span>)</span>.map</span> <span class="fn">(<span class="fn"><span class="fn">g</span>.app</span> <span class="fn">X✝</span>)</span></span></span></div></div></div></div><div class="decl" id="CategoryTheory.whiskeringRight₂_obj_obj_obj_map"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/Currying.lean#L107-L107">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.whiskeringRight₂_obj_obj_obj_map"><span class="name">CategoryTheory</span>.<span class="name">whiskeringRight₂_obj_obj_obj_map</span></a></span><span class="decl_args">
+<span class="fn">(B : <a href="../../.././foundational_types.html">Type</a> u₁)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">B</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(C : <a href="../../.././foundational_types.html">Type</a> u₂)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(D : <a href="../../.././foundational_types.html">Type</a> u₃)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(E : <a href="../../.././foundational_types.html">Type</a> u₄)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₄, u₄}</a>     <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(X : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">E</span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(X✝ : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">B</span> <span class="fn">C</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(Y : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">B</span> <span class="fn">D</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{X✝¹ Y✝ : <span class="fn">B</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X✝¹</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y✝</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">(<span class="fn"><span class="fn">(<span class="fn"><span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.whiskeringRight₂">CategoryTheory.whiskeringRight₂</a> <span class="fn">B</span> <span class="fn">C</span> <span class="fn">D</span> <span class="fn">E</span>)</span>.obj</span> <span class="fn">X</span>)</span>.obj</span> <span class="fn">X✝</span>)</span>.obj</span> <span class="fn">Y</span>)</span>.map</span> <span class="fn">f</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">CategoryTheory.CategoryStruct.comp</a> <span class="fn">(<span class="fn"><span class="fn">(<span class="fn"><span class="fn">X</span>.map</span> <span class="fn">(<span class="fn"><span class="fn">X✝</span>.map</span> <span class="fn">f</span>)</span>)</span>.app</span> <span class="fn">(<span class="fn"><span class="fn">Y</span>.obj</span> <span class="fn">X✝¹</span>)</span>)</span> <span class="fn">(<span class="fn"><span class="fn">(<span class="fn"><span class="fn">X</span>.obj</span> <span class="fn">(<span class="fn"><span class="fn">X✝</span>.obj</span> <span class="fn">Y✝</span>)</span>)</span>.map</span> <span class="fn">(<span class="fn"><span class="fn">Y</span>.map</span> <span class="fn">f</span>)</span>)</span></span></span></div></div></div></div><div class="decl" id="CategoryTheory.whiskeringRight₂_map_app_app_app"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/Currying.lean#L107-L107">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.whiskeringRight₂_map_app_app_app"><span class="name">CategoryTheory</span>.<span class="name">whiskeringRight₂_map_app_app_app</span></a></span><span class="decl_args">
+<span class="fn">(B : <a href="../../.././foundational_types.html">Type</a> u₁)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">B</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(C : <a href="../../.././foundational_types.html">Type</a> u₂)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(D : <a href="../../.././foundational_types.html">Type</a> u₃)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(E : <a href="../../.././foundational_types.html">Type</a> u₄)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₄, u₄}</a>     <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X✝ Y✝ : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">E</span>)</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X✝</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y✝</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(X : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">B</span> <span class="fn">C</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(Y : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">B</span> <span class="fn">D</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(c : <span class="fn">B</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">(<span class="fn"><span class="fn">(<span class="fn"><span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.whiskeringRight₂">CategoryTheory.whiskeringRight₂</a> <span class="fn">B</span> <span class="fn">C</span> <span class="fn">D</span> <span class="fn">E</span>)</span>.map</span> <span class="fn">f</span>)</span>.app</span> <span class="fn">X</span>)</span>.app</span> <span class="fn">Y</span>)</span>.app</span> <span class="fn">c</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">f</span>.app</span> <span class="fn">(<span class="fn"><span class="fn">X</span>.obj</span> <span class="fn">c</span>)</span>)</span>.app</span> <span class="fn">(<span class="fn"><span class="fn">Y</span>.obj</span> <span class="fn">c</span>)</span></span></span></div></div></div></div><div class="decl" id="CategoryTheory.whiskeringRight₂_obj_obj_obj_obj"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/Currying.lean#L107-L107">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.whiskeringRight₂_obj_obj_obj_obj"><span class="name">CategoryTheory</span>.<span class="name">whiskeringRight₂_obj_obj_obj_obj</span></a></span><span class="decl_args">
+<span class="fn">(B : <a href="../../.././foundational_types.html">Type</a> u₁)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">B</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(C : <a href="../../.././foundational_types.html">Type</a> u₂)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(D : <a href="../../.././foundational_types.html">Type</a> u₃)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(E : <a href="../../.././foundational_types.html">Type</a> u₄)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₄, u₄}</a>     <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(X : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">E</span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(X✝ : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">B</span> <span class="fn">C</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(Y : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">B</span> <span class="fn">D</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(X✝ : <span class="fn">B</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">(<span class="fn"><span class="fn">(<span class="fn"><span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.whiskeringRight₂">CategoryTheory.whiskeringRight₂</a> <span class="fn">B</span> <span class="fn">C</span> <span class="fn">D</span> <span class="fn">E</span>)</span>.obj</span> <span class="fn">X</span>)</span>.obj</span> <span class="fn">X✝</span>)</span>.obj</span> <span class="fn">Y</span>)</span>.obj</span> <span class="fn">X✝</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">X</span>.obj</span> <span class="fn">(<span class="fn"><span class="fn">X✝</span>.obj</span> <span class="fn">X✝</span>)</span>)</span>.obj</span> <span class="fn">(<span class="fn"><span class="fn">Y</span>.obj</span> <span class="fn">X✝</span>)</span></span></span></div></div></div></div><div class="decl" id="CategoryTheory.Functor.uncurry_obj_curry_obj"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/Currying.lean#L116-L119">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.Functor.uncurry_obj_curry_obj"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">uncurry_obj_curry_obj</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₃}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">(<span class="fn">B</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">C</span>)</span> <span class="fn">D</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">CategoryTheory.uncurry</span>.obj</span> <span class="fn">(<span class="fn"><span class="fn">CategoryTheory.curry</span>.obj</span> <span class="fn">F</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">F</span></span></div></div></div></div><div class="decl" id="CategoryTheory.Functor.curry_obj_injective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/Currying.lean#L121-L123">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.Functor.curry_obj_injective"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">curry_obj_injective</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₃}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u₄}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₄, u₄}</a>     <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F₁ F₂ : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">(<span class="fn">C</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">D</span>)</span> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><span class="fn"><span class="fn">CategoryTheory.curry</span>.obj</span> <span class="fn">F₁</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">CategoryTheory.curry</span>.obj</span> <span class="fn">F₂</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">F₁</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">F₂</span></span></div></div></div></div><div class="decl" id="CategoryTheory.Functor.curry_obj_uncurry_obj"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/Currying.lean#L125-L126">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.Functor.curry_obj_uncurry_obj"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">curry_obj_uncurry_obj</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₃}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">B</span> <span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">CategoryTheory.curry</span>.obj</span> <span class="fn">(<span class="fn"><span class="fn">CategoryTheory.uncurry</span>.obj</span> <span class="fn">F</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">F</span></span></div></div></div></div><div class="decl" id="CategoryTheory.Functor.uncurry_obj_injective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/Currying.lean#L128-L130">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.Functor.uncurry_obj_injective"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">uncurry_obj_injective</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₃}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F₁ F₂ : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">B</span> <span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span>)</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><span class="fn"><span class="fn">CategoryTheory.uncurry</span>.obj</span> <span class="fn">F₁</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">CategoryTheory.uncurry</span>.obj</span> <span class="fn">F₂</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">F₁</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">F₂</span></span></div></div></div></div><div class="decl" id="CategoryTheory.Functor.flip_flip"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/Currying.lean#L132-L132">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.Functor.flip_flip"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">flip_flip</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₃}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">B</span> <span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">F</span>.flip</span>.flip</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">F</span></span></div></div></div></div><div class="decl" id="CategoryTheory.Functor.flip_injective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/Currying.lean#L134-L136">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.Functor.flip_injective"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">flip_injective</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₃}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F₁ F₂ : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">B</span> <span class="fn">(<a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">C</span> <span class="fn">D</span>)</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><span class="fn">F₁</span>.flip</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">F₂</span>.flip</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">F₁</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">F₂</span></span></div></div></div></div><div class="decl" id="CategoryTheory.Functor.uncurry_obj_curry_obj_flip_flip"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/Currying.lean#L138-L142">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.Functor.uncurry_obj_curry_obj_flip_flip"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">uncurry_obj_curry_obj_flip_flip</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₃}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u₄}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₄, u₄}</a>     <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{H : <a href="../../.././foundational_types.html">Type</a> u₅}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₅, u₅}</a>     <span class="fn">H</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F₁ : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">B</span> <span class="fn">C</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(F₂ : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">E</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">(<span class="fn">C</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">E</span>)</span> <span class="fn">H</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">CategoryTheory.uncurry</span>.obj</span> <span class="fn"><span class="fn">(<span class="fn"><span class="fn">F₂</span>.comp</span> <span class="fn"><span class="fn">(<span class="fn"><span class="fn">F₁</span>.comp</span> <span class="fn">(<span class="fn"><span class="fn">CategoryTheory.curry</span>.obj</span> <span class="fn">G</span>)</span>)</span>.flip</span>)</span>.flip</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">F₁</span>.prod</span> <span class="fn">F₂</span>)</span>.comp</span> <span class="fn">G</span></span></span></div></div></div></div><div class="decl" id="CategoryTheory.Functor.uncurry_obj_curry_obj_flip_flip'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/CategoryTheory/Functor/Currying.lean#L144-L148">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.Functor.uncurry_obj_curry_obj_flip_flip'"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">uncurry_obj_curry_obj_flip_flip'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₁, u₁}</a>     <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₂, u₂}</a>     <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₃}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₃, u₃}</a>     <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u₄}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₄, u₄}</a>     <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{H : <a href="../../.././foundational_types.html">Type</a> u₅}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{v₅, u₅}</a>     <span class="fn">H</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F₁ : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">B</span> <span class="fn">C</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(F₂ : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">D</span> <span class="fn">E</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">CategoryTheory.Functor</a> <span class="fn">(<span class="fn">C</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">E</span>)</span> <span class="fn">H</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">CategoryTheory.uncurry</span>.obj</span> <span class="fn">(<span class="fn"><span class="fn">F₁</span>.comp</span> <span class="fn"><span class="fn">(<span class="fn"><span class="fn">F₂</span>.comp</span> <span class="fn"><span class="fn">(<span class="fn"><span class="fn">CategoryTheory.curry</span>.obj</span> <span class="fn">G</span>)</span>.flip</span>)</span>.flip</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">F₁</span>.prod</span> <span class="fn">F₂</span>)</span>.comp</span> <span class="fn">G</span></span></span></div></div></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

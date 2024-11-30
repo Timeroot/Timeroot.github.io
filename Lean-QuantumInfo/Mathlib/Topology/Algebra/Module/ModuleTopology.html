@@ -1,0 +1,364 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../../.././style.css"></link><link rel="icon" href="../../../.././favicon.svg"></link><link rel="mask-icon" href="../../../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Topology.Algebra.Module.ModuleTopology</title><script defer="true" src="../../../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../../.././";</script><script>const MODULE_NAME="Mathlib.Topology.Algebra.Module.ModuleTopology";</script><script type="module" src="../../../.././jump-src.js"></script><script type="module" src="../../../.././search.js"></script><script type="module" src="../../../.././expand-nav.js"></script><script type="module" src="../../../.././how-about.js"></script><script type="module" src="../../../.././instances.js"></script><script type="module" src="../../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Topology</span>.<span class="name">Algebra</span>.<span class="name">Module</span>.<span class="name">ModuleTopology</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/Algebra/Module/ModuleTopology.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../../.././Init.html">Init</a></li><li><a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html">Mathlib.Topology.Algebra.Module.Basic</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Topology.Algebra.Module.ModuleTopology" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#moduleTopology"><span class="name">moduleTopology</span></a></div><div class="nav_link"><a class="break_within" href="#IsModuleTopology"><span class="name">IsModuleTopology</span></a></div><div class="nav_link"><a class="break_within" href="#eq_moduleTopology"><span class="name">eq_moduleTopology</span></a></div><div class="nav_link"><a class="break_within" href="#ModuleTopology.continuousSMul"><span class="name">ModuleTopology</span>.<span class="name">continuousSMul</span></a></div><div class="nav_link"><a class="break_within" href="#ModuleTopology.continuousAdd"><span class="name">ModuleTopology</span>.<span class="name">continuousAdd</span></a></div><div class="nav_link"><a class="break_within" href="#IsModuleTopology.toContinuousSMul"><span class="name">IsModuleTopology</span>.<span class="name">toContinuousSMul</span></a></div><div class="nav_link"><a class="break_within" href="#IsModuleTopology.toContinuousAdd"><span class="name">IsModuleTopology</span>.<span class="name">toContinuousAdd</span></a></div><div class="nav_link"><a class="break_within" href="#moduleTopology_le"><span class="name">moduleTopology_le</span></a></div><div class="nav_link"><a class="break_within" href="#IsModuleTopology.of_continuous_id"><span class="name">IsModuleTopology</span>.<span class="name">of_continuous_id</span></a></div><div class="nav_link"><a class="break_within" href="#IsModuleTopology.instSubsingleton"><span class="name">IsModuleTopology</span>.<span class="name">instSubsingleton</span></a></div><div class="nav_link"><a class="break_within" href="#IsModuleTopology.iso"><span class="name">IsModuleTopology</span>.<span class="name">iso</span></a></div><div class="nav_link"><a class="break_within" href="#TopologicalSemiring.toIsModuleTopology"><span class="name">TopologicalSemiring</span>.<span class="name">toIsModuleTopology</span></a></div><div class="nav_link"><a class="break_within" href="#TopologicalSemiring.toOppositeIsModuleTopology"><span class="name">TopologicalSemiring</span>.<span class="name">toOppositeIsModuleTopology</span></a></div><div class="nav_link"><a class="break_within" href="#IsModuleTopology.continuous_of_distribMulActionHom"><span class="name">IsModuleTopology</span>.<span class="name">continuous_of_distribMulActionHom</span></a></div><div class="nav_link"><a class="break_within" href="#IsModuleTopology.continuous_of_linearMap"><span class="name">IsModuleTopology</span>.<span class="name">continuous_of_linearMap</span></a></div><div class="nav_link"><a class="break_within" href="#IsModuleTopology.continuous_neg"><span class="name">IsModuleTopology</span>.<span class="name">continuous_neg</span></a></div><div class="nav_link"><a class="break_within" href="#IsModuleTopology.continuous_of_ringHom"><span class="name">IsModuleTopology</span>.<span class="name">continuous_of_ringHom</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="A-module-topology-for-modules-over-a-topological-ring">A &quot;module topology&quot; for modules over a topological ring <a class="hover-link" href="#A-module-topology-for-modules-over-a-topological-ring">#</a></h1><p>If <code>R</code> is a topological ring acting on an additive abelian group <code>A</code>, we define the
+<em>module topology</em> to be the finest topology on <code>A</code> making both the maps
+<code>• : R × A → A</code> and <code>+ : A × A → A</code> continuous (with all the products having the
+product topology). Note that <code>- : A → A</code> is also automatically continuous as it is <code>a ↦ (-1) • a</code>.</p><p>This topology was suggested by Will Sawin <a href="https://mathoverflow.net/a/477763/1384">here</a>.</p><h2 class="markdown-heading" id="Mathematical-details">Mathematical details <a class="hover-link" href="#Mathematical-details">#</a></h2><p>I (buzzard) don't know of any reference for this other than Sawin's mathoverflow answer,
+so I expand some of the details here.</p><p>First note that the definition makes sense in far more generality (for example <code>R</code> just needs to
+be a topological space acting on an additive monoid).</p><p>Next note that there <em>is</em> a finest topology with this property! Indeed, topologies on a fixed
+type form a complete lattice (infinite infs and sups exist). So if <code>τ</code> is the Inf of all
+the topologies on <code>A</code> which make <code>+</code> and <code>•</code> continuous, then the claim is that <code>+</code> and <code>•</code>
+are still continuous for <code>τ</code> (note that topologies are ordered so that finer topologies
+are smaller). To show <code>+ : A × A → A</code> is continuous we equivalently need to show
+that the pushforward of the product topology <code>τ × τ</code> along <code>+</code> is <code>≤ τ</code>, and because <code>τ</code> is
+the greatest lower bound of the topologies making <code>•</code> and <code>+</code> continuous,
+it suffices to show that it's <code>≤ σ</code> for any topology <code>σ</code> on <code>A</code> which makes <code>+</code> and <code>•</code> continuous.
+However pushforward and products are monotone, so <code>τ × τ ≤ σ × σ</code>, and the pushforward of
+<code>σ × σ</code> is <code>≤ σ</code> because that's precisely the statement that <code>+</code> is continuous for <code>σ</code>.
+The proof for <code>•</code> follows mutatis mutandis.</p><p>A <em>topological module</em> for a topological ring <code>R</code> is an <code>R</code>-module <code>A</code> with a topology
+making <code>+</code> and <code>•</code> continuous. The discussion so far has shown that the module topology makes
+an <code>R</code>-module <code>A</code> into a topological module, and moreover is the finest topology with this property.</p><p>A crucial observation is that if <code>M</code> is a topological <code>R</code>-module, if <code>A</code> is an <code>R</code>-module with no
+topology, and if <code>φ : A → M</code> is linear, then the pullback of <code>M</code>'s topology to <code>A</code> is a topology
+making <code>A</code> into a topological module. Let's for example check that <code>•</code> is continuous.
+If <code>U ⊆ A</code> is open then by definition of the pullback topology, <code>U = φ⁻¹(V)</code> for some open <code>V ⊆ M</code>,
+and now the pullback of <code>U</code> under <code>•</code> is just the pullback along the continuous map
+<code><a href="../../../.././Init/Prelude.html#id">id</a> × φ : R × A → R × M</code> of the preimage of <code>V</code> under the continuous map <code>• : R × M → M</code>,
+so it's open. The proof for <code>+</code> is similar.</p><p>As a consequence of this, we see that if <code>φ : A → M</code> is a linear map between topological <code>R</code>-modules
+modules and if <code>A</code> has the module topology, then <code>φ</code> is automatically continuous.
+Indeed the argument above shows that if <code>A → M</code> is linear then the module
+topology on <code>A</code> is <code>≤</code> the pullback of the module topology on <code>M</code> (because it's the inf of a set
+containing this topology) which is the definition of continuity.</p><p>We also deduce that the module topology is a functor from the category of <code>R</code>-modules
+(<code>R</code> a topological ring) to the category of topological <code>R</code>-modules, and it is perhaps
+unsurprising that this is an adjoint to the forgetful functor. Indeed, if <code>A</code> is an <code>R</code>-module
+and <code>M</code> is a topological <code>R</code>-module, then the previous paragraph shows that
+the linear maps <code>A → M</code> are precisely the continuous linear maps
+from (<code>A</code> with its module topology) to <code>M</code>, so the module topology is a left adjoint
+to the forgetful functor.</p><p>This file develops the theory of the module topology. We prove that the module topology on
+<code>R</code> as a module over itself is <code>R</code>'s original topology, and that the module topology
+is isomorphism-invariant.</p><h2 class="markdown-heading" id="Main-theorems">Main theorems <a class="hover-link" href="#Main-theorems">#</a></h2><ul>
+<li><code><a href="../../../.././Mathlib/Topology/Algebra/Module/ModuleTopology.html#TopologicalSemiring.toIsModuleTopology">TopologicalSemiring.toIsModuleTopology</a> : <a href="../../../.././Mathlib/Topology/Algebra/Module/ModuleTopology.html#IsModuleTopology">IsModuleTopology</a> R R</code>. The module
+topology on <code>R</code> is <code>R</code>'s topology.</li>
+<li><code><a href="../../../.././Mathlib/Topology/Algebra/Module/ModuleTopology.html#IsModuleTopology.iso">IsModuleTopology.iso</a> [IsModuleTopology R A] (e : A ≃L[R] B) : <a href="../../../.././Mathlib/Topology/Algebra/Module/ModuleTopology.html#IsModuleTopology">IsModuleTopology</a> R B</code>. If <code>A</code> and
+<code>B</code> are <code>R</code>-modules with topologies, if <code>e</code> is a topological isomorphism between them,
+and if <code>A</code> has the module topology, then <code>B</code> has the module topology.</li>
+</ul><h2 class="markdown-heading" id="TODO">TODO <a class="hover-link" href="#TODO">#</a></h2><p>Forthcoming PRs from the FLT repo will show that the module topology on a (binary or finite) product
+of modules is the product of the module topologies, and that the module topology on the quotient
+of a module <code>M</code> is the quotient topology when <code>M</code> is equipped with the module topology.</p><p>We will also show the slightly more subtle result that if <code>M</code>, <code>N</code> and <code>P</code> are <code>R</code>-modules
+equipped with the module topology and if furthermore <code>M</code> is finite as an <code>R</code>-module,
+then any bilinear map <code>M × N → P</code> is continuous.</p><p>As a consequence of this, we deduce that if <code>R</code> is a commutative topological ring
+and <code>A</code> is an <code>R</code>-algebra of finite type as <code>R</code>-module, then <code>A</code> with its module
+topology becomes a topological ring (i.e., multiplication is continuous).</p><p>Other TODOs (not done in the FLT repo):</p><ul>
+<li>The module topology is a functor from the category of <code>R</code>-modules
+to the category of topological <code>R</code>-modules, and it's an adjoint to the forgetful functor.</li>
+</ul></div><div class="decl" id="moduleTopology"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/Algebra/Module/ModuleTopology.lean#L107-L113">source</a></div><div class="attributes">@[reducible, inline]</div>
+<div class="decl_header"><span class="decl_kind">abbrev</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Module/ModuleTopology.html#moduleTopology"><span class="name">moduleTopology</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(A : <a href="../../../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Add">Add</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Operations.html#SMul">SMul</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">A</span></span></div></div><p>The module topology, for a module <code>A</code> over a topological ring <code>R</code>. It's the finest topology
+making addition and the <code>R</code>-action continuous, or equivalently the finest topology making <code>A</code>
+into a topological <code>R</code>-module. More precisely it's the Inf of the set of
+topologies with these properties; theorems <code><a href="../../../.././Mathlib/Topology/Algebra/Module/ModuleTopology.html#ModuleTopology.continuousSMul">continuousSMul</a></code> and <code><a href="../../../.././Mathlib/Topology/Algebra/Module/ModuleTopology.html#ModuleTopology.continuousAdd">continuousAdd</a></code> show
+that the module topology also has these properties.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/Module/ModuleTopology.html#moduleTopology">moduleTopology</a> <span class="fn">R</span> <span class="fn">A</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Order/SetNotation.html#InfSet.sInf">sInf</a> <span class="fn">{<span class="fn">t</span> : <span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">A</span></span> | <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/MulAction.html#ContinuousSMul">ContinuousSMul</a> <span class="fn">R</span> <span class="fn">A</span></span> <a href="../../../.././Init/Prelude.html#And">∧</a> <span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/Monoid.html#ContinuousAdd">ContinuousAdd</a> <span class="fn">A</span></span></span>}</span></span></span></li></ul></details><details id="instances-for-list-moduleTopology" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="IsModuleTopology"><div class="class"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/Algebra/Module/ModuleTopology.lean#L115-L120">source</a></div><div class="decl_header"><span class="decl_kind">class</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Module/ModuleTopology.html#IsModuleTopology"><span class="name">IsModuleTopology</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(A : <a href="../../../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Add">Add</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Operations.html#SMul">SMul</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[τA : <span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><a href="../../../.././foundational_types.html">Prop</a></div></div><p>A class asserting that the topology on a module over a topological ring <code>R</code> is
+the module topology. See <code><a href="../../../.././Mathlib/Topology/Algebra/Module/ModuleTopology.html#moduleTopology">moduleTopology</a></code> for more discussion of the module topology.</p><ul class="structure_fields" id="IsModuleTopology.mk"><li id="IsModuleTopology.eq_moduleTopology'" class="structure_field"><div class="structure_field_info">eq_moduleTopology' : <span class="fn"><span class="fn">τA</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/Module/ModuleTopology.html#moduleTopology">moduleTopology</a> <span class="fn">R</span> <span class="fn">A</span></span></span></div><div class="structure_field_doc"><p>Note that this should not be used directly, and <code><a href="../../../.././Mathlib/Topology/Algebra/Module/ModuleTopology.html#eq_moduleTopology">eq_moduleTopology</a></code>, which takes <code>R</code> and <code>A</code>
+explicitly, should be used instead.</p></div></li></ul><details class="instances"><summary>Instances</summary><ul id="instances-list-IsModuleTopology" class="instances-list"></ul></details></div></div><div class="decl" id="eq_moduleTopology"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/Algebra/Module/ModuleTopology.lean#L122-L124">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Module/ModuleTopology.html#eq_moduleTopology"><span class="name">eq_moduleTopology</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(A : <a href="../../../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Add">Add</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Operations.html#SMul">SMul</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[τA : <span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/Module/ModuleTopology.html#IsModuleTopology">IsModuleTopology</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">τA</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/Module/ModuleTopology.html#moduleTopology">moduleTopology</a> <span class="fn">R</span> <span class="fn">A</span></span></span></div></div></div></div><div class="decl" id="ModuleTopology.continuousSMul"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/Algebra/Module/ModuleTopology.lean#L126-L136">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Module/ModuleTopology.html#ModuleTopology.continuousSMul"><span class="name">ModuleTopology</span>.<span class="name">continuousSMul</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(A : <a href="../../../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Add">Add</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Operations.html#SMul">SMul</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/MulAction.html#ContinuousSMul">ContinuousSMul</a> <span class="fn">R</span> <span class="fn">A</span></span></div></div><p>Scalar multiplication <code>• : R × A → A</code> is continuous if <code>R</code> is a topological
+ring, and <code>A</code> is an <code>R</code> module with the module topology.</p></div></div><div class="decl" id="ModuleTopology.continuousAdd"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/Algebra/Module/ModuleTopology.lean#L138-L141">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Module/ModuleTopology.html#ModuleTopology.continuousAdd"><span class="name">ModuleTopology</span>.<span class="name">continuousAdd</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(A : <a href="../../../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Add">Add</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Operations.html#SMul">SMul</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/Monoid.html#ContinuousAdd">ContinuousAdd</a> <span class="fn">A</span></span></div></div><p>Addition <code>+ : A × A → A</code> is continuous if <code>R</code> is a topological
+ring, and <code>A</code> is an <code>R</code> module with the module topology.</p></div></div><div class="decl" id="IsModuleTopology.toContinuousSMul"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/Algebra/Module/ModuleTopology.lean#L143-L144">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Module/ModuleTopology.html#IsModuleTopology.toContinuousSMul"><span class="name">IsModuleTopology</span>.<span class="name">toContinuousSMul</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(A : <a href="../../../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Add">Add</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Operations.html#SMul">SMul</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/Module/ModuleTopology.html#IsModuleTopology">IsModuleTopology</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/MulAction.html#ContinuousSMul">ContinuousSMul</a> <span class="fn">R</span> <span class="fn">A</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="IsModuleTopology.toContinuousAdd"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/Algebra/Module/ModuleTopology.lean#L147-L148">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Module/ModuleTopology.html#IsModuleTopology.toContinuousAdd"><span class="name">IsModuleTopology</span>.<span class="name">toContinuousAdd</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(A : <a href="../../../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Add">Add</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Operations.html#SMul">SMul</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/Module/ModuleTopology.html#IsModuleTopology">IsModuleTopology</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/Monoid.html#ContinuousAdd">ContinuousAdd</a> <span class="fn">A</span></span></div></div></div></div><div class="decl" id="moduleTopology_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/Algebra/Module/ModuleTopology.lean#L150-L152">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Module/ModuleTopology.html#moduleTopology_le"><span class="name">moduleTopology_le</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(A : <a href="../../../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Add">Add</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Operations.html#SMul">SMul</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[τA : <span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/MulAction.html#ContinuousSMul">ContinuousSMul</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/Monoid.html#ContinuousAdd">ContinuousAdd</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/Module/ModuleTopology.html#moduleTopology">moduleTopology</a> <span class="fn">R</span> <span class="fn">A</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">τA</span></span></div></div><p>The module topology is <code>≤</code> any topology making <code>A</code> into a topological module.</p></div></div><div class="decl" id="IsModuleTopology.of_continuous_id"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/Algebra/Module/ModuleTopology.lean#L163-L172">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Module/ModuleTopology.html#IsModuleTopology.of_continuous_id"><span class="name">IsModuleTopology</span>.<span class="name">of_continuous_id</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Add">Add</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Operations.html#SMul">SMul</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[τA : <span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/Monoid.html#ContinuousAdd">ContinuousAdd</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/MulAction.html#ContinuousSMul">ContinuousSMul</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#Continuous">Continuous</a> <span class="fn">id</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/Module/ModuleTopology.html#IsModuleTopology">IsModuleTopology</a> <span class="fn">R</span> <span class="fn">A</span></span></div></div><p>If <code>A</code> is a topological <code>R</code>-module and the identity map from (<code>A</code> with its given
+topology) to (<code>A</code> with the module topology) is continuous, then the topology on <code>A</code> is
+the module topology.</p></div></div><div class="decl" id="IsModuleTopology.instSubsingleton"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/Algebra/Module/ModuleTopology.lean#L174-L176">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Module/ModuleTopology.html#IsModuleTopology.instSubsingleton"><span class="name">IsModuleTopology</span>.<span class="name">instSubsingleton</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Prelude.html#Add">Add</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Operations.html#SMul">SMul</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[τA : <span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Init/Core.html#Subsingleton">Subsingleton</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/Module/ModuleTopology.html#IsModuleTopology">IsModuleTopology</a> <span class="fn">R</span> <span class="fn">A</span></span></div></div><p>The zero module has the module topology.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="IsModuleTopology.iso"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/Algebra/Module/ModuleTopology.lean#L186-L207">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Module/ModuleTopology.html#IsModuleTopology.iso"><span class="name">IsModuleTopology</span>.<span class="name">iso</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[τR : <span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[τA : <span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/Module/ModuleTopology.html#IsModuleTopology">IsModuleTopology</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[τB : <span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn">A</span> <a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearEquiv">≃L[</a><span class="fn">R</span><a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearEquiv">]</a> <span class="fn">B</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/Module/ModuleTopology.html#IsModuleTopology">IsModuleTopology</a> <span class="fn">R</span> <span class="fn">B</span></span></div></div><p>If <code>A</code> and <code>B</code> are <code>R</code>-modules, homeomorphic via an <code>R</code>-linear homeomorphism, and if
+<code>A</code> has the module topology, then so does <code>B</code>.</p></div></div><div class="mod_doc"><p>We now fix once and for all a topological semiring <code>R</code>.</p><p>We first prove that the module topology on <code>R</code> considered as a module over itself,
+is <code>R</code>'s topology.</p></div><div class="decl" id="TopologicalSemiring.toIsModuleTopology"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/Algebra/Module/ModuleTopology.lean#L222-L250">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Module/ModuleTopology.html#TopologicalSemiring.toIsModuleTopology"><span class="name">TopologicalSemiring</span>.<span class="name">toIsModuleTopology</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[τR : <span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/Ring/Basic.html#TopologicalSemiring">TopologicalSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/Module/ModuleTopology.html#IsModuleTopology">IsModuleTopology</a> <span class="fn">R</span> <span class="fn">R</span></span></div></div><p>The topology on a topological semiring <code>R</code> agrees with the module topology when considering
+<code>R</code> as an <code>R</code>-module in the obvious way (i.e., via <code><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Semiring.toModule">Semiring.toModule</a></code>).</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="TopologicalSemiring.toOppositeIsModuleTopology"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/Algebra/Module/ModuleTopology.lean#L258-L261">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Module/ModuleTopology.html#TopologicalSemiring.toOppositeIsModuleTopology"><span class="name">TopologicalSemiring</span>.<span class="name">toOppositeIsModuleTopology</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[τR : <span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/Ring/Basic.html#TopologicalSemiring">TopologicalSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/Module/ModuleTopology.html#IsModuleTopology">IsModuleTopology</a> <span class="fn"><span class="fn">R</span><a href="../../../.././Mathlib/Algebra/Opposites.html#MulOpposite">ᵐᵒᵖ</a></span> <span class="fn">R</span></span></div></div><p>The module topology coming from the action of the topological ring <code>Rᵐᵒᵖ</code> on <code>R</code>
+(via <code><a href="../../../.././Mathlib/Algebra/Module/Opposite.html#Semiring.toOppositeModule">Semiring.toOppositeModule</a></code>, i.e. via <code>(op r) • m = m * r</code>) is <code>R</code>'s topology.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="IsModuleTopology.continuous_of_distribMulActionHom"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/Algebra/Module/ModuleTopology.lean#L272-L283">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Module/ModuleTopology.html#IsModuleTopology.continuous_of_distribMulActionHom"><span class="name">IsModuleTopology</span>.<span class="name">continuous_of_distribMulActionHom</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[τR : <span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[aA : <span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/Module/ModuleTopology.html#IsModuleTopology">IsModuleTopology</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[aB : <span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/Monoid.html#ContinuousAdd">ContinuousAdd</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/MulAction.html#ContinuousSMul">ContinuousSMul</a> <span class="fn">R</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(φ : <span class="fn"><span class="fn">A</span> <a href="../../../.././Mathlib/GroupTheory/GroupAction/Hom.html#DistribMulActionHom">→+[</a><span class="fn">R</span><a href="../../../.././Mathlib/GroupTheory/GroupAction/Hom.html#DistribMulActionHom">]</a> <span class="fn">B</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#Continuous">Continuous</a> <span class="fn">⇑<span class="fn">φ</span></span></span></div></div><p>Every <code>R</code>-linear map between two topological <code>R</code>-modules, where the source has the module
+topology, is continuous.</p></div></div><div class="decl" id="IsModuleTopology.continuous_of_linearMap"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/Algebra/Module/ModuleTopology.lean#L285-L287">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Module/ModuleTopology.html#IsModuleTopology.continuous_of_linearMap"><span class="name">IsModuleTopology</span>.<span class="name">continuous_of_linearMap</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[τR : <span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[aA : <span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/Module/ModuleTopology.html#IsModuleTopology">IsModuleTopology</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[aB : <span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/Monoid.html#ContinuousAdd">ContinuousAdd</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/MulAction.html#ContinuousSMul">ContinuousSMul</a> <span class="fn">R</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(φ : <span class="fn"><span class="fn">A</span> <a href="../../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">]</a> <span class="fn">B</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#Continuous">Continuous</a> <span class="fn">⇑<span class="fn">φ</span></span></span></div></div></div></div><div class="decl" id="IsModuleTopology.continuous_neg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/Algebra/Module/ModuleTopology.lean#L290-L293">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Module/ModuleTopology.html#IsModuleTopology.continuous_neg"><span class="name">IsModuleTopology</span>.<span class="name">continuous_neg</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[τR : <span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(C : <a href="../../../.././foundational_types.html">Type</a> u_4)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/Module/ModuleTopology.html#IsModuleTopology">IsModuleTopology</a> <span class="fn">R</span> <span class="fn">C</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#Continuous">Continuous</a> <span class="fn">fun (<span class="fn">a</span> : <span class="fn">C</span>) =&gt; <span class="fn"><a href="../../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">a</span></span></span></span></div></div></div></div><div class="decl" id="IsModuleTopology.continuous_of_ringHom"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/Algebra/Module/ModuleTopology.lean#L295-L303">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Module/ModuleTopology.html#IsModuleTopology.continuous_of_ringHom"><span class="name">IsModuleTopology</span>.<span class="name">continuous_of_ringHom</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/Module/ModuleTopology.html#IsModuleTopology">IsModuleTopology</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/Ring/Basic.html#TopologicalSemiring">TopologicalSemiring</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(φ : <span class="fn"><span class="fn">A</span> <a href="../../../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">B</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hφ : <span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#Continuous">Continuous</a> <span class="fn">⇑<span class="fn">(<span class="fn"><span class="fn">φ</span>.comp</span> <span class="fn">(<a href="../../../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">R</span> <span class="fn">A</span>)</span>)</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#Continuous">Continuous</a> <span class="fn">⇑<span class="fn">φ</span></span></span></div></div></div></div></main>
+<nav class="nav"><iframe src="../../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

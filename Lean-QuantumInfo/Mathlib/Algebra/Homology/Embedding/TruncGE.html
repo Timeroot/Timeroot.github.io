@@ -1,0 +1,424 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../../.././style.css"></link><link rel="icon" href="../../../.././favicon.svg"></link><link rel="mask-icon" href="../../../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Algebra.Homology.Embedding.TruncGE</title><script defer="true" src="../../../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../../.././";</script><script>const MODULE_NAME="Mathlib.Algebra.Homology.Embedding.TruncGE";</script><script type="module" src="../../../.././jump-src.js"></script><script type="module" src="../../../.././search.js"></script><script type="module" src="../../../.././expand-nav.js"></script><script type="module" src="../../../.././how-about.js"></script><script type="module" src="../../../.././instances.js"></script><script type="module" src="../../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Algebra</span>.<span class="name">Homology</span>.<span class="name">Embedding</span>.<span class="name">TruncGE</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Homology/Embedding/TruncGE.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../../.././Init.html">Init</a></li><li><a href="../../../.././Mathlib/Algebra/Homology/Embedding/Boundary.html">Mathlib.Algebra.Homology.Embedding.Boundary</a></li><li><a href="../../../.././Mathlib/Algebra/Homology/Embedding/Extend.html">Mathlib.Algebra.Homology.Embedding.Extend</a></li><li><a href="../../../.././Mathlib/Algebra/Homology/ShortComplex/HomologicalComplex.html">Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Algebra.Homology.Embedding.TruncGE" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#HomologicalComplex.truncGE'.X"><span class="name">HomologicalComplex</span>.<span class="name">truncGE'</span>.<span class="name">X</span></a></div><div class="nav_link"><a class="break_within" href="#HomologicalComplex.truncGE'.XIsoOpcycles"><span class="name">HomologicalComplex</span>.<span class="name">truncGE'</span>.<span class="name">XIsoOpcycles</span></a></div><div class="nav_link"><a class="break_within" href="#HomologicalComplex.truncGE'.XIso"><span class="name">HomologicalComplex</span>.<span class="name">truncGE'</span>.<span class="name">XIso</span></a></div><div class="nav_link"><a class="break_within" href="#HomologicalComplex.truncGE'.d"><span class="name">HomologicalComplex</span>.<span class="name">truncGE'</span>.<span class="name">d</span></a></div><div class="nav_link"><a class="break_within" href="#HomologicalComplex.truncGE'.d_comp_d"><span class="name">HomologicalComplex</span>.<span class="name">truncGE'</span>.<span class="name">d_comp_d</span></a></div><div class="nav_link"><a class="break_within" href="#HomologicalComplex.truncGE'.d_comp_d_assoc"><span class="name">HomologicalComplex</span>.<span class="name">truncGE'</span>.<span class="name">d_comp_d_assoc</span></a></div><div class="nav_link"><a class="break_within" href="#HomologicalComplex.truncGE'"><span class="name">HomologicalComplex</span>.<span class="name">truncGE'</span></a></div><div class="nav_link"><a class="break_within" href="#HomologicalComplex.truncGE'XIso"><span class="name">HomologicalComplex</span>.<span class="name">truncGE'XIso</span></a></div><div class="nav_link"><a class="break_within" href="#HomologicalComplex.truncGE'XIsoOpcycles"><span class="name">HomologicalComplex</span>.<span class="name">truncGE'XIsoOpcycles</span></a></div><div class="nav_link"><a class="break_within" href="#HomologicalComplex.truncGE'_d_eq"><span class="name">HomologicalComplex</span>.<span class="name">truncGE'_d_eq</span></a></div><div class="nav_link"><a class="break_within" href="#HomologicalComplex.truncGE'_d_eq_fromOpcycles"><span class="name">HomologicalComplex</span>.<span class="name">truncGE'_d_eq_fromOpcycles</span></a></div><div class="nav_link"><a class="break_within" href="#HomologicalComplex.truncGE"><span class="name">HomologicalComplex</span>.<span class="name">truncGE</span></a></div><div class="nav_link"><a class="break_within" href="#HomologicalComplex.truncGEXIso"><span class="name">HomologicalComplex</span>.<span class="name">truncGEXIso</span></a></div><div class="nav_link"><a class="break_within" href="#HomologicalComplex.truncGEXIsoOpcycles"><span class="name">HomologicalComplex</span>.<span class="name">truncGEXIsoOpcycles</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="The-canonical-truncation">The canonical truncation <a class="hover-link" href="#The-canonical-truncation">#</a></h1><p>Given an embedding <code>e : Embedding c c'</code> of complex shapes which
+satisfies <code>e.IsTruncGE</code> and <code>K : <a href="../../../.././Mathlib/Algebra/Homology/HomologicalComplex.html#HomologicalComplex">HomologicalComplex</a> C c'</code>,
+we define <code>K.<a href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'">truncGE'</a> e : <a href="../../../.././Mathlib/Algebra/Homology/HomologicalComplex.html#HomologicalComplex">HomologicalComplex</a> C c</code>
+and <code>K.<a href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE">truncGE</a> e : <a href="../../../.././Mathlib/Algebra/Homology/HomologicalComplex.html#HomologicalComplex">HomologicalComplex</a> C c'</code> which are the canonical
+truncations of <code>K</code> relative to <code>e</code>.</p><p>For example, if <code>e</code> is the embedding <code>embeddingUpIntGE p</code> of <code><a href="../../../.././Mathlib/Algebra/Homology/ComplexShape.html#ComplexShape.up">ComplexShape.up</a> ℕ</code>
+in <code><a href="../../../.././Mathlib/Algebra/Homology/ComplexShape.html#ComplexShape.up">ComplexShape.up</a> ℤ</code> which sends <code>n : ℕ</code> to <code>p + n</code> and <code>K : <a href="../../../.././Mathlib/Algebra/Homology/HomologicalComplex.html#CochainComplex">CochainComplex</a> C ℤ</code>,
+then <code>K.<a href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'">truncGE'</a> e : <a href="../../../.././Mathlib/Algebra/Homology/HomologicalComplex.html#CochainComplex">CochainComplex</a> C ℕ</code> is the following complex:</p><p><code>Q ⟶ K.<a href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'.X">X</a> (p + 1) ⟶ K.<a href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'.X">X</a> (p + 2) ⟶ K.<a href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'.X">X</a> (p + 3) ⟶ ...</code></p><p>where in degree <code>0</code>, the object <code>Q</code> identifies to the cokernel
+of <code>K.<a href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'.X">X</a> (p - 1) ⟶ K.<a href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'.X">X</a> p</code> (this is <code>K.opcycles p</code>). Then, the
+cochain complex <code>K.<a href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE">truncGE</a> e</code> is indexed by <code>ℤ</code>, and has the
+following shape:</p><p><code>... ⟶ 0 ⟶ 0 ⟶ 0 ⟶ Q ⟶ K.<a href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'.X">X</a> (p + 1) ⟶ K.<a href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'.X">X</a> (p + 2) ⟶ K.<a href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'.X">X</a> (p + 3) ⟶ ...</code></p><p>where <code>Q</code> is in degree <code>p</code>.</p><h2 class="markdown-heading" id="TODO">TODO <a class="hover-link" href="#TODO">#</a></h2><ul>
+<li>construct a morphism <code>K.πTruncGE e : K ⟶ K.<a href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE">truncGE</a> e</code> and show that
+it induces an isomorphism in homology in degrees in the image of <code>e.f</code>.</li>
+</ul></div><div class="decl" id="HomologicalComplex.truncGE'.X"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Homology/Embedding/TruncGE.lean#L54-L58">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'.X"><span class="name">HomologicalComplex</span>.<span class="name">truncGE'</span>.<span class="name">X</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι' : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/ComplexShape.html#ComplexShape">ComplexShape</a> <span class="fn">ι</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c' : <span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/ComplexShape.html#ComplexShape">ComplexShape</a> <span class="fn">ι'</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{u_4, u_3}</a>      <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/CategoryTheory/Limits/Shapes/ZeroMorphisms.html#CategoryTheory.Limits.HasZeroMorphisms">CategoryTheory.Limits.HasZeroMorphisms</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(K : <span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/HomologicalComplex.html#HomologicalComplex">HomologicalComplex</a> <span class="fn">C</span> <span class="fn">c'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn"><span class="fn">c</span>.Embedding</span> <span class="fn">c'</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn">∀ (<span class="fn">i'</span> : <span class="fn">ι'</span>), <span class="fn"><span class="fn"><span class="fn">K</span>.HasHomology</span> <span class="fn">i'</span></span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn">ι</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">C</span></div></div><p>The <code><a href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'.X">X</a></code> field of <code><a href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'">truncGE'</a></code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'.X">HomologicalComplex.truncGE'.X</a> <span class="fn">K</span> <span class="fn">e</span> <span class="fn">i</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">if <span class="fn"><span class="fn"><span class="fn">e</span>.BoundaryGE</span> <span class="fn">i</span></span> then <span class="fn"><span class="fn"><span class="fn">K</span>.opcycles</span> <span class="fn">(<span class="fn"><span class="fn">e</span>.f</span> <span class="fn">i</span>)</span></span> else <span class="fn"><span class="fn"><span class="fn">K</span>.X</span> <span class="fn">(<span class="fn"><span class="fn">e</span>.f</span> <span class="fn">i</span>)</span></span></span></span></li></ul></details><details id="instances-for-list-HomologicalComplex.truncGE'.X" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="HomologicalComplex.truncGE'.XIsoOpcycles"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Homology/Embedding/TruncGE.lean#L60-L63">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'.XIsoOpcycles"><span class="name">HomologicalComplex</span>.<span class="name">truncGE'</span>.<span class="name">XIsoOpcycles</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι' : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/ComplexShape.html#ComplexShape">ComplexShape</a> <span class="fn">ι</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c' : <span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/ComplexShape.html#ComplexShape">ComplexShape</a> <span class="fn">ι'</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{u_4, u_3}</a>      <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/CategoryTheory/Limits/Shapes/ZeroMorphisms.html#CategoryTheory.Limits.HasZeroMorphisms">CategoryTheory.Limits.HasZeroMorphisms</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(K : <span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/HomologicalComplex.html#HomologicalComplex">HomologicalComplex</a> <span class="fn">C</span> <span class="fn">c'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn"><span class="fn">c</span>.Embedding</span> <span class="fn">c'</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn">∀ (<span class="fn">i'</span> : <span class="fn">ι'</span>), <span class="fn"><span class="fn"><span class="fn">K</span>.HasHomology</span> <span class="fn">i'</span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i : <span class="fn">ι</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hi : <span class="fn"><span class="fn"><span class="fn">e</span>.BoundaryGE</span> <span class="fn">i</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'.X">HomologicalComplex.truncGE'.X</a> <span class="fn">K</span> <span class="fn">e</span> <span class="fn">i</span></span> <a href="../../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.Iso">≅</a> <span class="fn"><span class="fn"><span class="fn">K</span>.opcycles</span> <span class="fn">(<span class="fn"><span class="fn">e</span>.f</span> <span class="fn">i</span>)</span></span></span></div></div><p>The isomorphism <code><a href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'.X">truncGE'.X</a> K e i ≅ K.opcycles (e.f i)</code> when <code>e.BoundaryGE i</code> holds.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'.XIsoOpcycles">HomologicalComplex.truncGE'.XIsoOpcycles</a> <span class="fn">K</span> <span class="fn">e</span> <span class="fn">hi</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/CategoryTheory/EqToHom.html#CategoryTheory.eqToIso">CategoryTheory.eqToIso</a> <span class="fn">⋯</span></span></span></li></ul></details><details id="instances-for-list-HomologicalComplex.truncGE'.XIsoOpcycles" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="HomologicalComplex.truncGE'.XIso"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Homology/Embedding/TruncGE.lean#L65-L68">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'.XIso"><span class="name">HomologicalComplex</span>.<span class="name">truncGE'</span>.<span class="name">XIso</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι' : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/ComplexShape.html#ComplexShape">ComplexShape</a> <span class="fn">ι</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c' : <span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/ComplexShape.html#ComplexShape">ComplexShape</a> <span class="fn">ι'</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{u_4, u_3}</a>      <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/CategoryTheory/Limits/Shapes/ZeroMorphisms.html#CategoryTheory.Limits.HasZeroMorphisms">CategoryTheory.Limits.HasZeroMorphisms</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(K : <span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/HomologicalComplex.html#HomologicalComplex">HomologicalComplex</a> <span class="fn">C</span> <span class="fn">c'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn"><span class="fn">c</span>.Embedding</span> <span class="fn">c'</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn">∀ (<span class="fn">i'</span> : <span class="fn">ι'</span>), <span class="fn"><span class="fn"><span class="fn">K</span>.HasHomology</span> <span class="fn">i'</span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i : <span class="fn">ι</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hi : <span class="fn"><a href="../../../.././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn"><span class="fn">e</span>.BoundaryGE</span> <span class="fn">i</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'.X">HomologicalComplex.truncGE'.X</a> <span class="fn">K</span> <span class="fn">e</span> <span class="fn">i</span></span> <a href="../../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.Iso">≅</a> <span class="fn"><span class="fn"><span class="fn">K</span>.X</span> <span class="fn">(<span class="fn"><span class="fn">e</span>.f</span> <span class="fn">i</span>)</span></span></span></div></div><p>The isomorphism <code><a href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'.X">truncGE'.X</a> K e i ≅ K.<a href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'.X">X</a> (e.f i)</code> when <code>e.BoundaryGE i</code> does not hold.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'.XIso">HomologicalComplex.truncGE'.XIso</a> <span class="fn">K</span> <span class="fn">e</span> <span class="fn">hi</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/CategoryTheory/EqToHom.html#CategoryTheory.eqToIso">CategoryTheory.eqToIso</a> <span class="fn">⋯</span></span></span></li></ul></details><details id="instances-for-list-HomologicalComplex.truncGE'.XIso" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="HomologicalComplex.truncGE'.d"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Homology/Embedding/TruncGE.lean#L71-L80">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'.d"><span class="name">HomologicalComplex</span>.<span class="name">truncGE'</span>.<span class="name">d</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι' : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/ComplexShape.html#ComplexShape">ComplexShape</a> <span class="fn">ι</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c' : <span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/ComplexShape.html#ComplexShape">ComplexShape</a> <span class="fn">ι'</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{u_4, u_3}</a>      <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/CategoryTheory/Limits/Shapes/ZeroMorphisms.html#CategoryTheory.Limits.HasZeroMorphisms">CategoryTheory.Limits.HasZeroMorphisms</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(K : <span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/HomologicalComplex.html#HomologicalComplex">HomologicalComplex</a> <span class="fn">C</span> <span class="fn">c'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn"><span class="fn">c</span>.Embedding</span> <span class="fn">c'</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">e</span>.IsTruncGE</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn">∀ (<span class="fn">i'</span> : <span class="fn">ι'</span>), <span class="fn"><span class="fn"><span class="fn">K</span>.HasHomology</span> <span class="fn">i'</span></span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i j : <span class="fn">ι</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'.X">HomologicalComplex.truncGE'.X</a> <span class="fn">K</span> <span class="fn">e</span> <span class="fn">i</span></span> <a href="../../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'.X">HomologicalComplex.truncGE'.X</a> <span class="fn">K</span> <span class="fn">e</span> <span class="fn">j</span></span></span></div></div><p>The <code><a href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'.d">d</a></code> field of <code><a href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'">truncGE'</a></code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-HomologicalComplex.truncGE'.d" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="HomologicalComplex.truncGE'.d_comp_d"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Homology/Embedding/TruncGE.lean#L82-L90">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'.d_comp_d"><span class="name">HomologicalComplex</span>.<span class="name">truncGE'</span>.<span class="name">d_comp_d</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι' : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/ComplexShape.html#ComplexShape">ComplexShape</a> <span class="fn">ι</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c' : <span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/ComplexShape.html#ComplexShape">ComplexShape</a> <span class="fn">ι'</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{u_4, u_3}</a>      <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/CategoryTheory/Limits/Shapes/ZeroMorphisms.html#CategoryTheory.Limits.HasZeroMorphisms">CategoryTheory.Limits.HasZeroMorphisms</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(K : <span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/HomologicalComplex.html#HomologicalComplex">HomologicalComplex</a> <span class="fn">C</span> <span class="fn">c'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn"><span class="fn">c</span>.Embedding</span> <span class="fn">c'</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">e</span>.IsTruncGE</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn">∀ (<span class="fn">i'</span> : <span class="fn">ι'</span>), <span class="fn"><span class="fn"><span class="fn">K</span>.HasHomology</span> <span class="fn">i'</span></span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i j k : <span class="fn">ι</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">CategoryTheory.CategoryStruct.comp</a> <span class="fn">(<a href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'.d">HomologicalComplex.truncGE'.d</a> <span class="fn">K</span> <span class="fn">e</span> <span class="fn">i</span> <span class="fn">j</span>)</span> <span class="fn">(<a href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'.d">HomologicalComplex.truncGE'.d</a> <span class="fn">K</span> <span class="fn">e</span> <span class="fn">j</span> <span class="fn">k</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="HomologicalComplex.truncGE'.d_comp_d_assoc"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Homology/Embedding/TruncGE.lean#L82-L82">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'.d_comp_d_assoc"><span class="name">HomologicalComplex</span>.<span class="name">truncGE'</span>.<span class="name">d_comp_d_assoc</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι' : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/ComplexShape.html#ComplexShape">ComplexShape</a> <span class="fn">ι</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c' : <span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/ComplexShape.html#ComplexShape">ComplexShape</a> <span class="fn">ι'</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{u_4, u_3}</a>      <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/CategoryTheory/Limits/Shapes/ZeroMorphisms.html#CategoryTheory.Limits.HasZeroMorphisms">CategoryTheory.Limits.HasZeroMorphisms</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(K : <span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/HomologicalComplex.html#HomologicalComplex">HomologicalComplex</a> <span class="fn">C</span> <span class="fn">c'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn"><span class="fn">c</span>.Embedding</span> <span class="fn">c'</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">e</span>.IsTruncGE</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn">∀ (<span class="fn">i'</span> : <span class="fn">ι'</span>), <span class="fn"><span class="fn"><span class="fn">K</span>.HasHomology</span> <span class="fn">i'</span></span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i j k : <span class="fn">ι</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z : <span class="fn">C</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'.X">HomologicalComplex.truncGE'.X</a> <span class="fn">K</span> <span class="fn">e</span> <span class="fn">k</span></span> <a href="../../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">CategoryTheory.CategoryStruct.comp</a> <span class="fn">(<a href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'.d">HomologicalComplex.truncGE'.d</a> <span class="fn">K</span> <span class="fn">e</span> <span class="fn">i</span> <span class="fn">j</span>)</span>
+    <span class="fn">(<a href="../../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">CategoryTheory.CategoryStruct.comp</a> <span class="fn">(<a href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'.d">HomologicalComplex.truncGE'.d</a> <span class="fn">K</span> <span class="fn">e</span> <span class="fn">j</span> <span class="fn">k</span>)</span> <span class="fn">h</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">CategoryTheory.CategoryStruct.comp</a> <span class="fn">0</span> <span class="fn">h</span></span></span></div></div></div></div><div class="decl" id="HomologicalComplex.truncGE'"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Homology/Embedding/TruncGE.lean#L94-L99">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'"><span class="name">HomologicalComplex</span>.<span class="name">truncGE'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι' : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/ComplexShape.html#ComplexShape">ComplexShape</a> <span class="fn">ι</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c' : <span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/ComplexShape.html#ComplexShape">ComplexShape</a> <span class="fn">ι'</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{u_4, u_3}</a>      <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/CategoryTheory/Limits/Shapes/ZeroMorphisms.html#CategoryTheory.Limits.HasZeroMorphisms">CategoryTheory.Limits.HasZeroMorphisms</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(K : <span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/HomologicalComplex.html#HomologicalComplex">HomologicalComplex</a> <span class="fn">C</span> <span class="fn">c'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn"><span class="fn">c</span>.Embedding</span> <span class="fn">c'</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">e</span>.IsTruncGE</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn">∀ (<span class="fn">i'</span> : <span class="fn">ι'</span>), <span class="fn"><span class="fn"><span class="fn">K</span>.HasHomology</span> <span class="fn">i'</span></span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/HomologicalComplex.html#HomologicalComplex">HomologicalComplex</a> <span class="fn">C</span> <span class="fn">c</span></span></div></div><p>The canonical truncation of a homological complex relative to an embedding
+of complex shapes <code>e</code> which satisfies <code>e.IsTruncGE</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><span class="fn"><span class="fn">K</span>.truncGE'</span> <span class="fn">e</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">{ <span class="fn">X</span> := <span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'.X">HomologicalComplex.truncGE'.X</a> <span class="fn">K</span> <span class="fn">e</span></span>, <span class="fn">d</span> := <span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'.d">HomologicalComplex.truncGE'.d</a> <span class="fn">K</span> <span class="fn">e</span></span>, <span class="fn">shape</span> := <span class="fn">⋯</span>, <span class="fn">d_comp_d'</span> := <span class="fn">⋯</span> }</span></span></li></ul></details><details id="instances-for-list-HomologicalComplex.truncGE'" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="HomologicalComplex.truncGE'XIso"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Homology/Embedding/TruncGE.lean#L101-L105">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'XIso"><span class="name">HomologicalComplex</span>.<span class="name">truncGE'XIso</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι' : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/ComplexShape.html#ComplexShape">ComplexShape</a> <span class="fn">ι</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c' : <span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/ComplexShape.html#ComplexShape">ComplexShape</a> <span class="fn">ι'</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{u_4, u_3}</a>      <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/CategoryTheory/Limits/Shapes/ZeroMorphisms.html#CategoryTheory.Limits.HasZeroMorphisms">CategoryTheory.Limits.HasZeroMorphisms</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(K : <span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/HomologicalComplex.html#HomologicalComplex">HomologicalComplex</a> <span class="fn">C</span> <span class="fn">c'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn"><span class="fn">c</span>.Embedding</span> <span class="fn">c'</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">e</span>.IsTruncGE</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn">∀ (<span class="fn">i'</span> : <span class="fn">ι'</span>), <span class="fn"><span class="fn"><span class="fn">K</span>.HasHomology</span> <span class="fn">i'</span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i : <span class="fn">ι</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i' : <span class="fn">ι'</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hi' : <span class="fn"><span class="fn"><span class="fn"><span class="fn">e</span>.f</span> <span class="fn">i</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">i'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hi : <span class="fn"><a href="../../../.././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn"><span class="fn">e</span>.BoundaryGE</span> <span class="fn">i</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">K</span>.truncGE'</span> <span class="fn">e</span>)</span>.X</span> <span class="fn">i</span></span> <a href="../../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.Iso">≅</a> <span class="fn"><span class="fn"><span class="fn">K</span>.X</span> <span class="fn">i'</span></span></span></div></div><p>The isomorphism <code>(K.<a href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'">truncGE'</a> e).<a href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'.X">X</a> i ≅ K.<a href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'.X">X</a> i'</code> when <code>e.f i = i'</code>
+and <code>e.BoundaryGE i</code> does not hold.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><span class="fn"><span class="fn">K</span>.truncGE'XIso</span> <span class="fn">e</span> <span class="fn">hi'</span> <span class="fn">hi</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'.XIso">HomologicalComplex.truncGE'.XIso</a> <span class="fn">K</span> <span class="fn">e</span> <span class="fn">hi</span></span> <a href="../../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.Iso.trans">≪≫</a> <span class="fn"><a href="../../../.././Mathlib/CategoryTheory/EqToHom.html#CategoryTheory.eqToIso">CategoryTheory.eqToIso</a> <span class="fn">⋯</span></span></span></span></li></ul></details><details id="instances-for-list-HomologicalComplex.truncGE'XIso" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="HomologicalComplex.truncGE'XIsoOpcycles"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Homology/Embedding/TruncGE.lean#L107-L111">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'XIsoOpcycles"><span class="name">HomologicalComplex</span>.<span class="name">truncGE'XIsoOpcycles</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι' : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/ComplexShape.html#ComplexShape">ComplexShape</a> <span class="fn">ι</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c' : <span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/ComplexShape.html#ComplexShape">ComplexShape</a> <span class="fn">ι'</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{u_4, u_3}</a>      <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/CategoryTheory/Limits/Shapes/ZeroMorphisms.html#CategoryTheory.Limits.HasZeroMorphisms">CategoryTheory.Limits.HasZeroMorphisms</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(K : <span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/HomologicalComplex.html#HomologicalComplex">HomologicalComplex</a> <span class="fn">C</span> <span class="fn">c'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn"><span class="fn">c</span>.Embedding</span> <span class="fn">c'</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">e</span>.IsTruncGE</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn">∀ (<span class="fn">i'</span> : <span class="fn">ι'</span>), <span class="fn"><span class="fn"><span class="fn">K</span>.HasHomology</span> <span class="fn">i'</span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i : <span class="fn">ι</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i' : <span class="fn">ι'</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hi' : <span class="fn"><span class="fn"><span class="fn"><span class="fn">e</span>.f</span> <span class="fn">i</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">i'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hi : <span class="fn"><span class="fn"><span class="fn">e</span>.BoundaryGE</span> <span class="fn">i</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">K</span>.truncGE'</span> <span class="fn">e</span>)</span>.X</span> <span class="fn">i</span></span> <a href="../../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.Iso">≅</a> <span class="fn"><span class="fn"><span class="fn">K</span>.opcycles</span> <span class="fn">i'</span></span></span></div></div><p>The isomorphism <code>(K.<a href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'">truncGE'</a> e).<a href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'.X">X</a> i ≅ K.opcycles i'</code> when <code>e.f i = i'</code>
+and <code>e.BoundaryGE i</code> holds.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><span class="fn"><span class="fn">K</span>.truncGE'XIsoOpcycles</span> <span class="fn">e</span> <span class="fn">hi'</span> <span class="fn">hi</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'.XIsoOpcycles">HomologicalComplex.truncGE'.XIsoOpcycles</a> <span class="fn">K</span> <span class="fn">e</span> <span class="fn">hi</span></span> <a href="../../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.Iso.trans">≪≫</a> <span class="fn"><a href="../../../.././Mathlib/CategoryTheory/EqToHom.html#CategoryTheory.eqToIso">CategoryTheory.eqToIso</a> <span class="fn">⋯</span></span></span></span></li></ul></details><details id="instances-for-list-HomologicalComplex.truncGE'XIsoOpcycles" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="HomologicalComplex.truncGE'_d_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Homology/Embedding/TruncGE.lean#L113-L120">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'_d_eq"><span class="name">HomologicalComplex</span>.<span class="name">truncGE'_d_eq</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι' : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/ComplexShape.html#ComplexShape">ComplexShape</a> <span class="fn">ι</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c' : <span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/ComplexShape.html#ComplexShape">ComplexShape</a> <span class="fn">ι'</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{u_4, u_3}</a>      <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/CategoryTheory/Limits/Shapes/ZeroMorphisms.html#CategoryTheory.Limits.HasZeroMorphisms">CategoryTheory.Limits.HasZeroMorphisms</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(K : <span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/HomologicalComplex.html#HomologicalComplex">HomologicalComplex</a> <span class="fn">C</span> <span class="fn">c'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn"><span class="fn">c</span>.Embedding</span> <span class="fn">c'</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">e</span>.IsTruncGE</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn">∀ (<span class="fn">i'</span> : <span class="fn">ι'</span>), <span class="fn"><span class="fn"><span class="fn">K</span>.HasHomology</span> <span class="fn">i'</span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i j : <span class="fn">ι</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hij : <span class="fn"><span class="fn"><span class="fn">c</span>.Rel</span> <span class="fn">i</span> <span class="fn">j</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{i' j' : <span class="fn">ι'</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hi' : <span class="fn"><span class="fn"><span class="fn"><span class="fn">e</span>.f</span> <span class="fn">i</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">i'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hj' : <span class="fn"><span class="fn"><span class="fn"><span class="fn">e</span>.f</span> <span class="fn">j</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">j'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hi : <span class="fn"><a href="../../../.././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn"><span class="fn">e</span>.BoundaryGE</span> <span class="fn">i</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">K</span>.truncGE'</span> <span class="fn">e</span>)</span>.d</span> <span class="fn">i</span> <span class="fn">j</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">CategoryTheory.CategoryStruct.comp</a> <span class="fn"><span class="fn">(<span class="fn"><span class="fn">K</span>.truncGE'XIso</span> <span class="fn">e</span> <span class="fn">hi'</span> <span class="fn">hi</span>)</span>.hom</span>
+    <span class="fn">(<a href="../../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">CategoryTheory.CategoryStruct.comp</a> <span class="fn">(<span class="fn"><span class="fn">K</span>.d</span> <span class="fn">i'</span> <span class="fn">j'</span>)</span> <span class="fn"><span class="fn">(<span class="fn"><span class="fn">K</span>.truncGE'XIso</span> <span class="fn">e</span> <span class="fn">hj'</span> <span class="fn">⋯</span>)</span>.inv</span>)</span></span></span></div></div></div></div><div class="decl" id="HomologicalComplex.truncGE'_d_eq_fromOpcycles"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Homology/Embedding/TruncGE.lean#L122-L129">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'_d_eq_fromOpcycles"><span class="name">HomologicalComplex</span>.<span class="name">truncGE'_d_eq_fromOpcycles</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι' : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/ComplexShape.html#ComplexShape">ComplexShape</a> <span class="fn">ι</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c' : <span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/ComplexShape.html#ComplexShape">ComplexShape</a> <span class="fn">ι'</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{u_4, u_3}</a>      <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/CategoryTheory/Limits/Shapes/ZeroMorphisms.html#CategoryTheory.Limits.HasZeroMorphisms">CategoryTheory.Limits.HasZeroMorphisms</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(K : <span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/HomologicalComplex.html#HomologicalComplex">HomologicalComplex</a> <span class="fn">C</span> <span class="fn">c'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn"><span class="fn">c</span>.Embedding</span> <span class="fn">c'</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">e</span>.IsTruncGE</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn">∀ (<span class="fn">i'</span> : <span class="fn">ι'</span>), <span class="fn"><span class="fn"><span class="fn">K</span>.HasHomology</span> <span class="fn">i'</span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i j : <span class="fn">ι</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hij : <span class="fn"><span class="fn"><span class="fn">c</span>.Rel</span> <span class="fn">i</span> <span class="fn">j</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{i' j' : <span class="fn">ι'</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hi' : <span class="fn"><span class="fn"><span class="fn"><span class="fn">e</span>.f</span> <span class="fn">i</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">i'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hj' : <span class="fn"><span class="fn"><span class="fn"><span class="fn">e</span>.f</span> <span class="fn">j</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">j'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hi : <span class="fn"><span class="fn"><span class="fn">e</span>.BoundaryGE</span> <span class="fn">i</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">K</span>.truncGE'</span> <span class="fn">e</span>)</span>.d</span> <span class="fn">i</span> <span class="fn">j</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">CategoryTheory.CategoryStruct.comp</a> <span class="fn"><span class="fn">(<span class="fn"><span class="fn">K</span>.truncGE'XIsoOpcycles</span> <span class="fn">e</span> <span class="fn">hi'</span> <span class="fn">hi</span>)</span>.hom</span>
+    <span class="fn">(<a href="../../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">CategoryTheory.CategoryStruct.comp</a> <span class="fn">(<span class="fn"><span class="fn">K</span>.fromOpcycles</span> <span class="fn">i'</span> <span class="fn">j'</span>)</span> <span class="fn"><span class="fn">(<span class="fn"><span class="fn">K</span>.truncGE'XIso</span> <span class="fn">e</span> <span class="fn">hj'</span> <span class="fn">⋯</span>)</span>.inv</span>)</span></span></span></div></div></div></div><div class="decl" id="HomologicalComplex.truncGE"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Homology/Embedding/TruncGE.lean#L133-L135">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE"><span class="name">HomologicalComplex</span>.<span class="name">truncGE</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι' : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/ComplexShape.html#ComplexShape">ComplexShape</a> <span class="fn">ι</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c' : <span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/ComplexShape.html#ComplexShape">ComplexShape</a> <span class="fn">ι'</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{u_4, u_3}</a>      <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/CategoryTheory/Limits/Shapes/ZeroMorphisms.html#CategoryTheory.Limits.HasZeroMorphisms">CategoryTheory.Limits.HasZeroMorphisms</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(K : <span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/HomologicalComplex.html#HomologicalComplex">HomologicalComplex</a> <span class="fn">C</span> <span class="fn">c'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn"><span class="fn">c</span>.Embedding</span> <span class="fn">c'</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">e</span>.IsTruncGE</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn">∀ (<span class="fn">i'</span> : <span class="fn">ι'</span>), <span class="fn"><span class="fn"><span class="fn">K</span>.HasHomology</span> <span class="fn">i'</span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/CategoryTheory/Limits/Shapes/ZeroObjects.html#CategoryTheory.Limits.HasZeroObject">CategoryTheory.Limits.HasZeroObject</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/HomologicalComplex.html#HomologicalComplex">HomologicalComplex</a> <span class="fn">C</span> <span class="fn">c'</span></span></div></div><p>The canonical truncation of a homological complex relative to an embedding
+of complex shapes <code>e</code> which satisfies <code>e.IsTruncGE</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><span class="fn"><span class="fn">K</span>.truncGE</span> <span class="fn">e</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">K</span>.truncGE'</span> <span class="fn">e</span>)</span>.extend</span> <span class="fn">e</span></span></span></li></ul></details><details id="instances-for-list-HomologicalComplex.truncGE" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="HomologicalComplex.truncGEXIso"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Homology/Embedding/TruncGE.lean#L137-L141">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGEXIso"><span class="name">HomologicalComplex</span>.<span class="name">truncGEXIso</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι' : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/ComplexShape.html#ComplexShape">ComplexShape</a> <span class="fn">ι</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c' : <span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/ComplexShape.html#ComplexShape">ComplexShape</a> <span class="fn">ι'</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{u_4, u_3}</a>      <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/CategoryTheory/Limits/Shapes/ZeroMorphisms.html#CategoryTheory.Limits.HasZeroMorphisms">CategoryTheory.Limits.HasZeroMorphisms</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(K : <span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/HomologicalComplex.html#HomologicalComplex">HomologicalComplex</a> <span class="fn">C</span> <span class="fn">c'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn"><span class="fn">c</span>.Embedding</span> <span class="fn">c'</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">e</span>.IsTruncGE</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn">∀ (<span class="fn">i'</span> : <span class="fn">ι'</span>), <span class="fn"><span class="fn"><span class="fn">K</span>.HasHomology</span> <span class="fn">i'</span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/CategoryTheory/Limits/Shapes/ZeroObjects.html#CategoryTheory.Limits.HasZeroObject">CategoryTheory.Limits.HasZeroObject</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i : <span class="fn">ι</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i' : <span class="fn">ι'</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hi' : <span class="fn"><span class="fn"><span class="fn"><span class="fn">e</span>.f</span> <span class="fn">i</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">i'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hi : <span class="fn"><a href="../../../.././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn"><span class="fn">e</span>.BoundaryGE</span> <span class="fn">i</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">K</span>.truncGE</span> <span class="fn">e</span>)</span>.X</span> <span class="fn">i'</span></span> <a href="../../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.Iso">≅</a> <span class="fn"><span class="fn"><span class="fn">K</span>.X</span> <span class="fn">i'</span></span></span></div></div><p>The isomorphism <code>(K.<a href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE">truncGE</a> e).<a href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'.X">X</a> i' ≅ K.<a href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'.X">X</a> i'</code> when <code>e.f i = i'</code>
+and <code>e.BoundaryGE i</code> does not hold.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><span class="fn"><span class="fn">K</span>.truncGEXIso</span> <span class="fn">e</span> <span class="fn">hi'</span> <span class="fn">hi</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">K</span>.truncGE'</span> <span class="fn">e</span>)</span>.extendXIso</span> <span class="fn">e</span> <span class="fn">hi'</span></span> <a href="../../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.Iso.trans">≪≫</a> <span class="fn"><span class="fn"><span class="fn">K</span>.truncGE'XIso</span> <span class="fn">e</span> <span class="fn">hi'</span> <span class="fn">hi</span></span></span></span></li></ul></details><details id="instances-for-list-HomologicalComplex.truncGEXIso" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="HomologicalComplex.truncGEXIsoOpcycles"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Homology/Embedding/TruncGE.lean#L143-L147">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGEXIsoOpcycles"><span class="name">HomologicalComplex</span>.<span class="name">truncGEXIsoOpcycles</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι' : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/ComplexShape.html#ComplexShape">ComplexShape</a> <span class="fn">ι</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c' : <span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/ComplexShape.html#ComplexShape">ComplexShape</a> <span class="fn">ι'</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category.{u_4, u_3}</a>      <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/CategoryTheory/Limits/Shapes/ZeroMorphisms.html#CategoryTheory.Limits.HasZeroMorphisms">CategoryTheory.Limits.HasZeroMorphisms</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(K : <span class="fn"><a href="../../../.././Mathlib/Algebra/Homology/HomologicalComplex.html#HomologicalComplex">HomologicalComplex</a> <span class="fn">C</span> <span class="fn">c'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn"><span class="fn">c</span>.Embedding</span> <span class="fn">c'</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">e</span>.IsTruncGE</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn">∀ (<span class="fn">i'</span> : <span class="fn">ι'</span>), <span class="fn"><span class="fn"><span class="fn">K</span>.HasHomology</span> <span class="fn">i'</span></span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/CategoryTheory/Limits/Shapes/ZeroObjects.html#CategoryTheory.Limits.HasZeroObject">CategoryTheory.Limits.HasZeroObject</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i : <span class="fn">ι</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i' : <span class="fn">ι'</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hi' : <span class="fn"><span class="fn"><span class="fn"><span class="fn">e</span>.f</span> <span class="fn">i</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">i'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hi : <span class="fn"><span class="fn"><span class="fn">e</span>.BoundaryGE</span> <span class="fn">i</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">K</span>.truncGE</span> <span class="fn">e</span>)</span>.X</span> <span class="fn">i'</span></span> <a href="../../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.Iso">≅</a> <span class="fn"><span class="fn"><span class="fn">K</span>.opcycles</span> <span class="fn">i'</span></span></span></div></div><p>The isomorphism <code>(K.<a href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE">truncGE</a> e).<a href="../../../.././Mathlib/Algebra/Homology/Embedding/TruncGE.html#HomologicalComplex.truncGE'.X">X</a> i' ≅ K.opcycles i'</code> when <code>e.f i = i'</code>
+and <code>e.BoundaryGE i</code> holds.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><span class="fn"><span class="fn">K</span>.truncGEXIsoOpcycles</span> <span class="fn">e</span> <span class="fn">hi'</span> <span class="fn">hi</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">K</span>.truncGE'</span> <span class="fn">e</span>)</span>.extendXIso</span> <span class="fn">e</span> <span class="fn">hi'</span></span> <a href="../../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.Iso.trans">≪≫</a> <span class="fn"><span class="fn"><span class="fn">K</span>.truncGE'XIsoOpcycles</span> <span class="fn">e</span> <span class="fn">hi'</span> <span class="fn">hi</span></span></span></span></li></ul></details><details id="instances-for-list-HomologicalComplex.truncGEXIsoOpcycles" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div></main>
+<nav class="nav"><iframe src="../../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

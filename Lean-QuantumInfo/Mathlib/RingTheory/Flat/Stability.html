@@ -1,0 +1,174 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="icon" href="../../.././favicon.svg"></link><link rel="mask-icon" href="../../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.RingTheory.Flat.Stability</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.RingTheory.Flat.Stability";</script><script type="module" src="../../.././jump-src.js"></script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././expand-nav.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">RingTheory</span>.<span class="name">Flat</span>.<span class="name">Stability</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/RingTheory/Flat/Stability.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/RingTheory/IsTensorProduct.html">Mathlib.RingTheory.IsTensorProduct</a></li><li><a href="../../.././Mathlib/LinearAlgebra/TensorProduct/Tower.html">Mathlib.LinearAlgebra.TensorProduct.Tower</a></li><li><a href="../../.././Mathlib/RingTheory/Flat/Basic.html">Mathlib.RingTheory.Flat.Basic</a></li><li><a href="../../.././Mathlib/RingTheory/Localization/BaseChange.html">Mathlib.RingTheory.Localization.BaseChange</a></li><li><a href="../../.././Mathlib/Algebra/Module/LocalizedModule/Basic.html">Mathlib.Algebra.Module.LocalizedModule.Basic</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.RingTheory.Flat.Stability" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#Module.Flat.trans"><span class="name">Module</span>.<span class="name">Flat</span>.<span class="name">trans</span></a></div><div class="nav_link"><a class="break_within" href="#Module.Flat.comp"><span class="name">Module</span>.<span class="name">Flat</span>.<span class="name">comp</span></a></div><div class="nav_link"><a class="break_within" href="#Module.Flat.baseChange"><span class="name">Module</span>.<span class="name">Flat</span>.<span class="name">baseChange</span></a></div><div class="nav_link"><a class="break_within" href="#Module.Flat.isBaseChange"><span class="name">Module</span>.<span class="name">Flat</span>.<span class="name">isBaseChange</span></a></div><div class="nav_link"><a class="break_within" href="#Module.Flat.localizedModule"><span class="name">Module</span>.<span class="name">Flat</span>.<span class="name">localizedModule</span></a></div><div class="nav_link"><a class="break_within" href="#Module.Flat.of_isLocalizedModule"><span class="name">Module</span>.<span class="name">Flat</span>.<span class="name">of_isLocalizedModule</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Flatness-is-stable-under-composition-and-base-change">Flatness is stable under composition and base change <a class="hover-link" href="#Flatness-is-stable-under-composition-and-base-change">#</a></h1><p>We show that flatness is stable under composition and base change.</p><h2 class="markdown-heading" id="Main-theorems">Main theorems <a class="hover-link" href="#Main-theorems">#</a></h2><ul>
+<li><code><a href="../../.././Mathlib/RingTheory/Flat/Stability.html#Module.Flat.comp">Module.Flat.comp</a></code>: if <code>S</code> is a flat <code>R</code>-algebra and <code>M</code> is a flat <code>S</code>-module,
+then <code>M</code> is a flat <code>R</code>-module</li>
+<li><code><a href="../../.././Mathlib/RingTheory/Flat/Stability.html#Module.Flat.baseChange">Module.Flat.baseChange</a></code>: if <code>M</code> is a flat <code>R</code>-module and <code>S</code> is any <code>R</code>-algebra,
+then <code>S ⊗[R] M</code> is <code>S</code>-flat.</li>
+<li><code><a href="../../.././Mathlib/RingTheory/Flat/Stability.html#Module.Flat.of_isLocalizedModule">Module.Flat.of_isLocalizedModule</a></code>: if <code>M</code> is a flat <code>R</code>-module and <code>S</code> is a submonoid of <code>R</code>
+then the localization of <code>M</code> at <code>S</code> is flat as a module
+for the localization of <code>R</code> at <code>S</code>.</li>
+</ul></div><div class="mod_doc"><h3 class="markdown-heading" id="Composition">Composition <a class="hover-link" href="#Composition">#</a></h3><p>Let <code>R</code> be a ring, <code>S</code> a flat <code>R</code>-algebra and <code>M</code> a flat <code>S</code>-module. To show that <code>M</code> is flat
+as an <code>R</code>-module, we show that the inclusion of an <code>R</code>-ideal <code>I</code> into <code>R</code> tensored on the left with
+<code>M</code> is injective. For this consider the composition of natural maps</p><p><code>M ⊗[R] I ≃ M ⊗[S] (S ⊗[R] I) ≃ M ⊗[S] J → M ⊗[S] S ≃ M ≃ M ⊗[R] R</code></p><p>where <code>J</code> is the image of <code>S ⊗[R] I</code> under the (by flatness of <code>S</code>) injective map
+<code>S ⊗[R] I → S</code>. One checks that this composition is precisely <code>I → R</code> tensored on the left
+with <code>M</code> and it is injective as a composition of injective maps (note that
+<code>M ⊗[S] J → M ⊗[S] S</code> is injective because <code>M</code> is <code>S</code>-flat).</p></div><div class="decl" id="Module.Flat.trans"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/RingTheory/Flat/Stability.lean#L89-L98">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/Flat/Stability.html#Module.Flat.trans"><span class="name">Module</span>.<span class="name">Flat</span>.<span class="name">trans</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(S : <a href="../../.././foundational_types.html">Type</a> v)</span></span>
+<span class="decl_args">
+<span class="fn">(M : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">S</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">R</span> <span class="fn">S</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/RingTheory/Flat/Basic.html#Module.Flat">Module.Flat</a> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/RingTheory/Flat/Basic.html#Module.Flat">Module.Flat</a> <span class="fn">S</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/RingTheory/Flat/Basic.html#Module.Flat">Module.Flat</a> <span class="fn">R</span> <span class="fn">M</span></span></div></div><p>If <code>S</code> is a flat <code>R</code>-algebra, then any flat <code>S</code>-Module is also <code>R</code>-flat.</p></div></div><div class="decl" id="Module.Flat.comp"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/RingTheory/Flat/Stability.lean#L100-L100">source</a></div><div class="attributes">@[deprecated Module.Flat.trans]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/Flat/Stability.html#Module.Flat.comp"><span class="name">Module</span>.<span class="name">Flat</span>.<span class="name">comp</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(S : <a href="../../.././foundational_types.html">Type</a> v)</span></span>
+<span class="decl_args">
+<span class="fn">(M : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">S</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">R</span> <span class="fn">S</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/RingTheory/Flat/Basic.html#Module.Flat">Module.Flat</a> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/RingTheory/Flat/Basic.html#Module.Flat">Module.Flat</a> <span class="fn">S</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/RingTheory/Flat/Basic.html#Module.Flat">Module.Flat</a> <span class="fn">R</span> <span class="fn">M</span></span></div></div><p><strong>Alias</strong> of <code><a href="../../.././Mathlib/RingTheory/Flat/Stability.html#Module.Flat.trans">Module.Flat.trans</a></code>.</p><hr></hr><p>If <code>S</code> is a flat <code>R</code>-algebra, then any flat <code>S</code>-Module is also <code>R</code>-flat.</p></div></div><div class="mod_doc"><h3 class="markdown-heading" id="Base-change">Base change <a class="hover-link" href="#Base-change">#</a></h3><p>Let <code>R</code> be a ring, <code>M</code> a flat <code>R</code>-module and <code>S</code> an <code>R</code>-algebra. To show that
+<code>S ⊗[R] M</code> is <code>S</code>-flat, we consider for an ideal <code>I</code> in <code>S</code> the composition of natural maps</p><p><code>I ⊗[S] (S ⊗[R] M) ≃ I ⊗[R] M → S ⊗[R] M ≃ S ⊗[S] (S ⊗[R] M)</code>.</p><p>One checks that this composition is precisely the inclusion <code>I → S</code> tensored on the right
+with <code>S ⊗[R] M</code> and that the former is injective (note that <code>I ⊗[R] M → S ⊗[R] M</code> is
+injective, since <code>M</code> is <code>R</code>-flat).</p></div><div class="decl" id="Module.Flat.baseChange"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/RingTheory/Flat/Stability.lean#L137-L143">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/Flat/Stability.html#Module.Flat.baseChange"><span class="name">Module</span>.<span class="name">Flat</span>.<span class="name">baseChange</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(S : <a href="../../.././foundational_types.html">Type</a> v)</span></span>
+<span class="decl_args">
+<span class="fn">(M : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/RingTheory/Flat/Basic.html#Module.Flat">Module.Flat</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/RingTheory/Flat/Basic.html#Module.Flat">Module.Flat</a> <span class="fn">S</span> <span class="fn">(<a href="../../.././Mathlib/LinearAlgebra/TensorProduct/Basic.html#TensorProduct">TensorProduct</a> <span class="fn">R</span> <span class="fn">S</span> <span class="fn">M</span>)</span></span></div></div><p>If <code>M</code> is a flat <code>R</code>-module and <code>S</code> is any <code>R</code>-algebra, <code>S ⊗[R] M</code> is <code>S</code>-flat.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="Module.Flat.isBaseChange"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/RingTheory/Flat/Stability.lean#L145-L149">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/Flat/Stability.html#Module.Flat.isBaseChange"><span class="name">Module</span>.<span class="name">Flat</span>.<span class="name">isBaseChange</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(S : <a href="../../.././foundational_types.html">Type</a> v)</span></span>
+<span class="decl_args">
+<span class="fn">(M : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/RingTheory/Flat/Basic.html#Module.Flat">Module.Flat</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(N : <a href="../../.././foundational_types.html">Type</a> t)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">S</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">R</span> <span class="fn">S</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">]</a> <span class="fn">N</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/RingTheory/IsTensorProduct.html#IsBaseChange">IsBaseChange</a> <span class="fn">S</span> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/RingTheory/Flat/Basic.html#Module.Flat">Module.Flat</a> <span class="fn">S</span> <span class="fn">N</span></span></div></div><p>A base change of a flat module is flat.</p></div></div><div class="decl" id="Module.Flat.localizedModule"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/RingTheory/Flat/Stability.lean#L159-L164">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/Flat/Stability.html#Module.Flat.localizedModule"><span class="name">Module</span>.<span class="name">Flat</span>.<span class="name">localizedModule</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/RingTheory/Flat/Basic.html#Module.Flat">Module.Flat</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(S : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Submonoid/Defs.html#Submonoid">Submonoid</a> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/RingTheory/Flat/Basic.html#Module.Flat">Module.Flat</a> <span class="fn">(<a href="../../.././Mathlib/GroupTheory/MonoidLocalization/Basic.html#Localization">Localization</a> <span class="fn">S</span>)</span> <span class="fn">(<a href="../../.././Mathlib/Algebra/Module/LocalizedModule/Basic.html#LocalizedModule">LocalizedModule</a> <span class="fn">S</span> <span class="fn">M</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="Module.Flat.of_isLocalizedModule"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/RingTheory/Flat/Stability.lean#L166-L169">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/Flat/Stability.html#Module.Flat.of_isLocalizedModule"><span class="name">Module</span>.<span class="name">Flat</span>.<span class="name">of_isLocalizedModule</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Mp : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(Rp : <a href="../../.././foundational_types.html">Type</a> v)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">Rp</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">Rp</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">Mp</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">Mp</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">Rp</span> <span class="fn">Mp</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">R</span> <span class="fn">Rp</span> <span class="fn">Mp</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/RingTheory/Flat/Basic.html#Module.Flat">Module.Flat</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(S : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Submonoid/Defs.html#Submonoid">Submonoid</a> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/RingTheory/Localization/Defs.html#IsLocalization">IsLocalization</a> <span class="fn">S</span> <span class="fn">Rp</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">]</a> <span class="fn">Mp</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[h : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/LocalizedModule/Basic.html#IsLocalizedModule">IsLocalizedModule</a> <span class="fn">S</span> <span class="fn">f</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/RingTheory/Flat/Basic.html#Module.Flat">Module.Flat</a> <span class="fn">Rp</span> <span class="fn">Mp</span></span></div></div></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

@@ -1,0 +1,434 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../.././style.css"></link><link rel="icon" href="../.././favicon.svg"></link><link rel="mask-icon" href="../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.LinearAlgebra.Reflection</title><script defer="true" src="../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../.././";</script><script>const MODULE_NAME="Mathlib.LinearAlgebra.Reflection";</script><script type="module" src="../.././jump-src.js"></script><script type="module" src="../.././search.js"></script><script type="module" src="../.././expand-nav.js"></script><script type="module" src="../.././how-about.js"></script><script type="module" src="../.././instances.js"></script><script type="module" src="../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">LinearAlgebra</span>.<span class="name">Reflection</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/LinearAlgebra/Reflection.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../.././Init.html">Init</a></li><li><a href="../.././Mathlib/GroupTheory/OrderOfElement.html">Mathlib.GroupTheory.OrderOfElement</a></li><li><a href="../.././Mathlib/LinearAlgebra/Dual.html">Mathlib.LinearAlgebra.Dual</a></li><li><a href="../.././Mathlib/LinearAlgebra/FiniteSpan.html">Mathlib.LinearAlgebra.FiniteSpan</a></li><li><a href="../.././Mathlib/Algebra/Module/LinearMap/Basic.html">Mathlib.Algebra.Module.LinearMap.Basic</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.LinearAlgebra.Reflection" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#Module.preReflection"><span class="name">Module</span>.<span class="name">preReflection</span></a></div><div class="nav_link"><a class="break_within" href="#Module.preReflection_apply"><span class="name">Module</span>.<span class="name">preReflection_apply</span></a></div><div class="nav_link"><a class="break_within" href="#Module.preReflection_apply_self"><span class="name">Module</span>.<span class="name">preReflection_apply_self</span></a></div><div class="nav_link"><a class="break_within" href="#Module.involutive_preReflection"><span class="name">Module</span>.<span class="name">involutive_preReflection</span></a></div><div class="nav_link"><a class="break_within" href="#Module.preReflection_preReflection"><span class="name">Module</span>.<span class="name">preReflection_preReflection</span></a></div><div class="nav_link"><a class="break_within" href="#Module.reflection"><span class="name">Module</span>.<span class="name">reflection</span></a></div><div class="nav_link"><a class="break_within" href="#Module.reflection_apply"><span class="name">Module</span>.<span class="name">reflection_apply</span></a></div><div class="nav_link"><a class="break_within" href="#Module.reflection_apply_self"><span class="name">Module</span>.<span class="name">reflection_apply_self</span></a></div><div class="nav_link"><a class="break_within" href="#Module.involutive_reflection"><span class="name">Module</span>.<span class="name">involutive_reflection</span></a></div><div class="nav_link"><a class="break_within" href="#Module.reflection_symm"><span class="name">Module</span>.<span class="name">reflection_symm</span></a></div><div class="nav_link"><a class="break_within" href="#Module.invOn_reflection_of_mapsTo"><span class="name">Module</span>.<span class="name">invOn_reflection_of_mapsTo</span></a></div><div class="nav_link"><a class="break_within" href="#Module.bijOn_reflection_of_mapsTo"><span class="name">Module</span>.<span class="name">bijOn_reflection_of_mapsTo</span></a></div><div class="nav_link"><a class="break_within" href="#Module.Dual.eq_of_preReflection_mapsTo"><span class="name">Module</span>.<span class="name">Dual</span>.<span class="name">eq_of_preReflection_mapsTo</span></a></div><div class="nav_link"><a class="break_within" href="#Module.Dual.eq_of_preReflection_mapsTo'"><span class="name">Module</span>.<span class="name">Dual</span>.<span class="name">eq_of_preReflection_mapsTo'</span></a></div><div class="nav_link"><a class="break_within" href="#Module.reflection_reflection_iterate"><span class="name">Module</span>.<span class="name">reflection_reflection_iterate</span></a></div><div class="nav_link"><a class="break_within" href="#Module.infinite_range_reflection_reflection_iterate_iff"><span class="name">Module</span>.<span class="name">infinite_range_reflection_reflection_iterate_iff</span></a></div><div class="nav_link"><a class="break_within" href="#Module.eq_of_mapsTo_reflection_of_mem"><span class="name">Module</span>.<span class="name">eq_of_mapsTo_reflection_of_mem</span></a></div><div class="nav_link"><a class="break_within" href="#Module.injOn_dualMap_subtype_span_range_range"><span class="name">Module</span>.<span class="name">injOn_dualMap_subtype_span_range_range</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Reflections-in-linear-algebra">Reflections in linear algebra <a class="hover-link" href="#Reflections-in-linear-algebra">#</a></h1><p>Given an element <code>x</code> in a module <code>M</code> together with a linear form <code>f</code> on <code>M</code> such that <code>f x = 2</code>, the
+map <code>y ↦ y - (f y) • x</code> is an involutive endomorphism of <code>M</code>, such that:</p><ol>
+<li>the kernel of <code>f</code> is fixed,</li>
+<li>the point <code>x ↦ -x</code>.</li>
+</ol><p>Such endomorphisms are often called reflections of the module <code>M</code>. When <code>M</code> carries an inner product
+for which <code>x</code> is perpendicular to the kernel of <code>f</code>, then (with mild assumptions) the endomorphism
+is characterised by properties 1 and 2 above, and is a linear isometry.</p><h2 class="markdown-heading" id="Main-definitions-results">Main definitions / results: <a class="hover-link" href="#Main-definitions-results">#</a></h2><ul>
+<li><code><a href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.preReflection">Module.preReflection</a></code>: the definition of the map <code>y ↦ y - (f y) • x</code>. Its main utility lies in
+the fact that it does not require the assumption <code>f x = 2</code>, giving the user freedom to defer
+discharging this proof obligation.</li>
+<li><code><a href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.reflection">Module.reflection</a></code>: the definition of the map <code>y ↦ y - (f y) • x</code>. This requires the assumption
+that <code>f x = 2</code> but by way of compensation it produces a linear equivalence rather than a mere
+linear map.</li>
+<li><code><a href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.Dual.eq_of_preReflection_mapsTo">Module.Dual.eq_of_preReflection_mapsTo</a></code>: a uniqueness result about reflections preserving
+finite spanning sets that is useful in the theory of root data / systems.</li>
+</ul><h2 class="markdown-heading" id="TODO">TODO <a class="hover-link" href="#TODO">#</a></h2><p>Related definitions of reflection exists elsewhere in the library. These more specialised
+definitions, which require an ambient <code>InnerProductSpace</code> structure, are <code><a href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.reflection">reflection</a></code> (of type
+<code>LinearIsometryEquiv</code>) and <code>EuclideanGeometry.<a href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.reflection">reflection</a></code> (of type <code>AffineIsometryEquiv</code>). We
+should connect (or unify) these definitions with <code>Module.reflecton</code> defined here.</p></div><div class="decl" id="Module.preReflection"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/LinearAlgebra/Reflection.lean#L53-L59">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.preReflection"><span class="name">Module</span>.<span class="name">preReflection</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">M</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Dual.html#Module.Dual">Module.Dual</a> <span class="fn">R</span> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Algebra/Module/LinearMap/End.html#Module.End">Module.End</a> <span class="fn">R</span> <span class="fn">M</span></span></div></div><p>Given an element <code>x</code> in a module <code>M</code> and a linear form <code>f</code> on <code>M</code>, we define the endomorphism
+of <code>M</code> for which <code>y ↦ y - (f y) • x</code>.</p><p>One is typically interested in this endomorphism when <code>f x = 2</code>; this definition exists to allow the
+user defer discharging this proof obligation. See also <code><a href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.reflection">Module.reflection</a></code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.preReflection">Module.preReflection</a> <span class="fn">x</span> <span class="fn">f</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">LinearMap.id</span> <a href="../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><a href="../.././Mathlib/Algebra/Module/LinearMap/End.html#LinearMap.smulRight">LinearMap.smulRight</a> <span class="fn">f</span> <span class="fn">x</span></span></span></span></li></ul></details><details id="instances-for-list-Module.preReflection" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Module.preReflection_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/LinearAlgebra/Reflection.lean#L61-L63">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.preReflection_apply"><span class="name">Module</span>.<span class="name">preReflection_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">M</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Dual.html#Module.Dual">Module.Dual</a> <span class="fn">R</span> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(y : <span class="fn">M</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.preReflection">Module.preReflection</a> <span class="fn">x</span> <span class="fn">f</span>)</span> <span class="fn">y</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">y</span> <a href="../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">y</span></span> <a href="../.././Mathlib/Algebra/Group/Operations.html#HSMul.hSMul">•</a> <span class="fn">x</span></span></span></span></div></div></div></div><div class="decl" id="Module.preReflection_apply_self"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/LinearAlgebra/Reflection.lean#L67-L69">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.preReflection_apply_self"><span class="name">Module</span>.<span class="name">preReflection_apply_self</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">M</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Dual.html#Module.Dual">Module.Dual</a> <span class="fn">R</span> <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">2</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.preReflection">Module.preReflection</a> <span class="fn">x</span> <span class="fn">f</span>)</span> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">x</span></span></span></div></div></div></div><div class="decl" id="Module.involutive_preReflection"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/LinearAlgebra/Reflection.lean#L71-L73">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.involutive_preReflection"><span class="name">Module</span>.<span class="name">involutive_preReflection</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">M</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Dual.html#Module.Dual">Module.Dual</a> <span class="fn">R</span> <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">2</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Logic/Function/Basic.html#Function.Involutive">Function.Involutive</a> <span class="fn">⇑<span class="fn">(<a href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.preReflection">Module.preReflection</a> <span class="fn">x</span> <span class="fn">f</span>)</span></span></span></div></div></div></div><div class="decl" id="Module.preReflection_preReflection"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/LinearAlgebra/Reflection.lean#L75-L82">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.preReflection_preReflection"><span class="name">Module</span>.<span class="name">preReflection_preReflection</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">M</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Dual.html#Module.Dual">Module.Dual</a> <span class="fn">R</span> <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(y : <span class="fn">M</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Dual.html#Module.Dual">Module.Dual</a> <span class="fn">R</span> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">2</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.preReflection">Module.preReflection</a> <span class="fn">(<span class="fn">(<a href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.preReflection">Module.preReflection</a> <span class="fn">x</span> <span class="fn">f</span>)</span> <span class="fn">y</span>)</span> <span class="fn">(<span class="fn">(<a href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.preReflection">Module.preReflection</a> <span class="fn">f</span> <span class="fn">(<span class="fn">(<a href="../.././Mathlib/LinearAlgebra/Dual.html#Module.Dual.eval">Module.Dual.eval</a> <span class="fn">R</span> <span class="fn">M</span>)</span> <span class="fn">x</span>)</span>)</span> <span class="fn">g</span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><span class="fn"><a href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.preReflection">Module.preReflection</a> <span class="fn">x</span> <span class="fn">f</span></span> ∘ₗ <span class="fn"><span class="fn"><a href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.preReflection">Module.preReflection</a> <span class="fn">y</span> <span class="fn">g</span></span> ∘ₗ <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.preReflection">Module.preReflection</a> <span class="fn">x</span> <span class="fn">f</span></span></span></span></span></div></div></div></div><div class="decl" id="Module.reflection"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/LinearAlgebra/Reflection.lean#L84-L89">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.reflection"><span class="name">Module</span>.<span class="name">reflection</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">M</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Dual.html#Module.Dual">Module.Dual</a> <span class="fn">R</span> <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">2</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">M</span> <a href="../.././Mathlib/Algebra/Module/Equiv/Defs.html#LinearEquiv">≃ₗ[</a><span class="fn">R</span><a href="../.././Mathlib/Algebra/Module/Equiv/Defs.html#LinearEquiv">]</a> <span class="fn">M</span></span></div></div><p>Given an element <code>x</code> in a module <code>M</code> and a linear form <code>f</code> on <code>M</code> for which <code>f x = 2</code>, we define
+the endomorphism of <code>M</code> for which <code>y ↦ y - (f y) • x</code>.</p><p>It is an involutive endomorphism of <code>M</code> fixing the kernel of <code>f</code> for which <code>x ↦ -x</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.reflection">Module.reflection</a> <span class="fn">h</span></span> <a href="../.././Init/Prelude.html#Eq">=</a>   <span class="fn">{ <span class="fn">toLinearMap</span> := <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.preReflection">Module.preReflection</a> <span class="fn">x</span> <span class="fn">f</span></span>,
+    <span class="fn">invFun</span> := <span class="fn"><span class="fn">(<a href="../.././Mathlib/Logic/Equiv/Basic.html#Function.Involutive.toPerm">Function.Involutive.toPerm</a> <span class="fn">⇑<span class="fn">(<a href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.preReflection">Module.preReflection</a> <span class="fn">x</span> <span class="fn">f</span>)</span></span> <span class="fn">⋯</span>)</span>.invFun</span>, <span class="fn">left_inv</span> := <span class="fn">⋯</span>, <span class="fn">right_inv</span> := <span class="fn">⋯</span> }</span></span></li></ul></details><details id="instances-for-list-Module.reflection" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Module.reflection_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/LinearAlgebra/Reflection.lean#L91-L93">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.reflection_apply"><span class="name">Module</span>.<span class="name">reflection_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">M</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Dual.html#Module.Dual">Module.Dual</a> <span class="fn">R</span> <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(y : <span class="fn">M</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">2</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.reflection">Module.reflection</a> <span class="fn">h</span>)</span> <span class="fn">y</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">y</span> <a href="../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">y</span></span> <a href="../.././Mathlib/Algebra/Group/Operations.html#HSMul.hSMul">•</a> <span class="fn">x</span></span></span></span></div></div></div></div><div class="decl" id="Module.reflection_apply_self"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/LinearAlgebra/Reflection.lean#L95-L98">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.reflection_apply_self"><span class="name">Module</span>.<span class="name">reflection_apply_self</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">M</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Dual.html#Module.Dual">Module.Dual</a> <span class="fn">R</span> <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">2</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.reflection">Module.reflection</a> <span class="fn">h</span>)</span> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">x</span></span></span></div></div></div></div><div class="decl" id="Module.involutive_reflection"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/LinearAlgebra/Reflection.lean#L100-L102">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.involutive_reflection"><span class="name">Module</span>.<span class="name">involutive_reflection</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">M</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Dual.html#Module.Dual">Module.Dual</a> <span class="fn">R</span> <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">2</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Logic/Function/Basic.html#Function.Involutive">Function.Involutive</a> <span class="fn">⇑<span class="fn">(<a href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.reflection">Module.reflection</a> <span class="fn">h</span>)</span></span></span></div></div></div></div><div class="decl" id="Module.reflection_symm"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/LinearAlgebra/Reflection.lean#L104-L107">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.reflection_symm"><span class="name">Module</span>.<span class="name">reflection_symm</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">M</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Dual.html#Module.Dual">Module.Dual</a> <span class="fn">R</span> <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">2</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.reflection">Module.reflection</a> <span class="fn">h</span>)</span>.symm</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.reflection">Module.reflection</a> <span class="fn">h</span></span></span></div></div></div></div><div class="decl" id="Module.invOn_reflection_of_mapsTo"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/LinearAlgebra/Reflection.lean#L109-L111">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.invOn_reflection_of_mapsTo"><span class="name">Module</span>.<span class="name">invOn_reflection_of_mapsTo</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">M</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Dual.html#Module.Dual">Module.Dual</a> <span class="fn">R</span> <span class="fn">M</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Φ : <span class="fn"><a href="../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">2</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Data/Set/Operations.html#Set.InvOn">Set.InvOn</a> <span class="fn">(⇑<span class="fn">(<a href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.reflection">Module.reflection</a> <span class="fn">h</span>)</span>)</span> <span class="fn">(⇑<span class="fn">(<a href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.reflection">Module.reflection</a> <span class="fn">h</span>)</span>)</span> <span class="fn">Φ</span> <span class="fn">Φ</span></span></div></div></div></div><div class="decl" id="Module.bijOn_reflection_of_mapsTo"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/LinearAlgebra/Reflection.lean#L113-L115">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.bijOn_reflection_of_mapsTo"><span class="name">Module</span>.<span class="name">bijOn_reflection_of_mapsTo</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">M</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Dual.html#Module.Dual">Module.Dual</a> <span class="fn">R</span> <span class="fn">M</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Φ : <span class="fn"><a href="../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">2</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h' : <span class="fn"><a href="../.././Mathlib/Data/Set/Operations.html#Set.MapsTo">Set.MapsTo</a> <span class="fn">(⇑<span class="fn">(<a href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.reflection">Module.reflection</a> <span class="fn">h</span>)</span>)</span> <span class="fn">Φ</span> <span class="fn">Φ</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Data/Set/Operations.html#Set.BijOn">Set.BijOn</a> <span class="fn">(⇑<span class="fn">(<a href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.reflection">Module.reflection</a> <span class="fn">h</span>)</span>)</span> <span class="fn">Φ</span> <span class="fn">Φ</span></span></div></div></div></div><div class="decl" id="Module.Dual.eq_of_preReflection_mapsTo"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/LinearAlgebra/Reflection.lean#L117-L151">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.Dual.eq_of_preReflection_mapsTo"><span class="name">Module</span>.<span class="name">Dual</span>.<span class="name">eq_of_preReflection_mapsTo</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/CharZero/Defs.html#CharZero">CharZero</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/NoZeroSMulDivisors/Defs.html#NoZeroSMulDivisors">NoZeroSMulDivisors</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">M</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hx : <span class="fn"><span class="fn">x</span> <a href="../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{Φ : <span class="fn"><a href="../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hΦ₁ : <span class="fn"><span class="fn">Φ</span>.Finite</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hΦ₂ : <span class="fn"><span class="fn"><a href="../.././Mathlib/LinearAlgebra/Span/Defs.html#Submodule.span">Submodule.span</a> <span class="fn">R</span> <span class="fn">Φ</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{f g : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Dual.html#Module.Dual">Module.Dual</a> <span class="fn">R</span> <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf₁ : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">2</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf₂ : <span class="fn"><a href="../.././Mathlib/Data/Set/Operations.html#Set.MapsTo">Set.MapsTo</a> <span class="fn">(⇑<span class="fn">(<a href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.preReflection">Module.preReflection</a> <span class="fn">x</span> <span class="fn">f</span>)</span>)</span> <span class="fn">Φ</span> <span class="fn">Φ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hg₁ : <span class="fn"><span class="fn"><span class="fn">g</span> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">2</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hg₂ : <span class="fn"><a href="../.././Mathlib/Data/Set/Operations.html#Set.MapsTo">Set.MapsTo</a> <span class="fn">(⇑<span class="fn">(<a href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.preReflection">Module.preReflection</a> <span class="fn">x</span> <span class="fn">g</span>)</span>)</span> <span class="fn">Φ</span> <span class="fn">Φ</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">f</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">g</span></span></div></div><p>See also <code><a href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.Dual.eq_of_preReflection_mapsTo'">Module.Dual.eq_of_preReflection_mapsTo'</a></code> for a variant of this lemma which
+applies when <code>Φ</code> does not span.</p><p>This rather technical-looking lemma exists because it is exactly what is needed to establish various
+uniqueness results for root data / systems. One might regard this lemma as lying at the boundary of
+linear algebra and combinatorics since the finiteness assumption is the key.</p></div></div><div class="decl" id="Module.Dual.eq_of_preReflection_mapsTo'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/LinearAlgebra/Reflection.lean#L153-L178">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.Dual.eq_of_preReflection_mapsTo'"><span class="name">Module</span>.<span class="name">Dual</span>.<span class="name">eq_of_preReflection_mapsTo'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/CharZero/Defs.html#CharZero">CharZero</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/NoZeroSMulDivisors/Defs.html#NoZeroSMulDivisors">NoZeroSMulDivisors</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">M</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hx : <span class="fn"><span class="fn">x</span> <a href="../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{Φ : <span class="fn"><a href="../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hΦ₁ : <span class="fn"><span class="fn">Φ</span>.Finite</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hx' : <span class="fn"><span class="fn">x</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Span/Defs.html#Submodule.span">Submodule.span</a> <span class="fn">R</span> <span class="fn">Φ</span></span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{f g : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Dual.html#Module.Dual">Module.Dual</a> <span class="fn">R</span> <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf₁ : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">2</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf₂ : <span class="fn"><a href="../.././Mathlib/Data/Set/Operations.html#Set.MapsTo">Set.MapsTo</a> <span class="fn">(⇑<span class="fn">(<a href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.preReflection">Module.preReflection</a> <span class="fn">x</span> <span class="fn">f</span>)</span>)</span> <span class="fn">Φ</span> <span class="fn">Φ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hg₁ : <span class="fn"><span class="fn"><span class="fn">g</span> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">2</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hg₂ : <span class="fn"><a href="../.././Mathlib/Data/Set/Operations.html#Set.MapsTo">Set.MapsTo</a> <span class="fn">(⇑<span class="fn">(<a href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.preReflection">Module.preReflection</a> <span class="fn">x</span> <span class="fn">g</span>)</span>)</span> <span class="fn">Φ</span> <span class="fn">Φ</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<a href="../.././Mathlib/LinearAlgebra/Span/Defs.html#Submodule.span">Submodule.span</a> <span class="fn">R</span> <span class="fn">Φ</span>)</span>.subtype</span>.dualMap</span> <span class="fn">f</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn"><span class="fn">(<a href="../.././Mathlib/LinearAlgebra/Span/Defs.html#Submodule.span">Submodule.span</a> <span class="fn">R</span> <span class="fn">Φ</span>)</span>.subtype</span>.dualMap</span> <span class="fn">g</span></span></span></div></div><p>This rather technical-looking lemma exists because it is exactly what is needed to establish a
+uniqueness result for root data. See the doc string of <code><a href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.Dual.eq_of_preReflection_mapsTo">Module.Dual.eq_of_preReflection_mapsTo</a></code> for
+further remarks.</p></div></div><div class="decl" id="Module.reflection_reflection_iterate"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/LinearAlgebra/Reflection.lean#L183-L196">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.reflection_reflection_iterate"><span class="name">Module</span>.<span class="name">reflection_reflection_iterate</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">M</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Dual.html#Module.Dual">Module.Dual</a> <span class="fn">R</span> <span class="fn">M</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">M</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Dual.html#Module.Dual">Module.Dual</a> <span class="fn">R</span> <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hfx : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">2</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hgy : <span class="fn"><span class="fn"><span class="fn">g</span> <span class="fn">y</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">2</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hgxfy : <span class="fn"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">y</span></span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">g</span> <span class="fn">x</span></span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">4</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(⇑<span class="fn">(<span class="fn"><a href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.reflection">Module.reflection</a> <span class="fn">hgy</span></span> ≪≫ₗ <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.reflection">Module.reflection</a> <span class="fn">hfx</span></span>)</span>)</span><a href="../.././Mathlib/Logic/Function/Iterate.html#Nat.iterate">^[</a><span class="fn">n</span><a href="../.././Mathlib/Logic/Function/Iterate.html#Nat.iterate">]</a></span> <span class="fn">y</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">y</span> <a href="../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">n</span> <a href="../.././Mathlib/Algebra/Group/Operations.html#HSMul.hSMul">•</a> <span class="fn">(<span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">y</span></span> <a href="../.././Mathlib/Algebra/Group/Operations.html#HSMul.hSMul">•</a> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">2</span> <a href="../.././Mathlib/Algebra/Group/Operations.html#HSMul.hSMul">•</a> <span class="fn">y</span></span>)</span></span></span></span></div></div><p>Composite of reflections in &quot;parallel&quot; hyperplanes is a shear (special case).</p></div></div><div class="decl" id="Module.infinite_range_reflection_reflection_iterate_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/LinearAlgebra/Reflection.lean#L198-L202">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.infinite_range_reflection_reflection_iterate_iff"><span class="name">Module</span>.<span class="name">infinite_range_reflection_reflection_iterate_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">M</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Dual.html#Module.Dual">Module.Dual</a> <span class="fn">R</span> <span class="fn">M</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">M</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Dual.html#Module.Dual">Module.Dual</a> <span class="fn">R</span> <span class="fn">M</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/NoZeroSMulDivisors/Defs.html#NoZeroSMulDivisors">NoZeroSMulDivisors</a> <a href="../.././Init/Data/Int/Basic.html#Int">ℤ</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hfx : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">2</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hgy : <span class="fn"><span class="fn"><span class="fn">g</span> <span class="fn">y</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">2</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hgxfy : <span class="fn"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">y</span></span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">g</span> <span class="fn">x</span></span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">4</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../.././Mathlib/Data/Set/Operations.html#Set.range">Set.range</a> <span class="fn">fun (<span class="fn">n</span> : <a href="../.././Init/Prelude.html#Nat">ℕ</a>) =&gt; <span class="fn"><span class="fn"><span class="fn">(⇑<span class="fn">(<span class="fn"><a href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.reflection">Module.reflection</a> <span class="fn">hgy</span></span> ≪≫ₗ <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.reflection">Module.reflection</a> <span class="fn">hfx</span></span>)</span>)</span><a href="../.././Mathlib/Logic/Function/Iterate.html#Nat.iterate">^[</a><span class="fn">n</span><a href="../.././Mathlib/Logic/Function/Iterate.html#Nat.iterate">]</a></span> <span class="fn">y</span></span></span>)</span>.Infinite</span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">y</span></span> <a href="../.././Mathlib/Algebra/Group/Operations.html#HSMul.hSMul">•</a> <span class="fn">x</span></span> <a href="../.././Init/Core.html#Ne">≠</a> <span class="fn"><span class="fn">2</span> <a href="../.././Mathlib/Algebra/Group/Operations.html#HSMul.hSMul">•</a> <span class="fn">y</span></span></span></span></div></div></div></div><div class="decl" id="Module.eq_of_mapsTo_reflection_of_mem"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/LinearAlgebra/Reflection.lean#L204-L221">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.eq_of_mapsTo_reflection_of_mem"><span class="name">Module</span>.<span class="name">eq_of_mapsTo_reflection_of_mem</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">M</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Dual.html#Module.Dual">Module.Dual</a> <span class="fn">R</span> <span class="fn">M</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">M</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Dual.html#Module.Dual">Module.Dual</a> <span class="fn">R</span> <span class="fn">M</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/NoZeroSMulDivisors/Defs.html#NoZeroSMulDivisors">NoZeroSMulDivisors</a> <a href="../.././Init/Data/Int/Basic.html#Int">ℤ</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Φ : <span class="fn"><a href="../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hΦ : <span class="fn"><span class="fn">Φ</span>.Finite</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hfx : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">2</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hgy : <span class="fn"><span class="fn"><span class="fn">g</span> <span class="fn">y</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">2</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hgx : <span class="fn"><span class="fn"><span class="fn">g</span> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">2</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hfy : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">y</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">2</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hxfΦ : <span class="fn"><a href="../.././Mathlib/Data/Set/Operations.html#Set.MapsTo">Set.MapsTo</a> <span class="fn">(⇑<span class="fn">(<a href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.preReflection">Module.preReflection</a> <span class="fn">x</span> <span class="fn">f</span>)</span>)</span> <span class="fn">Φ</span> <span class="fn">Φ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hygΦ : <span class="fn"><a href="../.././Mathlib/Data/Set/Operations.html#Set.MapsTo">Set.MapsTo</a> <span class="fn">(⇑<span class="fn">(<a href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.preReflection">Module.preReflection</a> <span class="fn">y</span> <span class="fn">g</span>)</span>)</span> <span class="fn">Φ</span> <span class="fn">Φ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hyΦ : <span class="fn"><span class="fn">y</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">Φ</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">x</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">y</span></span></div></div></div></div><div class="decl" id="Module.injOn_dualMap_subtype_span_range_range"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/LinearAlgebra/Reflection.lean#L223-L235">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.injOn_dualMap_subtype_span_range_range"><span class="name">Module</span>.<span class="name">injOn_dualMap_subtype_span_range_range</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/NoZeroSMulDivisors/Defs.html#NoZeroSMulDivisors">NoZeroSMulDivisors</a> <a href="../.././Init/Data/Int/Basic.html#Int">ℤ</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn"><span class="fn">ι</span> <a href="../.././Mathlib/Logic/Embedding/Basic.html#Function.Embedding">↪</a> <span class="fn">M</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn"><span class="fn">ι</span> → <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Dual.html#Module.Dual">Module.Dual</a> <span class="fn">R</span> <span class="fn">M</span></span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hfin : <span class="fn"><span class="fn">(<a href="../.././Mathlib/Data/Set/Operations.html#Set.range">Set.range</a> <span class="fn">⇑<span class="fn">r</span></span>)</span>.Finite</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h_two : <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">ι</span>), <span class="fn"><span class="fn"><span class="fn">(<span class="fn">c</span> <span class="fn">i</span>)</span> <span class="fn">(<span class="fn">r</span> <span class="fn">i</span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">2</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h_mapsTo : <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">ι</span>), <span class="fn"><a href="../.././Mathlib/Data/Set/Operations.html#Set.MapsTo">Set.MapsTo</a> <span class="fn">(⇑<span class="fn">(<a href="../.././Mathlib/LinearAlgebra/Reflection.html#Module.preReflection">Module.preReflection</a> <span class="fn">(<span class="fn">r</span> <span class="fn">i</span>)</span> <span class="fn">(<span class="fn">c</span> <span class="fn">i</span>)</span>)</span>)</span> <span class="fn">(<a href="../.././Mathlib/Data/Set/Operations.html#Set.range">Set.range</a> <span class="fn">⇑<span class="fn">r</span></span>)</span> <span class="fn">(<a href="../.././Mathlib/Data/Set/Operations.html#Set.range">Set.range</a> <span class="fn">⇑<span class="fn">r</span></span>)</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Data/Set/Operations.html#Set.InjOn">Set.InjOn</a> <span class="fn">(⇑<span class="fn"><span class="fn"><span class="fn">(<a href="../.././Mathlib/LinearAlgebra/Span/Defs.html#Submodule.span">Submodule.span</a> <span class="fn">R</span> <span class="fn">(<a href="../.././Mathlib/Data/Set/Operations.html#Set.range">Set.range</a> <span class="fn">⇑<span class="fn">r</span></span>)</span>)</span>.subtype</span>.dualMap</span>)</span> <span class="fn">(<a href="../.././Mathlib/Data/Set/Operations.html#Set.range">Set.range</a> <span class="fn">c</span>)</span></span></div></div></div></div></main>
+<nav class="nav"><iframe src="../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

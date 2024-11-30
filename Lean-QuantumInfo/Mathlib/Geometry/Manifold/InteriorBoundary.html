@@ -1,0 +1,758 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="icon" href="../../.././favicon.svg"></link><link rel="mask-icon" href="../../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Geometry.Manifold.InteriorBoundary</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.Geometry.Manifold.InteriorBoundary";</script><script type="module" src="../../.././jump-src.js"></script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././expand-nav.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Geometry</span>.<span class="name">Manifold</span>.<span class="name">InteriorBoundary</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Geometry/Manifold/InteriorBoundary.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/Geometry/Manifold/SmoothManifoldWithCorners.html">Mathlib.Geometry.Manifold.SmoothManifoldWithCorners</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Geometry.Manifold.InteriorBoundary" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#ModelWithCorners.IsInteriorPoint"><span class="name">ModelWithCorners</span>.<span class="name">IsInteriorPoint</span></a></div><div class="nav_link"><a class="break_within" href="#ModelWithCorners.IsBoundaryPoint"><span class="name">ModelWithCorners</span>.<span class="name">IsBoundaryPoint</span></a></div><div class="nav_link"><a class="break_within" href="#ModelWithCorners.interior"><span class="name">ModelWithCorners</span>.<span class="name">interior</span></a></div><div class="nav_link"><a class="break_within" href="#ModelWithCorners.isInteriorPoint_iff"><span class="name">ModelWithCorners</span>.<span class="name">isInteriorPoint_iff</span></a></div><div class="nav_link"><a class="break_within" href="#ModelWithCorners.boundary"><span class="name">ModelWithCorners</span>.<span class="name">boundary</span></a></div><div class="nav_link"><a class="break_within" href="#ModelWithCorners.isBoundaryPoint_iff"><span class="name">ModelWithCorners</span>.<span class="name">isBoundaryPoint_iff</span></a></div><div class="nav_link"><a class="break_within" href="#ModelWithCorners.isInteriorPoint_or_isBoundaryPoint"><span class="name">ModelWithCorners</span>.<span class="name">isInteriorPoint_or_isBoundaryPoint</span></a></div><div class="nav_link"><a class="break_within" href="#ModelWithCorners.interior_union_boundary_eq_univ"><span class="name">ModelWithCorners</span>.<span class="name">interior_union_boundary_eq_univ</span></a></div><div class="nav_link"><a class="break_within" href="#ModelWithCorners.disjoint_interior_boundary"><span class="name">ModelWithCorners</span>.<span class="name">disjoint_interior_boundary</span></a></div><div class="nav_link"><a class="break_within" href="#ModelWithCorners.compl_interior"><span class="name">ModelWithCorners</span>.<span class="name">compl_interior</span></a></div><div class="nav_link"><a class="break_within" href="#ModelWithCorners.compl_boundary"><span class="name">ModelWithCorners</span>.<span class="name">compl_boundary</span></a></div><div class="nav_link"><a class="break_within" href="#range_mem_nhds_isInteriorPoint"><span class="name">range_mem_nhds_isInteriorPoint</span></a></div><div class="nav_link"><a class="break_within" href="#BoundarylessManifold"><span class="name">BoundarylessManifold</span></a></div><div class="nav_link"><a class="break_within" href="#ModelWithCorners.instBoundarylessManifold"><span class="name">ModelWithCorners</span>.<span class="name">instBoundarylessManifold</span></a></div><div class="nav_link"><a class="break_within" href="#ModelWithCorners.BoundarylessManifold.of_empty"><span class="name">ModelWithCorners</span>.<span class="name">BoundarylessManifold</span>.<span class="name">of_empty</span></a></div><div class="nav_link"><a class="break_within" href="#BoundarylessManifold.isInteriorPoint"><span class="name">BoundarylessManifold</span>.<span class="name">isInteriorPoint</span></a></div><div class="nav_link"><a class="break_within" href="#ModelWithCorners.interior_eq_univ"><span class="name">ModelWithCorners</span>.<span class="name">interior_eq_univ</span></a></div><div class="nav_link"><a class="break_within" href="#ModelWithCorners.Boundaryless.boundary_eq_empty"><span class="name">ModelWithCorners</span>.<span class="name">Boundaryless</span>.<span class="name">boundary_eq_empty</span></a></div><div class="nav_link"><a class="break_within" href="#ModelWithCorners.instIsEmptyElemBoundaryOfBoundarylessManifold"><span class="name">ModelWithCorners</span>.<span class="name">instIsEmptyElemBoundaryOfBoundarylessManifold</span></a></div><div class="nav_link"><a class="break_within" href="#ModelWithCorners.Boundaryless.iff_boundary_eq_empty"><span class="name">ModelWithCorners</span>.<span class="name">Boundaryless</span>.<span class="name">iff_boundary_eq_empty</span></a></div><div class="nav_link"><a class="break_within" href="#ModelWithCorners.Boundaryless.of_boundary_eq_empty"><span class="name">ModelWithCorners</span>.<span class="name">Boundaryless</span>.<span class="name">of_boundary_eq_empty</span></a></div><div class="nav_link"><a class="break_within" href="#ModelWithCorners.interior_prod"><span class="name">ModelWithCorners</span>.<span class="name">interior_prod</span></a></div><div class="nav_link"><a class="break_within" href="#ModelWithCorners.boundary_prod"><span class="name">ModelWithCorners</span>.<span class="name">boundary_prod</span></a></div><div class="nav_link"><a class="break_within" href="#ModelWithCorners.boundary_of_boundaryless_left"><span class="name">ModelWithCorners</span>.<span class="name">boundary_of_boundaryless_left</span></a></div><div class="nav_link"><a class="break_within" href="#ModelWithCorners.boundary_of_boundaryless_right"><span class="name">ModelWithCorners</span>.<span class="name">boundary_of_boundaryless_right</span></a></div><div class="nav_link"><a class="break_within" href="#ModelWithCorners.BoundarylessManifold.prod"><span class="name">ModelWithCorners</span>.<span class="name">BoundarylessManifold</span>.<span class="name">prod</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Interior-and-boundary-of-a-manifold">Interior and boundary of a manifold <a class="hover-link" href="#Interior-and-boundary-of-a-manifold">#</a></h1><p>Define the interior and boundary of a manifold.</p><h2 class="markdown-heading" id="Main-definitions">Main definitions <a class="hover-link" href="#Main-definitions">#</a></h2><ul>
+<li><strong>IsInteriorPoint x</strong>: <code>p ∈ M</code> is an interior point if, for <code>φ</code> being the preferred chart at <code>x</code>,
+<code>φ x</code> is an interior point of <code>φ.target</code>.</li>
+<li><strong>IsBoundaryPoint x</strong>: <code>p ∈ M</code> is a boundary point if, <code>(extChartAt I x) x ∈ <a href="../../.././Mathlib/Topology/Defs/Basic.html#frontier">frontier</a> (range I)</code>.</li>
+<li><strong>interior I M</strong> is the <strong>interior</strong> of <code>M</code>, the set of its interior points.</li>
+<li><strong>boundary I M</strong> is the <strong>boundary</strong> of <code>M</code>, the set of its boundary points.</li>
+</ul><h2 class="markdown-heading" id="Main-results">Main results <a class="hover-link" href="#Main-results">#</a></h2><ul>
+<li><code>ModelWithCorners.univ_eq_interior_union_boundary</code>: <code>M</code> is the union of its interior and boundary</li>
+<li><code>ModelWithCorners.interior_boundary_disjoint</code>: interior and boundary of <code>M</code> are disjoint</li>
+<li><code><a href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#BoundarylessManifold.isInteriorPoint">BoundarylessManifold.isInteriorPoint</a></code>: if <code>M</code> is boundaryless, every point is an interior point</li>
+<li><code><a href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.Boundaryless.boundary_eq_empty">ModelWithCorners.Boundaryless.boundary_eq_empty</a></code> and <code><a href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.Boundaryless.of_boundary_eq_empty">of_boundary_eq_empty</a></code>:
+<code>M</code> is boundaryless if and only if its boundary is empty</li>
+<li><code><a href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.interior_prod">ModelWithCorners.interior_prod</a></code>: the interior of <code>M × N</code> is the product of the interiors
+of <code>M</code> and <code>N</code>.</li>
+<li><code><a href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.boundary_prod">ModelWithCorners.boundary_prod</a></code>: the boundary of <code>M × N</code> is <code>∂M × N ∪ (M × ∂N)</code>.</li>
+<li><code><a href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.BoundarylessManifold.prod">ModelWithCorners.BoundarylessManifold.prod</a></code>: if <code>M</code> and <code>N</code> are boundaryless, so is <code>M × N</code></li>
+</ul><h2 class="markdown-heading" id="Tags">Tags <a class="hover-link" href="#Tags">#</a></h2><p>manifold, interior, boundary</p><h2 class="markdown-heading" id="TODO">TODO <a class="hover-link" href="#TODO">#</a></h2><ul>
+<li><code>x</code> is an interior point iff <em>any</em> chart around <code>x</code> maps it to <code><a href="../../.././Mathlib/Topology/Defs/Basic.html#interior">interior</a> (range I)</code>;
+similarly for the boundary.</li>
+<li>the interior of <code>M</code> is open, hence the boundary is closed (and nowhere dense)
+In finite dimensions, this requires e.g. the homology of spheres.</li>
+<li>the interior of <code>M</code> is a smooth manifold without boundary</li>
+<li><code><a href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.boundary">boundary</a> M</code> is a smooth submanifold (possibly with boundary and corners):
+follows from the corresponding statement for the model with corners <code>I</code>;
+this requires a definition of submanifolds</li>
+<li>if <code>M</code> is finite-dimensional, its boundary has measure zero</li>
+</ul></div><div class="decl" id="ModelWithCorners.IsInteriorPoint"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Geometry/Manifold/InteriorBoundary.lean#L59-L61">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.IsInteriorPoint"><span class="name">ModelWithCorners</span>.<span class="name">IsInteriorPoint</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{H : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">H</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(I : <span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/SmoothManifoldWithCorners.html#ModelWithCorners">ModelWithCorners</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">H</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/ChartedSpace.html#ChartedSpace">ChartedSpace</a> <span class="fn">H</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">M</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../.././foundational_types.html">Prop</a></div></div><p><code>p ∈ M</code> is an interior point of a manifold <code>M</code> iff its image in the extended chart
+lies in the interior of the model space.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><span class="fn"><span class="fn">I</span>.IsInteriorPoint</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">(<span class="fn"><span class="fn">↑<span class="fn">(<a href="../../.././Mathlib/Geometry/Manifold/SmoothManifoldWithCorners.html#extChartAt">extChartAt</a> <span class="fn">I</span> <span class="fn">x</span>)</span></span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#interior">interior</a> <span class="fn">(<a href="../../.././Mathlib/Data/Set/Operations.html#Set.range">Set.range</a> <span class="fn">↑<span class="fn">I</span></span>)</span></span>)</span></span></li></ul></details><details id="instances-for-list-ModelWithCorners.IsInteriorPoint" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="ModelWithCorners.IsBoundaryPoint"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Geometry/Manifold/InteriorBoundary.lean#L64-L66">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.IsBoundaryPoint"><span class="name">ModelWithCorners</span>.<span class="name">IsBoundaryPoint</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{H : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">H</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(I : <span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/SmoothManifoldWithCorners.html#ModelWithCorners">ModelWithCorners</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">H</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/ChartedSpace.html#ChartedSpace">ChartedSpace</a> <span class="fn">H</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">M</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../.././foundational_types.html">Prop</a></div></div><p><code>p ∈ M</code> is a boundary point of a manifold <code>M</code> iff its image in the extended chart
+lies on the boundary of the model space.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><span class="fn"><span class="fn">I</span>.IsBoundaryPoint</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">(<span class="fn"><span class="fn">↑<span class="fn">(<a href="../../.././Mathlib/Geometry/Manifold/SmoothManifoldWithCorners.html#extChartAt">extChartAt</a> <span class="fn">I</span> <span class="fn">x</span>)</span></span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#frontier">frontier</a> <span class="fn">(<a href="../../.././Mathlib/Data/Set/Operations.html#Set.range">Set.range</a> <span class="fn">↑<span class="fn">I</span></span>)</span></span>)</span></span></li></ul></details><details id="instances-for-list-ModelWithCorners.IsBoundaryPoint" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="ModelWithCorners.interior"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Geometry/Manifold/InteriorBoundary.lean#L69-L70">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.interior"><span class="name">ModelWithCorners</span>.<span class="name">interior</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{H : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">H</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{I : <span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/SmoothManifoldWithCorners.html#ModelWithCorners">ModelWithCorners</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">H</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(M : <a href="../../.././foundational_types.html">Type</a> u_4)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/ChartedSpace.html#ChartedSpace">ChartedSpace</a> <span class="fn">H</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">M</span></span></div></div><p>The <strong>interior</strong> of a manifold <code>M</code> is the set of its interior points.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.interior">ModelWithCorners.interior</a> <span class="fn">M</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">{<span class="fn">x</span> : <span class="fn">M</span> | <span class="fn"><span class="fn"><span class="fn">I</span>.IsInteriorPoint</span> <span class="fn">x</span></span>}</span></span></li></ul></details><details id="instances-for-list-ModelWithCorners.interior" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="ModelWithCorners.isInteriorPoint_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Geometry/Manifold/InteriorBoundary.lean#L72-L75">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.isInteriorPoint_iff"><span class="name">ModelWithCorners</span>.<span class="name">isInteriorPoint_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{H : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">H</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{I : <span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/SmoothManifoldWithCorners.html#ModelWithCorners">ModelWithCorners</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">H</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/ChartedSpace.html#ChartedSpace">ChartedSpace</a> <span class="fn">H</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">M</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">I</span>.IsInteriorPoint</span> <span class="fn">x</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">↑<span class="fn">(<a href="../../.././Mathlib/Geometry/Manifold/SmoothManifoldWithCorners.html#extChartAt">extChartAt</a> <span class="fn">I</span> <span class="fn">x</span>)</span></span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#interior">interior</a> <span class="fn"><span class="fn">(<a href="../../.././Mathlib/Geometry/Manifold/SmoothManifoldWithCorners.html#extChartAt">extChartAt</a> <span class="fn">I</span> <span class="fn">x</span>)</span>.target</span></span></span></span></div></div></div></div><div class="decl" id="ModelWithCorners.boundary"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Geometry/Manifold/InteriorBoundary.lean#L78-L79">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.boundary"><span class="name">ModelWithCorners</span>.<span class="name">boundary</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{H : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">H</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{I : <span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/SmoothManifoldWithCorners.html#ModelWithCorners">ModelWithCorners</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">H</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(M : <a href="../../.././foundational_types.html">Type</a> u_4)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/ChartedSpace.html#ChartedSpace">ChartedSpace</a> <span class="fn">H</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">M</span></span></div></div><p>The <strong>boundary</strong> of a manifold <code>M</code> is the set of its boundary points.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.boundary">ModelWithCorners.boundary</a> <span class="fn">M</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">{<span class="fn">x</span> : <span class="fn">M</span> | <span class="fn"><span class="fn"><span class="fn">I</span>.IsBoundaryPoint</span> <span class="fn">x</span></span>}</span></span></li></ul></details><details id="instances-for-list-ModelWithCorners.boundary" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="ModelWithCorners.isBoundaryPoint_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Geometry/Manifold/InteriorBoundary.lean#L81-L82">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.isBoundaryPoint_iff"><span class="name">ModelWithCorners</span>.<span class="name">isBoundaryPoint_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{H : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">H</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{I : <span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/SmoothManifoldWithCorners.html#ModelWithCorners">ModelWithCorners</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">H</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/ChartedSpace.html#ChartedSpace">ChartedSpace</a> <span class="fn">H</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">M</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">I</span>.IsBoundaryPoint</span> <span class="fn">x</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">↑<span class="fn">(<a href="../../.././Mathlib/Geometry/Manifold/SmoothManifoldWithCorners.html#extChartAt">extChartAt</a> <span class="fn">I</span> <span class="fn">x</span>)</span></span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#frontier">frontier</a> <span class="fn">(<a href="../../.././Mathlib/Data/Set/Operations.html#Set.range">Set.range</a> <span class="fn">↑<span class="fn">I</span></span>)</span></span></span></span></div></div></div></div><div class="decl" id="ModelWithCorners.isInteriorPoint_or_isBoundaryPoint"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Geometry/Manifold/InteriorBoundary.lean#L84-L88">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.isInteriorPoint_or_isBoundaryPoint"><span class="name">ModelWithCorners</span>.<span class="name">isInteriorPoint_or_isBoundaryPoint</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{H : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">H</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{I : <span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/SmoothManifoldWithCorners.html#ModelWithCorners">ModelWithCorners</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">H</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/ChartedSpace.html#ChartedSpace">ChartedSpace</a> <span class="fn">H</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">M</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">I</span>.IsInteriorPoint</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn"><span class="fn">I</span>.IsBoundaryPoint</span> <span class="fn">x</span></span></span></div></div><p>Every point is either an interior or a boundary point.</p></div></div><div class="decl" id="ModelWithCorners.interior_union_boundary_eq_univ"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Geometry/Manifold/InteriorBoundary.lean#L90-L92">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.interior_union_boundary_eq_univ"><span class="name">ModelWithCorners</span>.<span class="name">interior_union_boundary_eq_univ</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{H : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">H</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{I : <span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/SmoothManifoldWithCorners.html#ModelWithCorners">ModelWithCorners</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">H</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/ChartedSpace.html#ChartedSpace">ChartedSpace</a> <span class="fn">H</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.interior">ModelWithCorners.interior</a> <span class="fn">M</span></span> <a href="../../.././Init/Core.html#Union.union">∪</a> <span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.boundary">ModelWithCorners.boundary</a> <span class="fn">M</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">Set.univ</span></span></div></div><p>A manifold decomposes into interior and boundary.</p></div></div><div class="decl" id="ModelWithCorners.disjoint_interior_boundary"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Geometry/Manifold/InteriorBoundary.lean#L94-L101">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.disjoint_interior_boundary"><span class="name">ModelWithCorners</span>.<span class="name">disjoint_interior_boundary</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{H : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">H</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{I : <span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/SmoothManifoldWithCorners.html#ModelWithCorners">ModelWithCorners</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">H</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/ChartedSpace.html#ChartedSpace">ChartedSpace</a> <span class="fn">H</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Order/Disjoint.html#Disjoint">Disjoint</a> <span class="fn">(<a href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.interior">ModelWithCorners.interior</a> <span class="fn">M</span>)</span> <span class="fn">(<a href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.boundary">ModelWithCorners.boundary</a> <span class="fn">M</span>)</span></span></div></div><p>The interior and boundary of a manifold <code>M</code> are disjoint.</p></div></div><div class="decl" id="ModelWithCorners.compl_interior"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Geometry/Manifold/InteriorBoundary.lean#L103-L106">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.compl_interior"><span class="name">ModelWithCorners</span>.<span class="name">compl_interior</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{H : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">H</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{I : <span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/SmoothManifoldWithCorners.html#ModelWithCorners">ModelWithCorners</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">H</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/ChartedSpace.html#ChartedSpace">ChartedSpace</a> <span class="fn">H</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.interior">ModelWithCorners.interior</a> <span class="fn">M</span>)</span><a href="../../.././Mathlib/Order/Notation.html#HasCompl.compl">ᶜ</a></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.boundary">ModelWithCorners.boundary</a> <span class="fn">M</span></span></span></div></div><p>The boundary is the complement of the interior.</p></div></div><div class="decl" id="ModelWithCorners.compl_boundary"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Geometry/Manifold/InteriorBoundary.lean#L108-L110">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.compl_boundary"><span class="name">ModelWithCorners</span>.<span class="name">compl_boundary</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{H : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">H</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{I : <span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/SmoothManifoldWithCorners.html#ModelWithCorners">ModelWithCorners</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">H</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/ChartedSpace.html#ChartedSpace">ChartedSpace</a> <span class="fn">H</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.boundary">ModelWithCorners.boundary</a> <span class="fn">M</span>)</span><a href="../../.././Mathlib/Order/Notation.html#HasCompl.compl">ᶜ</a></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.interior">ModelWithCorners.interior</a> <span class="fn">M</span></span></span></div></div><p>The interior is the complement of the boundary.</p></div></div><div class="decl" id="range_mem_nhds_isInteriorPoint"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Geometry/Manifold/InteriorBoundary.lean#L112-L115">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#range_mem_nhds_isInteriorPoint"><span class="name">range_mem_nhds_isInteriorPoint</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{H : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">H</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{I : <span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/SmoothManifoldWithCorners.html#ModelWithCorners">ModelWithCorners</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">H</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/ChartedSpace.html#ChartedSpace">ChartedSpace</a> <span class="fn">H</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">M</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><span class="fn">I</span>.IsInteriorPoint</span> <span class="fn">x</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/Set/Operations.html#Set.range">Set.range</a> <span class="fn">↑<span class="fn">I</span></span></span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Topology/Defs/Filter.html#nhds">nhds</a> <span class="fn">(<span class="fn">↑<span class="fn">(<a href="../../.././Mathlib/Geometry/Manifold/SmoothManifoldWithCorners.html#extChartAt">extChartAt</a> <span class="fn">I</span> <span class="fn">x</span>)</span></span> <span class="fn">x</span>)</span></span></span></div></div></div></div><div class="decl" id="BoundarylessManifold"><div class="class"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Geometry/Manifold/InteriorBoundary.lean#L117-L123">source</a></div><div class="decl_header"><span class="decl_kind">class</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#BoundarylessManifold"><span class="name">BoundarylessManifold</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{H : <a href="../../.././foundational_types.html">Type</a> u_7}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">H</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(I : <span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/SmoothManifoldWithCorners.html#ModelWithCorners">ModelWithCorners</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">H</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(M : <a href="../../.././foundational_types.html">Type</a> u_8)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/ChartedSpace.html#ChartedSpace">ChartedSpace</a> <span class="fn">H</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><a href="../../.././foundational_types.html">Prop</a></div></div><p>Type class for manifold without boundary. This differs from <code><a href="../../.././Mathlib/Geometry/Manifold/SmoothManifoldWithCorners.html#ModelWithCorners.Boundaryless">ModelWithCorners.Boundaryless</a></code>,
+which states that the <code><a href="../../.././Mathlib/Geometry/Manifold/SmoothManifoldWithCorners.html#ModelWithCorners">ModelWithCorners</a></code> maps to the whole model vector space.</p><ul class="structure_fields" id="BoundarylessManifold.mk"><li id="BoundarylessManifold.isInteriorPoint'" class="structure_field"><div class="structure_field_info">isInteriorPoint' : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">M</span>), <span class="fn"><span class="fn"><span class="fn">I</span>.IsInteriorPoint</span> <span class="fn">x</span></span></span></div></li></ul><details class="instances"><summary>Instances</summary><ul id="instances-list-BoundarylessManifold" class="instances-list"></ul></details></div></div><div class="decl" id="ModelWithCorners.instBoundarylessManifold"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Geometry/Manifold/InteriorBoundary.lean#L128-L135">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.instBoundarylessManifold"><span class="name">ModelWithCorners</span>.<span class="name">instBoundarylessManifold</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{H : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">H</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{I : <span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/SmoothManifoldWithCorners.html#ModelWithCorners">ModelWithCorners</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">H</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/ChartedSpace.html#ChartedSpace">ChartedSpace</a> <span class="fn">H</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><span class="fn">I</span>.Boundaryless</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#BoundarylessManifold">BoundarylessManifold</a> <span class="fn">I</span> <span class="fn">M</span></span></div></div><p>Boundaryless <code><a href="../../.././Mathlib/Geometry/Manifold/SmoothManifoldWithCorners.html#ModelWithCorners">ModelWithCorners</a></code> implies boundaryless manifold.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="ModelWithCorners.BoundarylessManifold.of_empty"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Geometry/Manifold/InteriorBoundary.lean#L141-L143">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.BoundarylessManifold.of_empty"><span class="name">ModelWithCorners</span>.<span class="name">BoundarylessManifold</span>.<span class="name">of_empty</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{H : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">H</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{I : <span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/SmoothManifoldWithCorners.html#ModelWithCorners">ModelWithCorners</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">H</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/ChartedSpace.html#ChartedSpace">ChartedSpace</a> <span class="fn">H</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Logic/IsEmpty.html#IsEmpty">IsEmpty</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#BoundarylessManifold">BoundarylessManifold</a> <span class="fn">I</span> <span class="fn">M</span></span></div></div><p>The empty manifold is boundaryless.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="BoundarylessManifold.isInteriorPoint"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Geometry/Manifold/InteriorBoundary.lean#L145-L146">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#BoundarylessManifold.isInteriorPoint"><span class="name">BoundarylessManifold</span>.<span class="name">isInteriorPoint</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{H : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">H</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{I : <span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/SmoothManifoldWithCorners.html#ModelWithCorners">ModelWithCorners</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">H</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/ChartedSpace.html#ChartedSpace">ChartedSpace</a> <span class="fn">H</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">M</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#BoundarylessManifold">BoundarylessManifold</a> <span class="fn">I</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">I</span>.IsInteriorPoint</span> <span class="fn">x</span></span></div></div></div></div><div class="decl" id="ModelWithCorners.interior_eq_univ"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Geometry/Manifold/InteriorBoundary.lean#L148-L150">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.interior_eq_univ"><span class="name">ModelWithCorners</span>.<span class="name">interior_eq_univ</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{H : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">H</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{I : <span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/SmoothManifoldWithCorners.html#ModelWithCorners">ModelWithCorners</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">H</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/ChartedSpace.html#ChartedSpace">ChartedSpace</a> <span class="fn">H</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#BoundarylessManifold">BoundarylessManifold</a> <span class="fn">I</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.interior">ModelWithCorners.interior</a> <span class="fn">M</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">Set.univ</span></span></div></div><p>If <code>I</code> is boundaryless, <code>M</code> has full interior.</p></div></div><div class="decl" id="ModelWithCorners.Boundaryless.boundary_eq_empty"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Geometry/Manifold/InteriorBoundary.lean#L152-L154">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.Boundaryless.boundary_eq_empty"><span class="name">ModelWithCorners</span>.<span class="name">Boundaryless</span>.<span class="name">boundary_eq_empty</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{H : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">H</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{I : <span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/SmoothManifoldWithCorners.html#ModelWithCorners">ModelWithCorners</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">H</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/ChartedSpace.html#ChartedSpace">ChartedSpace</a> <span class="fn">H</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#BoundarylessManifold">BoundarylessManifold</a> <span class="fn">I</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.boundary">ModelWithCorners.boundary</a> <span class="fn">M</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Core.html#EmptyCollection.emptyCollection">∅</a></span></div></div><p>Boundaryless manifolds have empty boundary.</p></div></div><div class="decl" id="ModelWithCorners.instIsEmptyElemBoundaryOfBoundarylessManifold"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Geometry/Manifold/InteriorBoundary.lean#L156-L157">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.instIsEmptyElemBoundaryOfBoundarylessManifold"><span class="name">ModelWithCorners</span>.<span class="name">instIsEmptyElemBoundaryOfBoundarylessManifold</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{H : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">H</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{I : <span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/SmoothManifoldWithCorners.html#ModelWithCorners">ModelWithCorners</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">H</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/ChartedSpace.html#ChartedSpace">ChartedSpace</a> <span class="fn">H</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#BoundarylessManifold">BoundarylessManifold</a> <span class="fn">I</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Logic/IsEmpty.html#IsEmpty">IsEmpty</a> <span class="fn">↑<span class="fn">(<a href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.boundary">ModelWithCorners.boundary</a> <span class="fn">M</span>)</span></span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="ModelWithCorners.Boundaryless.iff_boundary_eq_empty"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Geometry/Manifold/InteriorBoundary.lean#L159-L166">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.Boundaryless.iff_boundary_eq_empty"><span class="name">ModelWithCorners</span>.<span class="name">Boundaryless</span>.<span class="name">iff_boundary_eq_empty</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{H : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">H</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{I : <span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/SmoothManifoldWithCorners.html#ModelWithCorners">ModelWithCorners</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">H</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/ChartedSpace.html#ChartedSpace">ChartedSpace</a> <span class="fn">H</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.boundary">ModelWithCorners.boundary</a> <span class="fn">M</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Core.html#EmptyCollection.emptyCollection">∅</a></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#BoundarylessManifold">BoundarylessManifold</a> <span class="fn">I</span> <span class="fn">M</span></span></span></div></div><p><code>M</code> is boundaryless iff its boundary is empty.</p></div></div><div class="decl" id="ModelWithCorners.Boundaryless.of_boundary_eq_empty"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Geometry/Manifold/InteriorBoundary.lean#L168-L170">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.Boundaryless.of_boundary_eq_empty"><span class="name">ModelWithCorners</span>.<span class="name">Boundaryless</span>.<span class="name">of_boundary_eq_empty</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{H : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">H</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{I : <span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/SmoothManifoldWithCorners.html#ModelWithCorners">ModelWithCorners</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">H</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/ChartedSpace.html#ChartedSpace">ChartedSpace</a> <span class="fn">H</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.boundary">ModelWithCorners.boundary</a> <span class="fn">M</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Core.html#EmptyCollection.emptyCollection">∅</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#BoundarylessManifold">BoundarylessManifold</a> <span class="fn">I</span> <span class="fn">M</span></span></div></div><p>Manifolds with empty boundary are boundaryless.</p></div></div><div class="mod_doc"><p>Interior and boundary of the product of two manifolds.</p></div><div class="decl" id="ModelWithCorners.interior_prod"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Geometry/Manifold/InteriorBoundary.lean#L183-L197">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.interior_prod"><span class="name">ModelWithCorners</span>.<span class="name">interior_prod</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{H : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">H</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{I : <span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/SmoothManifoldWithCorners.html#ModelWithCorners">ModelWithCorners</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">H</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/ChartedSpace.html#ChartedSpace">ChartedSpace</a> <span class="fn">H</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E' : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{H' : <a href="../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">H'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././foundational_types.html">Type</a> u_7}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/ChartedSpace.html#ChartedSpace">ChartedSpace</a> <span class="fn">H'</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{J : <span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/SmoothManifoldWithCorners.html#ModelWithCorners">ModelWithCorners</a> <span class="fn">𝕜</span> <span class="fn">E'</span> <span class="fn">H'</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.interior">ModelWithCorners.interior</a> <span class="fn">(<span class="fn">M</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">N</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.interior">ModelWithCorners.interior</a> <span class="fn">M</span></span> <a href="../../.././Mathlib/Data/SProd.html#SProd.sprod">×ˢ</a> <span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.interior">ModelWithCorners.interior</a> <span class="fn">N</span></span></span></span></div></div><p>The interior of <code>M × N</code> is the product of the interiors of <code>M</code> and <code>N</code>.</p></div></div><div class="decl" id="ModelWithCorners.boundary_prod"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Geometry/Manifold/InteriorBoundary.lean#L199-L207">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.boundary_prod"><span class="name">ModelWithCorners</span>.<span class="name">boundary_prod</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{H : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">H</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{I : <span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/SmoothManifoldWithCorners.html#ModelWithCorners">ModelWithCorners</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">H</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/ChartedSpace.html#ChartedSpace">ChartedSpace</a> <span class="fn">H</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E' : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{H' : <a href="../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">H'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././foundational_types.html">Type</a> u_7}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/ChartedSpace.html#ChartedSpace">ChartedSpace</a> <span class="fn">H'</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{J : <span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/SmoothManifoldWithCorners.html#ModelWithCorners">ModelWithCorners</a> <span class="fn">𝕜</span> <span class="fn">E'</span> <span class="fn">H'</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.boundary">ModelWithCorners.boundary</a> <span class="fn">(<span class="fn">M</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">N</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><span class="fn"><span class="fn"><span class="fn">Set.univ</span>.prod</span> <span class="fn">(<a href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.boundary">ModelWithCorners.boundary</a> <span class="fn">N</span>)</span></span> <a href="../../.././Init/Core.html#Union.union">∪</a> <span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.boundary">ModelWithCorners.boundary</a> <span class="fn">M</span>)</span>.prod</span> <span class="fn">Set.univ</span></span></span></span></div></div><p>The boundary of <code>M × N</code> is <code>∂M × N ∪ (M × ∂N)</code>.</p></div></div><div class="decl" id="ModelWithCorners.boundary_of_boundaryless_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Geometry/Manifold/InteriorBoundary.lean#L209-L214">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.boundary_of_boundaryless_left"><span class="name">ModelWithCorners</span>.<span class="name">boundary_of_boundaryless_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{H : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">H</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{I : <span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/SmoothManifoldWithCorners.html#ModelWithCorners">ModelWithCorners</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">H</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/ChartedSpace.html#ChartedSpace">ChartedSpace</a> <span class="fn">H</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E' : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{H' : <a href="../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">H'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././foundational_types.html">Type</a> u_7}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/ChartedSpace.html#ChartedSpace">ChartedSpace</a> <span class="fn">H'</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{J : <span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/SmoothManifoldWithCorners.html#ModelWithCorners">ModelWithCorners</a> <span class="fn">𝕜</span> <span class="fn">E'</span> <span class="fn">H'</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#BoundarylessManifold">BoundarylessManifold</a> <span class="fn">I</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.boundary">ModelWithCorners.boundary</a> <span class="fn">(<span class="fn">M</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">N</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">Set.univ</span>.prod</span> <span class="fn">(<a href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.boundary">ModelWithCorners.boundary</a> <span class="fn">N</span>)</span></span></span></div></div><p>If <code>M</code> is boundaryless, <code>∂(M×N) = M × ∂N</code>.</p></div></div><div class="decl" id="ModelWithCorners.boundary_of_boundaryless_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Geometry/Manifold/InteriorBoundary.lean#L216-L221">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.boundary_of_boundaryless_right"><span class="name">ModelWithCorners</span>.<span class="name">boundary_of_boundaryless_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{H : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">H</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{I : <span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/SmoothManifoldWithCorners.html#ModelWithCorners">ModelWithCorners</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">H</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/ChartedSpace.html#ChartedSpace">ChartedSpace</a> <span class="fn">H</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E' : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{H' : <a href="../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">H'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././foundational_types.html">Type</a> u_7}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/ChartedSpace.html#ChartedSpace">ChartedSpace</a> <span class="fn">H'</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{J : <span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/SmoothManifoldWithCorners.html#ModelWithCorners">ModelWithCorners</a> <span class="fn">𝕜</span> <span class="fn">E'</span> <span class="fn">H'</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#BoundarylessManifold">BoundarylessManifold</a> <span class="fn">J</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.boundary">ModelWithCorners.boundary</a> <span class="fn">(<span class="fn">M</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">N</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.boundary">ModelWithCorners.boundary</a> <span class="fn">M</span>)</span>.prod</span> <span class="fn">Set.univ</span></span></span></div></div><p>If <code>N</code> is boundaryless, <code>∂(M×N) = ∂M × N</code>.</p></div></div><div class="decl" id="ModelWithCorners.BoundarylessManifold.prod"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Geometry/Manifold/InteriorBoundary.lean#L223-L230">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#ModelWithCorners.BoundarylessManifold.prod"><span class="name">ModelWithCorners</span>.<span class="name">BoundarylessManifold</span>.<span class="name">prod</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{H : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">H</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{I : <span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/SmoothManifoldWithCorners.html#ModelWithCorners">ModelWithCorners</a> <span class="fn">𝕜</span> <span class="fn">E</span> <span class="fn">H</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/ChartedSpace.html#ChartedSpace">ChartedSpace</a> <span class="fn">H</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E' : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{H' : <a href="../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">H'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././foundational_types.html">Type</a> u_7}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/ChartedSpace.html#ChartedSpace">ChartedSpace</a> <span class="fn">H'</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{J : <span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/SmoothManifoldWithCorners.html#ModelWithCorners">ModelWithCorners</a> <span class="fn">𝕜</span> <span class="fn">E'</span> <span class="fn">H'</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#BoundarylessManifold">BoundarylessManifold</a> <span class="fn">I</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#BoundarylessManifold">BoundarylessManifold</a> <span class="fn">J</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Geometry/Manifold/InteriorBoundary.html#BoundarylessManifold">BoundarylessManifold</a> <span class="fn">(<span class="fn"><span class="fn">I</span>.prod</span> <span class="fn">J</span>)</span> <span class="fn">(<span class="fn">M</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">N</span>)</span></span></div></div><p>The product of two boundaryless manifolds is boundaryless.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></span></li></ul></details></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

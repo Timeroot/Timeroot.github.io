@@ -1,0 +1,985 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../.././style.css"></link><link rel="icon" href="../.././favicon.svg"></link><link rel="mask-icon" href="../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Deprecated.Group</title><script defer="true" src="../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../.././";</script><script>const MODULE_NAME="Mathlib.Deprecated.Group";</script><script type="module" src="../.././jump-src.js"></script><script type="module" src="../.././search.js"></script><script type="module" src="../.././expand-nav.js"></script><script type="module" src="../.././how-about.js"></script><script type="module" src="../.././instances.js"></script><script type="module" src="../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Deprecated</span>.<span class="name">Group</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../.././Init.html">Init</a></li><li><a href="../.././Mathlib/Algebra/Group/Equiv/Basic.html">Mathlib.Algebra.Group.Equiv.Basic</a></li><li><a href="../.././Mathlib/Algebra/Group/TypeTags/Basic.html">Mathlib.Algebra.Group.TypeTags.Basic</a></li><li><a href="../.././Mathlib/Algebra/Group/Units/Hom.html">Mathlib.Algebra.Group.Units.Hom</a></li><li><a href="../.././Mathlib/Algebra/Ring/Hom/Defs.html">Mathlib.Algebra.Ring.Hom.Defs</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Deprecated.Group" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#IsAddHom"><span class="name">IsAddHom</span></a></div><div class="nav_link"><a class="break_within" href="#IsMulHom"><span class="name">IsMulHom</span></a></div><div class="nav_link"><a class="break_within" href="#IsMulHom.id"><span class="name">IsMulHom</span>.<span class="name">id</span></a></div><div class="nav_link"><a class="break_within" href="#IsAddHom.id"><span class="name">IsAddHom</span>.<span class="name">id</span></a></div><div class="nav_link"><a class="break_within" href="#IsMulHom.comp"><span class="name">IsMulHom</span>.<span class="name">comp</span></a></div><div class="nav_link"><a class="break_within" href="#IsAddHom.comp"><span class="name">IsAddHom</span>.<span class="name">comp</span></a></div><div class="nav_link"><a class="break_within" href="#IsMulHom.mul"><span class="name">IsMulHom</span>.<span class="name">mul</span></a></div><div class="nav_link"><a class="break_within" href="#IsAddHom.add"><span class="name">IsAddHom</span>.<span class="name">add</span></a></div><div class="nav_link"><a class="break_within" href="#IsMulHom.inv"><span class="name">IsMulHom</span>.<span class="name">inv</span></a></div><div class="nav_link"><a class="break_within" href="#IsAddHom.neg"><span class="name">IsAddHom</span>.<span class="name">neg</span></a></div><div class="nav_link"><a class="break_within" href="#IsAddMonoidHom"><span class="name">IsAddMonoidHom</span></a></div><div class="nav_link"><a class="break_within" href="#IsMonoidHom"><span class="name">IsMonoidHom</span></a></div><div class="nav_link"><a class="break_within" href="#MonoidHom.of"><span class="name">MonoidHom</span>.<span class="name">of</span></a></div><div class="nav_link"><a class="break_within" href="#AddMonoidHom.of"><span class="name">AddMonoidHom</span>.<span class="name">of</span></a></div><div class="nav_link"><a class="break_within" href="#MonoidHom.coe_of"><span class="name">MonoidHom</span>.<span class="name">coe_of</span></a></div><div class="nav_link"><a class="break_within" href="#AddMonoidHom.coe_of"><span class="name">AddMonoidHom</span>.<span class="name">coe_of</span></a></div><div class="nav_link"><a class="break_within" href="#MonoidHom.isMonoidHom_coe"><span class="name">MonoidHom</span>.<span class="name">isMonoidHom_coe</span></a></div><div class="nav_link"><a class="break_within" href="#AddMonoidHom.isAddMonoidHom_coe"><span class="name">AddMonoidHom</span>.<span class="name">isAddMonoidHom_coe</span></a></div><div class="nav_link"><a class="break_within" href="#MulEquiv.isMulHom"><span class="name">MulEquiv</span>.<span class="name">isMulHom</span></a></div><div class="nav_link"><a class="break_within" href="#AddEquiv.isAddHom"><span class="name">AddEquiv</span>.<span class="name">isAddHom</span></a></div><div class="nav_link"><a class="break_within" href="#MulEquiv.isMonoidHom"><span class="name">MulEquiv</span>.<span class="name">isMonoidHom</span></a></div><div class="nav_link"><a class="break_within" href="#AddEquiv.isAddMonoidHom"><span class="name">AddEquiv</span>.<span class="name">isAddMonoidHom</span></a></div><div class="nav_link"><a class="break_within" href="#IsMonoidHom.map_mul'"><span class="name">IsMonoidHom</span>.<span class="name">map_mul'</span></a></div><div class="nav_link"><a class="break_within" href="#IsAddMonoidHom.map_add'"><span class="name">IsAddMonoidHom</span>.<span class="name">map_add'</span></a></div><div class="nav_link"><a class="break_within" href="#IsMonoidHom.inv"><span class="name">IsMonoidHom</span>.<span class="name">inv</span></a></div><div class="nav_link"><a class="break_within" href="#IsAddMonoidHom.neg"><span class="name">IsAddMonoidHom</span>.<span class="name">neg</span></a></div><div class="nav_link"><a class="break_within" href="#IsMulHom.to_isMonoidHom"><span class="name">IsMulHom</span>.<span class="name">to_isMonoidHom</span></a></div><div class="nav_link"><a class="break_within" href="#IsAddHom.to_isAddMonoidHom"><span class="name">IsAddHom</span>.<span class="name">to_isAddMonoidHom</span></a></div><div class="nav_link"><a class="break_within" href="#IsMonoidHom.id"><span class="name">IsMonoidHom</span>.<span class="name">id</span></a></div><div class="nav_link"><a class="break_within" href="#IsAddMonoidHom.id"><span class="name">IsAddMonoidHom</span>.<span class="name">id</span></a></div><div class="nav_link"><a class="break_within" href="#IsMonoidHom.comp"><span class="name">IsMonoidHom</span>.<span class="name">comp</span></a></div><div class="nav_link"><a class="break_within" href="#IsAddMonoidHom.comp"><span class="name">IsAddMonoidHom</span>.<span class="name">comp</span></a></div><div class="nav_link"><a class="break_within" href="#IsAddMonoidHom.isAddMonoidHom_mul_left"><span class="name">IsAddMonoidHom</span>.<span class="name">isAddMonoidHom_mul_left</span></a></div><div class="nav_link"><a class="break_within" href="#IsAddMonoidHom.isAddMonoidHom_mul_right"><span class="name">IsAddMonoidHom</span>.<span class="name">isAddMonoidHom_mul_right</span></a></div><div class="nav_link"><a class="break_within" href="#IsAddGroupHom"><span class="name">IsAddGroupHom</span></a></div><div class="nav_link"><a class="break_within" href="#IsGroupHom"><span class="name">IsGroupHom</span></a></div><div class="nav_link"><a class="break_within" href="#MonoidHom.isGroupHom"><span class="name">MonoidHom</span>.<span class="name">isGroupHom</span></a></div><div class="nav_link"><a class="break_within" href="#AddMonoidHom.isAddGroupHom"><span class="name">AddMonoidHom</span>.<span class="name">isAddGroupHom</span></a></div><div class="nav_link"><a class="break_within" href="#MulEquiv.isGroupHom"><span class="name">MulEquiv</span>.<span class="name">isGroupHom</span></a></div><div class="nav_link"><a class="break_within" href="#AddEquiv.isAddGroupHom"><span class="name">AddEquiv</span>.<span class="name">isAddGroupHom</span></a></div><div class="nav_link"><a class="break_within" href="#IsGroupHom.mk'"><span class="name">IsGroupHom</span>.<span class="name">mk'</span></a></div><div class="nav_link"><a class="break_within" href="#IsAddGroupHom.mk'"><span class="name">IsAddGroupHom</span>.<span class="name">mk'</span></a></div><div class="nav_link"><a class="break_within" href="#IsGroupHom.id"><span class="name">IsGroupHom</span>.<span class="name">id</span></a></div><div class="nav_link"><a class="break_within" href="#IsAddGroupHom.id"><span class="name">IsAddGroupHom</span>.<span class="name">id</span></a></div><div class="nav_link"><a class="break_within" href="#IsGroupHom.map_mul'"><span class="name">IsGroupHom</span>.<span class="name">map_mul'</span></a></div><div class="nav_link"><a class="break_within" href="#IsGroupHom.to_isMonoidHom"><span class="name">IsGroupHom</span>.<span class="name">to_isMonoidHom</span></a></div><div class="nav_link"><a class="break_within" href="#IsAddGroupHom.to_isAddMonoidHom"><span class="name">IsAddGroupHom</span>.<span class="name">to_isAddMonoidHom</span></a></div><div class="nav_link"><a class="break_within" href="#IsGroupHom.map_one"><span class="name">IsGroupHom</span>.<span class="name">map_one</span></a></div><div class="nav_link"><a class="break_within" href="#IsAddGroupHom.map_zero"><span class="name">IsAddGroupHom</span>.<span class="name">map_zero</span></a></div><div class="nav_link"><a class="break_within" href="#IsGroupHom.map_inv"><span class="name">IsGroupHom</span>.<span class="name">map_inv</span></a></div><div class="nav_link"><a class="break_within" href="#IsAddGroupHom.map_neg"><span class="name">IsAddGroupHom</span>.<span class="name">map_neg</span></a></div><div class="nav_link"><a class="break_within" href="#IsGroupHom.map_div"><span class="name">IsGroupHom</span>.<span class="name">map_div</span></a></div><div class="nav_link"><a class="break_within" href="#IsAddGroupHom.map_sub"><span class="name">IsAddGroupHom</span>.<span class="name">map_sub</span></a></div><div class="nav_link"><a class="break_within" href="#IsGroupHom.comp"><span class="name">IsGroupHom</span>.<span class="name">comp</span></a></div><div class="nav_link"><a class="break_within" href="#IsAddGroupHom.comp"><span class="name">IsAddGroupHom</span>.<span class="name">comp</span></a></div><div class="nav_link"><a class="break_within" href="#IsGroupHom.injective_iff"><span class="name">IsGroupHom</span>.<span class="name">injective_iff</span></a></div><div class="nav_link"><a class="break_within" href="#IsAddGroupHom.injective_iff"><span class="name">IsAddGroupHom</span>.<span class="name">injective_iff</span></a></div><div class="nav_link"><a class="break_within" href="#IsGroupHom.mul"><span class="name">IsGroupHom</span>.<span class="name">mul</span></a></div><div class="nav_link"><a class="break_within" href="#IsAddGroupHom.add"><span class="name">IsAddGroupHom</span>.<span class="name">add</span></a></div><div class="nav_link"><a class="break_within" href="#IsGroupHom.inv"><span class="name">IsGroupHom</span>.<span class="name">inv</span></a></div><div class="nav_link"><a class="break_within" href="#IsAddGroupHom.neg"><span class="name">IsAddGroupHom</span>.<span class="name">neg</span></a></div><div class="nav_link"><a class="break_within" href="#RingHom.to_isMonoidHom"><span class="name">RingHom</span>.<span class="name">to_isMonoidHom</span></a></div><div class="nav_link"><a class="break_within" href="#RingHom.to_isAddMonoidHom"><span class="name">RingHom</span>.<span class="name">to_isAddMonoidHom</span></a></div><div class="nav_link"><a class="break_within" href="#RingHom.to_isAddGroupHom"><span class="name">RingHom</span>.<span class="name">to_isAddGroupHom</span></a></div><div class="nav_link"><a class="break_within" href="#Inv.isGroupHom"><span class="name">Inv</span>.<span class="name">isGroupHom</span></a></div><div class="nav_link"><a class="break_within" href="#Neg.isAddGroupHom"><span class="name">Neg</span>.<span class="name">isAddGroupHom</span></a></div><div class="nav_link"><a class="break_within" href="#IsAddGroupHom.sub"><span class="name">IsAddGroupHom</span>.<span class="name">sub</span></a></div><div class="nav_link"><a class="break_within" href="#Units.map'"><span class="name">Units</span>.<span class="name">map'</span></a></div><div class="nav_link"><a class="break_within" href="#Units.coe_map'"><span class="name">Units</span>.<span class="name">coe_map'</span></a></div><div class="nav_link"><a class="break_within" href="#Units.coe_isMonoidHom"><span class="name">Units</span>.<span class="name">coe_isMonoidHom</span></a></div><div class="nav_link"><a class="break_within" href="#IsUnit.map'"><span class="name">IsUnit</span>.<span class="name">map'</span></a></div><div class="nav_link"><a class="break_within" href="#Additive.isAddHom"><span class="name">Additive</span>.<span class="name">isAddHom</span></a></div><div class="nav_link"><a class="break_within" href="#Multiplicative.isMulHom"><span class="name">Multiplicative</span>.<span class="name">isMulHom</span></a></div><div class="nav_link"><a class="break_within" href="#Additive.isAddMonoidHom"><span class="name">Additive</span>.<span class="name">isAddMonoidHom</span></a></div><div class="nav_link"><a class="break_within" href="#Multiplicative.isMonoidHom"><span class="name">Multiplicative</span>.<span class="name">isMonoidHom</span></a></div><div class="nav_link"><a class="break_within" href="#Additive.isAddGroupHom"><span class="name">Additive</span>.<span class="name">isAddGroupHom</span></a></div><div class="nav_link"><a class="break_within" href="#Multiplicative.isGroupHom"><span class="name">Multiplicative</span>.<span class="name">isGroupHom</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Unbundled-monoid-and-group-homomorphisms">Unbundled monoid and group homomorphisms <a class="hover-link" href="#Unbundled-monoid-and-group-homomorphisms">#</a></h1><p>This file is deprecated, and is no longer imported by anything in mathlib other than other
+deprecated files, and test files. You should not need to import it.</p><p>This file defines predicates for unbundled monoid and group homomorphisms. Instead of using
+this file, please use <code><a href="../.././Mathlib/Algebra/Group/Hom/Defs.html#MonoidHom">MonoidHom</a></code>, defined in <code>Algebra.Hom.<a href="../.././Mathlib/Algebra/Group/Defs.html#Group">Group</a></code>, with notation <code>→*</code>, for
+morphisms between monoids or groups. For example use <code>φ : G →* H</code> to represent a group
+homomorphism between multiplicative groups, and <code>ψ : A →+ B</code> to represent a group homomorphism
+between additive groups.</p><h2 class="markdown-heading" id="Main-Definitions">Main Definitions <a class="hover-link" href="#Main-Definitions">#</a></h2><p><code><a href="../.././Mathlib/Deprecated/Group.html#IsMonoidHom">IsMonoidHom</a></code> (deprecated), <code><a href="../.././Mathlib/Deprecated/Group.html#IsGroupHom">IsGroupHom</a></code> (deprecated)</p><h2 class="markdown-heading" id="Tags">Tags <a class="hover-link" href="#Tags">#</a></h2><p>IsGroupHom, IsMonoidHom</p></div><div class="decl" id="IsAddHom"><div class="structure"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L38-L41">source</a></div><div class="decl_header"><span class="decl_kind">structure</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#IsAddHom"><span class="name">IsAddHom</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Init/Prelude.html#Add">Add</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Init/Prelude.html#Add">Add</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../.././foundational_types.html">Prop</a></div></div><p>Predicate for maps which preserve an addition.</p><ul class="structure_fields" id="IsAddHom.mk"><li id="IsAddHom.map_add" class="structure_field"><div class="structure_field_info">map_add : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">y</span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span></div><div class="structure_field_doc"><p>The proposition that <code>f</code> preserves addition.</p></div></li></ul><details id="instances-for-list-IsAddHom" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="IsMulHom"><div class="structure"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L43-L47">source</a></div><div class="decl_header"><span class="decl_kind">structure</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#IsMulHom"><span class="name">IsMulHom</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Init/Prelude.html#Mul">Mul</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Init/Prelude.html#Mul">Mul</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../.././foundational_types.html">Prop</a></div></div><p>Predicate for maps which preserve a multiplication.</p><ul class="structure_fields" id="IsMulHom.mk"><li id="IsMulHom.map_mul" class="structure_field"><div class="structure_field_info">map_mul : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">y</span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span></div><div class="structure_field_doc"><p>The proposition that <code>f</code> preserves multiplication.</p></div></li></ul><details id="instances-for-list-IsMulHom" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="IsMulHom.id"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L53-L56">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#IsMulHom.id"><span class="name">IsMulHom</span>.<span class="name">id</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Init/Prelude.html#Mul">Mul</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsMulHom">IsMulHom</a> <span class="fn">id</span></span></div></div><p>The identity map preserves multiplication.</p></div></div><div class="decl" id="IsAddHom.id"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L54-L54">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#IsAddHom.id"><span class="name">IsAddHom</span>.<span class="name">id</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Init/Prelude.html#Add">Add</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddHom">IsAddHom</a> <span class="fn">id</span></span></div></div><p>The identity map preserves addition</p></div></div><div class="decl" id="IsMulHom.comp"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L58-L61">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#IsMulHom.comp"><span class="name">IsMulHom</span>.<span class="name">comp</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Init/Prelude.html#Mul">Mul</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Init/Prelude.html#Mul">Mul</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Init/Prelude.html#Mul">Mul</a> <span class="fn">γ</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">β</span> → <span class="fn">γ</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsMulHom">IsMulHom</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hg : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsMulHom">IsMulHom</a> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsMulHom">IsMulHom</a> <span class="fn">(<span class="fn">g</span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">f</span>)</span></span></div></div><p>The composition of maps which preserve multiplication, also preserves multiplication.</p></div></div><div class="decl" id="IsAddHom.comp"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L59-L59">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#IsAddHom.comp"><span class="name">IsAddHom</span>.<span class="name">comp</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Init/Prelude.html#Add">Add</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Init/Prelude.html#Add">Add</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Init/Prelude.html#Add">Add</a> <span class="fn">γ</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">β</span> → <span class="fn">γ</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddHom">IsAddHom</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hg : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddHom">IsAddHom</a> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddHom">IsAddHom</a> <span class="fn">(<span class="fn">g</span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">f</span>)</span></span></div></div><p>The composition of addition preserving maps also preserves addition</p></div></div><div class="decl" id="IsMulHom.mul"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L63-L71">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#IsMulHom.mul"><span class="name">IsMulHom</span>.<span class="name">mul</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Semigroup">Semigroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#CommSemigroup">CommSemigroup</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f g : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsMulHom">IsMulHom</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hg : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsMulHom">IsMulHom</a> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsMulHom">IsMulHom</a> <span class="fn">fun (<span class="fn">a</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">a</span></span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">g</span> <span class="fn">a</span></span></span></span></span></div></div><p>A product of maps which preserve multiplication,
+preserves multiplication when the target is commutative.</p></div></div><div class="decl" id="IsAddHom.add"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L65-L67">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#IsAddHom.add"><span class="name">IsAddHom</span>.<span class="name">add</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddSemigroup">AddSemigroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommSemigroup">AddCommSemigroup</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f g : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddHom">IsAddHom</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hg : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddHom">IsAddHom</a> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddHom">IsAddHom</a> <span class="fn">fun (<span class="fn">a</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">a</span></span> <a href="../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">g</span> <span class="fn">a</span></span></span></span></span></div></div><p>A sum of maps which preserves addition, preserves addition when the target
+is commutative.</p></div></div><div class="decl" id="IsMulHom.inv"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L73-L79">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#IsMulHom.inv"><span class="name">IsMulHom</span>.<span class="name">inv</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Init/Prelude.html#Mul">Mul</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#CommGroup">CommGroup</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsMulHom">IsMulHom</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsMulHom">IsMulHom</a> <span class="fn">fun (<span class="fn">a</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">(<span class="fn">f</span> <span class="fn">a</span>)</span><a href="../.././Mathlib/Algebra/Group/Operations.html#Inv.inv">⁻¹</a></span></span></span></div></div><p>The inverse of a map which preserves multiplication,
+preserves multiplication when the target is commutative.</p></div></div><div class="decl" id="IsAddHom.neg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L75-L77">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#IsAddHom.neg"><span class="name">IsAddHom</span>.<span class="name">neg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Init/Prelude.html#Add">Add</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddHom">IsAddHom</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddHom">IsAddHom</a> <span class="fn">fun (<span class="fn">a</span> : <span class="fn">α</span>) =&gt; <span class="fn"><a href="../.././Init/Prelude.html#Neg.neg">-</a><span class="fn"><span class="fn">f</span> <span class="fn">a</span></span></span></span></span></div></div><p>The negation of a map which preserves addition, preserves addition when
+the target is commutative.</p></div></div><div class="decl" id="IsAddMonoidHom"><div class="structure"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L83-L88">source</a></div><div class="decl_header"><span class="decl_kind">structure</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#IsAddMonoidHom"><span class="name">IsAddMonoidHom</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_extends">extends</span> <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddHom">IsAddHom</a> <span class="fn">f</span></span><span class="decl_args"> :</span><div class="decl_type"><a href="../.././foundational_types.html">Prop</a></div></div><p>Predicate for additive monoid homomorphisms
+(deprecated -- use the bundled <code><a href="../.././Mathlib/Algebra/Group/Hom/Defs.html#MonoidHom">MonoidHom</a></code> version).</p><ul class="structure_fields" id="IsAddMonoidHom.mk"><li class="structure_field inherited_field"><div class="structure_field_info"><a href="../.././Mathlib/Deprecated/Group.html#IsAddHom.map_add">map_add</a> : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">y</span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span></div></li><li id="IsAddMonoidHom.map_zero" class="structure_field"><div class="structure_field_info">map_zero : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">0</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div><div class="structure_field_doc"><p>The proposition that <code>f</code> preserves the additive identity.</p></div></li></ul><details id="instances-for-list-IsAddMonoidHom" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="IsMonoidHom"><div class="structure"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L90-L94">source</a></div><div class="decl_header"><span class="decl_kind">structure</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#IsMonoidHom"><span class="name">IsMonoidHom</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_extends">extends</span> <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsMulHom">IsMulHom</a> <span class="fn">f</span></span><span class="decl_args"> :</span><div class="decl_type"><a href="../.././foundational_types.html">Prop</a></div></div><p>Predicate for monoid homomorphisms (deprecated -- use the bundled <code><a href="../.././Mathlib/Algebra/Group/Hom/Defs.html#MonoidHom">MonoidHom</a></code> version).</p><ul class="structure_fields" id="IsMonoidHom.mk"><li class="structure_field inherited_field"><div class="structure_field_info"><a href="../.././Mathlib/Deprecated/Group.html#IsMulHom.map_mul">map_mul</a> : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">y</span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span></div></li><li id="IsMonoidHom.map_one" class="structure_field"><div class="structure_field_info">map_one : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">1</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span></div><div class="structure_field_doc"><p>The proposition that <code>f</code> preserves the multiplicative identity.</p></div></li></ul><details id="instances-for-list-IsMonoidHom" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="MonoidHom.of"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L100-L105">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#MonoidHom.of"><span class="name">MonoidHom</span>.<span class="name">of</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{mM : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">M</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{mN : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">N</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M</span> → <span class="fn">N</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsMonoidHom">IsMonoidHom</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">M</span> <a href="../.././Mathlib/Algebra/Group/Hom/Defs.html#MonoidHom">→*</a> <span class="fn">N</span></span></div></div><p>Interpret a map <code>f : M → N</code> as a homomorphism <code>M →* N</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#MonoidHom.of">MonoidHom.of</a> <span class="fn">h</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ <span class="fn">toFun</span> := <span class="fn">f</span>, <span class="fn">map_one'</span> := <span class="fn">⋯</span>, <span class="fn">map_mul'</span> := <span class="fn">⋯</span> }</span></span></li></ul></details><details id="instances-for-list-MonoidHom.of" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="AddMonoidHom.of"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L101-L101">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#AddMonoidHom.of"><span class="name">AddMonoidHom</span>.<span class="name">of</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{mM : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">M</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{mN : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">N</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M</span> → <span class="fn">N</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddMonoidHom">IsAddMonoidHom</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">M</span> <a href="../.././Mathlib/Algebra/Group/Hom/Defs.html#AddMonoidHom">→+</a> <span class="fn">N</span></span></div></div><p>Interpret a map <code>f : M → N</code> as a homomorphism <code>M →+ N</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#AddMonoidHom.of">AddMonoidHom.of</a> <span class="fn">h</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ <span class="fn">toFun</span> := <span class="fn">f</span>, <span class="fn">map_zero'</span> := <span class="fn">⋯</span>, <span class="fn">map_add'</span> := <span class="fn">⋯</span> }</span></span></li></ul></details><details id="instances-for-list-AddMonoidHom.of" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="MonoidHom.coe_of"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L107-L109">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#MonoidHom.coe_of"><span class="name">MonoidHom</span>.<span class="name">coe_of</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{mM : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">M</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{mN : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">N</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M</span> → <span class="fn">N</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsMonoidHom">IsMonoidHom</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">⇑<span class="fn">(<a href="../.././Mathlib/Deprecated/Group.html#MonoidHom.of">MonoidHom.of</a> <span class="fn">hf</span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">f</span></span></div></div></div></div><div class="decl" id="AddMonoidHom.coe_of"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L107-L107">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#AddMonoidHom.coe_of"><span class="name">AddMonoidHom</span>.<span class="name">coe_of</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{mM : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">M</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{mN : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">N</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M</span> → <span class="fn">N</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddMonoidHom">IsAddMonoidHom</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">⇑<span class="fn">(<a href="../.././Mathlib/Deprecated/Group.html#AddMonoidHom.of">AddMonoidHom.of</a> <span class="fn">hf</span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">f</span></span></div></div></div></div><div class="decl" id="MonoidHom.isMonoidHom_coe"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L111-L114">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#MonoidHom.isMonoidHom_coe"><span class="name">MonoidHom</span>.<span class="name">isMonoidHom_coe</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{mM : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">M</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{mN : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">N</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M</span> <a href="../.././Mathlib/Algebra/Group/Hom/Defs.html#MonoidHom">→*</a> <span class="fn">N</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsMonoidHom">IsMonoidHom</a> <span class="fn">⇑<span class="fn">f</span></span></span></div></div></div></div><div class="decl" id="AddMonoidHom.isAddMonoidHom_coe"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L111-L111">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#AddMonoidHom.isAddMonoidHom_coe"><span class="name">AddMonoidHom</span>.<span class="name">isAddMonoidHom_coe</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{mM : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">M</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{mN : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">N</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M</span> <a href="../.././Mathlib/Algebra/Group/Hom/Defs.html#AddMonoidHom">→+</a> <span class="fn">N</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddMonoidHom">IsAddMonoidHom</a> <span class="fn">⇑<span class="fn">f</span></span></span></div></div></div></div><div class="decl" id="MulEquiv.isMulHom"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L122-L125">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#MulEquiv.isMulHom"><span class="name">MulEquiv</span>.<span class="name">isMulHom</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">M</span> <a href="../.././Mathlib/Algebra/Group/Equiv/Basic.html#MulEquiv">≃*</a> <span class="fn">N</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsMulHom">IsMulHom</a> <span class="fn">⇑<span class="fn">h</span></span></span></div></div><p>A multiplicative isomorphism preserves multiplication (deprecated).</p></div></div><div class="decl" id="AddEquiv.isAddHom"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L123-L123">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#AddEquiv.isAddHom"><span class="name">AddEquiv</span>.<span class="name">isAddHom</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">M</span> <a href="../.././Mathlib/Algebra/Group/Equiv/Basic.html#AddEquiv">≃+</a> <span class="fn">N</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddHom">IsAddHom</a> <span class="fn">⇑<span class="fn">h</span></span></span></div></div><p>An additive isomorphism preserves addition (deprecated).</p></div></div><div class="decl" id="MulEquiv.isMonoidHom"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L127-L134">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#MulEquiv.isMonoidHom"><span class="name">MulEquiv</span>.<span class="name">isMonoidHom</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">M</span> <a href="../.././Mathlib/Algebra/Group/Equiv/Basic.html#MulEquiv">≃*</a> <span class="fn">N</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsMonoidHom">IsMonoidHom</a> <span class="fn">⇑<span class="fn">h</span></span></span></div></div><p>A multiplicative bijection between two monoids is a monoid hom
+(deprecated -- use <code><a href="../.././Mathlib/Algebra/Group/Equiv/Basic.html#MulEquiv.toMonoidHom">MulEquiv.toMonoidHom</a></code>).</p></div></div><div class="decl" id="AddEquiv.isAddMonoidHom"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L129-L131">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#AddEquiv.isAddMonoidHom"><span class="name">AddEquiv</span>.<span class="name">isAddMonoidHom</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">M</span> <a href="../.././Mathlib/Algebra/Group/Equiv/Basic.html#AddEquiv">≃+</a> <span class="fn">N</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddMonoidHom">IsAddMonoidHom</a> <span class="fn">⇑<span class="fn">h</span></span></span></div></div><p>An additive bijection between two additive monoids is an additive
+monoid hom (deprecated).</p></div></div><div class="decl" id="IsMonoidHom.map_mul'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L140-L144">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#IsMonoidHom.map_mul'"><span class="name">IsMonoidHom</span>.<span class="name">map_mul'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsMonoidHom">IsMonoidHom</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x y : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">y</span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></div></div><p>A monoid homomorphism preserves multiplication.</p></div></div><div class="decl" id="IsAddMonoidHom.map_add'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L141-L141">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#IsAddMonoidHom.map_add'"><span class="name">IsAddMonoidHom</span>.<span class="name">map_add'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddMonoidHom">IsAddMonoidHom</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x y : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">y</span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></div></div><p>An additive monoid homomorphism preserves addition.</p></div></div><div class="decl" id="IsMonoidHom.inv"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L146-L154">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#IsMonoidHom.inv"><span class="name">IsMonoidHom</span>.<span class="name">inv</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#CommGroup">CommGroup</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsMonoidHom">IsMonoidHom</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsMonoidHom">IsMonoidHom</a> <span class="fn">fun (<span class="fn">a</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">(<span class="fn">f</span> <span class="fn">a</span>)</span><a href="../.././Mathlib/Algebra/Group/Operations.html#Inv.inv">⁻¹</a></span></span></span></div></div><p>The inverse of a map which preserves multiplication,
+preserves multiplication when the target is commutative.</p></div></div><div class="decl" id="IsAddMonoidHom.neg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L148-L150">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#IsAddMonoidHom.neg"><span class="name">IsAddMonoidHom</span>.<span class="name">neg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddMonoidHom">IsAddMonoidHom</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddMonoidHom">IsAddMonoidHom</a> <span class="fn">fun (<span class="fn">a</span> : <span class="fn">α</span>) =&gt; <span class="fn"><a href="../.././Init/Prelude.html#Neg.neg">-</a><span class="fn"><span class="fn">f</span> <span class="fn">a</span></span></span></span></span></div></div><p>The negation of a map which preserves addition, preserves addition
+when the target is commutative.</p></div></div><div class="decl" id="IsMulHom.to_isMonoidHom"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L158-L164">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#IsMulHom.to_isMonoidHom"><span class="name">IsMulHom</span>.<span class="name">to_isMonoidHom</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Group">Group</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsMulHom">IsMulHom</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsMonoidHom">IsMonoidHom</a> <span class="fn">f</span></span></div></div><p>A map to a group preserving multiplication is a monoid homomorphism.</p></div></div><div class="decl" id="IsAddHom.to_isAddMonoidHom"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L159-L160">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#IsAddHom.to_isAddMonoidHom"><span class="name">IsAddHom</span>.<span class="name">to_isAddMonoidHom</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddGroup">AddGroup</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddHom">IsAddHom</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddMonoidHom">IsAddMonoidHom</a> <span class="fn">f</span></span></div></div><p>A map to an additive group preserving addition is an additive monoid
+homomorphism.</p></div></div><div class="decl" id="IsMonoidHom.id"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L170-L174">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#IsMonoidHom.id"><span class="name">IsMonoidHom</span>.<span class="name">id</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsMonoidHom">IsMonoidHom</a> <span class="fn">id</span></span></div></div><p>The identity map is a monoid homomorphism.</p></div></div><div class="decl" id="IsAddMonoidHom.id"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L171-L171">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#IsAddMonoidHom.id"><span class="name">IsAddMonoidHom</span>.<span class="name">id</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddMonoidHom">IsAddMonoidHom</a> <span class="fn">id</span></span></div></div><p>The identity map is an additive monoid homomorphism.</p></div></div><div class="decl" id="IsMonoidHom.comp"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L176-L183">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#IsMonoidHom.comp"><span class="name">IsMonoidHom</span>.<span class="name">comp</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsMonoidHom">IsMonoidHom</a> <span class="fn">f</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">γ</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">β</span> → <span class="fn">γ</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hg : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsMonoidHom">IsMonoidHom</a> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsMonoidHom">IsMonoidHom</a> <span class="fn">(<span class="fn">g</span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">f</span>)</span></span></div></div><p>The composite of two monoid homomorphisms is a monoid homomorphism.</p></div></div><div class="decl" id="IsAddMonoidHom.comp"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L177-L179">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#IsAddMonoidHom.comp"><span class="name">IsAddMonoidHom</span>.<span class="name">comp</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddMonoidHom">IsAddMonoidHom</a> <span class="fn">f</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">γ</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">β</span> → <span class="fn">γ</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hg : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddMonoidHom">IsAddMonoidHom</a> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddMonoidHom">IsAddMonoidHom</a> <span class="fn">(<span class="fn">g</span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">f</span>)</span></span></div></div><p>The composite of two additive monoid homomorphisms is an additive monoid
+homomorphism.</p></div></div><div class="decl" id="IsAddMonoidHom.isAddMonoidHom_mul_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L189-L193">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#IsAddMonoidHom.isAddMonoidHom_mul_left"><span class="name">IsAddMonoidHom</span>.<span class="name">isAddMonoidHom_mul_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalNonAssocSemiring">NonUnitalNonAssocSemiring</a> <span class="fn">γ</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">γ</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddMonoidHom">IsAddMonoidHom</a> <span class="fn">fun (<span class="fn">y</span> : <span class="fn">γ</span>) =&gt; <span class="fn"><span class="fn">x</span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">y</span></span></span></span></div></div><p>Left multiplication in a ring is an additive monoid morphism.</p></div></div><div class="decl" id="IsAddMonoidHom.isAddMonoidHom_mul_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L195-L199">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#IsAddMonoidHom.isAddMonoidHom_mul_right"><span class="name">IsAddMonoidHom</span>.<span class="name">isAddMonoidHom_mul_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalNonAssocSemiring">NonUnitalNonAssocSemiring</a> <span class="fn">γ</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">γ</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddMonoidHom">IsAddMonoidHom</a> <span class="fn">fun (<span class="fn">y</span> : <span class="fn">γ</span>) =&gt; <span class="fn"><span class="fn">y</span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">x</span></span></span></span></div></div><p>Right multiplication in a ring is an additive monoid morphism.</p></div></div><div class="decl" id="IsAddGroupHom"><div class="structure"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L203-L204">source</a></div><div class="decl_header"><span class="decl_kind">structure</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#IsAddGroupHom"><span class="name">IsAddGroupHom</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddGroup">AddGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddGroup">AddGroup</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_extends">extends</span> <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddHom">IsAddHom</a> <span class="fn">f</span></span><span class="decl_args"> :</span><div class="decl_type"><a href="../.././foundational_types.html">Prop</a></div></div><p>Predicate for additive group homomorphism (deprecated -- use bundled <code><a href="../.././Mathlib/Algebra/Group/Hom/Defs.html#MonoidHom">MonoidHom</a></code>).</p><ul class="structure_fields" id="IsAddGroupHom.mk"><li class="structure_field inherited_field"><div class="structure_field_info"><a href="../.././Mathlib/Deprecated/Group.html#IsAddHom.map_add">map_add</a> : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">y</span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span></div></li></ul><details id="instances-for-list-IsAddGroupHom" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="IsGroupHom"><div class="structure"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L206-L208">source</a></div><div class="decl_header"><span class="decl_kind">structure</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#IsGroupHom"><span class="name">IsGroupHom</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Group">Group</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Group">Group</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_extends">extends</span> <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsMulHom">IsMulHom</a> <span class="fn">f</span></span><span class="decl_args"> :</span><div class="decl_type"><a href="../.././foundational_types.html">Prop</a></div></div><p>Predicate for group homomorphisms (deprecated -- use bundled <code><a href="../.././Mathlib/Algebra/Group/Hom/Defs.html#MonoidHom">MonoidHom</a></code>).</p><ul class="structure_fields" id="IsGroupHom.mk"><li class="structure_field inherited_field"><div class="structure_field_info"><a href="../.././Mathlib/Deprecated/Group.html#IsMulHom.map_mul">map_mul</a> : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">y</span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span></div></li></ul><details id="instances-for-list-IsGroupHom" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="MonoidHom.isGroupHom"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L210-L213">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#MonoidHom.isGroupHom"><span class="name">MonoidHom</span>.<span class="name">isGroupHom</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{H : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x✝ : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Group">Group</a> <span class="fn">G</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x✝¹ : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Group">Group</a> <span class="fn">H</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">G</span> <a href="../.././Mathlib/Algebra/Group/Hom/Defs.html#MonoidHom">→*</a> <span class="fn">H</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsGroupHom">IsGroupHom</a> <span class="fn">⇑<span class="fn">f</span></span></span></div></div></div></div><div class="decl" id="AddMonoidHom.isAddGroupHom"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L210-L210">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#AddMonoidHom.isAddGroupHom"><span class="name">AddMonoidHom</span>.<span class="name">isAddGroupHom</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{H : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x✝ : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddGroup">AddGroup</a> <span class="fn">G</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x✝¹ : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddGroup">AddGroup</a> <span class="fn">H</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">G</span> <a href="../.././Mathlib/Algebra/Group/Hom/Defs.html#AddMonoidHom">→+</a> <span class="fn">H</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddGroupHom">IsAddGroupHom</a> <span class="fn">⇑<span class="fn">f</span></span></span></div></div></div></div><div class="decl" id="MulEquiv.isGroupHom"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L215-L218">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#MulEquiv.isGroupHom"><span class="name">MulEquiv</span>.<span class="name">isGroupHom</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{H : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x✝ : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Group">Group</a> <span class="fn">G</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x✝¹ : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Group">Group</a> <span class="fn">H</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">G</span> <a href="../.././Mathlib/Algebra/Group/Equiv/Basic.html#MulEquiv">≃*</a> <span class="fn">H</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsGroupHom">IsGroupHom</a> <span class="fn">⇑<span class="fn">h</span></span></span></div></div></div></div><div class="decl" id="AddEquiv.isAddGroupHom"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L215-L215">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#AddEquiv.isAddGroupHom"><span class="name">AddEquiv</span>.<span class="name">isAddGroupHom</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{H : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x✝ : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddGroup">AddGroup</a> <span class="fn">G</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x✝¹ : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddGroup">AddGroup</a> <span class="fn">H</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">G</span> <a href="../.././Mathlib/Algebra/Group/Equiv/Basic.html#AddEquiv">≃+</a> <span class="fn">H</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddGroupHom">IsAddGroupHom</a> <span class="fn">⇑<span class="fn">h</span></span></span></div></div></div></div><div class="decl" id="IsGroupHom.mk'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L220-L224">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#IsGroupHom.mk'"><span class="name">IsGroupHom</span>.<span class="name">mk'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Group">Group</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Group">Group</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">y</span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsGroupHom">IsGroupHom</a> <span class="fn">f</span></span></div></div><p>Construct <code><a href="../.././Mathlib/Deprecated/Group.html#IsGroupHom">IsGroupHom</a></code> from its only hypothesis.</p></div></div><div class="decl" id="IsAddGroupHom.mk'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L221-L221">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#IsAddGroupHom.mk'"><span class="name">IsAddGroupHom</span>.<span class="name">mk'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddGroup">AddGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddGroup">AddGroup</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn">∀ (<span class="fn">x </span><span class="fn">y</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">y</span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddGroupHom">IsAddGroupHom</a> <span class="fn">f</span></span></div></div><p>Construct <code><a href="../.././Mathlib/Deprecated/Group.html#IsAddGroupHom">IsAddGroupHom</a></code> from its only hypothesis.</p></div></div><div class="decl" id="IsGroupHom.id"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L230-L233">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#IsGroupHom.id"><span class="name">IsGroupHom</span>.<span class="name">id</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Group">Group</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsGroupHom">IsGroupHom</a> <span class="fn">id</span></span></div></div><p>The identity is a group homomorphism.</p></div></div><div class="decl" id="IsAddGroupHom.id"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L231-L231">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#IsAddGroupHom.id"><span class="name">IsAddGroupHom</span>.<span class="name">id</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddGroup">AddGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddGroupHom">IsAddGroupHom</a> <span class="fn">id</span></span></div></div><p>The identity is an additive group homomorphism.</p></div></div><div class="decl" id="IsGroupHom.map_mul'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L240-L241">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#IsGroupHom.map_mul'"><span class="name">IsGroupHom</span>.<span class="name">map_mul'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Group">Group</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Group">Group</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsGroupHom">IsGroupHom</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x y : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">x</span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">y</span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span></span></div></div></div></div><div class="decl" id="IsGroupHom.to_isMonoidHom"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L243-L246">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#IsGroupHom.to_isMonoidHom"><span class="name">IsGroupHom</span>.<span class="name">to_isMonoidHom</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Group">Group</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Group">Group</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsGroupHom">IsGroupHom</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsMonoidHom">IsMonoidHom</a> <span class="fn">f</span></span></div></div><p>A group homomorphism is a monoid homomorphism.</p></div></div><div class="decl" id="IsAddGroupHom.to_isAddMonoidHom"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L244-L244">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#IsAddGroupHom.to_isAddMonoidHom"><span class="name">IsAddGroupHom</span>.<span class="name">to_isAddMonoidHom</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddGroup">AddGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddGroup">AddGroup</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddGroupHom">IsAddGroupHom</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddMonoidHom">IsAddMonoidHom</a> <span class="fn">f</span></span></div></div><p>An additive group homomorphism is an additive monoid homomorphism.</p></div></div><div class="decl" id="IsGroupHom.map_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L248-L251">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#IsGroupHom.map_one"><span class="name">IsGroupHom</span>.<span class="name">map_one</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Group">Group</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Group">Group</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsGroupHom">IsGroupHom</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">1</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span></div></div><p>A group homomorphism sends 1 to 1.</p></div></div><div class="decl" id="IsAddGroupHom.map_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L249-L249">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#IsAddGroupHom.map_zero"><span class="name">IsAddGroupHom</span>.<span class="name">map_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddGroup">AddGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddGroup">AddGroup</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddGroupHom">IsAddGroupHom</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">0</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div><p>An additive group homomorphism sends 0 to 0.</p></div></div><div class="decl" id="IsGroupHom.map_inv"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L253-L256">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#IsGroupHom.map_inv"><span class="name">IsGroupHom</span>.<span class="name">map_inv</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Group">Group</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Group">Group</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsGroupHom">IsGroupHom</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn"><span class="fn">a</span><a href="../.././Mathlib/Algebra/Group/Operations.html#Inv.inv">⁻¹</a></span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<span class="fn">f</span> <span class="fn">a</span>)</span><a href="../.././Mathlib/Algebra/Group/Operations.html#Inv.inv">⁻¹</a></span></span></div></div><p>A group homomorphism sends inverses to inverses.</p></div></div><div class="decl" id="IsAddGroupHom.map_neg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L254-L254">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#IsAddGroupHom.map_neg"><span class="name">IsAddGroupHom</span>.<span class="name">map_neg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddGroup">AddGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddGroup">AddGroup</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddGroupHom">IsAddGroupHom</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<a href="../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">a</span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Prelude.html#Neg.neg">-</a><span class="fn"><span class="fn">f</span> <span class="fn">a</span></span></span></span></div></div><p>An additive group homomorphism sends negations to negations.</p></div></div><div class="decl" id="IsGroupHom.map_div"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L258-L260">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#IsGroupHom.map_div"><span class="name">IsGroupHom</span>.<span class="name">map_div</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Group">Group</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Group">Group</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsGroupHom">IsGroupHom</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a b : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">a</span> <a href="../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">b</span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">a</span></span> <a href="../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn"><span class="fn">f</span> <span class="fn">b</span></span></span></span></div></div></div></div><div class="decl" id="IsAddGroupHom.map_sub"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L258-L258">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#IsAddGroupHom.map_sub"><span class="name">IsAddGroupHom</span>.<span class="name">map_sub</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddGroup">AddGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddGroup">AddGroup</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddGroupHom">IsAddGroupHom</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a b : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">(<span class="fn">a</span> <a href="../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">b</span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">a</span></span> <a href="../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">f</span> <span class="fn">b</span></span></span></span></div></div></div></div><div class="decl" id="IsGroupHom.comp"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L262-L268">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#IsGroupHom.comp"><span class="name">IsGroupHom</span>.<span class="name">comp</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Group">Group</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Group">Group</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsGroupHom">IsGroupHom</a> <span class="fn">f</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Group">Group</a> <span class="fn">γ</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">β</span> → <span class="fn">γ</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hg : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsGroupHom">IsGroupHom</a> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsGroupHom">IsGroupHom</a> <span class="fn">(<span class="fn">g</span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">f</span>)</span></span></div></div><p>The composition of two group homomorphisms is a group homomorphism.</p></div></div><div class="decl" id="IsAddGroupHom.comp"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L263-L265">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#IsAddGroupHom.comp"><span class="name">IsAddGroupHom</span>.<span class="name">comp</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddGroup">AddGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddGroup">AddGroup</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddGroupHom">IsAddGroupHom</a> <span class="fn">f</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{γ : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddGroup">AddGroup</a> <span class="fn">γ</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">β</span> → <span class="fn">γ</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hg : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddGroupHom">IsAddGroupHom</a> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddGroupHom">IsAddGroupHom</a> <span class="fn">(<span class="fn">g</span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">f</span>)</span></span></div></div><p>The composition of two additive group homomorphisms is an additive
+group homomorphism.</p></div></div><div class="decl" id="IsGroupHom.injective_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L270-L274">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#IsGroupHom.injective_iff"><span class="name">IsGroupHom</span>.<span class="name">injective_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Group">Group</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Group">Group</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsGroupHom">IsGroupHom</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Logic/Function/Defs.html#Function.Injective">Function.Injective</a> <span class="fn">f</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn">∀ (<span class="fn">a</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">a</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span> → <span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span></span></span></span></div></div><p>A group homomorphism is injective iff its kernel is trivial.</p></div></div><div class="decl" id="IsAddGroupHom.injective_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L271-L271">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#IsAddGroupHom.injective_iff"><span class="name">IsAddGroupHom</span>.<span class="name">injective_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddGroup">AddGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddGroup">AddGroup</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddGroupHom">IsAddGroupHom</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Logic/Function/Defs.html#Function.Injective">Function.Injective</a> <span class="fn">f</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn">∀ (<span class="fn">a</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">a</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span> → <span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span></span></span></div></div><p>An additive group homomorphism is injective if its kernel is trivial.</p></div></div><div class="decl" id="IsGroupHom.mul"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L278-L284">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#IsGroupHom.mul"><span class="name">IsGroupHom</span>.<span class="name">mul</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Group">Group</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#CommGroup">CommGroup</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f g : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsGroupHom">IsGroupHom</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hg : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsGroupHom">IsGroupHom</a> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsGroupHom">IsGroupHom</a> <span class="fn">fun (<span class="fn">a</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">a</span></span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">g</span> <span class="fn">a</span></span></span></span></span></div></div><p>The product of group homomorphisms is a group homomorphism if the target is commutative.</p></div></div><div class="decl" id="IsAddGroupHom.add"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L279-L281">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#IsAddGroupHom.add"><span class="name">IsAddGroupHom</span>.<span class="name">add</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddGroup">AddGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f g : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddGroupHom">IsAddGroupHom</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hg : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddGroupHom">IsAddGroupHom</a> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddGroupHom">IsAddGroupHom</a> <span class="fn">fun (<span class="fn">a</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">a</span></span> <a href="../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">g</span> <span class="fn">a</span></span></span></span></span></div></div><p>The sum of two additive group homomorphisms is an additive group homomorphism
+if the target is commutative.</p></div></div><div class="decl" id="IsGroupHom.inv"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L286-L292">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#IsGroupHom.inv"><span class="name">IsGroupHom</span>.<span class="name">inv</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Group">Group</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#CommGroup">CommGroup</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsGroupHom">IsGroupHom</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsGroupHom">IsGroupHom</a> <span class="fn">fun (<span class="fn">a</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn">(<span class="fn">f</span> <span class="fn">a</span>)</span><a href="../.././Mathlib/Algebra/Group/Operations.html#Inv.inv">⁻¹</a></span></span></span></div></div><p>The inverse of a group homomorphism is a group homomorphism if the target is commutative.</p></div></div><div class="decl" id="IsAddGroupHom.neg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L287-L289">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#IsAddGroupHom.neg"><span class="name">IsAddGroupHom</span>.<span class="name">neg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddGroup">AddGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddGroupHom">IsAddGroupHom</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddGroupHom">IsAddGroupHom</a> <span class="fn">fun (<span class="fn">a</span> : <span class="fn">α</span>) =&gt; <span class="fn"><a href="../.././Init/Prelude.html#Neg.neg">-</a><span class="fn"><span class="fn">f</span> <span class="fn">a</span></span></span></span></span></div></div><p>The negation of an additive group homomorphism is an additive group homomorphism
+if the target is commutative.</p></div></div><div class="mod_doc"><p>These instances look redundant, because <code>Deprecated.<a href="../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a></code> provides <code>IsRingHom</code> for a <code>→+*</code>.
+Nevertheless these are harmless, and helpful for stripping out dependencies on <code>Deprecated.<a href="../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a></code>.</p></div><div class="decl" id="RingHom.to_isMonoidHom"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L310-L312">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#RingHom.to_isMonoidHom"><span class="name">RingHom</span>.<span class="name">to_isMonoidHom</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#NonAssocSemiring">NonAssocSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#NonAssocSemiring">NonAssocSemiring</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">R</span> <a href="../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">S</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsMonoidHom">IsMonoidHom</a> <span class="fn">⇑<span class="fn">f</span></span></span></div></div></div></div><div class="decl" id="RingHom.to_isAddMonoidHom"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L314-L316">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#RingHom.to_isAddMonoidHom"><span class="name">RingHom</span>.<span class="name">to_isAddMonoidHom</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#NonAssocSemiring">NonAssocSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#NonAssocSemiring">NonAssocSemiring</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">R</span> <a href="../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">S</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddMonoidHom">IsAddMonoidHom</a> <span class="fn">⇑<span class="fn">f</span></span></span></div></div></div></div><div class="decl" id="RingHom.to_isAddGroupHom"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L324-L325">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#RingHom.to_isAddGroupHom"><span class="name">RingHom</span>.<span class="name">to_isAddGroupHom</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">R</span> <a href="../.././Mathlib/Algebra/Ring/Hom/Defs.html#RingHom">→+*</a> <span class="fn">S</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddGroupHom">IsAddGroupHom</a> <span class="fn">⇑<span class="fn">f</span></span></span></div></div></div></div><div class="decl" id="Inv.isGroupHom"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L331-L335">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#Inv.isGroupHom"><span class="name">Inv</span>.<span class="name">isGroupHom</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#CommGroup">CommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsGroupHom">IsGroupHom</a> <span class="fn">Inv.inv</span></span></div></div><p>Inversion is a group homomorphism if the group is commutative.</p></div></div><div class="decl" id="Neg.isAddGroupHom"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L332-L333">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#Neg.isAddGroupHom"><span class="name">Neg</span>.<span class="name">isAddGroupHom</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddGroupHom">IsAddGroupHom</a> <span class="fn">Neg.neg</span></span></div></div><p>Negation is an <code><a href="../.././Mathlib/Algebra/Group/Defs.html#AddGroup">AddGroup</a></code> homomorphism if the <code><a href="../.././Mathlib/Algebra/Group/Defs.html#AddGroup">AddGroup</a></code> is commutative.</p></div></div><div class="decl" id="IsAddGroupHom.sub"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L337-L341">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#IsAddGroupHom.sub"><span class="name">IsAddGroupHom</span>.<span class="name">sub</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddGroup">AddGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f g : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddGroupHom">IsAddGroupHom</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hg : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddGroupHom">IsAddGroupHom</a> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddGroupHom">IsAddGroupHom</a> <span class="fn">fun (<span class="fn">a</span> : <span class="fn">α</span>) =&gt; <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">a</span></span> <a href="../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">g</span> <span class="fn">a</span></span></span></span></span></div></div><p>The difference of two additive group homomorphisms is an additive group
+homomorphism if the target is commutative.</p></div></div><div class="decl" id="Units.map'"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L347-L349">source</a></div><div class="attributes">@[reducible, inline]</div>
+<div class="decl_header"><span class="decl_kind">abbrev</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#Units.map'"><span class="name">Units</span>.<span class="name">map'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M</span> → <span class="fn">N</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsMonoidHom">IsMonoidHom</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">M</span><a href="../.././Mathlib/Algebra/Group/Units/Defs.html#Units">ˣ</a></span> <a href="../.././Mathlib/Algebra/Group/Hom/Defs.html#MonoidHom">→*</a> <span class="fn"><span class="fn">N</span><a href="../.././Mathlib/Algebra/Group/Units/Defs.html#Units">ˣ</a></span></span></div></div><p>The group homomorphism on units induced by a multiplicative morphism.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#Units.map'">Units.map'</a> <span class="fn">hf</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Mathlib/Algebra/Group/Units/Hom.html#Units.map">Units.map</a> <span class="fn">(<a href="../.././Mathlib/Deprecated/Group.html#MonoidHom.of">MonoidHom.of</a> <span class="fn">hf</span>)</span></span></span></li></ul></details><details id="instances-for-list-Units.map'" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Units.coe_map'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L351-L353">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#Units.coe_map'"><span class="name">Units</span>.<span class="name">coe_map'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M</span> → <span class="fn">N</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsMonoidHom">IsMonoidHom</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><span class="fn">M</span><a href="../.././Mathlib/Algebra/Group/Units/Defs.html#Units">ˣ</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">(<span class="fn">(<a href="../.././Mathlib/Deprecated/Group.html#Units.map'">Units.map'</a> <span class="fn">hf</span>)</span> <span class="fn">x</span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span> <span class="fn">↑<span class="fn">x</span></span></span></span></div></div></div></div><div class="decl" id="Units.coe_isMonoidHom"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L355-L356">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#Units.coe_isMonoidHom"><span class="name">Units</span>.<span class="name">coe_isMonoidHom</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsMonoidHom">IsMonoidHom</a> <span class="fn">fun (<span class="fn">x</span> : <span class="fn"><span class="fn">M</span><a href="../.././Mathlib/Algebra/Group/Units/Defs.html#Units">ˣ</a></span>) =&gt; <span class="fn">↑<span class="fn">x</span></span></span></span></div></div></div></div><div class="decl" id="IsUnit.map'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L364-L365">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#IsUnit.map'"><span class="name">IsUnit</span>.<span class="name">map'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M</span> → <span class="fn">N</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsMonoidHom">IsMonoidHom</a> <span class="fn">f</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">M</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Units/Defs.html#IsUnit">IsUnit</a> <span class="fn">x</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Algebra/Group/Units/Defs.html#IsUnit">IsUnit</a> <span class="fn">(<span class="fn">f</span> <span class="fn">x</span>)</span></span></div></div></div></div><div class="decl" id="Additive.isAddHom"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L369-L371">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#Additive.isAddHom"><span class="name">Additive</span>.<span class="name">isAddHom</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Init/Prelude.html#Mul">Mul</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Init/Prelude.html#Mul">Mul</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsMulHom">IsMulHom</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddHom">IsAddHom</a> <span class="fn">f</span></span></div></div></div></div><div class="decl" id="Multiplicative.isMulHom"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L373-L375">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#Multiplicative.isMulHom"><span class="name">Multiplicative</span>.<span class="name">isMulHom</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Init/Prelude.html#Add">Add</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Init/Prelude.html#Add">Add</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddHom">IsAddHom</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsMulHom">IsMulHom</a> <span class="fn">f</span></span></div></div></div></div><div class="decl" id="Additive.isAddMonoidHom"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L378-L380">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#Additive.isAddMonoidHom"><span class="name">Additive</span>.<span class="name">isAddMonoidHom</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#MulOneClass">MulOneClass</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsMonoidHom">IsMonoidHom</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddMonoidHom">IsAddMonoidHom</a> <span class="fn">f</span></span></div></div></div></div><div class="decl" id="Multiplicative.isMonoidHom"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L382-L384">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#Multiplicative.isMonoidHom"><span class="name">Multiplicative</span>.<span class="name">isMonoidHom</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddZeroClass">AddZeroClass</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddMonoidHom">IsAddMonoidHom</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsMonoidHom">IsMonoidHom</a> <span class="fn">f</span></span></div></div></div></div><div class="decl" id="Additive.isAddGroupHom"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L386-L388">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#Additive.isAddGroupHom"><span class="name">Additive</span>.<span class="name">isAddGroupHom</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Group">Group</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Group">Group</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsGroupHom">IsGroupHom</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddGroupHom">IsAddGroupHom</a> <span class="fn">f</span></span></div></div></div></div><div class="decl" id="Multiplicative.isGroupHom"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Deprecated/Group.lean#L390-L392">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Deprecated/Group.html#Multiplicative.isGroupHom"><span class="name">Multiplicative</span>.<span class="name">isGroupHom</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddGroup">AddGroup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddGroup">AddGroup</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsAddGroupHom">IsAddGroupHom</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Deprecated/Group.html#IsGroupHom">IsGroupHom</a> <span class="fn">f</span></span></div></div></div></div></main>
+<nav class="nav"><iframe src="../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

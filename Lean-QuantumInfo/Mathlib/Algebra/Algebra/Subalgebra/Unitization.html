@@ -1,0 +1,973 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../../.././style.css"></link><link rel="icon" href="../../../.././favicon.svg"></link><link rel="mask-icon" href="../../../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Algebra.Algebra.Subalgebra.Unitization</title><script defer="true" src="../../../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../../.././";</script><script>const MODULE_NAME="Mathlib.Algebra.Algebra.Subalgebra.Unitization";</script><script type="module" src="../../../.././jump-src.js"></script><script type="module" src="../../../.././search.js"></script><script type="module" src="../../../.././expand-nav.js"></script><script type="module" src="../../../.././how-about.js"></script><script type="module" src="../../../.././instances.js"></script><script type="module" src="../../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Algebra</span>.<span class="name">Algebra</span>.<span class="name">Subalgebra</span>.<span class="name">Unitization</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../../.././Init.html">Init</a></li><li><a href="../../../.././Mathlib/Algebra/Algebra/Unitization.html">Mathlib.Algebra.Algebra.Unitization</a></li><li><a href="../../../.././Mathlib/Algebra/Star/NonUnitalSubalgebra.html">Mathlib.Algebra.Star.NonUnitalSubalgebra</a></li><li><a href="../../../.././Mathlib/Algebra/Star/Subalgebra.html">Mathlib.Algebra.Star.Subalgebra</a></li><li><a href="../../../.././Mathlib/GroupTheory/GroupAction/Ring.html">Mathlib.GroupTheory.GroupAction.Ring</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Algebra.Algebra.Subalgebra.Unitization" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#Subalgebra.toNonUnitalSubalgebra"><span class="name">Subalgebra</span>.<span class="name">toNonUnitalSubalgebra</span></a></div><div class="nav_link"><a class="break_within" href="#Subalgebra.one_mem_toNonUnitalSubalgebra"><span class="name">Subalgebra</span>.<span class="name">one_mem_toNonUnitalSubalgebra</span></a></div><div class="nav_link"><a class="break_within" href="#NonUnitalSubalgebra.toSubalgebra"><span class="name">NonUnitalSubalgebra</span>.<span class="name">toSubalgebra</span></a></div><div class="nav_link"><a class="break_within" href="#Subalgebra.toNonUnitalSubalgebra_toSubalgebra"><span class="name">Subalgebra</span>.<span class="name">toNonUnitalSubalgebra_toSubalgebra</span></a></div><div class="nav_link"><a class="break_within" href="#NonUnitalSubalgebra.toSubalgebra_toNonUnitalSubalgebra"><span class="name">NonUnitalSubalgebra</span>.<span class="name">toSubalgebra_toNonUnitalSubalgebra</span></a></div><div class="nav_link"><a class="break_within" href="#Algebra.adjoin_nonUnitalSubalgebra_eq_span"><span class="name">Algebra</span>.<span class="name">adjoin_nonUnitalSubalgebra_eq_span</span></a></div><div class="nav_link"><a class="break_within" href="#NonUnitalAlgebra.adjoin_le_algebra_adjoin"><span class="name">NonUnitalAlgebra</span>.<span class="name">adjoin_le_algebra_adjoin</span></a></div><div class="nav_link"><a class="break_within" href="#Algebra.adjoin_nonUnitalSubalgebra"><span class="name">Algebra</span>.<span class="name">adjoin_nonUnitalSubalgebra</span></a></div><div class="nav_link"><a class="break_within" href="#Unitization.lift_range_le"><span class="name">Unitization</span>.<span class="name">lift_range_le</span></a></div><div class="nav_link"><a class="break_within" href="#Unitization.lift_range"><span class="name">Unitization</span>.<span class="name">lift_range</span></a></div><div class="nav_link"><a class="break_within" href="#NonUnitalSubalgebra.unitization"><span class="name">NonUnitalSubalgebra</span>.<span class="name">unitization</span></a></div><div class="nav_link"><a class="break_within" href="#NonUnitalSubalgebra.unitization_apply"><span class="name">NonUnitalSubalgebra</span>.<span class="name">unitization_apply</span></a></div><div class="nav_link"><a class="break_within" href="#NonUnitalSubalgebra.unitization_range"><span class="name">NonUnitalSubalgebra</span>.<span class="name">unitization_range</span></a></div><div class="nav_link"><a class="break_within" href="#AlgHomClass.unitization_injective'"><span class="name">AlgHomClass</span>.<span class="name">unitization_injective'</span></a></div><div class="nav_link"><a class="break_within" href="#AlgHomClass.unitization_injective"><span class="name">AlgHomClass</span>.<span class="name">unitization_injective</span></a></div><div class="nav_link"><a class="break_within" href="#NonUnitalSubalgebra.unitization_injective"><span class="name">NonUnitalSubalgebra</span>.<span class="name">unitization_injective</span></a></div><div class="nav_link"><a class="break_within" href="#NonUnitalSubalgebra.unitizationAlgEquiv"><span class="name">NonUnitalSubalgebra</span>.<span class="name">unitizationAlgEquiv</span></a></div><div class="nav_link"><a class="break_within" href="#NonUnitalSubalgebra.unitizationAlgEquiv_apply_coe"><span class="name">NonUnitalSubalgebra</span>.<span class="name">unitizationAlgEquiv_apply_coe</span></a></div><div class="nav_link"><a class="break_within" href="#Subsemiring.toNonUnitalSubsemiring"><span class="name">Subsemiring</span>.<span class="name">toNonUnitalSubsemiring</span></a></div><div class="nav_link"><a class="break_within" href="#Subsemiring.one_mem_toNonUnitalSubsemiring"><span class="name">Subsemiring</span>.<span class="name">one_mem_toNonUnitalSubsemiring</span></a></div><div class="nav_link"><a class="break_within" href="#NonUnitalSubsemiring.toSubsemiring"><span class="name">NonUnitalSubsemiring</span>.<span class="name">toSubsemiring</span></a></div><div class="nav_link"><a class="break_within" href="#Subsemiring.toNonUnitalSubsemiring_toSubsemiring"><span class="name">Subsemiring</span>.<span class="name">toNonUnitalSubsemiring_toSubsemiring</span></a></div><div class="nav_link"><a class="break_within" href="#NonUnitalSubsemiring.toSubsemiring_toNonUnitalSubsemiring"><span class="name">NonUnitalSubsemiring</span>.<span class="name">toSubsemiring_toNonUnitalSubsemiring</span></a></div><div class="nav_link"><a class="break_within" href="#NonUnitalSubsemiring.unitization"><span class="name">NonUnitalSubsemiring</span>.<span class="name">unitization</span></a></div><div class="nav_link"><a class="break_within" href="#NonUnitalSubsemiring.unitization_apply"><span class="name">NonUnitalSubsemiring</span>.<span class="name">unitization_apply</span></a></div><div class="nav_link"><a class="break_within" href="#NonUnitalSubsemiring.unitization_range"><span class="name">NonUnitalSubsemiring</span>.<span class="name">unitization_range</span></a></div><div class="nav_link"><a class="break_within" href="#Subring.toNonUnitalSubring"><span class="name">Subring</span>.<span class="name">toNonUnitalSubring</span></a></div><div class="nav_link"><a class="break_within" href="#Subring.one_mem_toNonUnitalSubring"><span class="name">Subring</span>.<span class="name">one_mem_toNonUnitalSubring</span></a></div><div class="nav_link"><a class="break_within" href="#NonUnitalSubring.toSubring"><span class="name">NonUnitalSubring</span>.<span class="name">toSubring</span></a></div><div class="nav_link"><a class="break_within" href="#Subring.toNonUnitalSubring_toSubring"><span class="name">Subring</span>.<span class="name">toNonUnitalSubring_toSubring</span></a></div><div class="nav_link"><a class="break_within" href="#NonUnitalSubring.toSubring_toNonUnitalSubring"><span class="name">NonUnitalSubring</span>.<span class="name">toSubring_toNonUnitalSubring</span></a></div><div class="nav_link"><a class="break_within" href="#NonUnitalSubring.unitization"><span class="name">NonUnitalSubring</span>.<span class="name">unitization</span></a></div><div class="nav_link"><a class="break_within" href="#NonUnitalSubring.unitization_apply"><span class="name">NonUnitalSubring</span>.<span class="name">unitization_apply</span></a></div><div class="nav_link"><a class="break_within" href="#NonUnitalSubring.unitization_range"><span class="name">NonUnitalSubring</span>.<span class="name">unitization_range</span></a></div><div class="nav_link"><a class="break_within" href="#StarSubalgebra.toNonUnitalStarSubalgebra"><span class="name">StarSubalgebra</span>.<span class="name">toNonUnitalStarSubalgebra</span></a></div><div class="nav_link"><a class="break_within" href="#StarSubalgebra.one_mem_toNonUnitalStarSubalgebra"><span class="name">StarSubalgebra</span>.<span class="name">one_mem_toNonUnitalStarSubalgebra</span></a></div><div class="nav_link"><a class="break_within" href="#NonUnitalStarSubalgebra.toStarSubalgebra"><span class="name">NonUnitalStarSubalgebra</span>.<span class="name">toStarSubalgebra</span></a></div><div class="nav_link"><a class="break_within" href="#StarSubalgebra.toNonUnitalStarSubalgebra_toStarSubalgebra"><span class="name">StarSubalgebra</span>.<span class="name">toNonUnitalStarSubalgebra_toStarSubalgebra</span></a></div><div class="nav_link"><a class="break_within" href="#NonUnitalStarSubalgebra.toStarSubalgebra_toNonUnitalStarSubalgebra"><span class="name">NonUnitalStarSubalgebra</span>.<span class="name">toStarSubalgebra_toNonUnitalStarSubalgebra</span></a></div><div class="nav_link"><a class="break_within" href="#StarAlgebra.adjoin_nonUnitalStarSubalgebra_eq_span"><span class="name">StarAlgebra</span>.<span class="name">adjoin_nonUnitalStarSubalgebra_eq_span</span></a></div><div class="nav_link"><a class="break_within" href="#NonUnitalStarAlgebra.adjoin_le_starAlgebra_adjoin"><span class="name">NonUnitalStarAlgebra</span>.<span class="name">adjoin_le_starAlgebra_adjoin</span></a></div><div class="nav_link"><a class="break_within" href="#StarAlgebra.adjoin_nonUnitalStarSubalgebra"><span class="name">StarAlgebra</span>.<span class="name">adjoin_nonUnitalStarSubalgebra</span></a></div><div class="nav_link"><a class="break_within" href="#Unitization.starLift_range_le"><span class="name">Unitization</span>.<span class="name">starLift_range_le</span></a></div><div class="nav_link"><a class="break_within" href="#Unitization.starLift_range"><span class="name">Unitization</span>.<span class="name">starLift_range</span></a></div><div class="nav_link"><a class="break_within" href="#NonUnitalStarSubalgebra.unitization"><span class="name">NonUnitalStarSubalgebra</span>.<span class="name">unitization</span></a></div><div class="nav_link"><a class="break_within" href="#NonUnitalStarSubalgebra.unitization_apply"><span class="name">NonUnitalStarSubalgebra</span>.<span class="name">unitization_apply</span></a></div><div class="nav_link"><a class="break_within" href="#NonUnitalStarSubalgebra.unitization_range"><span class="name">NonUnitalStarSubalgebra</span>.<span class="name">unitization_range</span></a></div><div class="nav_link"><a class="break_within" href="#NonUnitalStarSubalgebra.unitization_injective"><span class="name">NonUnitalStarSubalgebra</span>.<span class="name">unitization_injective</span></a></div><div class="nav_link"><a class="break_within" href="#NonUnitalStarSubalgebra.unitizationStarAlgEquiv"><span class="name">NonUnitalStarSubalgebra</span>.<span class="name">unitizationStarAlgEquiv</span></a></div><div class="nav_link"><a class="break_within" href="#NonUnitalStarSubalgebra.unitizationStarAlgEquiv_apply_coe"><span class="name">NonUnitalStarSubalgebra</span>.<span class="name">unitizationStarAlgEquiv_apply_coe</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Relating-unital-and-non-unital-substructures">Relating unital and non-unital substructures <a class="hover-link" href="#Relating-unital-and-non-unital-substructures">#</a></h1><p>This file relates various algebraic structures and provides maps (generally algebra homomorphisms),
+from the unitization of a non-unital subobject into the full structure. The range of this map is
+the unital closure of the non-unital subobject (e.g., <code><a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a></code>, <code><a href="../../../.././Mathlib/Algebra/Ring/Subring/Basic.html#Subring.closure">Subring.closure</a></code>,
+<code><a href="../../../.././Mathlib/Algebra/Ring/Subsemiring/Basic.html#Subsemiring.closure">Subsemiring.closure</a></code> or <code><a href="../../../.././Mathlib/Algebra/Star/Subalgebra.html#StarAlgebra.adjoin">StarAlgebra.adjoin</a></code>). When the underlying scalar ring is a field, for
+this map to be injective it suffices that the range omits <code>1</code>. In this setting we provide suitable
+<code><a href="../../../.././Mathlib/Algebra/Algebra/Equiv.html#AlgEquiv">AlgEquiv</a></code> (or <code><a href="../../../.././Mathlib/Algebra/Star/StarAlgHom.html#StarAlgEquiv">StarAlgEquiv</a></code>) onto the range.</p><h2 class="markdown-heading" id="Main-declarations">Main declarations <a class="hover-link" href="#Main-declarations">#</a></h2><ul>
+<li><code><a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalSubalgebra.unitization">NonUnitalSubalgebra.unitization</a> s : <a href="../../../.././Mathlib/Algebra/Algebra/Unitization.html#Unitization">Unitization</a> R s →ₐ[R] A</code>:
+where <code>s</code> is a non-unital subalgebra of a unital <code>R</code>-algebra <code>A</code>, this is the natural algebra
+homomorphism sending <code>(r, a)</code> to <code>r • 1 + a</code>. The range of this map is
+<code><a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> R (s : <a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> A)</code>.</li>
+<li><code><a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalSubalgebra.unitizationAlgEquiv">NonUnitalSubalgebra.unitizationAlgEquiv</a> s : <a href="../../../.././Mathlib/Algebra/Algebra/Unitization.html#Unitization">Unitization</a> R s ≃ₐ[R] <a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> R (s : <a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> A)</code>
+when <code>R</code> is a field and <code>1 ∉ s</code>. This is <code><a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalSubalgebra.unitization">NonUnitalSubalgebra.unitization</a></code> upgraded to an
+<code><a href="../../../.././Mathlib/Algebra/Algebra/Equiv.html#AlgEquiv">AlgEquiv</a></code> onto its range.</li>
+<li><code><a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalSubsemiring.unitization">NonUnitalSubsemiring.unitization</a> : <a href="../../../.././Mathlib/Algebra/Algebra/Unitization.html#Unitization">Unitization</a> ℕ s →ₐ[ℕ] R</code>: the natural <code>ℕ</code>-algebra homomorphism
+from the unitization of a non-unital subsemiring <code>s</code> into the ring containing it. The range of
+this map is <code><a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#subalgebraOfSubsemiring">subalgebraOfSubsemiring</a> (Subsemiring.closure s)</code>.
+This is just <code><a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalSubalgebra.unitization">NonUnitalSubalgebra.unitization</a> s</code> but we provide a separate declaration because
+there is an instance Lean can't find on its own due to <code><a href="../../../.././Init/Prelude.html#outParam">outParam</a></code>.</li>
+<li><code><a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalSubring.unitization">NonUnitalSubring.unitization</a> : <a href="../../../.././Mathlib/Algebra/Algebra/Unitization.html#Unitization">Unitization</a> ℤ s →ₐ[ℤ] R</code>:
+the natural <code>ℤ</code>-algebra homomorphism from the unitization of a non-unital subring <code>s</code> into the
+ring containing it. The range of this map is <code><a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#subalgebraOfSubring">subalgebraOfSubring</a> (Subring.closure s)</code>.
+This is just <code><a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalSubalgebra.unitization">NonUnitalSubalgebra.unitization</a> s</code> but we provide a separate declaration because
+there is an instance Lean can't find on its own due to <code><a href="../../../.././Init/Prelude.html#outParam">outParam</a></code>.</li>
+<li><code><a href="../../../.././Mathlib/Algebra/Star/NonUnitalSubalgebra.html#NonUnitalStarSubalgebra">NonUnitalStarSubalgebra</a> s : <a href="../../../.././Mathlib/Algebra/Algebra/Unitization.html#Unitization">Unitization</a> R s →⋆ₐ[R] A</code>: a version of
+<code><a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalSubalgebra.unitization">NonUnitalSubalgebra.unitization</a></code> for star algebras.</li>
+<li><code><a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalStarSubalgebra.unitizationStarAlgEquiv">NonUnitalStarSubalgebra.unitizationStarAlgEquiv</a> s :</code>
+<code><a href="../../../.././Mathlib/Algebra/Algebra/Unitization.html#Unitization">Unitization</a> R s ≃⋆ₐ[R] <a href="../../../.././Mathlib/Algebra/Star/Subalgebra.html#StarAlgebra.adjoin">StarAlgebra.adjoin</a> R (s : <a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> A)</code>:
+a version of <code><a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalSubalgebra.unitizationAlgEquiv">NonUnitalSubalgebra.unitizationAlgEquiv</a></code> for star algebras.</li>
+</ul></div><div class="mod_doc"><h2 class="markdown-heading" id="Subalgebras">Subalgebras <a class="hover-link" href="#Subalgebras">#</a></h2></div><div class="decl" id="Subalgebra.toNonUnitalSubalgebra"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L53-L56">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#Subalgebra.toNonUnitalSubalgebra"><span class="name">Subalgebra</span>.<span class="name">toNonUnitalSubalgebra</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(S : <span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Subalgebra">Subalgebra</a> <span class="fn">R</span> <span class="fn">A</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/NonUnitalSubalgebra.html#NonUnitalSubalgebra">NonUnitalSubalgebra</a> <span class="fn">R</span> <span class="fn">A</span></span></div></div><p>Turn a <code><a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Subalgebra">Subalgebra</a></code> into a <code><a href="../../../.././Mathlib/Algebra/Algebra/NonUnitalSubalgebra.html#NonUnitalSubalgebra">NonUnitalSubalgebra</a></code> by forgetting that it contains <code>1</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><span class="fn">S</span>.toNonUnitalSubalgebra</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ <span class="fn">carrier</span> := <span class="fn"><span class="fn">S</span>.carrier</span>, <span class="fn">add_mem'</span> := <span class="fn">⋯</span>, <span class="fn">zero_mem'</span> := <span class="fn">⋯</span>, <span class="fn">mul_mem'</span> := <span class="fn">⋯</span>, <span class="fn">smul_mem'</span> := <span class="fn">⋯</span> }</span></span></li></ul></details><details id="instances-for-list-Subalgebra.toNonUnitalSubalgebra" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Subalgebra.one_mem_toNonUnitalSubalgebra"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L58-L60">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#Subalgebra.one_mem_toNonUnitalSubalgebra"><span class="name">Subalgebra</span>.<span class="name">one_mem_toNonUnitalSubalgebra</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(S : <span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Subalgebra">Subalgebra</a> <span class="fn">R</span> <span class="fn">A</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">1</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn">S</span>.toNonUnitalSubalgebra</span></span></div></div></div></div><div class="decl" id="NonUnitalSubalgebra.toSubalgebra"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L62-L68">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalSubalgebra.toSubalgebra"><span class="name">NonUnitalSubalgebra</span>.<span class="name">toSubalgebra</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(S : <span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/NonUnitalSubalgebra.html#NonUnitalSubalgebra">NonUnitalSubalgebra</a> <span class="fn">R</span> <span class="fn">A</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h1 : <span class="fn"><span class="fn">1</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">S</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Subalgebra">Subalgebra</a> <span class="fn">R</span> <span class="fn">A</span></span></div></div><p>Turn a non-unital subalgebra containing <code>1</code> into a subalgebra.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><span class="fn"><span class="fn">S</span>.toSubalgebra</span> <span class="fn">h1</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">{ <span class="fn">carrier</span> := <span class="fn"><span class="fn">S</span>.carrier</span>, <span class="fn">mul_mem'</span> := <span class="fn">⋯</span>, <span class="fn">one_mem'</span> := <span class="fn">h1</span>, <span class="fn">add_mem'</span> := <span class="fn">⋯</span>, <span class="fn">zero_mem'</span> := <span class="fn">⋯</span>, <span class="fn">algebraMap_mem'</span> := <span class="fn">⋯</span> }</span></span></li></ul></details><details id="instances-for-list-NonUnitalSubalgebra.toSubalgebra" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Subalgebra.toNonUnitalSubalgebra_toSubalgebra"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L70-L71">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#Subalgebra.toNonUnitalSubalgebra_toSubalgebra"><span class="name">Subalgebra</span>.<span class="name">toNonUnitalSubalgebra_toSubalgebra</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(S : <span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Subalgebra">Subalgebra</a> <span class="fn">R</span> <span class="fn">A</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn"><span class="fn">S</span>.toNonUnitalSubalgebra</span>.toSubalgebra</span> <span class="fn">⋯</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">S</span></span></div></div></div></div><div class="decl" id="NonUnitalSubalgebra.toSubalgebra_toNonUnitalSubalgebra"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L73-L75">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalSubalgebra.toSubalgebra_toNonUnitalSubalgebra"><span class="name">NonUnitalSubalgebra</span>.<span class="name">toSubalgebra_toNonUnitalSubalgebra</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(S : <span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/NonUnitalSubalgebra.html#NonUnitalSubalgebra">NonUnitalSubalgebra</a> <span class="fn">R</span> <span class="fn">A</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h1 : <span class="fn"><span class="fn">1</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">S</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">S</span>.toSubalgebra</span> <span class="fn">h1</span>)</span>.toNonUnitalSubalgebra</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">S</span></span></div></div></div></div><div class="decl" id="Algebra.adjoin_nonUnitalSubalgebra_eq_span"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L78-L81">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#Algebra.adjoin_nonUnitalSubalgebra_eq_span"><span class="name">Algebra</span>.<span class="name">adjoin_nonUnitalSubalgebra_eq_span</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/NonUnitalSubalgebra.html#NonUnitalSubalgebra">NonUnitalSubalgebra</a> <span class="fn">R</span> <span class="fn">A</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">Subalgebra.toSubmodule</span> <span class="fn">(<a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">R</span> <span class="fn">↑<span class="fn">s</span></span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><a href="../../../.././Mathlib/LinearAlgebra/Span/Defs.html#Submodule.span">Submodule.span</a> <span class="fn">R</span> <span class="fn">{<span class="fn">1</span>}</span></span> <a href="../../../.././Init/Prelude.html#Max.max">⊔</a> <span class="fn"><span class="fn">s</span>.toSubmodule</span></span></span></div></div></div></div><div class="decl" id="NonUnitalAlgebra.adjoin_le_algebra_adjoin"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L85-L87">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalAlgebra.adjoin_le_algebra_adjoin"><span class="name">NonUnitalAlgebra</span>.<span class="name">adjoin_le_algebra_adjoin</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">A</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/NonUnitalSubalgebra.html#NonUnitalAlgebra.adjoin">NonUnitalAlgebra.adjoin</a> <span class="fn">R</span> <span class="fn">s</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">(<a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">R</span> <span class="fn">s</span>)</span>.toNonUnitalSubalgebra</span></span></div></div></div></div><div class="decl" id="Algebra.adjoin_nonUnitalSubalgebra"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L89-L93">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#Algebra.adjoin_nonUnitalSubalgebra"><span class="name">Algebra</span>.<span class="name">adjoin_nonUnitalSubalgebra</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">A</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">R</span> <span class="fn">↑<span class="fn">(<a href="../../../.././Mathlib/Algebra/Algebra/NonUnitalSubalgebra.html#NonUnitalAlgebra.adjoin">NonUnitalAlgebra.adjoin</a> <span class="fn">R</span> <span class="fn">s</span>)</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">R</span> <span class="fn">s</span></span></span></div></div></div></div><div class="decl" id="Unitization.lift_range_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L102-L109">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#Unitization.lift_range_le"><span class="name">Unitization</span>.<span class="name">lift_range_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalSemiring">NonUnitalSemiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#SMulCommClass">SMulCommClass</a> <span class="fn">R</span> <span class="fn">A</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">R</span> <span class="fn">A</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">A</span> <a href="../../../.././Mathlib/Algebra/Algebra/NonUnitalHom.html#NonUnitalAlgHom">→ₙₐ[</a><span class="fn">R</span><a href="../../../.././Mathlib/Algebra/Algebra/NonUnitalHom.html#NonUnitalAlgHom">]</a> <span class="fn">C</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Subalgebra">Subalgebra</a> <span class="fn">R</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<span class="fn">Unitization.lift</span> <span class="fn">f</span>)</span>.range</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">S</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/NonUnitalSubalgebra.html#NonUnitalAlgHom.range">NonUnitalAlgHom.range</a> <span class="fn">f</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">S</span>.toNonUnitalSubalgebra</span></span></span></div></div></div></div><div class="decl" id="Unitization.lift_range"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L111-L113">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#Unitization.lift_range"><span class="name">Unitization</span>.<span class="name">lift_range</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalSemiring">NonUnitalSemiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#SMulCommClass">SMulCommClass</a> <span class="fn">R</span> <span class="fn">A</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">R</span> <span class="fn">A</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">C</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">A</span> <a href="../../../.././Mathlib/Algebra/Algebra/NonUnitalHom.html#NonUnitalAlgHom">→ₙₐ[</a><span class="fn">R</span><a href="../../../.././Mathlib/Algebra/Algebra/NonUnitalHom.html#NonUnitalAlgHom">]</a> <span class="fn">C</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn">Unitization.lift</span> <span class="fn">f</span>)</span>.range</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">R</span> <span class="fn">↑<span class="fn">(<a href="../../../.././Mathlib/Algebra/Algebra/NonUnitalSubalgebra.html#NonUnitalAlgHom.range">NonUnitalAlgHom.range</a> <span class="fn">f</span>)</span></span></span></span></div></div></div></div><div class="decl" id="NonUnitalSubalgebra.unitization"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L124-L127">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalSubalgebra.unitization"><span class="name">NonUnitalSubalgebra</span>.<span class="name">unitization</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/SetLike/Basic.html#SetLike">SetLike</a> <span class="fn">S</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hSA : <span class="fn"><a href="../../../.././Mathlib/RingTheory/NonUnitalSubsemiring/Defs.html#NonUnitalSubsemiringClass">NonUnitalSubsemiringClass</a> <span class="fn">S</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hSRA : <span class="fn"><a href="../../../.././Mathlib/GroupTheory/GroupAction/SubMulAction.html#SMulMemClass">SMulMemClass</a> <span class="fn">S</span> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn">S</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Unitization.html#Unitization">Unitization</a> <span class="fn">R</span> <span class="fn">↥<span class="fn">s</span></span></span> <a href="../../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">→ₐ[</a><span class="fn">R</span><a href="../../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">]</a> <span class="fn">A</span></span></div></div><p>The natural <code>R</code>-algebra homomorphism from the unitization of a non-unital subalgebra into
+the algebra containing it.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalSubalgebra.unitization">NonUnitalSubalgebra.unitization</a> <span class="fn">s</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">Unitization.lift</span> <span class="fn">(<a href="../../../.././Mathlib/Algebra/Algebra/NonUnitalSubalgebra.html#NonUnitalSubalgebraClass.subtype">NonUnitalSubalgebraClass.subtype</a> <span class="fn">s</span>)</span></span></span></li></ul></details><details id="instances-for-list-NonUnitalSubalgebra.unitization" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="NonUnitalSubalgebra.unitization_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L129-L132">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalSubalgebra.unitization_apply"><span class="name">NonUnitalSubalgebra</span>.<span class="name">unitization_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/SetLike/Basic.html#SetLike">SetLike</a> <span class="fn">S</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hSA : <span class="fn"><a href="../../../.././Mathlib/RingTheory/NonUnitalSubsemiring/Defs.html#NonUnitalSubsemiringClass">NonUnitalSubsemiringClass</a> <span class="fn">S</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hSRA : <span class="fn"><a href="../../../.././Mathlib/GroupTheory/GroupAction/SubMulAction.html#SMulMemClass">SMulMemClass</a> <span class="fn">S</span> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn">S</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Unitization.html#Unitization">Unitization</a> <span class="fn">R</span> <span class="fn">↥<span class="fn">s</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalSubalgebra.unitization">NonUnitalSubalgebra.unitization</a> <span class="fn">s</span>)</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">(<a href="../../../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">R</span> <span class="fn">A</span>)</span> <span class="fn"><span class="fn">x</span>.fst</span></span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">↑<span class="fn"><span class="fn">x</span>.snd</span></span></span></span></div></div></div></div><div class="decl" id="NonUnitalSubalgebra.unitization_range"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L134-L138">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalSubalgebra.unitization_range"><span class="name">NonUnitalSubalgebra</span>.<span class="name">unitization_range</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/SetLike/Basic.html#SetLike">SetLike</a> <span class="fn">S</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hSA : <span class="fn"><a href="../../../.././Mathlib/RingTheory/NonUnitalSubsemiring/Defs.html#NonUnitalSubsemiringClass">NonUnitalSubsemiringClass</a> <span class="fn">S</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hSRA : <span class="fn"><a href="../../../.././Mathlib/GroupTheory/GroupAction/SubMulAction.html#SMulMemClass">SMulMemClass</a> <span class="fn">S</span> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn">S</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalSubalgebra.unitization">NonUnitalSubalgebra.unitization</a> <span class="fn">s</span>)</span>.range</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">R</span> <span class="fn">↑<span class="fn">s</span></span></span></span></div></div></div></div><div class="decl" id="AlgHomClass.unitization_injective'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L142-L159">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#AlgHomClass.unitization_injective'"><span class="name">AlgHomClass</span>.<span class="name">unitization_injective'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/SetLike/Basic.html#SetLike">SetLike</a> <span class="fn">S</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hSA : <span class="fn"><a href="../../../.././Mathlib/RingTheory/NonUnitalSubring/Defs.html#NonUnitalSubringClass">NonUnitalSubringClass</a> <span class="fn">S</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hSRA : <span class="fn"><a href="../../../.././Mathlib/GroupTheory/GroupAction/SubMulAction.html#SMulMemClass">SMulMemClass</a> <span class="fn">S</span> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn">S</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn">∀ (<span class="fn">r</span> : <span class="fn">R</span>), <span class="fn"><span class="fn"><span class="fn">r</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span> → <span class="fn"><span class="fn"><span class="fn">(<a href="../../../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">R</span> <span class="fn">A</span>)</span> <span class="fn">r</span></span> ∉ <span class="fn">s</span></span></span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/FunLike/Basic.html#FunLike">FunLike</a> <span class="fn">F</span> <span class="fn">(<a href="../../../.././Mathlib/Algebra/Algebra/Unitization.html#Unitization">Unitization</a> <span class="fn">R</span> <span class="fn">↥<span class="fn">s</span></span>)</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHomClass">AlgHomClass</a> <span class="fn">F</span> <span class="fn">R</span> <span class="fn">(<a href="../../../.././Mathlib/Algebra/Algebra/Unitization.html#Unitization">Unitization</a> <span class="fn">R</span> <span class="fn">↥<span class="fn">s</span></span>)</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn">F</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">↥<span class="fn">s</span></span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">↑<span class="fn">x</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">x</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Logic/Function/Defs.html#Function.Injective">Function.Injective</a> <span class="fn">⇑<span class="fn">f</span></span></span></div></div><p>A sufficient condition for injectivity of <code><a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalSubalgebra.unitization">NonUnitalSubalgebra.unitization</a></code> when the scalars
+are a commutative ring. When the scalars are a field, one should use the more natural
+<code><a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalStarSubalgebra.unitization_injective">NonUnitalStarSubalgebra.unitization_injective</a></code> whose hypothesis is easier to verify.</p></div></div><div class="decl" id="AlgHomClass.unitization_injective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L161-L169">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#AlgHomClass.unitization_injective"><span class="name">AlgHomClass</span>.<span class="name">unitization_injective</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/SetLike/Basic.html#SetLike">SetLike</a> <span class="fn">S</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hSA : <span class="fn"><a href="../../../.././Mathlib/RingTheory/NonUnitalSubring/Defs.html#NonUnitalSubringClass">NonUnitalSubringClass</a> <span class="fn">S</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hSRA : <span class="fn"><a href="../../../.././Mathlib/GroupTheory/GroupAction/SubMulAction.html#SMulMemClass">SMulMemClass</a> <span class="fn">S</span> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn">S</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h1 : <span class="fn"><span class="fn">1</span> ∉ <span class="fn">s</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/FunLike/Basic.html#FunLike">FunLike</a> <span class="fn">F</span> <span class="fn">(<a href="../../../.././Mathlib/Algebra/Algebra/Unitization.html#Unitization">Unitization</a> <span class="fn">R</span> <span class="fn">↥<span class="fn">s</span></span>)</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHomClass">AlgHomClass</a> <span class="fn">F</span> <span class="fn">R</span> <span class="fn">(<a href="../../../.././Mathlib/Algebra/Algebra/Unitization.html#Unitization">Unitization</a> <span class="fn">R</span> <span class="fn">↥<span class="fn">s</span></span>)</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn">F</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">↥<span class="fn">s</span></span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">↑<span class="fn">x</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">x</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Logic/Function/Defs.html#Function.Injective">Function.Injective</a> <span class="fn">⇑<span class="fn">f</span></span></span></div></div><p>This is a generic version which allows us to prove both
+<code><a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalSubalgebra.unitization_injective">NonUnitalSubalgebra.unitization_injective</a></code> and <code><a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalStarSubalgebra.unitization_injective">NonUnitalStarSubalgebra.unitization_injective</a></code>.</p></div></div><div class="decl" id="NonUnitalSubalgebra.unitization_injective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L176-L177">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalSubalgebra.unitization_injective"><span class="name">NonUnitalSubalgebra</span>.<span class="name">unitization_injective</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/SetLike/Basic.html#SetLike">SetLike</a> <span class="fn">S</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hSA : <span class="fn"><a href="../../../.././Mathlib/RingTheory/NonUnitalSubring/Defs.html#NonUnitalSubringClass">NonUnitalSubringClass</a> <span class="fn">S</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hSRA : <span class="fn"><a href="../../../.././Mathlib/GroupTheory/GroupAction/SubMulAction.html#SMulMemClass">SMulMemClass</a> <span class="fn">S</span> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn">S</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h1 : <span class="fn"><span class="fn">1</span> ∉ <span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Logic/Function/Defs.html#Function.Injective">Function.Injective</a> <span class="fn">⇑<span class="fn">(<a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalSubalgebra.unitization">NonUnitalSubalgebra.unitization</a> <span class="fn">s</span>)</span></span></span></div></div></div></div><div class="decl" id="NonUnitalSubalgebra.unitizationAlgEquiv"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L179-L195">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalSubalgebra.unitizationAlgEquiv"><span class="name">NonUnitalSubalgebra</span>.<span class="name">unitizationAlgEquiv</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/SetLike/Basic.html#SetLike">SetLike</a> <span class="fn">S</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hSA : <span class="fn"><a href="../../../.././Mathlib/RingTheory/NonUnitalSubring/Defs.html#NonUnitalSubringClass">NonUnitalSubringClass</a> <span class="fn">S</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hSRA : <span class="fn"><a href="../../../.././Mathlib/GroupTheory/GroupAction/SubMulAction.html#SMulMemClass">SMulMemClass</a> <span class="fn">S</span> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn">S</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h1 : <span class="fn"><span class="fn">1</span> ∉ <span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Unitization.html#Unitization">Unitization</a> <span class="fn">R</span> <span class="fn">↥<span class="fn">s</span></span></span> <a href="../../../.././Mathlib/Algebra/Algebra/Equiv.html#AlgEquiv">≃ₐ[</a><span class="fn">R</span><a href="../../../.././Mathlib/Algebra/Algebra/Equiv.html#AlgEquiv">]</a> <span class="fn">↥<span class="fn">(<a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">R</span> <span class="fn">↑<span class="fn">s</span></span>)</span></span></span></div></div><p>If a <code><a href="../../../.././Mathlib/Algebra/Algebra/NonUnitalSubalgebra.html#NonUnitalSubalgebra">NonUnitalSubalgebra</a></code> over a field does not contain <code>1</code>, then its unitization is
+isomorphic to its <code><a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a></code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalSubalgebra.unitizationAlgEquiv">NonUnitalSubalgebra.unitizationAlgEquiv</a> <span class="fn">s</span> <span class="fn">h1</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Equiv.html#AlgEquiv.ofBijective">AlgEquiv.ofBijective</a> <span class="fn">(<span class="fn"><span class="fn">(<a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalSubalgebra.unitization">NonUnitalSubalgebra.unitization</a> <span class="fn">s</span>)</span>.codRestrict</span> <span class="fn">(<a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">R</span> <span class="fn">↑<span class="fn">s</span></span>)</span> <span class="fn">⋯</span>)</span> <span class="fn">⋯</span></span></span></li></ul></details><details id="instances-for-list-NonUnitalSubalgebra.unitizationAlgEquiv" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="NonUnitalSubalgebra.unitizationAlgEquiv_apply_coe"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L181-L181">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalSubalgebra.unitizationAlgEquiv_apply_coe"><span class="name">NonUnitalSubalgebra</span>.<span class="name">unitizationAlgEquiv_apply_coe</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/SetLike/Basic.html#SetLike">SetLike</a> <span class="fn">S</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hSA : <span class="fn"><a href="../../../.././Mathlib/RingTheory/NonUnitalSubring/Defs.html#NonUnitalSubringClass">NonUnitalSubringClass</a> <span class="fn">S</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hSRA : <span class="fn"><a href="../../../.././Mathlib/GroupTheory/GroupAction/SubMulAction.html#SMulMemClass">SMulMemClass</a> <span class="fn">S</span> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn">S</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h1 : <span class="fn"><span class="fn">1</span> ∉ <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Unitization.html#Unitization">Unitization</a> <span class="fn">R</span> <span class="fn">↥<span class="fn">s</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">(<span class="fn">(<a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalSubalgebra.unitizationAlgEquiv">NonUnitalSubalgebra.unitizationAlgEquiv</a> <span class="fn">s</span> <span class="fn">h1</span>)</span> <span class="fn">a</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">(<a href="../../../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">R</span> <span class="fn">A</span>)</span> <span class="fn"><span class="fn">a</span>.fst</span></span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">↑<span class="fn"><span class="fn">a</span>.snd</span></span></span></span></div></div></div></div><div class="mod_doc"><h2 class="markdown-heading" id="Subsemirings">Subsemirings <a class="hover-link" href="#Subsemirings">#</a></h2></div><div class="decl" id="Subsemiring.toNonUnitalSubsemiring"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L207-L209">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#Subsemiring.toNonUnitalSubsemiring"><span class="name">Subsemiring</span>.<span class="name">toNonUnitalSubsemiring</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonAssocSemiring">NonAssocSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(S : <span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Subsemiring/Defs.html#Subsemiring">Subsemiring</a> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/RingTheory/NonUnitalSubsemiring/Defs.html#NonUnitalSubsemiring">NonUnitalSubsemiring</a> <span class="fn">R</span></span></div></div><p>Turn a <code><a href="../../../.././Mathlib/Algebra/Ring/Subsemiring/Defs.html#Subsemiring">Subsemiring</a></code> into a <code><a href="../../../.././Mathlib/RingTheory/NonUnitalSubsemiring/Defs.html#NonUnitalSubsemiring">NonUnitalSubsemiring</a></code> by forgetting that it contains <code>1</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><span class="fn">S</span>.toNonUnitalSubsemiring</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ <span class="fn">carrier</span> := <span class="fn"><span class="fn">S</span>.carrier</span>, <span class="fn">add_mem'</span> := <span class="fn">⋯</span>, <span class="fn">zero_mem'</span> := <span class="fn">⋯</span>, <span class="fn">mul_mem'</span> := <span class="fn">⋯</span> }</span></span></li></ul></details><details id="instances-for-list-Subsemiring.toNonUnitalSubsemiring" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Subsemiring.one_mem_toNonUnitalSubsemiring"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L211-L213">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#Subsemiring.one_mem_toNonUnitalSubsemiring"><span class="name">Subsemiring</span>.<span class="name">one_mem_toNonUnitalSubsemiring</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonAssocSemiring">NonAssocSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(S : <span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Subsemiring/Defs.html#Subsemiring">Subsemiring</a> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">1</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn">S</span>.toNonUnitalSubsemiring</span></span></div></div></div></div><div class="decl" id="NonUnitalSubsemiring.toSubsemiring"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L215-L219">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalSubsemiring.toSubsemiring"><span class="name">NonUnitalSubsemiring</span>.<span class="name">toSubsemiring</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonAssocSemiring">NonAssocSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(S : <span class="fn"><a href="../../../.././Mathlib/RingTheory/NonUnitalSubsemiring/Defs.html#NonUnitalSubsemiring">NonUnitalSubsemiring</a> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h1 : <span class="fn"><span class="fn">1</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">S</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Subsemiring/Defs.html#Subsemiring">Subsemiring</a> <span class="fn">R</span></span></div></div><p>Turn a non-unital subsemiring containing <code>1</code> into a subsemiring.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><span class="fn"><span class="fn">S</span>.toSubsemiring</span> <span class="fn">h1</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ <span class="fn">carrier</span> := <span class="fn"><span class="fn">S</span>.carrier</span>, <span class="fn">mul_mem'</span> := <span class="fn">⋯</span>, <span class="fn">one_mem'</span> := <span class="fn">h1</span>, <span class="fn">add_mem'</span> := <span class="fn">⋯</span>, <span class="fn">zero_mem'</span> := <span class="fn">⋯</span> }</span></span></li></ul></details><details id="instances-for-list-NonUnitalSubsemiring.toSubsemiring" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Subsemiring.toNonUnitalSubsemiring_toSubsemiring"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L221-L222">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#Subsemiring.toNonUnitalSubsemiring_toSubsemiring"><span class="name">Subsemiring</span>.<span class="name">toNonUnitalSubsemiring_toSubsemiring</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonAssocSemiring">NonAssocSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(S : <span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Subsemiring/Defs.html#Subsemiring">Subsemiring</a> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn"><span class="fn">S</span>.toNonUnitalSubsemiring</span>.toSubsemiring</span> <span class="fn">⋯</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">S</span></span></div></div></div></div><div class="decl" id="NonUnitalSubsemiring.toSubsemiring_toNonUnitalSubsemiring"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L224-L226">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalSubsemiring.toSubsemiring_toNonUnitalSubsemiring"><span class="name">NonUnitalSubsemiring</span>.<span class="name">toSubsemiring_toNonUnitalSubsemiring</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonAssocSemiring">NonAssocSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(S : <span class="fn"><a href="../../../.././Mathlib/RingTheory/NonUnitalSubsemiring/Defs.html#NonUnitalSubsemiring">NonUnitalSubsemiring</a> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h1 : <span class="fn"><span class="fn">1</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">S</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">S</span>.toSubsemiring</span> <span class="fn">h1</span>)</span>.toNonUnitalSubsemiring</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">S</span></span></div></div></div></div><div class="decl" id="NonUnitalSubsemiring.unitization"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L234-L237">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalSubsemiring.unitization"><span class="name">NonUnitalSubsemiring</span>.<span class="name">unitization</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/SetLike/Basic.html#SetLike">SetLike</a> <span class="fn">S</span> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hSR : <span class="fn"><a href="../../../.././Mathlib/RingTheory/NonUnitalSubsemiring/Defs.html#NonUnitalSubsemiringClass">NonUnitalSubsemiringClass</a> <span class="fn">S</span> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn">S</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Unitization.html#Unitization">Unitization</a> <a href="../../../.././Init/Prelude.html#Nat">ℕ</a> <span class="fn">↥<span class="fn">s</span></span></span> <a href="../../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">→ₐ[</a><a href="../../../.././Init/Prelude.html#Nat">ℕ</a><a href="../../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">]</a> <span class="fn">R</span></span></div></div><p>The natural <code>ℕ</code>-algebra homomorphism from the unitization of a non-unital subsemiring to
+its <code><a href="../../../.././Mathlib/Algebra/Ring/Subsemiring/Basic.html#Subsemiring.closure">Subsemiring.closure</a></code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalSubsemiring.unitization">NonUnitalSubsemiring.unitization</a> <span class="fn">s</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalSubalgebra.unitization">NonUnitalSubalgebra.unitization</a> <span class="fn">s</span></span></span></li></ul></details><details id="instances-for-list-NonUnitalSubsemiring.unitization" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="NonUnitalSubsemiring.unitization_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L239-L241">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalSubsemiring.unitization_apply"><span class="name">NonUnitalSubsemiring</span>.<span class="name">unitization_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/SetLike/Basic.html#SetLike">SetLike</a> <span class="fn">S</span> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hSR : <span class="fn"><a href="../../../.././Mathlib/RingTheory/NonUnitalSubsemiring/Defs.html#NonUnitalSubsemiringClass">NonUnitalSubsemiringClass</a> <span class="fn">S</span> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn">S</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Unitization.html#Unitization">Unitization</a> <a href="../../../.././Init/Prelude.html#Nat">ℕ</a> <span class="fn">↥<span class="fn">s</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalSubsemiring.unitization">NonUnitalSubsemiring.unitization</a> <span class="fn">s</span>)</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">↑<span class="fn"><span class="fn">x</span>.fst</span></span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">↑<span class="fn"><span class="fn">x</span>.snd</span></span></span></span></div></div></div></div><div class="decl" id="NonUnitalSubsemiring.unitization_range"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L243-L246">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalSubsemiring.unitization_range"><span class="name">NonUnitalSubsemiring</span>.<span class="name">unitization_range</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/SetLike/Basic.html#SetLike">SetLike</a> <span class="fn">S</span> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hSR : <span class="fn"><a href="../../../.././Mathlib/RingTheory/NonUnitalSubsemiring/Defs.html#NonUnitalSubsemiringClass">NonUnitalSubsemiringClass</a> <span class="fn">S</span> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn">S</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalSubsemiring.unitization">NonUnitalSubsemiring.unitization</a> <span class="fn">s</span>)</span>.range</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#subalgebraOfSubsemiring">subalgebraOfSubsemiring</a> <span class="fn">(<a href="../../../.././Mathlib/Algebra/Ring/Subsemiring/Basic.html#Subsemiring.closure">Subsemiring.closure</a> <span class="fn">↑<span class="fn">s</span></span>)</span></span></span></div></div></div></div><div class="mod_doc"><h2 class="markdown-heading" id="Subrings">Subrings <a class="hover-link" href="#Subrings">#</a></h2></div><div class="decl" id="Subring.toNonUnitalSubring"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L257-L259">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#Subring.toNonUnitalSubring"><span class="name">Subring</span>.<span class="name">toNonUnitalSubring</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(S : <span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Subring/Defs.html#Subring">Subring</a> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/RingTheory/NonUnitalSubring/Defs.html#NonUnitalSubring">NonUnitalSubring</a> <span class="fn">R</span></span></div></div><p>Turn a <code><a href="../../../.././Mathlib/Algebra/Ring/Subring/Defs.html#Subring">Subring</a></code> into a <code><a href="../../../.././Mathlib/RingTheory/NonUnitalSubring/Defs.html#NonUnitalSubring">NonUnitalSubring</a></code> by forgetting that it contains <code>1</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><span class="fn">S</span>.toNonUnitalSubring</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ <span class="fn">carrier</span> := <span class="fn"><span class="fn">S</span>.carrier</span>, <span class="fn">add_mem'</span> := <span class="fn">⋯</span>, <span class="fn">zero_mem'</span> := <span class="fn">⋯</span>, <span class="fn">mul_mem'</span> := <span class="fn">⋯</span>, <span class="fn">neg_mem'</span> := <span class="fn">⋯</span> }</span></span></li></ul></details><details id="instances-for-list-Subring.toNonUnitalSubring" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Subring.one_mem_toNonUnitalSubring"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L261-L262">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#Subring.one_mem_toNonUnitalSubring"><span class="name">Subring</span>.<span class="name">one_mem_toNonUnitalSubring</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(S : <span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Subring/Defs.html#Subring">Subring</a> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">1</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn">S</span>.toNonUnitalSubring</span></span></div></div></div></div><div class="decl" id="NonUnitalSubring.toSubring"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L264-L267">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalSubring.toSubring"><span class="name">NonUnitalSubring</span>.<span class="name">toSubring</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(S : <span class="fn"><a href="../../../.././Mathlib/RingTheory/NonUnitalSubring/Defs.html#NonUnitalSubring">NonUnitalSubring</a> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h1 : <span class="fn"><span class="fn">1</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">S</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Subring/Defs.html#Subring">Subring</a> <span class="fn">R</span></span></div></div><p>Turn a non-unital subring containing <code>1</code> into a subring.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><span class="fn"><span class="fn">S</span>.toSubring</span> <span class="fn">h1</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ <span class="fn">carrier</span> := <span class="fn"><span class="fn">S</span>.carrier</span>, <span class="fn">mul_mem'</span> := <span class="fn">⋯</span>, <span class="fn">one_mem'</span> := <span class="fn">h1</span>, <span class="fn">add_mem'</span> := <span class="fn">⋯</span>, <span class="fn">zero_mem'</span> := <span class="fn">⋯</span>, <span class="fn">neg_mem'</span> := <span class="fn">⋯</span> }</span></span></li></ul></details><details id="instances-for-list-NonUnitalSubring.toSubring" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Subring.toNonUnitalSubring_toSubring"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L269-L270">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#Subring.toNonUnitalSubring_toSubring"><span class="name">Subring</span>.<span class="name">toNonUnitalSubring_toSubring</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(S : <span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Subring/Defs.html#Subring">Subring</a> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn"><span class="fn">S</span>.toNonUnitalSubring</span>.toSubring</span> <span class="fn">⋯</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">S</span></span></div></div></div></div><div class="decl" id="NonUnitalSubring.toSubring_toNonUnitalSubring"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L272-L273">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalSubring.toSubring_toNonUnitalSubring"><span class="name">NonUnitalSubring</span>.<span class="name">toSubring_toNonUnitalSubring</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(S : <span class="fn"><a href="../../../.././Mathlib/RingTheory/NonUnitalSubring/Defs.html#NonUnitalSubring">NonUnitalSubring</a> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h1 : <span class="fn"><span class="fn">1</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">S</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">S</span>.toSubring</span> <span class="fn">h1</span>)</span>.toNonUnitalSubring</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">S</span></span></div></div></div></div><div class="decl" id="NonUnitalSubring.unitization"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L281-L284">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalSubring.unitization"><span class="name">NonUnitalSubring</span>.<span class="name">unitization</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/SetLike/Basic.html#SetLike">SetLike</a> <span class="fn">S</span> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hSR : <span class="fn"><a href="../../../.././Mathlib/RingTheory/NonUnitalSubring/Defs.html#NonUnitalSubringClass">NonUnitalSubringClass</a> <span class="fn">S</span> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn">S</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Unitization.html#Unitization">Unitization</a> <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a> <span class="fn">↥<span class="fn">s</span></span></span> <a href="../../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">→ₐ[</a><a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a><a href="../../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">]</a> <span class="fn">R</span></span></div></div><p>The natural <code>ℤ</code>-algebra homomorphism from the unitization of a non-unital subring to
+its <code><a href="../../../.././Mathlib/Algebra/Ring/Subring/Basic.html#Subring.closure">Subring.closure</a></code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalSubring.unitization">NonUnitalSubring.unitization</a> <span class="fn">s</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalSubalgebra.unitization">NonUnitalSubalgebra.unitization</a> <span class="fn">s</span></span></span></li></ul></details><details id="instances-for-list-NonUnitalSubring.unitization" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="NonUnitalSubring.unitization_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L286-L288">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalSubring.unitization_apply"><span class="name">NonUnitalSubring</span>.<span class="name">unitization_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/SetLike/Basic.html#SetLike">SetLike</a> <span class="fn">S</span> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hSR : <span class="fn"><a href="../../../.././Mathlib/RingTheory/NonUnitalSubring/Defs.html#NonUnitalSubringClass">NonUnitalSubringClass</a> <span class="fn">S</span> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn">S</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Unitization.html#Unitization">Unitization</a> <a href="../../../.././Init/Data/Int/Basic.html#Int">ℤ</a> <span class="fn">↥<span class="fn">s</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalSubring.unitization">NonUnitalSubring.unitization</a> <span class="fn">s</span>)</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">↑<span class="fn"><span class="fn">x</span>.fst</span></span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">↑<span class="fn"><span class="fn">x</span>.snd</span></span></span></span></div></div></div></div><div class="decl" id="NonUnitalSubring.unitization_range"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L290-L293">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalSubring.unitization_range"><span class="name">NonUnitalSubring</span>.<span class="name">unitization_range</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/SetLike/Basic.html#SetLike">SetLike</a> <span class="fn">S</span> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hSR : <span class="fn"><a href="../../../.././Mathlib/RingTheory/NonUnitalSubring/Defs.html#NonUnitalSubringClass">NonUnitalSubringClass</a> <span class="fn">S</span> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn">S</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalSubring.unitization">NonUnitalSubring.unitization</a> <span class="fn">s</span>)</span>.range</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#subalgebraOfSubring">subalgebraOfSubring</a> <span class="fn">(<a href="../../../.././Mathlib/Algebra/Ring/Subring/Basic.html#Subring.closure">Subring.closure</a> <span class="fn">↑<span class="fn">s</span></span>)</span></span></span></div></div></div></div><div class="mod_doc"><h2 class="markdown-heading" id="Star-subalgebras">Star subalgebras <a class="hover-link" href="#Star-subalgebras">#</a></h2></div><div class="decl" id="StarSubalgebra.toNonUnitalStarSubalgebra"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L304-L309">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#StarSubalgebra.toNonUnitalStarSubalgebra"><span class="name">StarSubalgebra</span>.<span class="name">toNonUnitalStarSubalgebra</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarModule">StarModule</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(S : <span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Subalgebra.html#StarSubalgebra">StarSubalgebra</a> <span class="fn">R</span> <span class="fn">A</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/Star/NonUnitalSubalgebra.html#NonUnitalStarSubalgebra">NonUnitalStarSubalgebra</a> <span class="fn">R</span> <span class="fn">A</span></span></div></div><p>Turn a <code><a href="../../../.././Mathlib/Algebra/Star/Subalgebra.html#StarSubalgebra">StarSubalgebra</a></code> into a <code><a href="../../../.././Mathlib/Algebra/Star/NonUnitalSubalgebra.html#NonUnitalStarSubalgebra">NonUnitalStarSubalgebra</a></code> by forgetting that it contains <code>1</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><span class="fn">S</span>.toNonUnitalStarSubalgebra</span> <a href="../../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">{ <span class="fn">carrier</span> := <span class="fn"><span class="fn">S</span>.carrier</span>, <span class="fn">add_mem'</span> := <span class="fn">⋯</span>, <span class="fn">zero_mem'</span> := <span class="fn">⋯</span>, <span class="fn">mul_mem'</span> := <span class="fn">⋯</span>, <span class="fn">smul_mem'</span> := <span class="fn">⋯</span>, <span class="fn">star_mem'</span> := <span class="fn">⋯</span> }</span></span></li></ul></details><details id="instances-for-list-StarSubalgebra.toNonUnitalStarSubalgebra" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="StarSubalgebra.one_mem_toNonUnitalStarSubalgebra"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L311-L313">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#StarSubalgebra.one_mem_toNonUnitalStarSubalgebra"><span class="name">StarSubalgebra</span>.<span class="name">one_mem_toNonUnitalStarSubalgebra</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarModule">StarModule</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(S : <span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Subalgebra.html#StarSubalgebra">StarSubalgebra</a> <span class="fn">R</span> <span class="fn">A</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">1</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn">S</span>.toNonUnitalStarSubalgebra</span></span></div></div></div></div><div class="decl" id="NonUnitalStarSubalgebra.toStarSubalgebra"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L315-L322">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalStarSubalgebra.toStarSubalgebra"><span class="name">NonUnitalStarSubalgebra</span>.<span class="name">toStarSubalgebra</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarModule">StarModule</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(S : <span class="fn"><a href="../../../.././Mathlib/Algebra/Star/NonUnitalSubalgebra.html#NonUnitalStarSubalgebra">NonUnitalStarSubalgebra</a> <span class="fn">R</span> <span class="fn">A</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h1 : <span class="fn"><span class="fn">1</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">S</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Subalgebra.html#StarSubalgebra">StarSubalgebra</a> <span class="fn">R</span> <span class="fn">A</span></span></div></div><p>Turn a non-unital star subalgebra containing <code>1</code> into a <code><a href="../../../.././Mathlib/Algebra/Star/Subalgebra.html#StarSubalgebra">StarSubalgebra</a></code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><span class="fn"><span class="fn">S</span>.toStarSubalgebra</span> <span class="fn">h1</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">{ <span class="fn">carrier</span> := <span class="fn"><span class="fn">S</span>.carrier</span>, <span class="fn">mul_mem'</span> := <span class="fn">⋯</span>, <span class="fn">one_mem'</span> := <span class="fn">h1</span>, <span class="fn">add_mem'</span> := <span class="fn">⋯</span>, <span class="fn">zero_mem'</span> := <span class="fn">⋯</span>, <span class="fn">algebraMap_mem'</span> := <span class="fn">⋯</span>,
+    <span class="fn">star_mem'</span> := <span class="fn">⋯</span> }</span></span></li></ul></details><details id="instances-for-list-NonUnitalStarSubalgebra.toStarSubalgebra" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="StarSubalgebra.toNonUnitalStarSubalgebra_toStarSubalgebra"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L324-L325">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#StarSubalgebra.toNonUnitalStarSubalgebra_toStarSubalgebra"><span class="name">StarSubalgebra</span>.<span class="name">toNonUnitalStarSubalgebra_toStarSubalgebra</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarModule">StarModule</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(S : <span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Subalgebra.html#StarSubalgebra">StarSubalgebra</a> <span class="fn">R</span> <span class="fn">A</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn"><span class="fn">S</span>.toNonUnitalStarSubalgebra</span>.toStarSubalgebra</span> <span class="fn">⋯</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">S</span></span></div></div></div></div><div class="decl" id="NonUnitalStarSubalgebra.toStarSubalgebra_toNonUnitalStarSubalgebra"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L327-L330">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalStarSubalgebra.toStarSubalgebra_toNonUnitalStarSubalgebra"><span class="name">NonUnitalStarSubalgebra</span>.<span class="name">toStarSubalgebra_toNonUnitalStarSubalgebra</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarModule">StarModule</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(S : <span class="fn"><a href="../../../.././Mathlib/Algebra/Star/NonUnitalSubalgebra.html#NonUnitalStarSubalgebra">NonUnitalStarSubalgebra</a> <span class="fn">R</span> <span class="fn">A</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h1 : <span class="fn"><span class="fn">1</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">S</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">S</span>.toStarSubalgebra</span> <span class="fn">h1</span>)</span>.toNonUnitalStarSubalgebra</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">S</span></span></div></div></div></div><div class="decl" id="StarAlgebra.adjoin_nonUnitalStarSubalgebra_eq_span"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L333-L336">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#StarAlgebra.adjoin_nonUnitalStarSubalgebra_eq_span"><span class="name">StarAlgebra</span>.<span class="name">adjoin_nonUnitalStarSubalgebra_eq_span</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarModule">StarModule</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../../.././Mathlib/Algebra/Star/NonUnitalSubalgebra.html#NonUnitalStarSubalgebra">NonUnitalStarSubalgebra</a> <span class="fn">R</span> <span class="fn">A</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">Subalgebra.toSubmodule</span> <span class="fn"><span class="fn">(<a href="../../../.././Mathlib/Algebra/Star/Subalgebra.html#StarAlgebra.adjoin">StarAlgebra.adjoin</a> <span class="fn">R</span> <span class="fn">↑<span class="fn">s</span></span>)</span>.toSubalgebra</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><a href="../../../.././Mathlib/LinearAlgebra/Span/Defs.html#Submodule.span">Submodule.span</a> <span class="fn">R</span> <span class="fn">{<span class="fn">1</span>}</span></span> <a href="../../../.././Init/Prelude.html#Max.max">⊔</a> <span class="fn"><span class="fn">s</span>.toSubmodule</span></span></span></div></div></div></div><div class="decl" id="NonUnitalStarAlgebra.adjoin_le_starAlgebra_adjoin"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L340-L342">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalStarAlgebra.adjoin_le_starAlgebra_adjoin"><span class="name">NonUnitalStarAlgebra</span>.<span class="name">adjoin_le_starAlgebra_adjoin</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarModule">StarModule</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">A</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Star/NonUnitalSubalgebra.html#NonUnitalStarAlgebra.adjoin">NonUnitalStarAlgebra.adjoin</a> <span class="fn">R</span> <span class="fn">s</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">(<a href="../../../.././Mathlib/Algebra/Star/Subalgebra.html#StarAlgebra.adjoin">StarAlgebra.adjoin</a> <span class="fn">R</span> <span class="fn">s</span>)</span>.toNonUnitalStarSubalgebra</span></span></div></div></div></div><div class="decl" id="StarAlgebra.adjoin_nonUnitalStarSubalgebra"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L344-L348">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#StarAlgebra.adjoin_nonUnitalStarSubalgebra"><span class="name">StarAlgebra</span>.<span class="name">adjoin_nonUnitalStarSubalgebra</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarModule">StarModule</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">A</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Subalgebra.html#StarAlgebra.adjoin">StarAlgebra.adjoin</a> <span class="fn">R</span> <span class="fn">↑<span class="fn">(<a href="../../../.././Mathlib/Algebra/Star/NonUnitalSubalgebra.html#NonUnitalStarAlgebra.adjoin">NonUnitalStarAlgebra.adjoin</a> <span class="fn">R</span> <span class="fn">s</span>)</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Subalgebra.html#StarAlgebra.adjoin">StarAlgebra.adjoin</a> <span class="fn">R</span> <span class="fn">s</span></span></span></div></div></div></div><div class="decl" id="Unitization.starLift_range_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L358-L366">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#Unitization.starLift_range_le"><span class="name">Unitization</span>.<span class="name">starLift_range_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalSemiring">NonUnitalSemiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#SMulCommClass">SMulCommClass</a> <span class="fn">R</span> <span class="fn">A</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">R</span> <span class="fn">A</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarModule">StarModule</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarModule">StarModule</a> <span class="fn">R</span> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">A</span> <a href="../../../.././Mathlib/Algebra/Star/StarAlgHom.html#NonUnitalStarAlgHom">→⋆ₙₐ[</a><span class="fn">R</span><a href="../../../.././Mathlib/Algebra/Star/StarAlgHom.html#NonUnitalStarAlgHom">]</a> <span class="fn">C</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Subalgebra.html#StarSubalgebra">StarSubalgebra</a> <span class="fn">R</span> <span class="fn">C</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(<span class="fn">Unitization.starLift</span> <span class="fn">f</span>)</span>.range</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">S</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Star/NonUnitalSubalgebra.html#NonUnitalStarAlgHom.range">NonUnitalStarAlgHom.range</a> <span class="fn">f</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">S</span>.toNonUnitalStarSubalgebra</span></span></span></div></div></div></div><div class="decl" id="Unitization.starLift_range"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L368-L372">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#Unitization.starLift_range"><span class="name">Unitization</span>.<span class="name">starLift_range</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalSemiring">NonUnitalSemiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#SMulCommClass">SMulCommClass</a> <span class="fn">R</span> <span class="fn">A</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">R</span> <span class="fn">A</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarModule">StarModule</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarModule">StarModule</a> <span class="fn">R</span> <span class="fn">C</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">A</span> <a href="../../../.././Mathlib/Algebra/Star/StarAlgHom.html#NonUnitalStarAlgHom">→⋆ₙₐ[</a><span class="fn">R</span><a href="../../../.././Mathlib/Algebra/Star/StarAlgHom.html#NonUnitalStarAlgHom">]</a> <span class="fn">C</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn">Unitization.starLift</span> <span class="fn">f</span>)</span>.range</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Subalgebra.html#StarAlgebra.adjoin">StarAlgebra.adjoin</a> <span class="fn">R</span> <span class="fn">↑<span class="fn">(<a href="../../../.././Mathlib/Algebra/Star/NonUnitalSubalgebra.html#NonUnitalStarAlgHom.range">NonUnitalStarAlgHom.range</a> <span class="fn">f</span>)</span></span></span></span></div></div></div></div><div class="decl" id="NonUnitalStarSubalgebra.unitization"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L383-L386">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalStarSubalgebra.unitization"><span class="name">NonUnitalStarSubalgebra</span>.<span class="name">unitization</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarModule">StarModule</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/SetLike/Basic.html#SetLike">SetLike</a> <span class="fn">S</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hSA : <span class="fn"><a href="../../../.././Mathlib/RingTheory/NonUnitalSubsemiring/Defs.html#NonUnitalSubsemiringClass">NonUnitalSubsemiringClass</a> <span class="fn">S</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hSRA : <span class="fn"><a href="../../../.././Mathlib/GroupTheory/GroupAction/SubMulAction.html#SMulMemClass">SMulMemClass</a> <span class="fn">S</span> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarMemClass">StarMemClass</a> <span class="fn">S</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn">S</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Unitization.html#Unitization">Unitization</a> <span class="fn">R</span> <span class="fn">↥<span class="fn">s</span></span></span> <a href="../../../.././Mathlib/Algebra/Star/StarAlgHom.html#StarAlgHom">→⋆ₐ[</a><span class="fn">R</span><a href="../../../.././Mathlib/Algebra/Star/StarAlgHom.html#StarAlgHom">]</a> <span class="fn">A</span></span></div></div><p>The natural star <code>R</code>-algebra homomorphism from the unitization of a non-unital star subalgebra
+to its <code><a href="../../../.././Mathlib/Algebra/Star/Subalgebra.html#StarAlgebra.adjoin">StarAlgebra.adjoin</a></code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalStarSubalgebra.unitization">NonUnitalStarSubalgebra.unitization</a> <span class="fn">s</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">Unitization.starLift</span> <span class="fn">(<a href="../../../.././Mathlib/Algebra/Star/NonUnitalSubalgebra.html#NonUnitalStarSubalgebraClass.subtype">NonUnitalStarSubalgebraClass.subtype</a> <span class="fn">s</span>)</span></span></span></li></ul></details><details id="instances-for-list-NonUnitalStarSubalgebra.unitization" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="NonUnitalStarSubalgebra.unitization_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L388-L390">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalStarSubalgebra.unitization_apply"><span class="name">NonUnitalStarSubalgebra</span>.<span class="name">unitization_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarModule">StarModule</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/SetLike/Basic.html#SetLike">SetLike</a> <span class="fn">S</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hSA : <span class="fn"><a href="../../../.././Mathlib/RingTheory/NonUnitalSubsemiring/Defs.html#NonUnitalSubsemiringClass">NonUnitalSubsemiringClass</a> <span class="fn">S</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hSRA : <span class="fn"><a href="../../../.././Mathlib/GroupTheory/GroupAction/SubMulAction.html#SMulMemClass">SMulMemClass</a> <span class="fn">S</span> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarMemClass">StarMemClass</a> <span class="fn">S</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn">S</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Unitization.html#Unitization">Unitization</a> <span class="fn">R</span> <span class="fn">↥<span class="fn">s</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalStarSubalgebra.unitization">NonUnitalStarSubalgebra.unitization</a> <span class="fn">s</span>)</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">(<a href="../../../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">R</span> <span class="fn">A</span>)</span> <span class="fn"><span class="fn">x</span>.fst</span></span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">↑<span class="fn"><span class="fn">x</span>.snd</span></span></span></span></div></div></div></div><div class="decl" id="NonUnitalStarSubalgebra.unitization_range"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L392-L396">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalStarSubalgebra.unitization_range"><span class="name">NonUnitalStarSubalgebra</span>.<span class="name">unitization_range</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarModule">StarModule</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/SetLike/Basic.html#SetLike">SetLike</a> <span class="fn">S</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hSA : <span class="fn"><a href="../../../.././Mathlib/RingTheory/NonUnitalSubsemiring/Defs.html#NonUnitalSubsemiringClass">NonUnitalSubsemiringClass</a> <span class="fn">S</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hSRA : <span class="fn"><a href="../../../.././Mathlib/GroupTheory/GroupAction/SubMulAction.html#SMulMemClass">SMulMemClass</a> <span class="fn">S</span> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarMemClass">StarMemClass</a> <span class="fn">S</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn">S</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalStarSubalgebra.unitization">NonUnitalStarSubalgebra.unitization</a> <span class="fn">s</span>)</span>.range</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Subalgebra.html#StarAlgebra.adjoin">StarAlgebra.adjoin</a> <span class="fn">R</span> <span class="fn">↑<span class="fn">s</span></span></span></span></div></div></div></div><div class="decl" id="NonUnitalStarSubalgebra.unitization_injective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L406-L407">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalStarSubalgebra.unitization_injective"><span class="name">NonUnitalStarSubalgebra</span>.<span class="name">unitization_injective</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarModule">StarModule</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/SetLike/Basic.html#SetLike">SetLike</a> <span class="fn">S</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hSA : <span class="fn"><a href="../../../.././Mathlib/RingTheory/NonUnitalSubring/Defs.html#NonUnitalSubringClass">NonUnitalSubringClass</a> <span class="fn">S</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hSRA : <span class="fn"><a href="../../../.././Mathlib/GroupTheory/GroupAction/SubMulAction.html#SMulMemClass">SMulMemClass</a> <span class="fn">S</span> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarMemClass">StarMemClass</a> <span class="fn">S</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn">S</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h1 : <span class="fn"><span class="fn">1</span> ∉ <span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Logic/Function/Defs.html#Function.Injective">Function.Injective</a> <span class="fn">⇑<span class="fn">(<a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalStarSubalgebra.unitization">NonUnitalStarSubalgebra.unitization</a> <span class="fn">s</span>)</span></span></span></div></div></div></div><div class="decl" id="NonUnitalStarSubalgebra.unitizationStarAlgEquiv"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L409-L425">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalStarSubalgebra.unitizationStarAlgEquiv"><span class="name">NonUnitalStarSubalgebra</span>.<span class="name">unitizationStarAlgEquiv</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarModule">StarModule</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/SetLike/Basic.html#SetLike">SetLike</a> <span class="fn">S</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hSA : <span class="fn"><a href="../../../.././Mathlib/RingTheory/NonUnitalSubring/Defs.html#NonUnitalSubringClass">NonUnitalSubringClass</a> <span class="fn">S</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hSRA : <span class="fn"><a href="../../../.././Mathlib/GroupTheory/GroupAction/SubMulAction.html#SMulMemClass">SMulMemClass</a> <span class="fn">S</span> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarMemClass">StarMemClass</a> <span class="fn">S</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn">S</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h1 : <span class="fn"><span class="fn">1</span> ∉ <span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Unitization.html#Unitization">Unitization</a> <span class="fn">R</span> <span class="fn">↥<span class="fn">s</span></span></span> <a href="../../../.././Mathlib/Algebra/Star/StarAlgHom.html#StarAlgEquiv">≃⋆ₐ[</a><span class="fn">R</span><a href="../../../.././Mathlib/Algebra/Star/StarAlgHom.html#StarAlgEquiv">]</a> <span class="fn">↥<span class="fn">(<a href="../../../.././Mathlib/Algebra/Star/Subalgebra.html#StarAlgebra.adjoin">StarAlgebra.adjoin</a> <span class="fn">R</span> <span class="fn">↑<span class="fn">s</span></span>)</span></span></span></div></div><p>If a <code><a href="../../../.././Mathlib/Algebra/Star/NonUnitalSubalgebra.html#NonUnitalStarSubalgebra">NonUnitalStarSubalgebra</a></code> over a field does not contain <code>1</code>, then its unitization is
+isomorphic to its <code><a href="../../../.././Mathlib/Algebra/Star/Subalgebra.html#StarAlgebra.adjoin">StarAlgebra.adjoin</a></code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalStarSubalgebra.unitizationStarAlgEquiv">NonUnitalStarSubalgebra.unitizationStarAlgEquiv</a> <span class="fn">s</span> <span class="fn">h1</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../../../.././Mathlib/Algebra/Star/StarAlgHom.html#StarAlgEquiv.ofBijective">StarAlgEquiv.ofBijective</a> <span class="fn">(<span class="fn"><span class="fn">(<a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalStarSubalgebra.unitization">NonUnitalStarSubalgebra.unitization</a> <span class="fn">s</span>)</span>.codRestrict</span> <span class="fn">(<a href="../../../.././Mathlib/Algebra/Star/Subalgebra.html#StarAlgebra.adjoin">StarAlgebra.adjoin</a> <span class="fn">R</span> <span class="fn">↑<span class="fn">s</span></span>)</span> <span class="fn">⋯</span>)</span> <span class="fn">⋯</span></span></span></li></ul></details><details id="instances-for-list-NonUnitalStarSubalgebra.unitizationStarAlgEquiv" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="NonUnitalStarSubalgebra.unitizationStarAlgEquiv_apply_coe"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean#L411-L411">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalStarSubalgebra.unitizationStarAlgEquiv_apply_coe"><span class="name">NonUnitalStarSubalgebra</span>.<span class="name">unitizationStarAlgEquiv_apply_coe</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarModule">StarModule</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Data/SetLike/Basic.html#SetLike">SetLike</a> <span class="fn">S</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hSA : <span class="fn"><a href="../../../.././Mathlib/RingTheory/NonUnitalSubring/Defs.html#NonUnitalSubringClass">NonUnitalSubringClass</a> <span class="fn">S</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hSRA : <span class="fn"><a href="../../../.././Mathlib/GroupTheory/GroupAction/SubMulAction.html#SMulMemClass">SMulMemClass</a> <span class="fn">S</span> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarMemClass">StarMemClass</a> <span class="fn">S</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn">S</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h1 : <span class="fn"><span class="fn">1</span> ∉ <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Unitization.html#Unitization">Unitization</a> <span class="fn">R</span> <span class="fn">↥<span class="fn">s</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">(<span class="fn">(<a href="../../../.././Mathlib/Algebra/Algebra/Subalgebra/Unitization.html#NonUnitalStarSubalgebra.unitizationStarAlgEquiv">NonUnitalStarSubalgebra.unitizationStarAlgEquiv</a> <span class="fn">s</span> <span class="fn">h1</span>)</span> <span class="fn">a</span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">(<a href="../../../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">R</span> <span class="fn">A</span>)</span> <span class="fn"><span class="fn">a</span>.fst</span></span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">↑<span class="fn"><span class="fn">a</span>.snd</span></span></span></span></div></div></div></div></main>
+<nav class="nav"><iframe src="../../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

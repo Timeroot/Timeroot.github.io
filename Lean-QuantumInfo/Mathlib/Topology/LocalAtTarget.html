@@ -1,0 +1,589 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../.././style.css"></link><link rel="icon" href="../.././favicon.svg"></link><link rel="mask-icon" href="../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Topology.LocalAtTarget</title><script defer="true" src="../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../.././";</script><script>const MODULE_NAME="Mathlib.Topology.LocalAtTarget";</script><script type="module" src="../.././jump-src.js"></script><script type="module" src="../.././search.js"></script><script type="module" src="../.././expand-nav.js"></script><script type="module" src="../.././how-about.js"></script><script type="module" src="../.././instances.js"></script><script type="module" src="../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Topology</span>.<span class="name">LocalAtTarget</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/LocalAtTarget.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../.././Init.html">Init</a></li><li><a href="../.././Mathlib/Topology/LocallyClosed.html">Mathlib.Topology.LocallyClosed</a></li><li><a href="../.././Mathlib/Topology/Sets/Opens.html">Mathlib.Topology.Sets.Opens</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Topology.LocalAtTarget" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#Set.restrictPreimage_isInducing"><span class="name">Set</span>.<span class="name">restrictPreimage_isInducing</span></a></div><div class="nav_link"><a class="break_within" href="#Set.restrictPreimage_inducing"><span class="name">Set</span>.<span class="name">restrictPreimage_inducing</span></a></div><div class="nav_link"><a class="break_within" href="#Topology.IsInducing.restrictPreimage"><span class="name">Topology</span>.<span class="name">IsInducing</span>.<span class="name">restrictPreimage</span></a></div><div class="nav_link"><a class="break_within" href="#Inducing.restrictPreimage"><span class="name">Inducing</span>.<span class="name">restrictPreimage</span></a></div><div class="nav_link"><a class="break_within" href="#Set.restrictPreimage_isEmbedding"><span class="name">Set</span>.<span class="name">restrictPreimage_isEmbedding</span></a></div><div class="nav_link"><a class="break_within" href="#Set.restrictPreimage_embedding"><span class="name">Set</span>.<span class="name">restrictPreimage_embedding</span></a></div><div class="nav_link"><a class="break_within" href="#Topology.IsEmbedding.restrictPreimage"><span class="name">Topology</span>.<span class="name">IsEmbedding</span>.<span class="name">restrictPreimage</span></a></div><div class="nav_link"><a class="break_within" href="#Embedding.restrictPreimage"><span class="name">Embedding</span>.<span class="name">restrictPreimage</span></a></div><div class="nav_link"><a class="break_within" href="#Set.restrictPreimage_isOpenEmbedding"><span class="name">Set</span>.<span class="name">restrictPreimage_isOpenEmbedding</span></a></div><div class="nav_link"><a class="break_within" href="#Set.restrictPreimage_openEmbedding"><span class="name">Set</span>.<span class="name">restrictPreimage_openEmbedding</span></a></div><div class="nav_link"><a class="break_within" href="#Topology.IsOpenEmbedding.restrictPreimage"><span class="name">Topology</span>.<span class="name">IsOpenEmbedding</span>.<span class="name">restrictPreimage</span></a></div><div class="nav_link"><a class="break_within" href="#OpenEmbedding.restrictPreimage"><span class="name">OpenEmbedding</span>.<span class="name">restrictPreimage</span></a></div><div class="nav_link"><a class="break_within" href="#Set.restrictPreimage_isClosedEmbedding"><span class="name">Set</span>.<span class="name">restrictPreimage_isClosedEmbedding</span></a></div><div class="nav_link"><a class="break_within" href="#Set.restrictPreimage_closedEmbedding"><span class="name">Set</span>.<span class="name">restrictPreimage_closedEmbedding</span></a></div><div class="nav_link"><a class="break_within" href="#Topology.IsClosedEmbedding.restrictPreimage"><span class="name">Topology</span>.<span class="name">IsClosedEmbedding</span>.<span class="name">restrictPreimage</span></a></div><div class="nav_link"><a class="break_within" href="#ClosedEmbedding.restrictPreimage"><span class="name">ClosedEmbedding</span>.<span class="name">restrictPreimage</span></a></div><div class="nav_link"><a class="break_within" href="#IsClosedMap.restrictPreimage"><span class="name">IsClosedMap</span>.<span class="name">restrictPreimage</span></a></div><div class="nav_link"><a class="break_within" href="#Set.restrictPreimage_isClosedMap"><span class="name">Set</span>.<span class="name">restrictPreimage_isClosedMap</span></a></div><div class="nav_link"><a class="break_within" href="#IsOpenMap.restrictPreimage"><span class="name">IsOpenMap</span>.<span class="name">restrictPreimage</span></a></div><div class="nav_link"><a class="break_within" href="#Set.restrictPreimage_isOpenMap"><span class="name">Set</span>.<span class="name">restrictPreimage_isOpenMap</span></a></div><div class="nav_link"><a class="break_within" href="#isOpen_iff_inter_of_iSup_eq_top"><span class="name">isOpen_iff_inter_of_iSup_eq_top</span></a></div><div class="nav_link"><a class="break_within" href="#isOpen_iff_coe_preimage_of_iSup_eq_top"><span class="name">isOpen_iff_coe_preimage_of_iSup_eq_top</span></a></div><div class="nav_link"><a class="break_within" href="#isClosed_iff_coe_preimage_of_iSup_eq_top"><span class="name">isClosed_iff_coe_preimage_of_iSup_eq_top</span></a></div><div class="nav_link"><a class="break_within" href="#isLocallyClosed_iff_coe_preimage_of_iSup_eq_top"><span class="name">isLocallyClosed_iff_coe_preimage_of_iSup_eq_top</span></a></div><div class="nav_link"><a class="break_within" href="#isOpenMap_iff_isOpenMap_of_iSup_eq_top"><span class="name">isOpenMap_iff_isOpenMap_of_iSup_eq_top</span></a></div><div class="nav_link"><a class="break_within" href="#isClosedMap_iff_isClosedMap_of_iSup_eq_top"><span class="name">isClosedMap_iff_isClosedMap_of_iSup_eq_top</span></a></div><div class="nav_link"><a class="break_within" href="#inducing_iff_inducing_of_iSup_eq_top"><span class="name">inducing_iff_inducing_of_iSup_eq_top</span></a></div><div class="nav_link"><a class="break_within" href="#isEmbedding_iff_of_iSup_eq_top"><span class="name">isEmbedding_iff_of_iSup_eq_top</span></a></div><div class="nav_link"><a class="break_within" href="#isEmbedding_of_iSup_eq_top_of_preimage_subset_range"><span class="name">isEmbedding_of_iSup_eq_top_of_preimage_subset_range</span></a></div><div class="nav_link"><a class="break_within" href="#embedding_iff_embedding_of_iSup_eq_top"><span class="name">embedding_iff_embedding_of_iSup_eq_top</span></a></div><div class="nav_link"><a class="break_within" href="#isOpenEmbedding_iff_isOpenEmbedding_of_iSup_eq_top"><span class="name">isOpenEmbedding_iff_isOpenEmbedding_of_iSup_eq_top</span></a></div><div class="nav_link"><a class="break_within" href="#openEmbedding_iff_openEmbedding_of_iSup_eq_top"><span class="name">openEmbedding_iff_openEmbedding_of_iSup_eq_top</span></a></div><div class="nav_link"><a class="break_within" href="#isClosedEmbedding_iff_isClosedEmbedding_of_iSup_eq_top"><span class="name">isClosedEmbedding_iff_isClosedEmbedding_of_iSup_eq_top</span></a></div><div class="nav_link"><a class="break_within" href="#denseRange_iff_denseRange_of_iSup_eq_top"><span class="name">denseRange_iff_denseRange_of_iSup_eq_top</span></a></div><div class="nav_link"><a class="break_within" href="#closedEmbedding_iff_closedEmbedding_of_iSup_eq_top"><span class="name">closedEmbedding_iff_closedEmbedding_of_iSup_eq_top</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Properties-of-maps-that-are-local-at-the-target">Properties of maps that are local at the target. <a class="hover-link" href="#Properties-of-maps-that-are-local-at-the-target">#</a></h1><p>We show that the following properties of continuous maps are local at the target :</p><ul>
+<li><code>IsInducing</code></li>
+<li><code>IsEmbedding</code></li>
+<li><code>IsOpenEmbedding</code></li>
+<li><code>IsClosedEmbedding</code></li>
+</ul></div><div class="decl" id="Set.restrictPreimage_isInducing"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/LocalAtTarget.lean#L25-L30">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Topology/LocalAtTarget.html#Set.restrictPreimage_isInducing"><span class="name">Set</span>.<span class="name">restrictPreimage_isInducing</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Mathlib/Topology/Defs/Induced.html#Topology.IsInducing">Topology.IsInducing</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Topology/Defs/Induced.html#Topology.IsInducing">Topology.IsInducing</a> <span class="fn">(<span class="fn"><span class="fn">s</span>.restrictPreimage</span> <span class="fn">f</span>)</span></span></div></div></div></div><div class="decl" id="Set.restrictPreimage_inducing"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/LocalAtTarget.lean#L32-L33">source</a></div><div class="attributes">@[deprecated Set.restrictPreimage_isInducing]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Topology/LocalAtTarget.html#Set.restrictPreimage_inducing"><span class="name">Set</span>.<span class="name">restrictPreimage_inducing</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Mathlib/Topology/Defs/Induced.html#Topology.IsInducing">Topology.IsInducing</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Topology/Defs/Induced.html#Topology.IsInducing">Topology.IsInducing</a> <span class="fn">(<span class="fn"><span class="fn">s</span>.restrictPreimage</span> <span class="fn">f</span>)</span></span></div></div><p><strong>Alias</strong> of <code><a href="../.././Mathlib/Topology/LocalAtTarget.html#Set.restrictPreimage_isInducing">Set.restrictPreimage_isInducing</a></code>.</p></div></div><div class="decl" id="Topology.IsInducing.restrictPreimage"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/LocalAtTarget.lean#L35-L35">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Topology/LocalAtTarget.html#Topology.IsInducing.restrictPreimage"><span class="name">Topology</span>.<span class="name">IsInducing</span>.<span class="name">restrictPreimage</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Mathlib/Topology/Defs/Induced.html#Topology.IsInducing">Topology.IsInducing</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Topology/Defs/Induced.html#Topology.IsInducing">Topology.IsInducing</a> <span class="fn">(<span class="fn"><span class="fn">s</span>.restrictPreimage</span> <span class="fn">f</span>)</span></span></div></div><p><strong>Alias</strong> of <code><a href="../.././Mathlib/Topology/LocalAtTarget.html#Set.restrictPreimage_isInducing">Set.restrictPreimage_isInducing</a></code>.</p></div></div><div class="decl" id="Inducing.restrictPreimage"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/LocalAtTarget.lean#L37-L37">source</a></div><div class="attributes">@[deprecated Topology.IsInducing.restrictPreimage]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Topology/LocalAtTarget.html#Inducing.restrictPreimage"><span class="name">Inducing</span>.<span class="name">restrictPreimage</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Mathlib/Topology/Defs/Induced.html#Topology.IsInducing">Topology.IsInducing</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Topology/Defs/Induced.html#Topology.IsInducing">Topology.IsInducing</a> <span class="fn">(<span class="fn"><span class="fn">s</span>.restrictPreimage</span> <span class="fn">f</span>)</span></span></div></div><p><strong>Alias</strong> of <code><a href="../.././Mathlib/Topology/LocalAtTarget.html#Set.restrictPreimage_isInducing">Set.restrictPreimage_isInducing</a></code>.</p><hr></hr><p><strong>Alias</strong> of <code><a href="../.././Mathlib/Topology/LocalAtTarget.html#Set.restrictPreimage_isInducing">Set.restrictPreimage_isInducing</a></code>.</p></div></div><div class="decl" id="Set.restrictPreimage_isEmbedding"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/LocalAtTarget.lean#L39-L41">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Topology/LocalAtTarget.html#Set.restrictPreimage_isEmbedding"><span class="name">Set</span>.<span class="name">restrictPreimage_isEmbedding</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Mathlib/Topology/Defs/Induced.html#Topology.IsEmbedding">Topology.IsEmbedding</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Topology/Defs/Induced.html#Topology.IsEmbedding">Topology.IsEmbedding</a> <span class="fn">(<span class="fn"><span class="fn">s</span>.restrictPreimage</span> <span class="fn">f</span>)</span></span></div></div></div></div><div class="decl" id="Set.restrictPreimage_embedding"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/LocalAtTarget.lean#L43-L44">source</a></div><div class="attributes">@[deprecated Set.restrictPreimage_isEmbedding]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Topology/LocalAtTarget.html#Set.restrictPreimage_embedding"><span class="name">Set</span>.<span class="name">restrictPreimage_embedding</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Mathlib/Topology/Defs/Induced.html#Topology.IsEmbedding">Topology.IsEmbedding</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Topology/Defs/Induced.html#Topology.IsEmbedding">Topology.IsEmbedding</a> <span class="fn">(<span class="fn"><span class="fn">s</span>.restrictPreimage</span> <span class="fn">f</span>)</span></span></div></div><p><strong>Alias</strong> of <code><a href="../.././Mathlib/Topology/LocalAtTarget.html#Set.restrictPreimage_isEmbedding">Set.restrictPreimage_isEmbedding</a></code>.</p></div></div><div class="decl" id="Topology.IsEmbedding.restrictPreimage"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/LocalAtTarget.lean#L46-L46">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Topology/LocalAtTarget.html#Topology.IsEmbedding.restrictPreimage"><span class="name">Topology</span>.<span class="name">IsEmbedding</span>.<span class="name">restrictPreimage</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Mathlib/Topology/Defs/Induced.html#Topology.IsEmbedding">Topology.IsEmbedding</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Topology/Defs/Induced.html#Topology.IsEmbedding">Topology.IsEmbedding</a> <span class="fn">(<span class="fn"><span class="fn">s</span>.restrictPreimage</span> <span class="fn">f</span>)</span></span></div></div><p><strong>Alias</strong> of <code><a href="../.././Mathlib/Topology/LocalAtTarget.html#Set.restrictPreimage_isEmbedding">Set.restrictPreimage_isEmbedding</a></code>.</p></div></div><div class="decl" id="Embedding.restrictPreimage"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/LocalAtTarget.lean#L48-L49">source</a></div><div class="attributes">@[deprecated Topology.IsEmbedding.restrictPreimage]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Topology/LocalAtTarget.html#Embedding.restrictPreimage"><span class="name">Embedding</span>.<span class="name">restrictPreimage</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Mathlib/Topology/Defs/Induced.html#Topology.IsEmbedding">Topology.IsEmbedding</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Topology/Defs/Induced.html#Topology.IsEmbedding">Topology.IsEmbedding</a> <span class="fn">(<span class="fn"><span class="fn">s</span>.restrictPreimage</span> <span class="fn">f</span>)</span></span></div></div><p><strong>Alias</strong> of <code><a href="../.././Mathlib/Topology/LocalAtTarget.html#Set.restrictPreimage_isEmbedding">Set.restrictPreimage_isEmbedding</a></code>.</p><hr></hr><p><strong>Alias</strong> of <code><a href="../.././Mathlib/Topology/LocalAtTarget.html#Set.restrictPreimage_isEmbedding">Set.restrictPreimage_isEmbedding</a></code>.</p></div></div><div class="decl" id="Set.restrictPreimage_isOpenEmbedding"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/LocalAtTarget.lean#L51-L54">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Topology/LocalAtTarget.html#Set.restrictPreimage_isOpenEmbedding"><span class="name">Set</span>.<span class="name">restrictPreimage_isOpenEmbedding</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Mathlib/Topology/Defs/Induced.html#Topology.IsOpenEmbedding">Topology.IsOpenEmbedding</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Topology/Defs/Induced.html#Topology.IsOpenEmbedding">Topology.IsOpenEmbedding</a> <span class="fn">(<span class="fn"><span class="fn">s</span>.restrictPreimage</span> <span class="fn">f</span>)</span></span></div></div></div></div><div class="decl" id="Set.restrictPreimage_openEmbedding"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/LocalAtTarget.lean#L56-L57">source</a></div><div class="attributes">@[deprecated Set.restrictPreimage_isOpenEmbedding]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Topology/LocalAtTarget.html#Set.restrictPreimage_openEmbedding"><span class="name">Set</span>.<span class="name">restrictPreimage_openEmbedding</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Mathlib/Topology/Defs/Induced.html#Topology.IsOpenEmbedding">Topology.IsOpenEmbedding</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Topology/Defs/Induced.html#Topology.IsOpenEmbedding">Topology.IsOpenEmbedding</a> <span class="fn">(<span class="fn"><span class="fn">s</span>.restrictPreimage</span> <span class="fn">f</span>)</span></span></div></div><p><strong>Alias</strong> of <code><a href="../.././Mathlib/Topology/LocalAtTarget.html#Set.restrictPreimage_isOpenEmbedding">Set.restrictPreimage_isOpenEmbedding</a></code>.</p></div></div><div class="decl" id="Topology.IsOpenEmbedding.restrictPreimage"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/LocalAtTarget.lean#L59-L59">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Topology/LocalAtTarget.html#Topology.IsOpenEmbedding.restrictPreimage"><span class="name">Topology</span>.<span class="name">IsOpenEmbedding</span>.<span class="name">restrictPreimage</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Mathlib/Topology/Defs/Induced.html#Topology.IsOpenEmbedding">Topology.IsOpenEmbedding</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Topology/Defs/Induced.html#Topology.IsOpenEmbedding">Topology.IsOpenEmbedding</a> <span class="fn">(<span class="fn"><span class="fn">s</span>.restrictPreimage</span> <span class="fn">f</span>)</span></span></div></div><p><strong>Alias</strong> of <code><a href="../.././Mathlib/Topology/LocalAtTarget.html#Set.restrictPreimage_isOpenEmbedding">Set.restrictPreimage_isOpenEmbedding</a></code>.</p></div></div><div class="decl" id="OpenEmbedding.restrictPreimage"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/LocalAtTarget.lean#L61-L62">source</a></div><div class="attributes">@[deprecated Topology.IsOpenEmbedding.restrictPreimage]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Topology/LocalAtTarget.html#OpenEmbedding.restrictPreimage"><span class="name">OpenEmbedding</span>.<span class="name">restrictPreimage</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Mathlib/Topology/Defs/Induced.html#Topology.IsOpenEmbedding">Topology.IsOpenEmbedding</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Topology/Defs/Induced.html#Topology.IsOpenEmbedding">Topology.IsOpenEmbedding</a> <span class="fn">(<span class="fn"><span class="fn">s</span>.restrictPreimage</span> <span class="fn">f</span>)</span></span></div></div><p><strong>Alias</strong> of <code><a href="../.././Mathlib/Topology/LocalAtTarget.html#Set.restrictPreimage_isOpenEmbedding">Set.restrictPreimage_isOpenEmbedding</a></code>.</p><hr></hr><p><strong>Alias</strong> of <code><a href="../.././Mathlib/Topology/LocalAtTarget.html#Set.restrictPreimage_isOpenEmbedding">Set.restrictPreimage_isOpenEmbedding</a></code>.</p></div></div><div class="decl" id="Set.restrictPreimage_isClosedEmbedding"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/LocalAtTarget.lean#L64-L67">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Topology/LocalAtTarget.html#Set.restrictPreimage_isClosedEmbedding"><span class="name">Set</span>.<span class="name">restrictPreimage_isClosedEmbedding</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Mathlib/Topology/Defs/Induced.html#Topology.IsClosedEmbedding">Topology.IsClosedEmbedding</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Topology/Defs/Induced.html#Topology.IsClosedEmbedding">Topology.IsClosedEmbedding</a> <span class="fn">(<span class="fn"><span class="fn">s</span>.restrictPreimage</span> <span class="fn">f</span>)</span></span></div></div></div></div><div class="decl" id="Set.restrictPreimage_closedEmbedding"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/LocalAtTarget.lean#L69-L70">source</a></div><div class="attributes">@[deprecated Set.restrictPreimage_isClosedEmbedding]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Topology/LocalAtTarget.html#Set.restrictPreimage_closedEmbedding"><span class="name">Set</span>.<span class="name">restrictPreimage_closedEmbedding</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Mathlib/Topology/Defs/Induced.html#Topology.IsClosedEmbedding">Topology.IsClosedEmbedding</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Topology/Defs/Induced.html#Topology.IsClosedEmbedding">Topology.IsClosedEmbedding</a> <span class="fn">(<span class="fn"><span class="fn">s</span>.restrictPreimage</span> <span class="fn">f</span>)</span></span></div></div><p><strong>Alias</strong> of <code><a href="../.././Mathlib/Topology/LocalAtTarget.html#Set.restrictPreimage_isClosedEmbedding">Set.restrictPreimage_isClosedEmbedding</a></code>.</p></div></div><div class="decl" id="Topology.IsClosedEmbedding.restrictPreimage"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/LocalAtTarget.lean#L72-L72">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Topology/LocalAtTarget.html#Topology.IsClosedEmbedding.restrictPreimage"><span class="name">Topology</span>.<span class="name">IsClosedEmbedding</span>.<span class="name">restrictPreimage</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Mathlib/Topology/Defs/Induced.html#Topology.IsClosedEmbedding">Topology.IsClosedEmbedding</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Topology/Defs/Induced.html#Topology.IsClosedEmbedding">Topology.IsClosedEmbedding</a> <span class="fn">(<span class="fn"><span class="fn">s</span>.restrictPreimage</span> <span class="fn">f</span>)</span></span></div></div><p><strong>Alias</strong> of <code><a href="../.././Mathlib/Topology/LocalAtTarget.html#Set.restrictPreimage_isClosedEmbedding">Set.restrictPreimage_isClosedEmbedding</a></code>.</p></div></div><div class="decl" id="ClosedEmbedding.restrictPreimage"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/LocalAtTarget.lean#L74-L75">source</a></div><div class="attributes">@[deprecated Topology.IsClosedEmbedding.restrictPreimage]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Topology/LocalAtTarget.html#ClosedEmbedding.restrictPreimage"><span class="name">ClosedEmbedding</span>.<span class="name">restrictPreimage</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Mathlib/Topology/Defs/Induced.html#Topology.IsClosedEmbedding">Topology.IsClosedEmbedding</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Topology/Defs/Induced.html#Topology.IsClosedEmbedding">Topology.IsClosedEmbedding</a> <span class="fn">(<span class="fn"><span class="fn">s</span>.restrictPreimage</span> <span class="fn">f</span>)</span></span></div></div><p><strong>Alias</strong> of <code><a href="../.././Mathlib/Topology/LocalAtTarget.html#Set.restrictPreimage_isClosedEmbedding">Set.restrictPreimage_isClosedEmbedding</a></code>.</p><hr></hr><p><strong>Alias</strong> of <code><a href="../.././Mathlib/Topology/LocalAtTarget.html#Set.restrictPreimage_isClosedEmbedding">Set.restrictPreimage_isClosedEmbedding</a></code>.</p></div></div><div class="decl" id="IsClosedMap.restrictPreimage"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/LocalAtTarget.lean#L77-L83">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Topology/LocalAtTarget.html#IsClosedMap.restrictPreimage"><span class="name">IsClosedMap</span>.<span class="name">restrictPreimage</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(H : <span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#IsClosedMap">IsClosedMap</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#IsClosedMap">IsClosedMap</a> <span class="fn">(<span class="fn"><span class="fn">s</span>.restrictPreimage</span> <span class="fn">f</span>)</span></span></div></div></div></div><div class="decl" id="Set.restrictPreimage_isClosedMap"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/LocalAtTarget.lean#L85-L87">source</a></div><div class="attributes">@[deprecated]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Topology/LocalAtTarget.html#Set.restrictPreimage_isClosedMap"><span class="name">Set</span>.<span class="name">restrictPreimage_isClosedMap</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(H : <span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#IsClosedMap">IsClosedMap</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#IsClosedMap">IsClosedMap</a> <span class="fn">(<span class="fn"><span class="fn">s</span>.restrictPreimage</span> <span class="fn">f</span>)</span></span></div></div></div></div><div class="decl" id="IsOpenMap.restrictPreimage"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/LocalAtTarget.lean#L89-L95">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Topology/LocalAtTarget.html#IsOpenMap.restrictPreimage"><span class="name">IsOpenMap</span>.<span class="name">restrictPreimage</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(H : <span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#IsOpenMap">IsOpenMap</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#IsOpenMap">IsOpenMap</a> <span class="fn">(<span class="fn"><span class="fn">s</span>.restrictPreimage</span> <span class="fn">f</span>)</span></span></div></div></div></div><div class="decl" id="Set.restrictPreimage_isOpenMap"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/LocalAtTarget.lean#L97-L99">source</a></div><div class="attributes">@[deprecated]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Topology/LocalAtTarget.html#Set.restrictPreimage_isOpenMap"><span class="name">Set</span>.<span class="name">restrictPreimage_isOpenMap</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(H : <span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#IsOpenMap">IsOpenMap</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#IsOpenMap">IsOpenMap</a> <span class="fn">(<span class="fn"><span class="fn">s</span>.restrictPreimage</span> <span class="fn">f</span>)</span></span></div></div></div></div><div class="decl" id="isOpen_iff_inter_of_iSup_eq_top"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/LocalAtTarget.lean#L104-L112">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Topology/LocalAtTarget.html#isOpen_iff_inter_of_iSup_eq_top"><span class="name">isOpen_iff_inter_of_iSup_eq_top</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{U : <span class="fn"><span class="fn">ι</span> → <span class="fn"><a href="../.././Mathlib/Topology/Sets/Opens.html#TopologicalSpace.Opens">TopologicalSpace.Opens</a> <span class="fn">β</span></span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hU : <span class="fn"><span class="fn"><a href="../.././Mathlib/Order/SetNotation.html#iSup">iSup</a> <span class="fn">U</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#IsOpen">IsOpen</a> <span class="fn">s</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">ι</span>), <span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#IsOpen">IsOpen</a> <span class="fn">(<span class="fn">s</span> <a href="../.././Init/Core.html#Inter.inter">∩</a> <span class="fn">↑<span class="fn">(<span class="fn">U</span> <span class="fn">i</span>)</span></span>)</span></span></span></span></div></div></div></div><div class="decl" id="isOpen_iff_coe_preimage_of_iSup_eq_top"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/LocalAtTarget.lean#L114-L121">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Topology/LocalAtTarget.html#isOpen_iff_coe_preimage_of_iSup_eq_top"><span class="name">isOpen_iff_coe_preimage_of_iSup_eq_top</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{U : <span class="fn"><span class="fn">ι</span> → <span class="fn"><a href="../.././Mathlib/Topology/Sets/Opens.html#TopologicalSpace.Opens">TopologicalSpace.Opens</a> <span class="fn">β</span></span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hU : <span class="fn"><span class="fn"><a href="../.././Mathlib/Order/SetNotation.html#iSup">iSup</a> <span class="fn">U</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#IsOpen">IsOpen</a> <span class="fn">s</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">ι</span>), <span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#IsOpen">IsOpen</a> <span class="fn">(<span class="fn">Subtype.val</span> <a href="../.././Mathlib/Data/Set/Operations.html#Set.preimage">⁻¹'</a> <span class="fn">s</span>)</span></span></span></span></div></div></div></div><div class="decl" id="isClosed_iff_coe_preimage_of_iSup_eq_top"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/LocalAtTarget.lean#L123-L125">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Topology/LocalAtTarget.html#isClosed_iff_coe_preimage_of_iSup_eq_top"><span class="name">isClosed_iff_coe_preimage_of_iSup_eq_top</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{U : <span class="fn"><span class="fn">ι</span> → <span class="fn"><a href="../.././Mathlib/Topology/Sets/Opens.html#TopologicalSpace.Opens">TopologicalSpace.Opens</a> <span class="fn">β</span></span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hU : <span class="fn"><span class="fn"><a href="../.././Mathlib/Order/SetNotation.html#iSup">iSup</a> <span class="fn">U</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#IsClosed">IsClosed</a> <span class="fn">s</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">ι</span>), <span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#IsClosed">IsClosed</a> <span class="fn">(<span class="fn">Subtype.val</span> <a href="../.././Mathlib/Data/Set/Operations.html#Set.preimage">⁻¹'</a> <span class="fn">s</span>)</span></span></span></span></div></div></div></div><div class="decl" id="isLocallyClosed_iff_coe_preimage_of_iSup_eq_top"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/LocalAtTarget.lean#L127-L134">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Topology/LocalAtTarget.html#isLocallyClosed_iff_coe_preimage_of_iSup_eq_top"><span class="name">isLocallyClosed_iff_coe_preimage_of_iSup_eq_top</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{U : <span class="fn"><span class="fn">ι</span> → <span class="fn"><a href="../.././Mathlib/Topology/Sets/Opens.html#TopologicalSpace.Opens">TopologicalSpace.Opens</a> <span class="fn">β</span></span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hU : <span class="fn"><span class="fn"><a href="../.././Mathlib/Order/SetNotation.html#iSup">iSup</a> <span class="fn">U</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../.././Mathlib/Data/Set/Defs.html#Set">Set</a> <span class="fn">β</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#IsLocallyClosed">IsLocallyClosed</a> <span class="fn">s</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">ι</span>), <span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#IsLocallyClosed">IsLocallyClosed</a> <span class="fn">(<span class="fn">Subtype.val</span> <a href="../.././Mathlib/Data/Set/Operations.html#Set.preimage">⁻¹'</a> <span class="fn">s</span>)</span></span></span></span></div></div></div></div><div class="decl" id="isOpenMap_iff_isOpenMap_of_iSup_eq_top"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/LocalAtTarget.lean#L136-L146">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Topology/LocalAtTarget.html#isOpenMap_iff_isOpenMap_of_iSup_eq_top"><span class="name">isOpenMap_iff_isOpenMap_of_iSup_eq_top</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{U : <span class="fn"><span class="fn">ι</span> → <span class="fn"><a href="../.././Mathlib/Topology/Sets/Opens.html#TopologicalSpace.Opens">TopologicalSpace.Opens</a> <span class="fn">β</span></span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hU : <span class="fn"><span class="fn"><a href="../.././Mathlib/Order/SetNotation.html#iSup">iSup</a> <span class="fn">U</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#IsOpenMap">IsOpenMap</a> <span class="fn">f</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">ι</span>), <span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#IsOpenMap">IsOpenMap</a> <span class="fn">(<span class="fn"><span class="fn"><span class="fn">(<span class="fn">U</span> <span class="fn">i</span>)</span>.carrier</span>.restrictPreimage</span> <span class="fn">f</span>)</span></span></span></span></div></div></div></div><div class="decl" id="isClosedMap_iff_isClosedMap_of_iSup_eq_top"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/LocalAtTarget.lean#L148-L158">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Topology/LocalAtTarget.html#isClosedMap_iff_isClosedMap_of_iSup_eq_top"><span class="name">isClosedMap_iff_isClosedMap_of_iSup_eq_top</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{U : <span class="fn"><span class="fn">ι</span> → <span class="fn"><a href="../.././Mathlib/Topology/Sets/Opens.html#TopologicalSpace.Opens">TopologicalSpace.Opens</a> <span class="fn">β</span></span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hU : <span class="fn"><span class="fn"><a href="../.././Mathlib/Order/SetNotation.html#iSup">iSup</a> <span class="fn">U</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#IsClosedMap">IsClosedMap</a> <span class="fn">f</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">ι</span>), <span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#IsClosedMap">IsClosedMap</a> <span class="fn">(<span class="fn"><span class="fn"><span class="fn">(<span class="fn">U</span> <span class="fn">i</span>)</span>.carrier</span>.restrictPreimage</span> <span class="fn">f</span>)</span></span></span></span></div></div></div></div><div class="decl" id="inducing_iff_inducing_of_iSup_eq_top"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/LocalAtTarget.lean#L160-L176">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Topology/LocalAtTarget.html#inducing_iff_inducing_of_iSup_eq_top"><span class="name">inducing_iff_inducing_of_iSup_eq_top</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{U : <span class="fn"><span class="fn">ι</span> → <span class="fn"><a href="../.././Mathlib/Topology/Sets/Opens.html#TopologicalSpace.Opens">TopologicalSpace.Opens</a> <span class="fn">β</span></span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hU : <span class="fn"><span class="fn"><a href="../.././Mathlib/Order/SetNotation.html#iSup">iSup</a> <span class="fn">U</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#Continuous">Continuous</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Topology/Defs/Induced.html#Topology.IsInducing">Topology.IsInducing</a> <span class="fn">f</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">ι</span>), <span class="fn"><a href="../.././Mathlib/Topology/Defs/Induced.html#Topology.IsInducing">Topology.IsInducing</a> <span class="fn">(<span class="fn"><span class="fn"><span class="fn">(<span class="fn">U</span> <span class="fn">i</span>)</span>.carrier</span>.restrictPreimage</span> <span class="fn">f</span>)</span></span></span></span></div></div></div></div><div class="decl" id="isEmbedding_iff_of_iSup_eq_top"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/LocalAtTarget.lean#L178-L186">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Topology/LocalAtTarget.html#isEmbedding_iff_of_iSup_eq_top"><span class="name">isEmbedding_iff_of_iSup_eq_top</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{U : <span class="fn"><span class="fn">ι</span> → <span class="fn"><a href="../.././Mathlib/Topology/Sets/Opens.html#TopologicalSpace.Opens">TopologicalSpace.Opens</a> <span class="fn">β</span></span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hU : <span class="fn"><span class="fn"><a href="../.././Mathlib/Order/SetNotation.html#iSup">iSup</a> <span class="fn">U</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#Continuous">Continuous</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Topology/Defs/Induced.html#Topology.IsEmbedding">Topology.IsEmbedding</a> <span class="fn">f</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">ι</span>), <span class="fn"><a href="../.././Mathlib/Topology/Defs/Induced.html#Topology.IsEmbedding">Topology.IsEmbedding</a> <span class="fn">(<span class="fn"><span class="fn"><span class="fn">(<span class="fn">U</span> <span class="fn">i</span>)</span>.carrier</span>.restrictPreimage</span> <span class="fn">f</span>)</span></span></span></span></div></div></div></div><div class="decl" id="isEmbedding_of_iSup_eq_top_of_preimage_subset_range"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/LocalAtTarget.lean#L189-L227">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Topology/LocalAtTarget.html#isEmbedding_of_iSup_eq_top_of_preimage_subset_range"><span class="name">isEmbedding_of_iSup_eq_top_of_preimage_subset_range</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <a href="../.././foundational_types.html">Type</a> u_7}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">Y</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X</span> → <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#Continuous">Continuous</a> <span class="fn">f</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="decl_args">
+<span class="fn">(U : <span class="fn"><span class="fn">ι</span> → <span class="fn"><a href="../.././Mathlib/Topology/Sets/Opens.html#TopologicalSpace.Opens">TopologicalSpace.Opens</a> <span class="fn">Y</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hU : <span class="fn"><span class="fn"><a href="../.././Mathlib/Data/Set/Operations.html#Set.range">Set.range</a> <span class="fn">f</span></span> <a href="../.././Init/Core.html#HasSubset.Subset">⊆</a> <span class="fn">↑<span class="fn">(<a href="../.././Mathlib/Order/SetNotation.html#iSup">iSup</a> <span class="fn">U</span>)</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(V : <span class="fn"><span class="fn">ι</span> → <a href="../.././foundational_types.html">Type</a> u_5</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn">(<span class="fn">i</span> : <span class="fn">ι</span>) → <span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">(<span class="fn">V</span> <span class="fn">i</span>)</span></span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(iV : <span class="fn">(<span class="fn">i</span> : <span class="fn">ι</span>) → <span class="fn"><span class="fn"><span class="fn">V</span> <span class="fn">i</span></span> → <span class="fn">X</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hiV : <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">ι</span>), <span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#Continuous">Continuous</a> <span class="fn">(<span class="fn">iV</span> <span class="fn">i</span>)</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hV : <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">ι</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <a href="../.././Mathlib/Data/Set/Operations.html#Set.preimage">⁻¹'</a> <span class="fn">↑<span class="fn">(<span class="fn">U</span> <span class="fn">i</span>)</span></span></span> <a href="../.././Init/Core.html#HasSubset.Subset">⊆</a> <span class="fn"><a href="../.././Mathlib/Data/Set/Operations.html#Set.range">Set.range</a> <span class="fn">(<span class="fn">iV</span> <span class="fn">i</span>)</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hV' : <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">ι</span>), <span class="fn"><a href="../.././Mathlib/Topology/Defs/Induced.html#Topology.IsEmbedding">Topology.IsEmbedding</a> <span class="fn">(<span class="fn">f</span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn"><span class="fn">iV</span> <span class="fn">i</span></span>)</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Topology/Defs/Induced.html#Topology.IsEmbedding">Topology.IsEmbedding</a> <span class="fn">f</span></span></div></div><p>Given a continuous map <code>f : X → Y</code> between topological spaces.
+Suppose we have an open cover <code>V i</code> of the range of <code>f</code>, and an open cover <code>U i</code> of <code>X</code> that is
+coarser than the pullback of <code>V</code> under <code>f</code>.
+To check that <code>f</code> is an embedding it suffices to check that <code>U i → Y</code> is an embedding for all <code>i</code>.</p></div></div><div class="decl" id="embedding_iff_embedding_of_iSup_eq_top"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/LocalAtTarget.lean#L229-L230">source</a></div><div class="attributes">@[deprecated isEmbedding_iff_of_iSup_eq_top]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Topology/LocalAtTarget.html#embedding_iff_embedding_of_iSup_eq_top"><span class="name">embedding_iff_embedding_of_iSup_eq_top</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{U : <span class="fn"><span class="fn">ι</span> → <span class="fn"><a href="../.././Mathlib/Topology/Sets/Opens.html#TopologicalSpace.Opens">TopologicalSpace.Opens</a> <span class="fn">β</span></span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hU : <span class="fn"><span class="fn"><a href="../.././Mathlib/Order/SetNotation.html#iSup">iSup</a> <span class="fn">U</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#Continuous">Continuous</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Topology/Defs/Induced.html#Topology.IsEmbedding">Topology.IsEmbedding</a> <span class="fn">f</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">ι</span>), <span class="fn"><a href="../.././Mathlib/Topology/Defs/Induced.html#Topology.IsEmbedding">Topology.IsEmbedding</a> <span class="fn">(<span class="fn"><span class="fn"><span class="fn">(<span class="fn">U</span> <span class="fn">i</span>)</span>.carrier</span>.restrictPreimage</span> <span class="fn">f</span>)</span></span></span></span></div></div><p><strong>Alias</strong> of <code><a href="../.././Mathlib/Topology/LocalAtTarget.html#isEmbedding_iff_of_iSup_eq_top">isEmbedding_iff_of_iSup_eq_top</a></code>.</p></div></div><div class="decl" id="isOpenEmbedding_iff_isOpenEmbedding_of_iSup_eq_top"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/LocalAtTarget.lean#L232-L239">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Topology/LocalAtTarget.html#isOpenEmbedding_iff_isOpenEmbedding_of_iSup_eq_top"><span class="name">isOpenEmbedding_iff_isOpenEmbedding_of_iSup_eq_top</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{U : <span class="fn"><span class="fn">ι</span> → <span class="fn"><a href="../.././Mathlib/Topology/Sets/Opens.html#TopologicalSpace.Opens">TopologicalSpace.Opens</a> <span class="fn">β</span></span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hU : <span class="fn"><span class="fn"><a href="../.././Mathlib/Order/SetNotation.html#iSup">iSup</a> <span class="fn">U</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#Continuous">Continuous</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Topology/Defs/Induced.html#Topology.IsOpenEmbedding">Topology.IsOpenEmbedding</a> <span class="fn">f</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">ι</span>), <span class="fn"><a href="../.././Mathlib/Topology/Defs/Induced.html#Topology.IsOpenEmbedding">Topology.IsOpenEmbedding</a> <span class="fn">(<span class="fn"><span class="fn"><span class="fn">(<span class="fn">U</span> <span class="fn">i</span>)</span>.carrier</span>.restrictPreimage</span> <span class="fn">f</span>)</span></span></span></span></div></div></div></div><div class="decl" id="openEmbedding_iff_openEmbedding_of_iSup_eq_top"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/LocalAtTarget.lean#L241-L243">source</a></div><div class="attributes">@[deprecated isOpenEmbedding_iff_isOpenEmbedding_of_iSup_eq_top]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Topology/LocalAtTarget.html#openEmbedding_iff_openEmbedding_of_iSup_eq_top"><span class="name">openEmbedding_iff_openEmbedding_of_iSup_eq_top</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{U : <span class="fn"><span class="fn">ι</span> → <span class="fn"><a href="../.././Mathlib/Topology/Sets/Opens.html#TopologicalSpace.Opens">TopologicalSpace.Opens</a> <span class="fn">β</span></span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hU : <span class="fn"><span class="fn"><a href="../.././Mathlib/Order/SetNotation.html#iSup">iSup</a> <span class="fn">U</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#Continuous">Continuous</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Topology/Defs/Induced.html#Topology.IsOpenEmbedding">Topology.IsOpenEmbedding</a> <span class="fn">f</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">ι</span>), <span class="fn"><a href="../.././Mathlib/Topology/Defs/Induced.html#Topology.IsOpenEmbedding">Topology.IsOpenEmbedding</a> <span class="fn">(<span class="fn"><span class="fn"><span class="fn">(<span class="fn">U</span> <span class="fn">i</span>)</span>.carrier</span>.restrictPreimage</span> <span class="fn">f</span>)</span></span></span></span></div></div><p><strong>Alias</strong> of <code><a href="../.././Mathlib/Topology/LocalAtTarget.html#isOpenEmbedding_iff_isOpenEmbedding_of_iSup_eq_top">isOpenEmbedding_iff_isOpenEmbedding_of_iSup_eq_top</a></code>.</p></div></div><div class="decl" id="isClosedEmbedding_iff_isClosedEmbedding_of_iSup_eq_top"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/LocalAtTarget.lean#L245-L252">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Topology/LocalAtTarget.html#isClosedEmbedding_iff_isClosedEmbedding_of_iSup_eq_top"><span class="name">isClosedEmbedding_iff_isClosedEmbedding_of_iSup_eq_top</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{U : <span class="fn"><span class="fn">ι</span> → <span class="fn"><a href="../.././Mathlib/Topology/Sets/Opens.html#TopologicalSpace.Opens">TopologicalSpace.Opens</a> <span class="fn">β</span></span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hU : <span class="fn"><span class="fn"><a href="../.././Mathlib/Order/SetNotation.html#iSup">iSup</a> <span class="fn">U</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#Continuous">Continuous</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Topology/Defs/Induced.html#Topology.IsClosedEmbedding">Topology.IsClosedEmbedding</a> <span class="fn">f</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">ι</span>), <span class="fn"><a href="../.././Mathlib/Topology/Defs/Induced.html#Topology.IsClosedEmbedding">Topology.IsClosedEmbedding</a> <span class="fn">(<span class="fn"><span class="fn"><span class="fn">(<span class="fn">U</span> <span class="fn">i</span>)</span>.carrier</span>.restrictPreimage</span> <span class="fn">f</span>)</span></span></span></span></div></div></div></div><div class="decl" id="denseRange_iff_denseRange_of_iSup_eq_top"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/LocalAtTarget.lean#L255-L264">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Topology/LocalAtTarget.html#denseRange_iff_denseRange_of_iSup_eq_top"><span class="name">denseRange_iff_denseRange_of_iSup_eq_top</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{U : <span class="fn"><span class="fn">ι</span> → <span class="fn"><a href="../.././Mathlib/Topology/Sets/Opens.html#TopologicalSpace.Opens">TopologicalSpace.Opens</a> <span class="fn">β</span></span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hU : <span class="fn"><span class="fn"><a href="../.././Mathlib/Order/SetNotation.html#iSup">iSup</a> <span class="fn">U</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#DenseRange">DenseRange</a> <span class="fn">f</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">ι</span>), <span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#DenseRange">DenseRange</a> <span class="fn">(<span class="fn"><span class="fn"><span class="fn">(<span class="fn">U</span> <span class="fn">i</span>)</span>.carrier</span>.restrictPreimage</span> <span class="fn">f</span>)</span></span></span></span></div></div></div></div><div class="decl" id="closedEmbedding_iff_closedEmbedding_of_iSup_eq_top"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Topology/LocalAtTarget.lean#L266-L268">source</a></div><div class="attributes">@[deprecated isClosedEmbedding_iff_isClosedEmbedding_of_iSup_eq_top]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Topology/LocalAtTarget.html#closedEmbedding_iff_closedEmbedding_of_iSup_eq_top"><span class="name">closedEmbedding_iff_closedEmbedding_of_iSup_eq_top</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{U : <span class="fn"><span class="fn">ι</span> → <span class="fn"><a href="../.././Mathlib/Topology/Sets/Opens.html#TopologicalSpace.Opens">TopologicalSpace.Opens</a> <span class="fn">β</span></span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hU : <span class="fn"><span class="fn"><a href="../.././Mathlib/Order/SetNotation.html#iSup">iSup</a> <span class="fn">U</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Mathlib/Topology/Defs/Basic.html#Continuous">Continuous</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Topology/Defs/Induced.html#Topology.IsClosedEmbedding">Topology.IsClosedEmbedding</a> <span class="fn">f</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">ι</span>), <span class="fn"><a href="../.././Mathlib/Topology/Defs/Induced.html#Topology.IsClosedEmbedding">Topology.IsClosedEmbedding</a> <span class="fn">(<span class="fn"><span class="fn"><span class="fn">(<span class="fn">U</span> <span class="fn">i</span>)</span>.carrier</span>.restrictPreimage</span> <span class="fn">f</span>)</span></span></span></span></div></div><p><strong>Alias</strong> of <code><a href="../.././Mathlib/Topology/LocalAtTarget.html#isClosedEmbedding_iff_isClosedEmbedding_of_iSup_eq_top">isClosedEmbedding_iff_isClosedEmbedding_of_iSup_eq_top</a></code>.</p></div></div></main>
+<nav class="nav"><iframe src="../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

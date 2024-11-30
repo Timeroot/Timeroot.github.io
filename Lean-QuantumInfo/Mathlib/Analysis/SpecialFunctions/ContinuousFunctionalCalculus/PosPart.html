@@ -1,0 +1,421 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../../.././style.css"></link><link rel="icon" href="../../../.././favicon.svg"></link><link rel="mask-icon" href="../../../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Analysis.SpecialFunctions.ContinuousFunctionalCalculus.PosPart</title><script defer="true" src="../../../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../../.././";</script><script>const MODULE_NAME="Mathlib.Analysis.SpecialFunctions.ContinuousFunctionalCalculus.PosPart";</script><script type="module" src="../../../.././jump-src.js"></script><script type="module" src="../../../.././search.js"></script><script type="module" src="../../../.././expand-nav.js"></script><script type="module" src="../../../.././how-about.js"></script><script type="module" src="../../../.././instances.js"></script><script type="module" src="../../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Analysis</span>.<span class="name">SpecialFunctions</span>.<span class="name">ContinuousFunctionalCalculus</span>.<span class="name">PosPart</span></h2><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Analysis/SpecialFunctions/ContinuousFunctionalCalculus/PosPart.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../../.././Init.html">Init</a></li><li><a href="../../../.././Mathlib/Analysis/InnerProductSpace/Basic.html">Mathlib.Analysis.InnerProductSpace.Basic</a></li><li><a href="../../../.././Mathlib/Topology/ContinuousMap/StarOrdered.html">Mathlib.Topology.ContinuousMap.StarOrdered</a></li><li><a href="../../../.././Mathlib/Topology/ContinuousMap/StoneWeierstrass.html">Mathlib.Topology.ContinuousMap.StoneWeierstrass</a></li><li><a href="../../../.././Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/NonUnital.html">Mathlib.Analysis.CStarAlgebra.ContinuousFunctionalCalculus.NonUnital</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Analysis.SpecialFunctions.ContinuousFunctionalCalculus.PosPart" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#CStarAlgebra.instPosPart"><span class="name">CStarAlgebra</span>.<span class="name">instPosPart</span></a></div><div class="nav_link"><a class="break_within" href="#CStarAlgebra.instNegPart"><span class="name">CStarAlgebra</span>.<span class="name">instNegPart</span></a></div><div class="nav_link"><a class="break_within" href="#CFC.posPart_def"><span class="name">CFC</span>.<span class="name">posPart_def</span></a></div><div class="nav_link"><a class="break_within" href="#CFC.negPart_def"><span class="name">CFC</span>.<span class="name">negPart_def</span></a></div><div class="nav_link"><a class="break_within" href="#CFC.posPart_mul_negPart"><span class="name">CFC</span>.<span class="name">posPart_mul_negPart</span></a></div><div class="nav_link"><a class="break_within" href="#CFC.negPart_mul_posPart"><span class="name">CFC</span>.<span class="name">negPart_mul_posPart</span></a></div><div class="nav_link"><a class="break_within" href="#CFC.posPart_sub_negPart"><span class="name">CFC</span>.<span class="name">posPart_sub_negPart</span></a></div><div class="nav_link"><a class="break_within" href="#CFC.posPart_neg"><span class="name">CFC</span>.<span class="name">posPart_neg</span></a></div><div class="nav_link"><a class="break_within" href="#CFC.negPart_neg"><span class="name">CFC</span>.<span class="name">negPart_neg</span></a></div><div class="nav_link"><a class="break_within" href="#CFC.posPart_nonneg"><span class="name">CFC</span>.<span class="name">posPart_nonneg</span></a></div><div class="nav_link"><a class="break_within" href="#CFC.negPart_nonneg"><span class="name">CFC</span>.<span class="name">negPart_nonneg</span></a></div><div class="nav_link"><a class="break_within" href="#CFC.eq_posPart_iff"><span class="name">CFC</span>.<span class="name">eq_posPart_iff</span></a></div><div class="nav_link"><a class="break_within" href="#CFC.negPart_eq_zero_iff"><span class="name">CFC</span>.<span class="name">negPart_eq_zero_iff</span></a></div><div class="nav_link"><a class="break_within" href="#CFC.eq_negPart_iff"><span class="name">CFC</span>.<span class="name">eq_negPart_iff</span></a></div><div class="nav_link"><a class="break_within" href="#CFC.posPart_eq_zero_iff"><span class="name">CFC</span>.<span class="name">posPart_eq_zero_iff</span></a></div><div class="nav_link"><a class="break_within" href="#CFC.posPart_negPart_unique"><span class="name">CFC</span>.<span class="name">posPart_negPart_unique</span></a></div><div class="nav_link"><a class="break_within" href="#CStarAlgebra.linear_combination_nonneg"><span class="name">CStarAlgebra</span>.<span class="name">linear_combination_nonneg</span></a></div><div class="nav_link"><a class="break_within" href="#CStarAlgebra.span_nonneg"><span class="name">CStarAlgebra</span>.<span class="name">span_nonneg</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="The-positive-and-negative-parts-of-a-selfadjoint-element-in-a-C⋆-algebra">The positive (and negative) parts of a selfadjoint element in a C⋆-algebra <a class="hover-link" href="#The-positive-and-negative-parts-of-a-selfadjoint-element-in-a-C⋆-algebra">#</a></h1><p>This file defines the positive and negative parts of a selfadjoint element in a C⋆-algebra via
+the continuous functional calculus and develops the basic API, including the uniqueness of the
+positive and negative parts.</p></div><div class="decl" id="CStarAlgebra.instPosPart"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Analysis/SpecialFunctions/ContinuousFunctionalCalculus/PosPart.lean#L25-L26">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable instance</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/SpecialFunctions/ContinuousFunctionalCalculus/PosPart.html#CStarAlgebra.instPosPart"><span class="name">CStarAlgebra</span>.<span class="name">instPosPart</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalRing">NonUnitalRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#SMulCommClass">SMulCommClass</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/NonUnital.html#NonUnitalContinuousFunctionalCalculus">NonUnitalContinuousFunctionalCalculus</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">IsSelfAdjoint</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/Notation.html#PosPart">PosPart</a> <span class="fn">A</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">CStarAlgebra.instPosPart</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ <span class="fn">posPart</span> := <span class="fn"><a href="../../../.././Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/NonUnital.html#cfcₙ">cfcₙ</a> <span class="fn">fun (<span class="fn">x</span> : <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>) =&gt; <span class="fn"><span class="fn">x</span><a href="../../../.././Mathlib/Algebra/Notation.html#PosPart.posPart">⁺</a></span></span></span> }</span></span></li></ul></details></div></div><div class="decl" id="CStarAlgebra.instNegPart"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Analysis/SpecialFunctions/ContinuousFunctionalCalculus/PosPart.lean#L28-L29">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable instance</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/SpecialFunctions/ContinuousFunctionalCalculus/PosPart.html#CStarAlgebra.instNegPart"><span class="name">CStarAlgebra</span>.<span class="name">instNegPart</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalRing">NonUnitalRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#SMulCommClass">SMulCommClass</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/NonUnital.html#NonUnitalContinuousFunctionalCalculus">NonUnitalContinuousFunctionalCalculus</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">IsSelfAdjoint</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Algebra/Notation.html#NegPart">NegPart</a> <span class="fn">A</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">CStarAlgebra.instNegPart</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ <span class="fn">negPart</span> := <span class="fn"><a href="../../../.././Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/NonUnital.html#cfcₙ">cfcₙ</a> <span class="fn">fun (<span class="fn">x</span> : <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>) =&gt; <span class="fn"><span class="fn">x</span><a href="../../../.././Mathlib/Algebra/Notation.html#NegPart.negPart">⁻</a></span></span></span> }</span></span></li></ul></details></div></div><div class="decl" id="CFC.posPart_def"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Analysis/SpecialFunctions/ContinuousFunctionalCalculus/PosPart.lean#L35-L35">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/SpecialFunctions/ContinuousFunctionalCalculus/PosPart.html#CFC.posPart_def"><span class="name">CFC</span>.<span class="name">posPart_def</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalRing">NonUnitalRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#SMulCommClass">SMulCommClass</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/NonUnital.html#NonUnitalContinuousFunctionalCalculus">NonUnitalContinuousFunctionalCalculus</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">IsSelfAdjoint</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">A</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span><a href="../../../.././Mathlib/Algebra/Notation.html#PosPart.posPart">⁺</a></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/NonUnital.html#cfcₙ">cfcₙ</a> <span class="fn">(fun (<span class="fn">x</span> : <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>) =&gt; <span class="fn"><span class="fn">x</span><a href="../../../.././Mathlib/Algebra/Notation.html#PosPart.posPart">⁺</a></span>)</span> <span class="fn">a</span></span></span></div></div></div></div><div class="decl" id="CFC.negPart_def"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Analysis/SpecialFunctions/ContinuousFunctionalCalculus/PosPart.lean#L37-L37">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/SpecialFunctions/ContinuousFunctionalCalculus/PosPart.html#CFC.negPart_def"><span class="name">CFC</span>.<span class="name">negPart_def</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalRing">NonUnitalRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#SMulCommClass">SMulCommClass</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/NonUnital.html#NonUnitalContinuousFunctionalCalculus">NonUnitalContinuousFunctionalCalculus</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">IsSelfAdjoint</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">A</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span><a href="../../../.././Mathlib/Algebra/Notation.html#NegPart.negPart">⁻</a></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/NonUnital.html#cfcₙ">cfcₙ</a> <span class="fn">(fun (<span class="fn">x</span> : <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>) =&gt; <span class="fn"><span class="fn">x</span><a href="../../../.././Mathlib/Algebra/Notation.html#NegPart.negPart">⁻</a></span>)</span> <span class="fn">a</span></span></span></div></div></div></div><div class="decl" id="CFC.posPart_mul_negPart"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Analysis/SpecialFunctions/ContinuousFunctionalCalculus/PosPart.lean#L39-L47">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/SpecialFunctions/ContinuousFunctionalCalculus/PosPart.html#CFC.posPart_mul_negPart"><span class="name">CFC</span>.<span class="name">posPart_mul_negPart</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalRing">NonUnitalRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#SMulCommClass">SMulCommClass</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/NonUnital.html#NonUnitalContinuousFunctionalCalculus">NonUnitalContinuousFunctionalCalculus</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">IsSelfAdjoint</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">A</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span><a href="../../../.././Mathlib/Algebra/Notation.html#PosPart.posPart">⁺</a></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">a</span><a href="../../../.././Mathlib/Algebra/Notation.html#NegPart.negPart">⁻</a></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="CFC.negPart_mul_posPart"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Analysis/SpecialFunctions/ContinuousFunctionalCalculus/PosPart.lean#L49-L57">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/SpecialFunctions/ContinuousFunctionalCalculus/PosPart.html#CFC.negPart_mul_posPart"><span class="name">CFC</span>.<span class="name">negPart_mul_posPart</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalRing">NonUnitalRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#SMulCommClass">SMulCommClass</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/NonUnital.html#NonUnitalContinuousFunctionalCalculus">NonUnitalContinuousFunctionalCalculus</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">IsSelfAdjoint</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">A</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span><a href="../../../.././Mathlib/Algebra/Notation.html#NegPart.negPart">⁻</a></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">a</span><a href="../../../.././Mathlib/Algebra/Notation.html#PosPart.posPart">⁺</a></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="CFC.posPart_sub_negPart"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Analysis/SpecialFunctions/ContinuousFunctionalCalculus/PosPart.lean#L59-L64">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/SpecialFunctions/ContinuousFunctionalCalculus/PosPart.html#CFC.posPart_sub_negPart"><span class="name">CFC</span>.<span class="name">posPart_sub_negPart</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalRing">NonUnitalRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#SMulCommClass">SMulCommClass</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/NonUnital.html#NonUnitalContinuousFunctionalCalculus">NonUnitalContinuousFunctionalCalculus</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">IsSelfAdjoint</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">A</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ha : <span class="fn"><a href="../../../.././Mathlib/Algebra/Star/SelfAdjoint.html#IsSelfAdjoint">IsSelfAdjoint</a> <span class="fn">a</span></span> := by cfc_tac)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span><a href="../../../.././Mathlib/Algebra/Notation.html#PosPart.posPart">⁺</a></span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">a</span><a href="../../../.././Mathlib/Algebra/Notation.html#NegPart.negPart">⁻</a></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span></div></div></div></div><div class="decl" id="CFC.posPart_neg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Analysis/SpecialFunctions/ContinuousFunctionalCalculus/PosPart.lean#L70-L77">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/SpecialFunctions/ContinuousFunctionalCalculus/PosPart.html#CFC.posPart_neg"><span class="name">CFC</span>.<span class="name">posPart_neg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalRing">NonUnitalRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#SMulCommClass">SMulCommClass</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/NonUnital.html#NonUnitalContinuousFunctionalCalculus">NonUnitalContinuousFunctionalCalculus</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">IsSelfAdjoint</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/NonUnital.html#UniqueNonUnitalContinuousFunctionalCalculus">UniqueNonUnitalContinuousFunctionalCalculus</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">A</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">a</span>)</span><a href="../../../.././Mathlib/Algebra/Notation.html#PosPart.posPart">⁺</a></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">a</span><a href="../../../.././Mathlib/Algebra/Notation.html#NegPart.negPart">⁻</a></span></span></div></div></div></div><div class="decl" id="CFC.negPart_neg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Analysis/SpecialFunctions/ContinuousFunctionalCalculus/PosPart.lean#L79-L81">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/SpecialFunctions/ContinuousFunctionalCalculus/PosPart.html#CFC.negPart_neg"><span class="name">CFC</span>.<span class="name">negPart_neg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalRing">NonUnitalRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#SMulCommClass">SMulCommClass</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/NonUnital.html#NonUnitalContinuousFunctionalCalculus">NonUnitalContinuousFunctionalCalculus</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">IsSelfAdjoint</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/NonUnital.html#UniqueNonUnitalContinuousFunctionalCalculus">UniqueNonUnitalContinuousFunctionalCalculus</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">A</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">a</span>)</span><a href="../../../.././Mathlib/Algebra/Notation.html#NegPart.negPart">⁻</a></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">a</span><a href="../../../.././Mathlib/Algebra/Notation.html#PosPart.posPart">⁺</a></span></span></div></div></div></div><div class="decl" id="CFC.posPart_nonneg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Analysis/SpecialFunctions/ContinuousFunctionalCalculus/PosPart.lean#L87-L90">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/SpecialFunctions/ContinuousFunctionalCalculus/PosPart.html#CFC.posPart_nonneg"><span class="name">CFC</span>.<span class="name">posPart_nonneg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalRing">NonUnitalRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#SMulCommClass">SMulCommClass</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/NonUnital.html#NonUnitalContinuousFunctionalCalculus">NonUnitalContinuousFunctionalCalculus</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">IsSelfAdjoint</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs/PartialOrder.html#PartialOrder">PartialOrder</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">A</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">a</span><a href="../../../.././Mathlib/Algebra/Notation.html#PosPart.posPart">⁺</a></span></span></div></div></div></div><div class="decl" id="CFC.negPart_nonneg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Analysis/SpecialFunctions/ContinuousFunctionalCalculus/PosPart.lean#L92-L95">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/SpecialFunctions/ContinuousFunctionalCalculus/PosPart.html#CFC.negPart_nonneg"><span class="name">CFC</span>.<span class="name">negPart_nonneg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalRing">NonUnitalRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#SMulCommClass">SMulCommClass</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/NonUnital.html#NonUnitalContinuousFunctionalCalculus">NonUnitalContinuousFunctionalCalculus</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">IsSelfAdjoint</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs/PartialOrder.html#PartialOrder">PartialOrder</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">A</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">a</span><a href="../../../.././Mathlib/Algebra/Notation.html#NegPart.negPart">⁻</a></span></span></div></div></div></div><div class="decl" id="CFC.eq_posPart_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Analysis/SpecialFunctions/ContinuousFunctionalCalculus/PosPart.lean#L99-L104">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/SpecialFunctions/ContinuousFunctionalCalculus/PosPart.html#CFC.eq_posPart_iff"><span class="name">CFC</span>.<span class="name">eq_posPart_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalRing">NonUnitalRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#SMulCommClass">SMulCommClass</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/NonUnital.html#NonUnitalContinuousFunctionalCalculus">NonUnitalContinuousFunctionalCalculus</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">IsSelfAdjoint</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs/PartialOrder.html#PartialOrder">PartialOrder</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Quasispectrum.html#NonnegSpectrumClass">NonnegSpectrumClass</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">A</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">a</span><a href="../../../.././Mathlib/Algebra/Notation.html#PosPart.posPart">⁺</a></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">a</span></span></span></div></div></div></div><div class="decl" id="CFC.negPart_eq_zero_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Analysis/SpecialFunctions/ContinuousFunctionalCalculus/PosPart.lean#L106-L110">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/SpecialFunctions/ContinuousFunctionalCalculus/PosPart.html#CFC.negPart_eq_zero_iff"><span class="name">CFC</span>.<span class="name">negPart_eq_zero_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalRing">NonUnitalRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#SMulCommClass">SMulCommClass</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/NonUnital.html#NonUnitalContinuousFunctionalCalculus">NonUnitalContinuousFunctionalCalculus</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">IsSelfAdjoint</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs/PartialOrder.html#PartialOrder">PartialOrder</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Quasispectrum.html#NonnegSpectrumClass">NonnegSpectrumClass</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">A</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ha : <span class="fn"><a href="../../../.././Mathlib/Algebra/Star/SelfAdjoint.html#IsSelfAdjoint">IsSelfAdjoint</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span><a href="../../../.././Mathlib/Algebra/Notation.html#NegPart.negPart">⁻</a></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">a</span></span></span></div></div></div></div><div class="decl" id="CFC.eq_negPart_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Analysis/SpecialFunctions/ContinuousFunctionalCalculus/PosPart.lean#L112-L122">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/SpecialFunctions/ContinuousFunctionalCalculus/PosPart.html#CFC.eq_negPart_iff"><span class="name">CFC</span>.<span class="name">eq_negPart_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalRing">NonUnitalRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#SMulCommClass">SMulCommClass</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/NonUnital.html#NonUnitalContinuousFunctionalCalculus">NonUnitalContinuousFunctionalCalculus</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">IsSelfAdjoint</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs/PartialOrder.html#PartialOrder">PartialOrder</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Quasispectrum.html#NonnegSpectrumClass">NonnegSpectrumClass</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">A</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn"><span class="fn">a</span><a href="../../../.././Mathlib/Algebra/Notation.html#NegPart.negPart">⁻</a></span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">0</span></span></span></div></div></div></div><div class="decl" id="CFC.posPart_eq_zero_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Analysis/SpecialFunctions/ContinuousFunctionalCalculus/PosPart.lean#L124-L128">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/SpecialFunctions/ContinuousFunctionalCalculus/PosPart.html#CFC.posPart_eq_zero_iff"><span class="name">CFC</span>.<span class="name">posPart_eq_zero_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalRing">NonUnitalRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#SMulCommClass">SMulCommClass</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/NonUnital.html#NonUnitalContinuousFunctionalCalculus">NonUnitalContinuousFunctionalCalculus</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">IsSelfAdjoint</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs/PartialOrder.html#PartialOrder">PartialOrder</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Quasispectrum.html#NonnegSpectrumClass">NonnegSpectrumClass</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">A</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ha : <span class="fn"><a href="../../../.././Mathlib/Algebra/Star/SelfAdjoint.html#IsSelfAdjoint">IsSelfAdjoint</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">a</span><a href="../../../.././Mathlib/Algebra/Notation.html#PosPart.posPart">⁺</a></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">0</span></span></span></div></div></div></div><div class="decl" id="CFC.posPart_negPart_unique"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Analysis/SpecialFunctions/ContinuousFunctionalCalculus/PosPart.lean#L138-L226">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/SpecialFunctions/ContinuousFunctionalCalculus/PosPart.html#CFC.posPart_negPart_unique"><span class="name">CFC</span>.<span class="name">posPart_negPart_unique</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalRing">NonUnitalRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#SMulCommClass">SMulCommClass</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/NonUnital.html#NonUnitalContinuousFunctionalCalculus">NonUnitalContinuousFunctionalCalculus</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">IsSelfAdjoint</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs/PartialOrder.html#PartialOrder">PartialOrder</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Algebra/Quasispectrum.html#NonnegSpectrumClass">NonnegSpectrumClass</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/NonUnital.html#UniqueNonUnitalContinuousFunctionalCalculus">UniqueNonUnitalContinuousFunctionalCalculus</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/Ring/Basic.html#TopologicalRing">TopologicalRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Separation/Basic.html#T2Space">T2Space</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a b c : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(habc : <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">c</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hbc : <span class="fn"><span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">c</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hb : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b</span></span> := by cfc_tac)</span></span>
+<span class="decl_args">
+<span class="fn">(hc : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">c</span></span> := by cfc_tac)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">a</span><a href="../../../.././Mathlib/Algebra/Notation.html#PosPart.posPart">⁺</a></span></span> <a href="../../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">c</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">a</span><a href="../../../.././Mathlib/Algebra/Notation.html#NegPart.negPart">⁻</a></span></span></span></div></div><p>The positive and negative parts of a selfadjoint element <code>a</code> are unique. That is, if
+<code>a = b - c</code> is the difference of nonnegative elements whose product is zero, then these are
+precisely <code>a⁺</code> and <code>a⁻</code>.</p></div></div><div class="decl" id="CStarAlgebra.linear_combination_nonneg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Analysis/SpecialFunctions/ContinuousFunctionalCalculus/PosPart.lean#L240-L243">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/SpecialFunctions/ContinuousFunctionalCalculus/PosPart.html#CStarAlgebra.linear_combination_nonneg"><span class="name">CStarAlgebra</span>.<span class="name">linear_combination_nonneg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalRing">NonUnitalRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <a href="../../../.././Mathlib/Data/Complex/Basic.html#Complex">ℂ</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#SMulCommClass">SMulCommClass</a> <a href="../../../.././Mathlib/Data/Complex/Basic.html#Complex">ℂ</a> <span class="fn">A</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <a href="../../../.././Mathlib/Data/Complex/Basic.html#Complex">ℂ</a> <span class="fn">A</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarModule">StarModule</a> <a href="../../../.././Mathlib/Data/Complex/Basic.html#Complex">ℂ</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/NonUnital.html#NonUnitalContinuousFunctionalCalculus">NonUnitalContinuousFunctionalCalculus</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">IsSelfAdjoint</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs/PartialOrder.html#PartialOrder">PartialOrder</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">A</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn"><span class="fn">(↑<span class="fn">(<span class="fn">realPart</span> <span class="fn">x</span>)</span>)</span><a href="../../../.././Mathlib/Algebra/Notation.html#PosPart.posPart">⁺</a></span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">(↑<span class="fn">(<span class="fn">realPart</span> <span class="fn">x</span>)</span>)</span><a href="../../../.././Mathlib/Algebra/Notation.html#NegPart.negPart">⁻</a></span></span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">(<span class="fn"><a href="../../../.././Mathlib/Data/Complex/Basic.html#Complex.I">Complex.I</a> <a href="../../../.././Mathlib/Algebra/Group/Operations.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">(↑<span class="fn">(<span class="fn">imaginaryPart</span> <span class="fn">x</span>)</span>)</span><a href="../../../.././Mathlib/Algebra/Notation.html#PosPart.posPart">⁺</a></span></span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><a href="../../../.././Mathlib/Data/Complex/Basic.html#Complex.I">Complex.I</a> <a href="../../../.././Mathlib/Algebra/Group/Operations.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">(↑<span class="fn">(<span class="fn">imaginaryPart</span> <span class="fn">x</span>)</span>)</span><a href="../../../.././Mathlib/Algebra/Notation.html#NegPart.negPart">⁻</a></span></span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">x</span></span></div></div></div></div><div class="decl" id="CStarAlgebra.span_nonneg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/52e329815d8c2be3b3630cfef7ae62f68d836fc5/Mathlib/Analysis/SpecialFunctions/ContinuousFunctionalCalculus/PosPart.lean#L245-L252">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/SpecialFunctions/ContinuousFunctionalCalculus/PosPart.html#CStarAlgebra.span_nonneg"><span class="name">CStarAlgebra</span>.<span class="name">span_nonneg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Ring/Defs.html#NonUnitalRing">NonUnitalRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <a href="../../../.././Mathlib/Data/Complex/Basic.html#Complex">ℂ</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#SMulCommClass">SMulCommClass</a> <a href="../../../.././Mathlib/Data/Complex/Basic.html#Complex">ℂ</a> <span class="fn">A</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Action/Defs.html#IsScalarTower">IsScalarTower</a> <a href="../../../.././Mathlib/Data/Complex/Basic.html#Complex">ℂ</a> <span class="fn">A</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Topology/Defs/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Star/Basic.html#StarModule">StarModule</a> <a href="../../../.././Mathlib/Data/Complex/Basic.html#Complex">ℂ</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/NonUnital.html#NonUnitalContinuousFunctionalCalculus">NonUnitalContinuousFunctionalCalculus</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">IsSelfAdjoint</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Order/Defs/PartialOrder.html#PartialOrder">PartialOrder</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Star/Basic.html#StarOrderedRing">StarOrderedRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/LinearAlgebra/Span/Defs.html#Submodule.span">Submodule.span</a> <a href="../../../.././Mathlib/Data/Complex/Basic.html#Complex">ℂ</a> <span class="fn">{<span class="fn">a</span> : <span class="fn">A</span> | <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">a</span></span>}</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <a href="../../../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span></div></div><p>A C⋆-algebra is spanned by its nonnegative elements.</p></div></div></main>
+<nav class="nav"><iframe src="../../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>
