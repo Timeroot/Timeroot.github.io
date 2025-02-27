@@ -1,0 +1,507 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../.././style.css"></link><link rel="icon" href="../.././favicon.svg"></link><link rel="mask-icon" href="../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../.././/declarations/declaration-data.bmp" as="image"></link><title>QuantumInfo.Finite.Ensemble</title><script defer="true" src="../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../.././";</script><script>const MODULE_NAME="QuantumInfo.Finite.Ensemble";</script><script type="module" src="../.././jump-src.js"></script><script type="module" src="../.././search.js"></script><script type="module" src="../.././expand-nav.js"></script><script type="module" src="../.././how-about.js"></script><script type="module" src="../.././instances.js"></script><script type="module" src="../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">QuantumInfo</span>.<span class="name">Finite</span>.<span class="name">Ensemble</span></h2><form id="search_form"><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../.././search.html';">Search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/bd0e4d330c32bd86e83d3533cf25ff57634cfd80/QuantumInfo/Finite/Ensemble.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../.././Init.html">Init</a></li><li><a href="../.././QuantumInfo/Finite/MState.html">QuantumInfo.Finite.MState</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-QuantumInfo.Finite.Ensemble" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#MEnsemble"><span class="name">MEnsemble</span></a></div><div class="nav_link"><a class="break_within" href="#PEnsemble"><span class="name">PEnsemble</span></a></div><div class="nav_link"><a class="break_within" href="#MEnsemble.states"><span class="name">MEnsemble</span>.<span class="name">states</span></a></div><div class="nav_link"><a class="break_within" href="#PEnsemble.states"><span class="name">PEnsemble</span>.<span class="name">states</span></a></div><div class="nav_link"><a class="break_within" href="#Ensemble.toMEnsemble"><span class="name">Ensemble</span>.<span class="name">toMEnsemble</span></a></div><div class="nav_link"><a class="break_within" href="#Ensemble.instCoePEnsembleMEnsemble"><span class="name">Ensemble</span>.<span class="name">instCoePEnsembleMEnsemble</span></a></div><div class="nav_link"><a class="break_within" href="#Ensemble.toMEnsemble_mk"><span class="name">Ensemble</span>.<span class="name">toMEnsemble_mk</span></a></div><div class="nav_link"><a class="break_within" href="#Ensemble.coe_PEnsemble_iff_pure_states"><span class="name">Ensemble</span>.<span class="name">coe_PEnsemble_iff_pure_states</span></a></div><div class="nav_link"><a class="break_within" href="#Ensemble.mix"><span class="name">Ensemble</span>.<span class="name">mix</span></a></div><div class="nav_link"><a class="break_within" href="#Ensemble.mix_of"><span class="name">Ensemble</span>.<span class="name">mix_of</span></a></div><div class="nav_link"><a class="break_within" href="#Ensemble.congrMEnsemble"><span class="name">Ensemble</span>.<span class="name">congrMEnsemble</span></a></div><div class="nav_link"><a class="break_within" href="#Ensemble.congrPEnsemble"><span class="name">Ensemble</span>.<span class="name">congrPEnsemble</span></a></div><div class="nav_link"><a class="break_within" href="#Ensemble.mix_congrMEnsemble_eq_mix"><span class="name">Ensemble</span>.<span class="name">mix_congrMEnsemble_eq_mix</span></a></div><div class="nav_link"><a class="break_within" href="#Ensemble.mix_congrPEnsemble_eq_mix"><span class="name">Ensemble</span>.<span class="name">mix_congrPEnsemble_eq_mix</span></a></div><div class="nav_link"><a class="break_within" href="#Ensemble.average"><span class="name">Ensemble</span>.<span class="name">average</span></a></div><div class="nav_link"><a class="break_within" href="#Ensemble.average_NNReal"><span class="name">Ensemble</span>.<span class="name">average_NNReal</span></a></div><div class="nav_link"><a class="break_within" href="#Ensemble.pure_average"><span class="name">Ensemble</span>.<span class="name">pure_average</span></a></div><div class="nav_link"><a class="break_within" href="#Ensemble.pure_average_NNReal"><span class="name">Ensemble</span>.<span class="name">pure_average_NNReal</span></a></div><div class="nav_link"><a class="break_within" href="#Ensemble.average_of_pure_ensemble"><span class="name">Ensemble</span>.<span class="name">average_of_pure_ensemble</span></a></div><div class="nav_link"><a class="break_within" href="#Ensemble.mix_pEnsemble_pure_iff_pure"><span class="name">Ensemble</span>.<span class="name">mix_pEnsemble_pure_iff_pure</span></a></div><div class="nav_link"><a class="break_within" href="#Ensemble.mix_pEnsemble_pure_average"><span class="name">Ensemble</span>.<span class="name">mix_pEnsemble_pure_average</span></a></div><div class="nav_link"><a class="break_within" href="#Ensemble.mix_mEnsemble_pure_iff_pure"><span class="name">Ensemble</span>.<span class="name">mix_mEnsemble_pure_iff_pure</span></a></div><div class="nav_link"><a class="break_within" href="#Ensemble.mix_mEnsemble_pure_average"><span class="name">Ensemble</span>.<span class="name">mix_mEnsemble_pure_average</span></a></div><div class="nav_link"><a class="break_within" href="#Ensemble.trivial_mEnsemble"><span class="name">Ensemble</span>.<span class="name">trivial_mEnsemble</span></a></div><div class="nav_link"><a class="break_within" href="#Ensemble.trivial_mEnsemble_mix"><span class="name">Ensemble</span>.<span class="name">trivial_mEnsemble_mix</span></a></div><div class="nav_link"><a class="break_within" href="#Ensemble.trivial_mEnsemble_average"><span class="name">Ensemble</span>.<span class="name">trivial_mEnsemble_average</span></a></div><div class="nav_link"><a class="break_within" href="#Ensemble.MEnsemble.instInhabited"><span class="name">Ensemble</span>.<span class="name">MEnsemble</span>.<span class="name">instInhabited</span></a></div><div class="nav_link"><a class="break_within" href="#Ensemble.trivial_pEnsemble"><span class="name">Ensemble</span>.<span class="name">trivial_pEnsemble</span></a></div><div class="nav_link"><a class="break_within" href="#Ensemble.trivial_pEnsemble_mix"><span class="name">Ensemble</span>.<span class="name">trivial_pEnsemble_mix</span></a></div><div class="nav_link"><a class="break_within" href="#Ensemble.trivial_pEnsemble_average"><span class="name">Ensemble</span>.<span class="name">trivial_pEnsemble_average</span></a></div><div class="nav_link"><a class="break_within" href="#Ensemble.PEnsemble.instInhabited"><span class="name">Ensemble</span>.<span class="name">PEnsemble</span>.<span class="name">instInhabited</span></a></div><div class="nav_link"><a class="break_within" href="#Ensemble.spectral_ensemble"><span class="name">Ensemble</span>.<span class="name">spectral_ensemble</span></a></div><div class="nav_link"><a class="break_within" href="#Ensemble.spectral_ensemble_mix"><span class="name">Ensemble</span>.<span class="name">spectral_ensemble_mix</span></a></div></nav><main>
+<div class="decl" id="MEnsemble"><div class="def"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/bd0e4d330c32bd86e83d3533cf25ff57634cfd80/QuantumInfo/Finite/Ensemble.lean#L9-L12">source</a></div><div class="attributes">@[reducible, inline]</div>
+<div class="decl_header"><span class="decl_kind">abbrev</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumInfo/Finite/Ensemble.html#MEnsemble"><span class="name">MEnsemble</span></a></span><span class="decl_args">
+<span class="fn">(d : <a href="../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="decl_args">
+<span class="fn">(α : <a href="../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><a href="../.././foundational_types.html">Type</a> (max u_2 u_1)</div></div><p>A mixed-state ensemble is a random variable valued in <code><a href="../.././QuantumInfo/Finite/MState.html#MState">MState</a> d</code>. That is,
+a collection of mixed states <code>var : α → <a href="../.././QuantumInfo/Finite/MState.html#MState">MState</a> d</code>, each with their own probability weight
+described by <code>distr : <a href="../.././ClassicalInfo/Distribution.html#Distribution">Distribution</a> α</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#MEnsemble">MEnsemble</a> <span class="fn">d</span> <span class="fn">α</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././ClassicalInfo/Distribution.html#Distribution.RandVar">Distribution.RandVar</a> <span class="fn">α</span> <span class="fn">(<a href="../.././QuantumInfo/Finite/MState.html#MState">MState</a> <span class="fn">d</span>)</span></span></li></ul></details><details id="instances-for-list-MEnsemble" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="PEnsemble"><div class="def"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/bd0e4d330c32bd86e83d3533cf25ff57634cfd80/QuantumInfo/Finite/Ensemble.lean#L14-L17">source</a></div><div class="attributes">@[reducible, inline]</div>
+<div class="decl_header"><span class="decl_kind">abbrev</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumInfo/Finite/Ensemble.html#PEnsemble"><span class="name">PEnsemble</span></a></span><span class="decl_args">
+<span class="fn">(d : <a href="../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="decl_args">
+<span class="fn">(α : <a href="../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><a href="../.././foundational_types.html">Type</a> (max u_2 u_1)</div></div><p>A pure-state ensemble is a random variable valued in <code><a href="../.././QuantumInfo/Finite/Braket.html#Ket">Ket</a> d</code>. That is,
+a collection of pure states <code>var : α → <a href="../.././QuantumInfo/Finite/Braket.html#Ket">Ket</a> d</code>, each with their own probability weight
+described by <code>distr : <a href="../.././ClassicalInfo/Distribution.html#Distribution">Distribution</a> α</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#PEnsemble">PEnsemble</a> <span class="fn">d</span> <span class="fn">α</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././ClassicalInfo/Distribution.html#Distribution.RandVar">Distribution.RandVar</a> <span class="fn">α</span> <span class="fn">(<a href="../.././QuantumInfo/Finite/Braket.html#Ket">Ket</a> <span class="fn">d</span>)</span></span></li></ul></details><details id="instances-for-list-PEnsemble" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="MEnsemble.states"><div class="def"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/bd0e4d330c32bd86e83d3533cf25ff57634cfd80/QuantumInfo/Finite/Ensemble.lean#L21-L22">source</a></div><div class="attributes">@[reducible, inline]</div>
+<div class="decl_header"><span class="decl_kind">abbrev</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumInfo/Finite/Ensemble.html#MEnsemble.states"><span class="name">MEnsemble</span>.<span class="name">states</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{d : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#MEnsemble">MEnsemble</a> <span class="fn">d</span> <span class="fn">α</span></span> → <span class="fn"><span class="fn">α</span> → <span class="fn"><a href="../.././QuantumInfo/Finite/MState.html#MState">MState</a> <span class="fn">d</span></span></span></span></div></div><p>Alias for <code>Distribution.var</code> for mixed-state ensembles.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><a href="../.././QuantumInfo/Finite/Ensemble.html#MEnsemble.states">MEnsemble.states</a> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././ClassicalInfo/Distribution.html#Distribution.RandVar.var">Distribution.RandVar.var</a></li></ul></details><details id="instances-for-list-MEnsemble.states" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="PEnsemble.states"><div class="def"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/bd0e4d330c32bd86e83d3533cf25ff57634cfd80/QuantumInfo/Finite/Ensemble.lean#L24-L25">source</a></div><div class="attributes">@[reducible, inline]</div>
+<div class="decl_header"><span class="decl_kind">abbrev</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumInfo/Finite/Ensemble.html#PEnsemble.states"><span class="name">PEnsemble</span>.<span class="name">states</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{d : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#PEnsemble">PEnsemble</a> <span class="fn">d</span> <span class="fn">α</span></span> → <span class="fn"><span class="fn">α</span> → <span class="fn"><a href="../.././QuantumInfo/Finite/Braket.html#Ket">Ket</a> <span class="fn">d</span></span></span></span></div></div><p>Alias for <code>Distribution.var</code> for pure-state ensembles.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><a href="../.././QuantumInfo/Finite/Ensemble.html#PEnsemble.states">PEnsemble.states</a> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././ClassicalInfo/Distribution.html#Distribution.RandVar.var">Distribution.RandVar.var</a></li></ul></details><details id="instances-for-list-PEnsemble.states" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Ensemble.toMEnsemble"><div class="def"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/bd0e4d330c32bd86e83d3533cf25ff57634cfd80/QuantumInfo/Finite/Ensemble.lean#L29-L30">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.toMEnsemble"><span class="name">Ensemble</span>.<span class="name">toMEnsemble</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{d : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#PEnsemble">PEnsemble</a> <span class="fn">d</span> <span class="fn">α</span></span> → <span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#MEnsemble">MEnsemble</a> <span class="fn">d</span> <span class="fn">α</span></span></span></div></div><p>A pure-state ensemble is a mixed-state ensemble if all kets are interpreted as mixed states.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><a href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.toMEnsemble">Ensemble.toMEnsemble</a> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Init/Prelude.html#Functor.map">Functor.map</a> <a href="../.././QuantumInfo/Finite/MState.html#MState.pure">MState.pure</a></span></li></ul></details><details id="instances-for-list-Ensemble.toMEnsemble" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Ensemble.instCoePEnsembleMEnsemble"><div class="instance"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/bd0e4d330c32bd86e83d3533cf25ff57634cfd80/QuantumInfo/Finite/Ensemble.lean#L32-L32">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.instCoePEnsembleMEnsemble"><span class="name">Ensemble</span>.<span class="name">instCoePEnsembleMEnsemble</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{d : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Init/Coe.html#Coe">Coe</a> <span class="fn">(<a href="../.././QuantumInfo/Finite/Ensemble.html#PEnsemble">PEnsemble</a> <span class="fn">d</span> <span class="fn">α</span>)</span> <span class="fn">(<a href="../.././QuantumInfo/Finite/Ensemble.html#MEnsemble">MEnsemble</a> <span class="fn">d</span> <span class="fn">α</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><a href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.instCoePEnsembleMEnsemble">Ensemble.instCoePEnsembleMEnsemble</a> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ <span class="fn">coe</span> := <a href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.toMEnsemble">Ensemble.toMEnsemble</a> }</span></li></ul></details></div></div><div class="decl" id="Ensemble.toMEnsemble_mk"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/bd0e4d330c32bd86e83d3533cf25ff57634cfd80/QuantumInfo/Finite/Ensemble.lean#L34-L36">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.toMEnsemble_mk"><span class="name">Ensemble</span>.<span class="name">toMEnsemble_mk</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{d : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ps : <span class="fn"><span class="fn">α</span> → <span class="fn"><a href="../.././QuantumInfo/Finite/Braket.html#Ket">Ket</a> <span class="fn">d</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{distr : <span class="fn"><a href="../.././ClassicalInfo/Distribution.html#Distribution">Distribution</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn">↑<span class="fn">{ <span class="fn">var</span> := <span class="fn">ps</span>, <span class="fn">distr</span> := <span class="fn">distr</span> }</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ <span class="fn">var</span> := <a href="../.././QuantumInfo/Finite/MState.html#MState.pure">MState.pure</a> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">ps</span>, <span class="fn">distr</span> := <span class="fn">distr</span> }</span></div></div></div></div><div class="decl" id="Ensemble.coe_PEnsemble_iff_pure_states"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/bd0e4d330c32bd86e83d3533cf25ff57634cfd80/QuantumInfo/Finite/Ensemble.lean#L38-L50">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.coe_PEnsemble_iff_pure_states"><span class="name">Ensemble</span>.<span class="name">coe_PEnsemble_iff_pure_states</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{d : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(me : <span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#MEnsemble">MEnsemble</a> <span class="fn">d</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">(∃ (<span class="fn">pe</span> : <span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#PEnsemble">PEnsemble</a> <span class="fn">d</span> <span class="fn">α</span></span>), <span class="fn">↑<span class="fn">pe</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">me</span>)</span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn">∃ (<span class="fn">ψ</span> : <span class="fn"><span class="fn">α</span> → <span class="fn"><a href="../.././QuantumInfo/Finite/Braket.html#Ket">Ket</a> <span class="fn">d</span></span></span>), <span class="fn"><span class="fn">me</span>.<a href="../.././QuantumInfo/Finite/Ensemble.html#MEnsemble.states">states</a></span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././QuantumInfo/Finite/MState.html#MState.pure">MState.pure</a> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">ψ</span></span></div></div><p>A mixed-state ensemble comes from a pure-state ensemble if and only if all states are pure.</p></div></div><div class="decl" id="Ensemble.mix"><div class="def"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/bd0e4d330c32bd86e83d3533cf25ff57634cfd80/QuantumInfo/Finite/Ensemble.lean#L52-L55">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.mix"><span class="name">Ensemble</span>.<span class="name">mix</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{d : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#MEnsemble">MEnsemble</a> <span class="fn">d</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././QuantumInfo/Finite/MState.html#MState">MState</a> <span class="fn">d</span></span></div></div><p>The resulting mixed state after mixing the states in an ensemble with their
+respective probability weights. Note that, generically, a single mixed state has infinitely many
+ensembles that mixes into it.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.mix">Ensemble.mix</a> <span class="fn">e</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././ClassicalInfo/Distribution.html#Distribution.expect_val">Distribution.expect_val</a> <span class="fn">e</span></span></li></ul></details><details id="instances-for-list-Ensemble.mix" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Ensemble.mix_of"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/bd0e4d330c32bd86e83d3533cf25ff57634cfd80/QuantumInfo/Finite/Ensemble.lean#L57-L59">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.mix_of"><span class="name">Ensemble</span>.<span class="name">mix_of</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{d : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#MEnsemble">MEnsemble</a> <span class="fn">d</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<a href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.mix">mix</a> <span class="fn">e</span>)</span>.<a href="../.././QuantumInfo/Finite/MState.html#MState.m">m</a></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">∑ <span class="fn">i</span> : <span class="fn">α</span>, <span class="fn">↑<span class="fn">(<span class="fn"><span class="fn">e</span>.<a href="../.././ClassicalInfo/Distribution.html#Distribution.RandVar.distr">distr</a></span> <span class="fn">i</span>)</span></span> <a href="../.././Mathlib/Algebra/Group/Operations.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">(<span class="fn"><span class="fn">e</span>.<a href="../.././QuantumInfo/Finite/Ensemble.html#MEnsemble.states">states</a></span> <span class="fn">i</span>)</span>.<a href="../.././QuantumInfo/Finite/MState.html#MState.m">m</a></span></span></div></div></div></div><div class="decl" id="Ensemble.congrMEnsemble"><div class="def"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/bd0e4d330c32bd86e83d3533cf25ff57634cfd80/QuantumInfo/Finite/Ensemble.lean#L61-L62">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.congrMEnsemble"><span class="name">Ensemble</span>.<span class="name">congrMEnsemble</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{d : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(σ : <span class="fn">α</span> <a href="../.././Mathlib/Logic/Equiv/Defs.html#Equiv">≃</a> <span class="fn">β</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#MEnsemble">MEnsemble</a> <span class="fn">d</span> <span class="fn">α</span></span> <a href="../.././Mathlib/Logic/Equiv/Defs.html#Equiv">≃</a> <span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#MEnsemble">MEnsemble</a> <span class="fn">d</span> <span class="fn">β</span></span></div></div><p>Two mixed-state ensembles indexed by <code>\alpha</code> and <code>\beta</code> are equivalent if <code>α ≃ β</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.congrMEnsemble">Ensemble.congrMEnsemble</a> <span class="fn">σ</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././ClassicalInfo/Distribution.html#Distribution.congrRandVar">Distribution.congrRandVar</a> <span class="fn">σ</span></span></li></ul></details><details id="instances-for-list-Ensemble.congrMEnsemble" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Ensemble.congrPEnsemble"><div class="def"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/bd0e4d330c32bd86e83d3533cf25ff57634cfd80/QuantumInfo/Finite/Ensemble.lean#L64-L65">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.congrPEnsemble"><span class="name">Ensemble</span>.<span class="name">congrPEnsemble</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{d : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(σ : <span class="fn">α</span> <a href="../.././Mathlib/Logic/Equiv/Defs.html#Equiv">≃</a> <span class="fn">β</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#PEnsemble">PEnsemble</a> <span class="fn">d</span> <span class="fn">α</span></span> <a href="../.././Mathlib/Logic/Equiv/Defs.html#Equiv">≃</a> <span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#PEnsemble">PEnsemble</a> <span class="fn">d</span> <span class="fn">β</span></span></div></div><p>Two pure-state ensembles indexed by <code>\alpha</code> and <code>\beta</code> are equivalent if <code>α ≃ β</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.congrPEnsemble">Ensemble.congrPEnsemble</a> <span class="fn">σ</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././ClassicalInfo/Distribution.html#Distribution.congrRandVar">Distribution.congrRandVar</a> <span class="fn">σ</span></span></li></ul></details><details id="instances-for-list-Ensemble.congrPEnsemble" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Ensemble.mix_congrMEnsemble_eq_mix"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/bd0e4d330c32bd86e83d3533cf25ff57634cfd80/QuantumInfo/Finite/Ensemble.lean#L67-L70">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.mix_congrMEnsemble_eq_mix"><span class="name">Ensemble</span>.<span class="name">mix_congrMEnsemble_eq_mix</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{d : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(σ : <span class="fn">α</span> <a href="../.././Mathlib/Logic/Equiv/Defs.html#Equiv">≃</a> <span class="fn">β</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(e : <span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#MEnsemble">MEnsemble</a> <span class="fn">d</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.mix">mix</a> <span class="fn">(<span class="fn">(<a href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.congrMEnsemble">congrMEnsemble</a> <span class="fn">σ</span>)</span> <span class="fn">e</span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.mix">mix</a> <span class="fn">e</span></span></div></div><p>Equivalence of mixed-state ensembles leaves the resulting mixed state invariant</p></div></div><div class="decl" id="Ensemble.mix_congrPEnsemble_eq_mix"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/bd0e4d330c32bd86e83d3533cf25ff57634cfd80/QuantumInfo/Finite/Ensemble.lean#L72-L77">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.mix_congrPEnsemble_eq_mix"><span class="name">Ensemble</span>.<span class="name">mix_congrPEnsemble_eq_mix</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{d : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(σ : <span class="fn">α</span> <a href="../.././Mathlib/Logic/Equiv/Defs.html#Equiv">≃</a> <span class="fn">β</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(e : <span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#PEnsemble">PEnsemble</a> <span class="fn">d</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.mix">mix</a> <span class="fn">↑<span class="fn">(<span class="fn">(<a href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.congrPEnsemble">congrPEnsemble</a> <span class="fn">σ</span>)</span> <span class="fn">e</span>)</span></span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.mix">mix</a> <span class="fn">↑<span class="fn">e</span></span></span></div></div><p>Equivalence of pure-state ensembles leaves the resulting mixed state invariant</p></div></div><div class="decl" id="Ensemble.average"><div class="def"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/bd0e4d330c32bd86e83d3533cf25ff57634cfd80/QuantumInfo/Finite/Ensemble.lean#L79-L82">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.average"><span class="name">Ensemble</span>.<span class="name">average</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{d : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{T : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{U : <a href="../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">U</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <a href="../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">U</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././ClassicalInfo/Prob.html#Mixable">Mixable</a> <span class="fn">U</span> <span class="fn">T</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn"><a href="../.././QuantumInfo/Finite/MState.html#MState">MState</a> <span class="fn">d</span></span> → <span class="fn">T</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(e : <span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#MEnsemble">MEnsemble</a> <span class="fn">d</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">T</span></div></div><p>The average of a function <code>f : <a href="../.././QuantumInfo/Finite/MState.html#MState">MState</a> d → T</code>, where <code>T</code> is of <code><a href="../.././ClassicalInfo/Prob.html#Mixable">Mixable</a> U T</code> instance, on a mixed-state ensemble <code>e</code>
+is the expectation value of <code>f</code> acting on the states of <code>e</code>, with the corresponding probability weights from <code>e.distr</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.average">Ensemble.average</a> <span class="fn">f</span> <span class="fn">e</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././ClassicalInfo/Distribution.html#Distribution.expect_val">Distribution.expect_val</a> (<span class="fn">f</span> <a href="../.././Init/Prelude.html#Functor.map">&lt;$&gt;</a> <span class="fn">e</span>)</span></li></ul></details><details id="instances-for-list-Ensemble.average" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Ensemble.average_NNReal"><div class="def"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/bd0e4d330c32bd86e83d3533cf25ff57634cfd80/QuantumInfo/Finite/Ensemble.lean#L84-L88">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.average_NNReal"><span class="name">Ensemble</span>.<span class="name">average_NNReal</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{d : <a href="../.././foundational_types.html">Type</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn"><a href="../.././QuantumInfo/Finite/MState.html#MState">MState</a> <span class="fn">d</span></span> → <a href="../.././Mathlib/Data/NNReal/Defs.html#NNReal">NNReal</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(e : <span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#MEnsemble">MEnsemble</a> <span class="fn">d</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../.././Mathlib/Data/NNReal/Defs.html#NNReal">NNReal</a></div></div><p>A version of <code><a href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.average">average</a></code> conveniently specialized for functions <code>f : <a href="../.././QuantumInfo/Finite/MState.html#MState">MState</a> d → ℝ≥0</code> returning nonnegative reals.
+Notably, the average is also a nonnegative real number.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.average_NNReal">Ensemble.average_NNReal</a> <span class="fn">f</span> <span class="fn">e</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">⟨<span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.average">Ensemble.average</a> (<a href="../.././Mathlib/Data/NNReal/Defs.html#NNReal.toReal">NNReal.toReal</a> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">f</span>) <span class="fn">e</span></span>, <span class="fn">⋯</span>⟩</span></li></ul></details><details id="instances-for-list-Ensemble.average_NNReal" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Ensemble.pure_average"><div class="def"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/bd0e4d330c32bd86e83d3533cf25ff57634cfd80/QuantumInfo/Finite/Ensemble.lean#L90-L93">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.pure_average"><span class="name">Ensemble</span>.<span class="name">pure_average</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{d : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{T : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{U : <a href="../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">U</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <a href="../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">U</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././ClassicalInfo/Prob.html#Mixable">Mixable</a> <span class="fn">U</span> <span class="fn">T</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn"><a href="../.././QuantumInfo/Finite/Braket.html#Ket">Ket</a> <span class="fn">d</span></span> → <span class="fn">T</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(e : <span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#PEnsemble">PEnsemble</a> <span class="fn">d</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">T</span></div></div><p>The average of a function <code>f : <a href="../.././QuantumInfo/Finite/Braket.html#Ket">Ket</a> d → T</code>, where <code>T</code> is of <code><a href="../.././ClassicalInfo/Prob.html#Mixable">Mixable</a> U T</code> instance, on a pure-state ensemble <code>e</code>
+is the expectation value of <code>f</code> acting on the states of <code>e</code>, with the corresponding probability weights from <code>e.distr</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.pure_average">Ensemble.pure_average</a> <span class="fn">f</span> <span class="fn">e</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././ClassicalInfo/Distribution.html#Distribution.expect_val">Distribution.expect_val</a> (<span class="fn">f</span> <a href="../.././Init/Prelude.html#Functor.map">&lt;$&gt;</a> <span class="fn">e</span>)</span></li></ul></details><details id="instances-for-list-Ensemble.pure_average" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Ensemble.pure_average_NNReal"><div class="def"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/bd0e4d330c32bd86e83d3533cf25ff57634cfd80/QuantumInfo/Finite/Ensemble.lean#L95-L99">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.pure_average_NNReal"><span class="name">Ensemble</span>.<span class="name">pure_average_NNReal</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{d : <a href="../.././foundational_types.html">Type</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn"><a href="../.././QuantumInfo/Finite/Braket.html#Ket">Ket</a> <span class="fn">d</span></span> → <a href="../.././Mathlib/Data/NNReal/Defs.html#NNReal">NNReal</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(e : <span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#PEnsemble">PEnsemble</a> <span class="fn">d</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../.././Mathlib/Data/NNReal/Defs.html#NNReal">NNReal</a></div></div><p>A version of <code><a href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.average">average</a></code> conveniently specialized for functions <code>f : <a href="../.././QuantumInfo/Finite/Braket.html#Ket">Ket</a> d → ℝ≥0</code> returning nonnegative reals.
+Notably, the average is also a nonnegative real number.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.pure_average_NNReal">Ensemble.pure_average_NNReal</a> <span class="fn">f</span> <span class="fn">e</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">⟨<span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.pure_average">Ensemble.pure_average</a> (<a href="../.././Mathlib/Data/NNReal/Defs.html#NNReal.toReal">NNReal.toReal</a> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">f</span>) <span class="fn">e</span></span>, <span class="fn">⋯</span>⟩</span></li></ul></details><details id="instances-for-list-Ensemble.pure_average_NNReal" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Ensemble.average_of_pure_ensemble"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/bd0e4d330c32bd86e83d3533cf25ff57634cfd80/QuantumInfo/Finite/Ensemble.lean#L101-L106">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.average_of_pure_ensemble"><span class="name">Ensemble</span>.<span class="name">average_of_pure_ensemble</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{d : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{T : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{U : <a href="../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">U</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <a href="../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">U</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././ClassicalInfo/Prob.html#Mixable">Mixable</a> <span class="fn">U</span> <span class="fn">T</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn"><a href="../.././QuantumInfo/Finite/MState.html#MState">MState</a> <span class="fn">d</span></span> → <span class="fn">T</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(e : <span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#PEnsemble">PEnsemble</a> <span class="fn">d</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.average">average</a> <span class="fn">f</span> <span class="fn">↑<span class="fn">e</span></span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.pure_average">pure_average</a> (<span class="fn">f</span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <a href="../.././QuantumInfo/Finite/MState.html#MState.pure">MState.pure</a>) <span class="fn">e</span></span></div></div><p>The average of <code>f : <a href="../.././QuantumInfo/Finite/MState.html#MState">MState</a> d → T</code> on a coerced pure-state ensemble <code>↑e : <a href="../.././QuantumInfo/Finite/Ensemble.html#MEnsemble">MEnsemble</a> d α</code>
+is equal to averaging the restricted function over Kets <code>f ∘ pure : <a href="../.././QuantumInfo/Finite/Braket.html#Ket">Ket</a> d → T</code> on <code>e</code>.</p></div></div><div class="decl" id="Ensemble.mix_pEnsemble_pure_iff_pure"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/bd0e4d330c32bd86e83d3533cf25ff57634cfd80/QuantumInfo/Finite/Ensemble.lean#L108-L112">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.mix_pEnsemble_pure_iff_pure"><span class="name">Ensemble</span>.<span class="name">mix_pEnsemble_pure_iff_pure</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{d : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ψ : <span class="fn"><a href="../.././QuantumInfo/Finite/Braket.html#Ket">Ket</a> <span class="fn">d</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{e : <span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#PEnsemble">PEnsemble</a> <span class="fn">d</span> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.mix">mix</a> <span class="fn">↑<span class="fn">e</span></span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././QuantumInfo/Finite/MState.html#MState.pure">MState.pure</a> <span class="fn">ψ</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn"><span class="fn">e</span>.<a href="../.././ClassicalInfo/Distribution.html#Distribution.RandVar.distr">distr</a></span> <span class="fn">i</span></span> <a href="../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span> → <span class="fn"><span class="fn"><span class="fn">e</span>.<a href="../.././QuantumInfo/Finite/Ensemble.html#PEnsemble.states">states</a></span> <span class="fn">i</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">ψ</span></span></span></div></div><p>A pure-state ensemble mixes into a pure state if and only if
+the only states in the ensemble with nonzero probability are equal to <code>ψ</code></p></div></div><div class="decl" id="Ensemble.mix_pEnsemble_pure_average"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/bd0e4d330c32bd86e83d3533cf25ff57634cfd80/QuantumInfo/Finite/Ensemble.lean#L114-L139">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.mix_pEnsemble_pure_average"><span class="name">Ensemble</span>.<span class="name">mix_pEnsemble_pure_average</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{d : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ψ : <span class="fn"><a href="../.././QuantumInfo/Finite/Braket.html#Ket">Ket</a> <span class="fn">d</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{e : <span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#PEnsemble">PEnsemble</a> <span class="fn">d</span> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{T : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{U : <a href="../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">U</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <a href="../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">U</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././ClassicalInfo/Prob.html#Mixable">Mixable</a> <span class="fn">U</span> <span class="fn">T</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn"><a href="../.././QuantumInfo/Finite/Braket.html#Ket">Ket</a> <span class="fn">d</span></span> → <span class="fn">T</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hmix : <span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.mix">mix</a> <span class="fn">↑<span class="fn">e</span></span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././QuantumInfo/Finite/MState.html#MState.pure">MState.pure</a> <span class="fn">ψ</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.pure_average">pure_average</a> <span class="fn">f</span> <span class="fn">e</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span> <span class="fn">ψ</span></span></div></div><p>The average of <code>f : <a href="../.././QuantumInfo/Finite/Braket.html#Ket">Ket</a> d → T</code> on an ensemble that mixes to a pure state <code>ψ</code> is <code>f ψ</code></p></div></div><div class="decl" id="Ensemble.mix_mEnsemble_pure_iff_pure"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/bd0e4d330c32bd86e83d3533cf25ff57634cfd80/QuantumInfo/Finite/Ensemble.lean#L141-L145">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.mix_mEnsemble_pure_iff_pure"><span class="name">Ensemble</span>.<span class="name">mix_mEnsemble_pure_iff_pure</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{d : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ψ : <span class="fn"><a href="../.././QuantumInfo/Finite/Braket.html#Ket">Ket</a> <span class="fn">d</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{e : <span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#MEnsemble">MEnsemble</a> <span class="fn">d</span> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.mix">mix</a> <span class="fn">e</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././QuantumInfo/Finite/MState.html#MState.pure">MState.pure</a> <span class="fn">ψ</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn"><span class="fn">e</span>.<a href="../.././ClassicalInfo/Distribution.html#Distribution.RandVar.distr">distr</a></span> <span class="fn">i</span></span> <a href="../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span> → <span class="fn"><span class="fn"><span class="fn">e</span>.<a href="../.././QuantumInfo/Finite/Ensemble.html#MEnsemble.states">states</a></span> <span class="fn">i</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././QuantumInfo/Finite/MState.html#MState.pure">MState.pure</a> <span class="fn">ψ</span></span></span></span></div></div><p>A mixed-state ensemble mixes into a pure state if and only if
+the only states in the ensemble with nonzero probability are equal to <code>pure ψ</code></p></div></div><div class="decl" id="Ensemble.mix_mEnsemble_pure_average"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/bd0e4d330c32bd86e83d3533cf25ff57634cfd80/QuantumInfo/Finite/Ensemble.lean#L147-L172">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.mix_mEnsemble_pure_average"><span class="name">Ensemble</span>.<span class="name">mix_mEnsemble_pure_average</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{d : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ψ : <span class="fn"><a href="../.././QuantumInfo/Finite/Braket.html#Ket">Ket</a> <span class="fn">d</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{e : <span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#MEnsemble">MEnsemble</a> <span class="fn">d</span> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{T : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{U : <a href="../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">U</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <a href="../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">U</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././ClassicalInfo/Prob.html#Mixable">Mixable</a> <span class="fn">U</span> <span class="fn">T</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn"><a href="../.././QuantumInfo/Finite/MState.html#MState">MState</a> <span class="fn">d</span></span> → <span class="fn">T</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hmix : <span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.mix">mix</a> <span class="fn">e</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././QuantumInfo/Finite/MState.html#MState.pure">MState.pure</a> <span class="fn">ψ</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.average">average</a> <span class="fn">f</span> <span class="fn">e</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span> <span class="fn">(<a href="../.././QuantumInfo/Finite/MState.html#MState.pure">MState.pure</a> <span class="fn">ψ</span>)</span></span></div></div><p>The average of <code>f : <a href="../.././QuantumInfo/Finite/MState.html#MState">MState</a> d → T</code> on an ensemble that mixes to a pure state <code>ψ</code> is <code>f (pure ψ)</code></p></div></div><div class="decl" id="Ensemble.trivial_mEnsemble"><div class="def"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/bd0e4d330c32bd86e83d3533cf25ff57634cfd80/QuantumInfo/Finite/Ensemble.lean#L174-L176">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.trivial_mEnsemble"><span class="name">Ensemble</span>.<span class="name">trivial_mEnsemble</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{d : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(ρ : <span class="fn"><a href="../.././QuantumInfo/Finite/MState.html#MState">MState</a> <span class="fn">d</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(i : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#MEnsemble">MEnsemble</a> <span class="fn">d</span> <span class="fn">α</span></span></div></div><p>The trivial mixed-state ensemble of <code>ρ</code> consists of copies of <code>rho</code>, with the <code>i</code>-th one having
+probability 1.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.trivial_mEnsemble">Ensemble.trivial_mEnsemble</a> <span class="fn">ρ</span> <span class="fn">i</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ <span class="fn">var</span> := <span class="fn">fun (<span class="fn">x</span> : <span class="fn">α</span>) =&gt; <span class="fn">ρ</span></span>, <span class="fn">distr</span> := <span class="fn"><a href="../.././ClassicalInfo/Distribution.html#Distribution.constant">Distribution.constant</a> <span class="fn">i</span></span> }</span></li></ul></details><details id="instances-for-list-Ensemble.trivial_mEnsemble" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Ensemble.trivial_mEnsemble_mix"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/bd0e4d330c32bd86e83d3533cf25ff57634cfd80/QuantumInfo/Finite/Ensemble.lean#L178-L183">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.trivial_mEnsemble_mix"><span class="name">Ensemble</span>.<span class="name">trivial_mEnsemble_mix</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{d : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(ρ : <span class="fn"><a href="../.././QuantumInfo/Finite/MState.html#MState">MState</a> <span class="fn">d</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(i : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.mix">mix</a> <span class="fn">(<a href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.trivial_mEnsemble">trivial_mEnsemble</a> <span class="fn">ρ</span> <span class="fn">i</span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">ρ</span></div></div><p>The trivial mixed-state ensemble of <code>ρ</code> mixes to <code>ρ</code></p></div></div><div class="decl" id="Ensemble.trivial_mEnsemble_average"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/bd0e4d330c32bd86e83d3533cf25ff57634cfd80/QuantumInfo/Finite/Ensemble.lean#L185-L192">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.trivial_mEnsemble_average"><span class="name">Ensemble</span>.<span class="name">trivial_mEnsemble_average</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{d : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{T : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{U : <a href="../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">U</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <a href="../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">U</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././ClassicalInfo/Prob.html#Mixable">Mixable</a> <span class="fn">U</span> <span class="fn">T</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn"><a href="../.././QuantumInfo/Finite/MState.html#MState">MState</a> <span class="fn">d</span></span> → <span class="fn">T</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ρ : <span class="fn"><a href="../.././QuantumInfo/Finite/MState.html#MState">MState</a> <span class="fn">d</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(i : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.average">average</a> <span class="fn">f</span> <span class="fn">(<a href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.trivial_mEnsemble">trivial_mEnsemble</a> <span class="fn">ρ</span> <span class="fn">i</span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span> <span class="fn">ρ</span></span></div></div><p>The average of <code>f : <a href="../.././QuantumInfo/Finite/MState.html#MState">MState</a> d → T</code> on a trivial ensemble of <code>ρ</code> is <code>f ρ</code></p></div></div><div class="decl" id="Ensemble.MEnsemble.instInhabited"><div class="instance"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/bd0e4d330c32bd86e83d3533cf25ff57634cfd80/QuantumInfo/Finite/Ensemble.lean#L194-L195">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.MEnsemble.instInhabited"><span class="name">Ensemble</span>.<span class="name">MEnsemble</span>.<span class="name">instInhabited</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{d : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Init/Prelude.html#Inhabited">Inhabited</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Init/Prelude.html#Inhabited">Inhabited</a> <span class="fn">(<a href="../.././QuantumInfo/Finite/Ensemble.html#MEnsemble">MEnsemble</a> <span class="fn">d</span> <span class="fn">α</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><a href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.MEnsemble.instInhabited">Ensemble.MEnsemble.instInhabited</a> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ <span class="fn">default</span> := <span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.trivial_mEnsemble">Ensemble.trivial_mEnsemble</a> <a href="../.././Init/Prelude.html#Inhabited.default">default</a> <a href="../.././Init/Prelude.html#Inhabited.default">default</a></span> }</span></li></ul></details></div></div><div class="decl" id="Ensemble.trivial_pEnsemble"><div class="def"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/bd0e4d330c32bd86e83d3533cf25ff57634cfd80/QuantumInfo/Finite/Ensemble.lean#L197-L199">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.trivial_pEnsemble"><span class="name">Ensemble</span>.<span class="name">trivial_pEnsemble</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{d : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(ψ : <span class="fn"><a href="../.././QuantumInfo/Finite/Braket.html#Ket">Ket</a> <span class="fn">d</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(i : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#PEnsemble">PEnsemble</a> <span class="fn">d</span> <span class="fn">α</span></span></div></div><p>The trivial pure-state ensemble of <code>ψ</code> consists of copies of <code>ψ</code>, with the <code>i</code>-th one having
+probability 1.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.trivial_pEnsemble">Ensemble.trivial_pEnsemble</a> <span class="fn">ψ</span> <span class="fn">i</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ <span class="fn">var</span> := <span class="fn">fun (<span class="fn">x</span> : <span class="fn">α</span>) =&gt; <span class="fn">ψ</span></span>, <span class="fn">distr</span> := <span class="fn"><a href="../.././ClassicalInfo/Distribution.html#Distribution.constant">Distribution.constant</a> <span class="fn">i</span></span> }</span></li></ul></details><details id="instances-for-list-Ensemble.trivial_pEnsemble" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Ensemble.trivial_pEnsemble_mix"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/bd0e4d330c32bd86e83d3533cf25ff57634cfd80/QuantumInfo/Finite/Ensemble.lean#L201-L206">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.trivial_pEnsemble_mix"><span class="name">Ensemble</span>.<span class="name">trivial_pEnsemble_mix</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{d : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(ψ : <span class="fn"><a href="../.././QuantumInfo/Finite/Braket.html#Ket">Ket</a> <span class="fn">d</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(i : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.mix">mix</a> <span class="fn">↑<span class="fn">(<a href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.trivial_pEnsemble">trivial_pEnsemble</a> <span class="fn">ψ</span> <span class="fn">i</span>)</span></span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././QuantumInfo/Finite/MState.html#MState.pure">MState.pure</a> <span class="fn">ψ</span></span></div></div><p>The trivial pure-state ensemble of <code>ψ</code> mixes to <code>ψ</code></p></div></div><div class="decl" id="Ensemble.trivial_pEnsemble_average"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/bd0e4d330c32bd86e83d3533cf25ff57634cfd80/QuantumInfo/Finite/Ensemble.lean#L208-L215">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.trivial_pEnsemble_average"><span class="name">Ensemble</span>.<span class="name">trivial_pEnsemble_average</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{d : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{T : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{U : <a href="../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">U</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <a href="../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">U</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././ClassicalInfo/Prob.html#Mixable">Mixable</a> <span class="fn">U</span> <span class="fn">T</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn"><a href="../.././QuantumInfo/Finite/Braket.html#Ket">Ket</a> <span class="fn">d</span></span> → <span class="fn">T</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ψ : <span class="fn"><a href="../.././QuantumInfo/Finite/Braket.html#Ket">Ket</a> <span class="fn">d</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(i : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.pure_average">pure_average</a> <span class="fn">f</span> <span class="fn">(<a href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.trivial_pEnsemble">trivial_pEnsemble</a> <span class="fn">ψ</span> <span class="fn">i</span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span> <span class="fn">ψ</span></span></div></div><p>The average of <code>f : <a href="../.././QuantumInfo/Finite/Braket.html#Ket">Ket</a> d → T</code> on a trivial ensemble of <code>ψ</code> is <code>f ψ</code></p></div></div><div class="decl" id="Ensemble.PEnsemble.instInhabited"><div class="instance"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/bd0e4d330c32bd86e83d3533cf25ff57634cfd80/QuantumInfo/Finite/Ensemble.lean#L217-L218">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.PEnsemble.instInhabited"><span class="name">Ensemble</span>.<span class="name">PEnsemble</span>.<span class="name">instInhabited</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{d : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Init/Prelude.html#Inhabited">Inhabited</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Init/Prelude.html#Inhabited">Inhabited</a> <span class="fn">(<a href="../.././QuantumInfo/Finite/Ensemble.html#PEnsemble">PEnsemble</a> <span class="fn">d</span> <span class="fn">α</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><a href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.PEnsemble.instInhabited">Ensemble.PEnsemble.instInhabited</a> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ <span class="fn">default</span> := <span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.trivial_pEnsemble">Ensemble.trivial_pEnsemble</a> <a href="../.././Init/Prelude.html#Inhabited.default">default</a> <a href="../.././Init/Prelude.html#Inhabited.default">default</a></span> }</span></li></ul></details></div></div><div class="decl" id="Ensemble.spectral_ensemble"><div class="def"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/bd0e4d330c32bd86e83d3533cf25ff57634cfd80/QuantumInfo/Finite/Ensemble.lean#L220-L231">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.spectral_ensemble"><span class="name">Ensemble</span>.<span class="name">spectral_ensemble</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{d : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(ρ : <span class="fn"><a href="../.././QuantumInfo/Finite/MState.html#MState">MState</a> <span class="fn">d</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#PEnsemble">PEnsemble</a> <span class="fn">d</span> <span class="fn">d</span></span></div></div><p>The spectral pure-state ensemble of <code>ρ</code>. The states are its eigenvectors, and the probabilities, eigenvalues.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.spectral_ensemble">Ensemble.spectral_ensemble</a> <span class="fn">ρ</span></span> <a href="../.././Init/Prelude.html#Eq">=</a>   <span class="fn">{ <span class="fn">var</span> := <span class="fn">fun (<span class="fn">i</span> : <span class="fn">d</span>) =&gt; <span class="fn">{ <span class="fn">vec</span> := <span class="fn"><span class="fn"><span class="fn">⋯</span>.<a href="../.././Mathlib/LinearAlgebra/Matrix/Spectrum.html#Matrix.IsHermitian.eigenvectorBasis">eigenvectorBasis</a></span> <span class="fn">i</span></span>, <span class="fn">normalized'</span> := <span class="fn">⋯</span> }</span></span>, <span class="fn">distr</span> := <span class="fn"><span class="fn">ρ</span>.<a href="../.././QuantumInfo/Finite/MState.html#MState.spectrum">spectrum</a></span> }</span></li></ul></details><details id="instances-for-list-Ensemble.spectral_ensemble" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Ensemble.spectral_ensemble_mix"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/bd0e4d330c32bd86e83d3533cf25ff57634cfd80/QuantumInfo/Finite/Ensemble.lean#L233-L236">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.spectral_ensemble_mix"><span class="name">Ensemble</span>.<span class="name">spectral_ensemble_mix</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{d : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ρ : <span class="fn"><a href="../.././QuantumInfo/Finite/MState.html#MState">MState</a> <span class="fn">d</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.mix">mix</a> <span class="fn">↑<span class="fn">(<a href="../.././QuantumInfo/Finite/Ensemble.html#Ensemble.spectral_ensemble">spectral_ensemble</a> <span class="fn">ρ</span>)</span></span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">ρ</span></div></div><p>The spectral pure-state ensemble of <code>ρ</code> mixes to <code>ρ</code></p></div></div></main>
+<nav class="nav"><iframe src="../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>
