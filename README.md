@@ -8,7 +8,7 @@ I'm at postdoc at [University of Waterloo's IQC](https://uwaterloo.ca/institute-
 
 I've got a few pages you might like, if you like complexity theory, graph theory, or math in general.
 
-I have a page for discussing different types of [graph substrcture](./graph_substructure), such as the different ways to combine graphs together, modify them, or recognize different types of graph 'containment'. There's a related page for [graph parameters](./graph_parameters).
+I have a page for discussing different types of [graph substructure](./graph_substructure), such as the different ways to combine graphs together, modify them, or recognize different types of graph 'containment'. There's a related page for [graph parameters](./graph_parameters).
 
 I collect [fun math terms](./fun_names). Please let me know about other ones to add!
 
