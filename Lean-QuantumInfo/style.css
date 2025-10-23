@@ -329,7 +329,6 @@ header .header_filename {
 
 
 #search_results {
-    display: table;
     width: 100%;
 }
 #search_results[state="done"]:empty::before {
@@ -339,6 +338,17 @@ header .header_filename {
 
 #search_results .result_link, #search_results .result_doc {
     border-bottom: 1px solid rgba(0, 0, 0, 0.8);
+}
+
+.search_result_block {
+    width: 100%;
+    content-visibility: auto;
+    contain-intrinsic-size: auto 75em;
+}
+
+.search_result_block_inner {
+    display: table;
+    width: 100%;
 }
 
 .search_result {
@@ -667,6 +677,14 @@ main h2, main h3, main h4, main h5, main h6 {
 .decl_type {
     margin-top: 2px;
     margin-left: 4ex; /* extra indentation */
+}
+
+.decl.sorried .decl_name {
+    text-decoration: underline wavy #cca733;
+}
+
+.decl .sorry_msg > strong {
+    color: #a90000;
 }
 
 .imports li, code, .decl_header, .attributes, .structure_field_info,

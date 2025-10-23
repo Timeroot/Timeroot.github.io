@@ -1,0 +1,786 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="icon" href="../../.././favicon.svg"></link><link rel="mask-icon" href="../../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Analysis.Distribution.ContDiffMapSupportedIn</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.Analysis.Distribution.ContDiffMapSupportedIn";</script><script type="module" src="../../.././jump-src.js"></script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././expand-nav.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Analysis</span>.<span class="name">Distribution</span>.<span class="name">ContDiffMapSupportedIn</span></h2><form id="search_form"><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/d9d1cc1012eccfc8d01215b1b7943b0e7f8b7757/Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/Topology/Sets/Compacts.html">Mathlib.Topology.Sets.Compacts</a></li><li><a href="../../.././Mathlib/Analysis/Calculus/ContDiff/Operations.html">Mathlib.Analysis.Calculus.ContDiff.Operations</a></li><li><a href="../../.././Mathlib/Topology/ContinuousMap/Bounded/Normed.html">Mathlib.Topology.ContinuousMap.Bounded.Normed</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Analysis.Distribution.ContDiffMapSupportedIn" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#ContDiffMapSupportedIn"><span class="name">ContDiffMapSupportedIn</span></a></div><div class="nav_link"><a class="break_within" href="#Distributions.«term𝓓^{_}_{_}(_,_)»"><span class="name">Distributions</span>.<span class="name">«term𝓓^{_}_{_}(_,_)»</span></a></div><div class="nav_link"><a class="break_within" href="#Distributions.«term𝓓_{_}(_,_)»"><span class="name">Distributions</span>.<span class="name">«term𝓓_{_}(_,_)»</span></a></div><div class="nav_link"><a class="break_within" href="#ContDiffMapSupportedInClass"><span class="name">ContDiffMapSupportedInClass</span></a></div><div class="nav_link"><a class="break_within" href="#instContinuousMapClass"><span class="name">instContinuousMapClass</span></a></div><div class="nav_link"><a class="break_within" href="#instBoundedContinuousMapClass"><span class="name">instBoundedContinuousMapClass</span></a></div><div class="nav_link"><a class="break_within" href="#ContDiffMapSupportedIn.toContDiffMapSupportedInClass"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">toContDiffMapSupportedInClass</span></a></div><div class="nav_link"><a class="break_within" href="#ContDiffMapSupportedIn.contDiff"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">contDiff</span></a></div><div class="nav_link"><a class="break_within" href="#ContDiffMapSupportedIn.zero_on_compl"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">zero_on_compl</span></a></div><div class="nav_link"><a class="break_within" href="#ContDiffMapSupportedIn.compact_supp"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">compact_supp</span></a></div><div class="nav_link"><a class="break_within" href="#ContDiffMapSupportedIn.toFun_eq_coe"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">toFun_eq_coe</span></a></div><div class="nav_link"><a class="break_within" href="#ContDiffMapSupportedIn.Simps.apply"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">Simps</span>.<span class="name">apply</span></a></div><div class="nav_link"><a class="break_within" href="#ContDiffMapSupportedIn.ext"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">ext</span></a></div><div class="nav_link"><a class="break_within" href="#ContDiffMapSupportedIn.ext_iff"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">ext_iff</span></a></div><div class="nav_link"><a class="break_within" href="#ContDiffMapSupportedIn.copy"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">copy</span></a></div><div class="nav_link"><a class="break_within" href="#ContDiffMapSupportedIn.coe_copy"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">coe_copy</span></a></div><div class="nav_link"><a class="break_within" href="#ContDiffMapSupportedIn.copy_eq"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">copy_eq</span></a></div><div class="nav_link"><a class="break_within" href="#ContDiffMapSupportedIn.toBoundedContinuousFunction_apply"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">toBoundedContinuousFunction_apply</span></a></div><div class="nav_link"><a class="break_within" href="#ContDiffMapSupportedIn.instZero"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">instZero</span></a></div><div class="nav_link"><a class="break_within" href="#ContDiffMapSupportedIn.coe_zero"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">coe_zero</span></a></div><div class="nav_link"><a class="break_within" href="#ContDiffMapSupportedIn.zero_apply"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">zero_apply</span></a></div><div class="nav_link"><a class="break_within" href="#ContDiffMapSupportedIn.instAdd"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">instAdd</span></a></div><div class="nav_link"><a class="break_within" href="#ContDiffMapSupportedIn.coe_add"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">coe_add</span></a></div><div class="nav_link"><a class="break_within" href="#ContDiffMapSupportedIn.add_apply"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">add_apply</span></a></div><div class="nav_link"><a class="break_within" href="#ContDiffMapSupportedIn.instNeg"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">instNeg</span></a></div><div class="nav_link"><a class="break_within" href="#ContDiffMapSupportedIn.coe_neg"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">coe_neg</span></a></div><div class="nav_link"><a class="break_within" href="#ContDiffMapSupportedIn.neg_apply"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">neg_apply</span></a></div><div class="nav_link"><a class="break_within" href="#ContDiffMapSupportedIn.instSub"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">instSub</span></a></div><div class="nav_link"><a class="break_within" href="#ContDiffMapSupportedIn.coe_sub"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">coe_sub</span></a></div><div class="nav_link"><a class="break_within" href="#ContDiffMapSupportedIn.sub_apply"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">sub_apply</span></a></div><div class="nav_link"><a class="break_within" href="#ContDiffMapSupportedIn.instSMul"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">instSMul</span></a></div><div class="nav_link"><a class="break_within" href="#ContDiffMapSupportedIn.coe_smul"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">coe_smul</span></a></div><div class="nav_link"><a class="break_within" href="#ContDiffMapSupportedIn.smul_apply"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">smul_apply</span></a></div><div class="nav_link"><a class="break_within" href="#ContDiffMapSupportedIn.instAddCommGroup"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">instAddCommGroup</span></a></div><div class="nav_link"><a class="break_within" href="#ContDiffMapSupportedIn.coeHom"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">coeHom</span></a></div><div class="nav_link"><a class="break_within" href="#ContDiffMapSupportedIn.coe_coeHom"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">coe_coeHom</span></a></div><div class="nav_link"><a class="break_within" href="#ContDiffMapSupportedIn.coeHom_injective"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">coeHom_injective</span></a></div><div class="nav_link"><a class="break_within" href="#ContDiffMapSupportedIn.instModuleOfSMulCommClassRealOfContinuousConstSMul"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">instModuleOfSMulCommClassRealOfContinuousConstSMul</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Continuously-differentiable-functions-supported-in-a-given-compact-set">Continuously differentiable functions supported in a given compact set <a class="hover-link" href="#Continuously-differentiable-functions-supported-in-a-given-compact-set">#</a></h1><p>This file develops the basic theory of bundled <code>n</code>-times continuously differentiable functions
+with support contained in a given compact set.</p><p>Given <code>n : ℕ∞</code> and a compact subset <code>K</code> of a normed space <code>E</code>, we consider the type of bundled
+functions <code>f : E → F</code> (where <code>F</code> is a normed vector space) such that:</p><ul>
+<li><code>f</code> is <code>n</code>-times continuously differentiable: <code><a href="../../.././Mathlib/Analysis/Calculus/ContDiff/Defs.html#ContDiff">ContDiff</a> ℝ n f</code>.</li>
+<li><code>f</code> vanishes outside of a compact set: <code>EqOn f 0 Kᶜ</code>.</li>
+</ul><p>The main reason this exists as a bundled type is to be endowed with its natural locally convex
+topology (namely, uniform convergence of <code>f</code> and its derivative up to order <code>n</code>).
+Taking the locally convex inductive limit of these as <code>K</code> varies yields the natural topology on test
+functions, used to define distributions. While most of distribution theory cares only about <code>C^∞</code>
+functions, we also want to endow the space of <code>C^n</code> test functions with its natural topology.
+Indeed, distributions of order less than <code>n</code> are precisely those which extend continuously to this
+larger space of test functions.</p><h2 class="markdown-heading" id="Main-definitions">Main definitions <a class="hover-link" href="#Main-definitions">#</a></h2><ul>
+<li><code><a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn">ContDiffMapSupportedIn</a> E F n K</code>: the type of bundled <code>n</code>-times continuously differentiable
+functions <code>E → F</code> which vanish outside of <code>K</code>.</li>
+<li><code>ContDiffMapSupportedIn.iteratedFDerivₗ'</code>: wraps <code><a href="../../.././Mathlib/Analysis/Calculus/ContDiff/FTaylorSeries.html#iteratedFDeriv">iteratedFDeriv</a></code> into a <code>𝕜</code>-linear map on
+<code><a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn">ContDiffMapSupportedIn</a> E F n K</code>, as a map into
+<code><a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn">ContDiffMapSupportedIn</a> E (E [×i]→L[ℝ] F) (n-i) K</code>.</li>
+</ul><h2 class="markdown-heading" id="Main-statements">Main statements <a class="hover-link" href="#Main-statements">#</a></h2><p>TODO:</p><ul>
+<li><code>ContDiffMapSupportedIn.instIsUniformAddGroup</code> and
+<code>ContDiffMapSupportedIn.instLocallyConvexSpace</code>: <code><a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn">ContDiffMapSupportedIn</a></code> is a locally convex
+topological vector space.</li>
+</ul><h2 class="markdown-heading" id="Notation">Notation <a class="hover-link" href="#Notation">#</a></h2><ul>
+<li><code>𝓓^{n}_{K}(E, F)</code>:  the space of <code>n</code>-times continuously differentiable functions <code>E → F</code>
+which vanish outside of <code>K</code>.</li>
+<li><code>𝓓_{K}(E, F)</code>:  the space of smooth (infinitely differentiable) functions <code>E → F</code>
+which vanish outside of <code>K</code>, i.e. <code>𝓓^{⊤}_{K}(E, F)</code>.</li>
+</ul><h2 class="markdown-heading" id="Implementation-details">Implementation details <a class="hover-link" href="#Implementation-details">#</a></h2><p>The technical choice of spelling <code>EqOn f 0 Kᶜ</code> in the definition, as opposed to <code><a href="../../.././Mathlib/Topology/Algebra/Support.html#tsupport">tsupport</a> f ⊆ K</code>
+is to make rewriting <code>f x</code> to <code>0</code> easier when <code>x ∉ K</code>.</p><h2 class="markdown-heading" id="Tags">Tags <a class="hover-link" href="#Tags">#</a></h2><p>distributions</p></div><div class="decl" id="ContDiffMapSupportedIn"><div class="structure"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/d9d1cc1012eccfc8d01215b1b7943b0e7f8b7757/Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean#L71-L77">source</a></div><div class="decl_header"><span class="decl_kind">structure</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn"><span class="name">ContDiffMapSupportedIn</span></a></span><span class="decl_args">
+<span class="fn">(<span class="fn">E</span> : <a href="../../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">F</span> : <a href="../../.././foundational_types.html">Type</a> u_3)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">n</span> : <a href="../../.././Mathlib/Data/ENat/Defs.html#ENat">ℕ∞</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">K</span> : <span class="fn"><a href="../../.././Mathlib/Topology/Sets/Compacts.html#TopologicalSpace.Compacts">TopologicalSpace.Compacts</a> <span class="fn">E</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../.././foundational_types.html">Type</a> (max u_2 u_3)</div></div><p>The type of bundled <code>n</code>-times continuously differentiable maps which vanish outside of a fixed
+compact set <code>K</code>.</p><ul class="structure_fields" id="ContDiffMapSupportedIn.mk"><li id="ContDiffMapSupportedIn.toFun" class="structure_field"><div class="structure_field_info">toFun : <span class="fn"><span class="fn">E</span> → <span class="fn">F</span></span></div><div class="structure_field_doc"><p>The underlying function. Use coercion instead.</p></div></li><li id="ContDiffMapSupportedIn.contDiff'" class="structure_field"><div class="structure_field_info">contDiff' : <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/ContDiff/Defs.html#ContDiff">ContDiff</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">(↑<span class="fn">n</span>)</span> <span class="fn"><span class="fn">self</span>.<a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.toFun">toFun</a></span></span></div></li><li id="ContDiffMapSupportedIn.zero_on_compl'" class="structure_field"><div class="structure_field_info">zero_on_compl' : <span class="fn"><a href="../../.././Mathlib/Data/Set/Operations.html#Set.EqOn">Set.EqOn</a> <span class="fn"><span class="fn">self</span>.<a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.toFun">toFun</a></span> <span class="fn">0</span> <span class="fn">(↑<span class="fn">K</span>)</span><a href="../../.././Mathlib/Order/Notation.html#HasCompl.compl">ᶜ</a></span></div></li></ul><details id="instances-for-list-ContDiffMapSupportedIn" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Distributions.«term𝓓^{_}_{_}(_,_)»"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/d9d1cc1012eccfc8d01215b1b7943b0e7f8b7757/Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean#L79-L82">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#Distributions.«term𝓓^{_}_{_}(_,_)»"><span class="name">Distributions</span>.<span class="name">«term𝓓^{_}_{_}(_,_)»</span></a></span><span class="decl_args"> :</span><div class="decl_type"><a href="../../.././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div><p>Notation for the space of bundled <code>n</code>-times continuously differentiable
+functions with support in a compact set <code>K</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Distributions.«term𝓓^{_}_{_}(_,_)»" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="Distributions.«term𝓓_{_}(_,_)»"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/d9d1cc1012eccfc8d01215b1b7943b0e7f8b7757/Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean#L84-L87">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#Distributions.«term𝓓_{_}(_,_)»"><span class="name">Distributions</span>.<span class="name">«term𝓓_{_}(_,_)»</span></a></span><span class="decl_args"> :</span><div class="decl_type"><a href="../../.././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div><p>Notation for the space of bundled smooth (inifinitely differentiable)
+functions with support in a compact set <code>K</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-Distributions.«term𝓓_{_}(_,_)»" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="ContDiffMapSupportedInClass"><div class="class"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/d9d1cc1012eccfc8d01215b1b7943b0e7f8b7757/Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean#L91-L98">source</a></div><div class="decl_header"><span class="decl_kind">class</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedInClass"><span class="name">ContDiffMapSupportedInClass</span></a></span><span class="decl_args">
+<span class="fn">(<span class="fn">B</span> : <a href="../../.././foundational_types.html">Type</a> u_4)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">E</span> : <span class="fn"><a href="../../.././Init/Prelude.html#outParam">outParam</a> <a href="../../.././foundational_types.html">(Type</a> u_5)</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">F</span> : <span class="fn"><a href="../../.././Init/Prelude.html#outParam">outParam</a> <a href="../../.././foundational_types.html">(Type</a> u_6)</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">n</span> : <span class="fn"><a href="../../.././Init/Prelude.html#outParam">outParam</a> <a href="../../.././Mathlib/Data/ENat/Defs.html#ENat">ℕ∞</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">K</span> : <span class="fn"><a href="../../.././Init/Prelude.html#outParam">outParam</a> <span class="fn">(<a href="../../.././Mathlib/Topology/Sets/Compacts.html#TopologicalSpace.Compacts">TopologicalSpace.Compacts</a> <span class="fn">E</span>)</span></span>)</span></span>
+<span class="decl_extends">extends</span> <span class="fn"><a href="../../.././Mathlib/Data/FunLike/Basic.html#DFunLike">DFunLike</a> <span class="fn">B</span> <span class="fn">E</span> <span class="fn">fun (<span class="fn">x</span> : <span class="fn">E</span>) =&gt; <span class="fn">F</span></span></span><span class="decl_args"> :</span><div class="decl_type"><a href="../../.././foundational_types.html">Type</a> (max (max u_4 u_5) u_6)</div></div><p><code><a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedInClass">ContDiffMapSupportedInClass</a> B E F n K</code> states that <code>B</code> is a type of bundled <code>n</code>-times
+continously differentiable functions with support in the compact set <code>K</code>.</p><ul class="structure_fields" id="ContDiffMapSupportedInClass.mk"><li class="structure_field inherited_field"><div class="structure_field_info"><a href="../../.././Mathlib/Data/FunLike/Basic.html#DFunLike.coe">coe</a> : <span class="fn"><span class="fn">B</span> → <span class="fn">(<span class="fn">a</span> : <span class="fn">E</span>) → <span class="fn">F</span></span></span></div></li><li class="structure_field inherited_field"><div class="structure_field_info"><a href="../../.././Mathlib/Data/FunLike/Basic.html#DFunLike.coe_injective'">coe_injective'</a> : <span class="fn"><a href="../../.././Init/Data/Function.html#Function.Injective">Function.Injective</a> <a href="../../.././Mathlib/Data/FunLike/Basic.html#DFunLike.coe">coe</a></span></div></li><li id="ContDiffMapSupportedInClass.map_contDiff" class="structure_field"><div class="structure_field_info">map_contDiff<span class="decl_args">
+<span class="fn">(<span class="fn">f</span> : <span class="fn">B</span>)</span></span>
+ : <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/ContDiff/Defs.html#ContDiff">ContDiff</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">↑<span class="fn">n</span></span> <span class="fn">⇑<span class="fn">f</span></span></span></div></li><li id="ContDiffMapSupportedInClass.map_zero_on_compl" class="structure_field"><div class="structure_field_info">map_zero_on_compl<span class="decl_args">
+<span class="fn">(<span class="fn">f</span> : <span class="fn">B</span>)</span></span>
+ : <span class="fn"><a href="../../.././Mathlib/Data/Set/Operations.html#Set.EqOn">Set.EqOn</a> <span class="fn">(⇑<span class="fn">f</span>)</span> <span class="fn">0</span> <span class="fn">(↑<span class="fn">K</span>)</span><a href="../../.././Mathlib/Order/Notation.html#HasCompl.compl">ᶜ</a></span></div></li></ul><details class="instances"><summary>Instances</summary><ul id="instances-list-ContDiffMapSupportedInClass" class="instances-list"></ul></details></div></div><div class="decl" id="instContinuousMapClass"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/d9d1cc1012eccfc8d01215b1b7943b0e7f8b7757/Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean#L102-L107">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#instContinuousMapClass"><span class="name">instContinuousMapClass</span></a></span><span class="decl_args">
+<span class="fn">(<span class="fn">B</span> : <a href="../../.././foundational_types.html">Type</a> u_4)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">E</span> : <span class="fn"><a href="../../.././Init/Prelude.html#outParam">outParam</a> <a href="../../.././foundational_types.html">(Type</a> u_5)</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">F</span> : <span class="fn"><a href="../../.././Init/Prelude.html#outParam">outParam</a> <a href="../../.././foundational_types.html">(Type</a> u_6)</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">n</span> : <span class="fn"><a href="../../.././Init/Prelude.html#outParam">outParam</a> <a href="../../.././Mathlib/Data/ENat/Defs.html#ENat">ℕ∞</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">K</span> : <span class="fn"><a href="../../.././Init/Prelude.html#outParam">outParam</a> <span class="fn">(<a href="../../.././Mathlib/Topology/Sets/Compacts.html#TopologicalSpace.Compacts">TopologicalSpace.Compacts</a> <span class="fn">E</span>)</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedInClass">ContDiffMapSupportedInClass</a> <span class="fn">B</span> <span class="fn">E</span> <span class="fn">F</span> <span class="fn">n</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/ContinuousMap/Defs.html#ContinuousMapClass">ContinuousMapClass</a> <span class="fn">B</span> <span class="fn">E</span> <span class="fn">F</span></span></div></div></div></div><div class="decl" id="instBoundedContinuousMapClass"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/d9d1cc1012eccfc8d01215b1b7943b0e7f8b7757/Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean#L109-L117">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#instBoundedContinuousMapClass"><span class="name">instBoundedContinuousMapClass</span></a></span><span class="decl_args">
+<span class="fn">(<span class="fn">B</span> : <a href="../../.././foundational_types.html">Type</a> u_4)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">E</span> : <span class="fn"><a href="../../.././Init/Prelude.html#outParam">outParam</a> <a href="../../.././foundational_types.html">(Type</a> u_5)</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">F</span> : <span class="fn"><a href="../../.././Init/Prelude.html#outParam">outParam</a> <a href="../../.././foundational_types.html">(Type</a> u_6)</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">n</span> : <span class="fn"><a href="../../.././Init/Prelude.html#outParam">outParam</a> <a href="../../.././Mathlib/Data/ENat/Defs.html#ENat">ℕ∞</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">K</span> : <span class="fn"><a href="../../.././Init/Prelude.html#outParam">outParam</a> <span class="fn">(<a href="../../.././Mathlib/Topology/Sets/Compacts.html#TopologicalSpace.Compacts">TopologicalSpace.Compacts</a> <span class="fn">E</span>)</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedInClass">ContDiffMapSupportedInClass</a> <span class="fn">B</span> <span class="fn">E</span> <span class="fn">F</span> <span class="fn">n</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/ContinuousMap/Bounded/Basic.html#BoundedContinuousMapClass">BoundedContinuousMapClass</a> <span class="fn">B</span> <span class="fn">E</span> <span class="fn">F</span></span></div></div></div></div><div class="decl" id="ContDiffMapSupportedIn.toContDiffMapSupportedInClass"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/d9d1cc1012eccfc8d01215b1b7943b0e7f8b7757/Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean#L121-L126">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.toContDiffMapSupportedInClass"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">toContDiffMapSupportedInClass</span></a></span><span class="decl_args">
+<span class="fn">(<span class="fn">E</span> : <a href="../../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">F</span> : <a href="../../.././foundational_types.html">Type</a> u_3)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././Mathlib/Data/ENat/Defs.html#ENat">ℕ∞</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">K</span> : <span class="fn"><a href="../../.././Mathlib/Topology/Sets/Compacts.html#TopologicalSpace.Compacts">TopologicalSpace.Compacts</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedInClass">ContDiffMapSupportedInClass</a> <span class="fn">(<a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn">ContDiffMapSupportedIn</a> <span class="fn">E</span> <span class="fn">F</span> <span class="fn">n</span> <span class="fn">K</span>)</span> <span class="fn">E</span> <span class="fn">F</span> <span class="fn">n</span> <span class="fn">K</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.toContDiffMapSupportedInClass">ContDiffMapSupportedIn.toContDiffMapSupportedInClass</a> <span class="fn">E</span> <span class="fn">F</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedInClass.mk">{</a> <span class="fn">coe</span> := <span class="fn">fun (<span class="fn">f</span> : <span class="fn"><a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn">ContDiffMapSupportedIn</a> <span class="fn">E</span> <span class="fn">F</span> <span class="fn">n</span> <span class="fn">K</span></span>) =&gt; <span class="fn"><span class="fn">f</span>.<a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.toFun">toFun</a></span></span>, <span class="fn">coe_injective'</span> := <span class="fn">⋯</span>, <span class="fn">map_contDiff</span> := <span class="fn">⋯</span>,
+    <span class="fn">map_zero_on_compl</span> := <span class="fn">⋯</span> <a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedInClass.mk">}</a></li></ul></details></div></div><div class="decl" id="ContDiffMapSupportedIn.contDiff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/d9d1cc1012eccfc8d01215b1b7943b0e7f8b7757/Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean#L130-L130">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.contDiff"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">contDiff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">E</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">F</span> : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././Mathlib/Data/ENat/Defs.html#ENat">ℕ∞</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">K</span> : <span class="fn"><a href="../../.././Mathlib/Topology/Sets/Compacts.html#TopologicalSpace.Compacts">TopologicalSpace.Compacts</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">f</span> : <span class="fn"><a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn">ContDiffMapSupportedIn</a> <span class="fn">E</span> <span class="fn">F</span> <span class="fn">n</span> <span class="fn">K</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/ContDiff/Defs.html#ContDiff">ContDiff</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">↑<span class="fn">n</span></span> <span class="fn">⇑<span class="fn">f</span></span></span></div></div></div></div><div class="decl" id="ContDiffMapSupportedIn.zero_on_compl"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/d9d1cc1012eccfc8d01215b1b7943b0e7f8b7757/Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean#L131-L131">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.zero_on_compl"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">zero_on_compl</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">E</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">F</span> : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././Mathlib/Data/ENat/Defs.html#ENat">ℕ∞</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">K</span> : <span class="fn"><a href="../../.././Mathlib/Topology/Sets/Compacts.html#TopologicalSpace.Compacts">TopologicalSpace.Compacts</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">f</span> : <span class="fn"><a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn">ContDiffMapSupportedIn</a> <span class="fn">E</span> <span class="fn">F</span> <span class="fn">n</span> <span class="fn">K</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Data/Set/Operations.html#Set.EqOn">Set.EqOn</a> <span class="fn">(⇑<span class="fn">f</span>)</span> <span class="fn">0</span> <span class="fn">(↑<span class="fn">K</span>)</span><a href="../../.././Mathlib/Order/Notation.html#HasCompl.compl">ᶜ</a></span></div></div></div></div><div class="decl" id="ContDiffMapSupportedIn.compact_supp"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/d9d1cc1012eccfc8d01215b1b7943b0e7f8b7757/Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean#L132-L133">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.compact_supp"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">compact_supp</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">E</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">F</span> : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././Mathlib/Data/ENat/Defs.html#ENat">ℕ∞</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">K</span> : <span class="fn"><a href="../../.././Mathlib/Topology/Sets/Compacts.html#TopologicalSpace.Compacts">TopologicalSpace.Compacts</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">f</span> : <span class="fn"><a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn">ContDiffMapSupportedIn</a> <span class="fn">E</span> <span class="fn">F</span> <span class="fn">n</span> <span class="fn">K</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Support.html#HasCompactSupport">HasCompactSupport</a> <span class="fn">⇑<span class="fn">f</span></span></span></div></div></div></div><div class="decl" id="ContDiffMapSupportedIn.toFun_eq_coe"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/d9d1cc1012eccfc8d01215b1b7943b0e7f8b7757/Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean#L135-L137">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.toFun_eq_coe"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">toFun_eq_coe</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">E</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">F</span> : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././Mathlib/Data/ENat/Defs.html#ENat">ℕ∞</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">K</span> : <span class="fn"><a href="../../.././Mathlib/Topology/Sets/Compacts.html#TopologicalSpace.Compacts">TopologicalSpace.Compacts</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">f</span> : <span class="fn"><a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn">ContDiffMapSupportedIn</a> <span class="fn">E</span> <span class="fn">F</span> <span class="fn">n</span> <span class="fn">K</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">f</span>.<a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.toFun">toFun</a></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⇑<span class="fn">f</span></span></div></div></div></div><div class="decl" id="ContDiffMapSupportedIn.Simps.apply"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/d9d1cc1012eccfc8d01215b1b7943b0e7f8b7757/Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean#L139-L140">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.Simps.apply"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">Simps</span>.<span class="name">apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">E</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">F</span> : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././Mathlib/Data/ENat/Defs.html#ENat">ℕ∞</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">K</span> : <span class="fn"><a href="../../.././Mathlib/Topology/Sets/Compacts.html#TopologicalSpace.Compacts">TopologicalSpace.Compacts</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">f</span> : <span class="fn"><a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn">ContDiffMapSupportedIn</a> <span class="fn">E</span> <span class="fn">F</span> <span class="fn">n</span> <span class="fn">K</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">E</span> → <span class="fn">F</span></span></div></div><p>See note [custom simps projection].</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.Simps.apply">ContDiffMapSupportedIn.Simps.apply</a> <span class="fn">f</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⇑<span class="fn">f</span></span></li></ul></details><details id="instances-for-list-ContDiffMapSupportedIn.Simps.apply" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="ContDiffMapSupportedIn.ext"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/d9d1cc1012eccfc8d01215b1b7943b0e7f8b7757/Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean#L144-L146">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.ext"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">ext</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">E</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">F</span> : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././Mathlib/Data/ENat/Defs.html#ENat">ℕ∞</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">K</span> : <span class="fn"><a href="../../.././Mathlib/Topology/Sets/Compacts.html#TopologicalSpace.Compacts">TopologicalSpace.Compacts</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">f </span><span class="fn">g</span> : <span class="fn"><a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn">ContDiffMapSupportedIn</a> <span class="fn">E</span> <span class="fn">F</span> <span class="fn">n</span> <span class="fn">K</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">h</span> : <span class="fn">∀ (<span class="fn">a</span> : <span class="fn">E</span>), <span class="fn"><span class="fn">f</span> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">g</span> <span class="fn">a</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">f</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">g</span></div></div></div></div><div class="decl" id="ContDiffMapSupportedIn.ext_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/d9d1cc1012eccfc8d01215b1b7943b0e7f8b7757/Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean#L144-L144">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.ext_iff"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">ext_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">E</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">F</span> : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././Mathlib/Data/ENat/Defs.html#ENat">ℕ∞</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">K</span> : <span class="fn"><a href="../../.././Mathlib/Topology/Sets/Compacts.html#TopologicalSpace.Compacts">TopologicalSpace.Compacts</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">f </span><span class="fn">g</span> : <span class="fn"><a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn">ContDiffMapSupportedIn</a> <span class="fn">E</span> <span class="fn">F</span> <span class="fn">n</span> <span class="fn">K</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn">f</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">g</span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn">∀ (<span class="fn">a</span> : <span class="fn">E</span>), <span class="fn"><span class="fn">f</span> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">g</span> <span class="fn">a</span></span></span></div></div></div></div><div class="decl" id="ContDiffMapSupportedIn.copy"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/d9d1cc1012eccfc8d01215b1b7943b0e7f8b7757/Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean#L148-L153">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.copy"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">copy</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">E</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">F</span> : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././Mathlib/Data/ENat/Defs.html#ENat">ℕ∞</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">K</span> : <span class="fn"><a href="../../.././Mathlib/Topology/Sets/Compacts.html#TopologicalSpace.Compacts">TopologicalSpace.Compacts</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">f</span> : <span class="fn"><a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn">ContDiffMapSupportedIn</a> <span class="fn">E</span> <span class="fn">F</span> <span class="fn">n</span> <span class="fn">K</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">f'</span> : <span class="fn"><span class="fn">E</span> → <span class="fn">F</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">h</span> : <span class="fn">f'</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⇑<span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn">ContDiffMapSupportedIn</a> <span class="fn">E</span> <span class="fn">F</span> <span class="fn">n</span> <span class="fn">K</span></span></div></div><p>Copy of a <code><a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn">ContDiffMapSupportedIn</a></code> with a new <code><a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.toFun">toFun</a></code> equal to the old one. Useful to fix
+definitional equalities.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><span class="fn">f</span>.<a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.copy">copy</a></span> <span class="fn">f'</span> <span class="fn">h</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.mk">{</a> <span class="fn">toFun</span> := <span class="fn">f'</span>, <span class="fn">contDiff'</span> := <span class="fn">⋯</span>, <span class="fn">zero_on_compl'</span> := <span class="fn">⋯</span> <a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.mk">}</a></li></ul></details><details id="instances-for-list-ContDiffMapSupportedIn.copy" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="ContDiffMapSupportedIn.coe_copy"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/d9d1cc1012eccfc8d01215b1b7943b0e7f8b7757/Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean#L155-L157">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.coe_copy"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">coe_copy</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">E</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">F</span> : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././Mathlib/Data/ENat/Defs.html#ENat">ℕ∞</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">K</span> : <span class="fn"><a href="../../.././Mathlib/Topology/Sets/Compacts.html#TopologicalSpace.Compacts">TopologicalSpace.Compacts</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">f</span> : <span class="fn"><a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn">ContDiffMapSupportedIn</a> <span class="fn">E</span> <span class="fn">F</span> <span class="fn">n</span> <span class="fn">K</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">f'</span> : <span class="fn"><span class="fn">E</span> → <span class="fn">F</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">h</span> : <span class="fn">f'</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⇑<span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">⇑<span class="fn">(<span class="fn"><span class="fn">f</span>.<a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.copy">copy</a></span> <span class="fn">f'</span> <span class="fn">h</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">f'</span></div></div></div></div><div class="decl" id="ContDiffMapSupportedIn.copy_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/d9d1cc1012eccfc8d01215b1b7943b0e7f8b7757/Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean#L159-L160">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.copy_eq"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">copy_eq</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">E</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">F</span> : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././Mathlib/Data/ENat/Defs.html#ENat">ℕ∞</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">K</span> : <span class="fn"><a href="../../.././Mathlib/Topology/Sets/Compacts.html#TopologicalSpace.Compacts">TopologicalSpace.Compacts</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">f</span> : <span class="fn"><a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn">ContDiffMapSupportedIn</a> <span class="fn">E</span> <span class="fn">F</span> <span class="fn">n</span> <span class="fn">K</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">f'</span> : <span class="fn"><span class="fn">E</span> → <span class="fn">F</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">h</span> : <span class="fn">f'</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⇑<span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span>.<a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.copy">copy</a></span> <span class="fn">f'</span> <span class="fn">h</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">f</span></div></div></div></div><div class="decl" id="ContDiffMapSupportedIn.toBoundedContinuousFunction_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/d9d1cc1012eccfc8d01215b1b7943b0e7f8b7757/Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean#L162-L164">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.toBoundedContinuousFunction_apply"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">toBoundedContinuousFunction_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">E</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">F</span> : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././Mathlib/Data/ENat/Defs.html#ENat">ℕ∞</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">K</span> : <span class="fn"><a href="../../.././Mathlib/Topology/Sets/Compacts.html#TopologicalSpace.Compacts">TopologicalSpace.Compacts</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">f</span> : <span class="fn"><a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn">ContDiffMapSupportedIn</a> <span class="fn">E</span> <span class="fn">F</span> <span class="fn">n</span> <span class="fn">K</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">x</span> : <span class="fn">E</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/ContinuousMap/Bounded/Basic.html#BoundedContinuousFunction.mk">{</a> <span class="fn">toFun</span> := <span class="fn">⇑<span class="fn">f</span></span>, <span class="fn">continuous_toFun</span> := <span class="fn">⋯</span>, <span class="fn">map_bounded'</span> := <span class="fn">⋯</span> <a href="../../.././Mathlib/Topology/ContinuousMap/Bounded/Basic.html#BoundedContinuousFunction.mk">}</a> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></div></div></div></div><div class="decl" id="ContDiffMapSupportedIn.instZero"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/d9d1cc1012eccfc8d01215b1b7943b0e7f8b7757/Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean#L168-L169">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.instZero"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">instZero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">E</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">F</span> : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././Mathlib/Data/ENat/Defs.html#ENat">ℕ∞</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">K</span> : <span class="fn"><a href="../../.././Mathlib/Topology/Sets/Compacts.html#TopologicalSpace.Compacts">TopologicalSpace.Compacts</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Init/Prelude.html#Zero">Zero</a> <span class="fn">(<a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn">ContDiffMapSupportedIn</a> <span class="fn">E</span> <span class="fn">F</span> <span class="fn">n</span> <span class="fn">K</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.instZero">ContDiffMapSupportedIn.instZero</a> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Zero.mk">{</a> <span class="fn">zero</span> := <a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.mk">{</a> <span class="fn">toFun</span> := <span class="fn">0</span>, <span class="fn">contDiff'</span> := <span class="fn">⋯</span>, <span class="fn">zero_on_compl'</span> := <span class="fn">⋯</span> <a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.mk">}</a> <a href="../../.././Init/Prelude.html#Zero.mk">}</a></li></ul></details></div></div><div class="decl" id="ContDiffMapSupportedIn.coe_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/d9d1cc1012eccfc8d01215b1b7943b0e7f8b7757/Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean#L171-L173">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.coe_zero"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">coe_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">E</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">F</span> : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././Mathlib/Data/ENat/Defs.html#ENat">ℕ∞</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">K</span> : <span class="fn"><a href="../../.././Mathlib/Topology/Sets/Compacts.html#TopologicalSpace.Compacts">TopologicalSpace.Compacts</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn">⇑<span class="fn">0</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></div></div></div></div><div class="decl" id="ContDiffMapSupportedIn.zero_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/d9d1cc1012eccfc8d01215b1b7943b0e7f8b7757/Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean#L175-L177">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.zero_apply"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">zero_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">E</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">F</span> : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././Mathlib/Data/ENat/Defs.html#ENat">ℕ∞</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">K</span> : <span class="fn"><a href="../../.././Mathlib/Topology/Sets/Compacts.html#TopologicalSpace.Compacts">TopologicalSpace.Compacts</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">x</span> : <span class="fn">E</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">0</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></div></div></div></div><div class="decl" id="ContDiffMapSupportedIn.instAdd"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/d9d1cc1012eccfc8d01215b1b7943b0e7f8b7757/Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean#L179-L182">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.instAdd"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">instAdd</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">E</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">F</span> : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././Mathlib/Data/ENat/Defs.html#ENat">ℕ∞</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">K</span> : <span class="fn"><a href="../../.././Mathlib/Topology/Sets/Compacts.html#TopologicalSpace.Compacts">TopologicalSpace.Compacts</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Init/Prelude.html#Add">Add</a> <span class="fn">(<a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn">ContDiffMapSupportedIn</a> <span class="fn">E</span> <span class="fn">F</span> <span class="fn">n</span> <span class="fn">K</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.instAdd">ContDiffMapSupportedIn.instAdd</a> <a href="../../.././Init/Prelude.html#Eq">=</a>   <a href="../../.././Init/Prelude.html#Add.mk">{</a> <span class="fn">add</span> := <span class="fn">fun (<span class="fn">f</span> <span class="fn">g</span> : <span class="fn"><a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn">ContDiffMapSupportedIn</a> <span class="fn">E</span> <span class="fn">F</span> <span class="fn">n</span> <span class="fn">K</span></span>) =&gt; <a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.mk">{</a> <span class="fn">toFun</span> := <span class="fn">⇑<span class="fn">f</span></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">⇑<span class="fn">g</span></span>, <span class="fn">contDiff'</span> := <span class="fn">⋯</span>, <span class="fn">zero_on_compl'</span> := <span class="fn">⋯</span> <a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.mk">}</a></span> <a href="../../.././Init/Prelude.html#Add.mk">}</a></li></ul></details></div></div><div class="decl" id="ContDiffMapSupportedIn.coe_add"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/d9d1cc1012eccfc8d01215b1b7943b0e7f8b7757/Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean#L187-L189">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.coe_add"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">coe_add</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">E</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">F</span> : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././Mathlib/Data/ENat/Defs.html#ENat">ℕ∞</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">K</span> : <span class="fn"><a href="../../.././Mathlib/Topology/Sets/Compacts.html#TopologicalSpace.Compacts">TopologicalSpace.Compacts</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">f </span><span class="fn">g</span> : <span class="fn"><a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn">ContDiffMapSupportedIn</a> <span class="fn">E</span> <span class="fn">F</span> <span class="fn">n</span> <span class="fn">K</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">⇑(<span class="fn">f</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">g</span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⇑<span class="fn">f</span></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">⇑<span class="fn">g</span></span></div></div></div></div><div class="decl" id="ContDiffMapSupportedIn.add_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/d9d1cc1012eccfc8d01215b1b7943b0e7f8b7757/Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean#L191-L193">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.add_apply"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">add_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">E</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">F</span> : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././Mathlib/Data/ENat/Defs.html#ENat">ℕ∞</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">K</span> : <span class="fn"><a href="../../.././Mathlib/Topology/Sets/Compacts.html#TopologicalSpace.Compacts">TopologicalSpace.Compacts</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">f </span><span class="fn">g</span> : <span class="fn"><a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn">ContDiffMapSupportedIn</a> <span class="fn">E</span> <span class="fn">F</span> <span class="fn">n</span> <span class="fn">K</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">x</span> : <span class="fn">E</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">(<span class="fn">f</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">g</span>) <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">g</span> <span class="fn">x</span></span></div></div></div></div><div class="decl" id="ContDiffMapSupportedIn.instNeg"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/d9d1cc1012eccfc8d01215b1b7943b0e7f8b7757/Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean#L195-L198">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.instNeg"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">instNeg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">E</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">F</span> : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././Mathlib/Data/ENat/Defs.html#ENat">ℕ∞</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">K</span> : <span class="fn"><a href="../../.././Mathlib/Topology/Sets/Compacts.html#TopologicalSpace.Compacts">TopologicalSpace.Compacts</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Init/Prelude.html#Neg">Neg</a> <span class="fn">(<a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn">ContDiffMapSupportedIn</a> <span class="fn">E</span> <span class="fn">F</span> <span class="fn">n</span> <span class="fn">K</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.instNeg">ContDiffMapSupportedIn.instNeg</a> <a href="../../.././Init/Prelude.html#Eq">=</a>   <a href="../../.././Init/Prelude.html#Neg.mk">{</a> <span class="fn">neg</span> := <span class="fn">fun (<span class="fn">f</span> : <span class="fn"><a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn">ContDiffMapSupportedIn</a> <span class="fn">E</span> <span class="fn">F</span> <span class="fn">n</span> <span class="fn">K</span></span>) =&gt; <a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.mk">{</a> <span class="fn">toFun</span> := <a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">⇑<span class="fn">f</span></span>, <span class="fn">contDiff'</span> := <span class="fn">⋯</span>, <span class="fn">zero_on_compl'</span> := <span class="fn">⋯</span> <a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.mk">}</a></span> <a href="../../.././Init/Prelude.html#Neg.mk">}</a></li></ul></details></div></div><div class="decl" id="ContDiffMapSupportedIn.coe_neg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/d9d1cc1012eccfc8d01215b1b7943b0e7f8b7757/Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean#L200-L202">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.coe_neg"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">coe_neg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">E</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">F</span> : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././Mathlib/Data/ENat/Defs.html#ENat">ℕ∞</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">K</span> : <span class="fn"><a href="../../.././Mathlib/Topology/Sets/Compacts.html#TopologicalSpace.Compacts">TopologicalSpace.Compacts</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">f</span> : <span class="fn"><a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn">ContDiffMapSupportedIn</a> <span class="fn">E</span> <span class="fn">F</span> <span class="fn">n</span> <span class="fn">K</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">⇑(<a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">f</span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">⇑<span class="fn">f</span></span></div></div></div></div><div class="decl" id="ContDiffMapSupportedIn.neg_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/d9d1cc1012eccfc8d01215b1b7943b0e7f8b7757/Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean#L204-L206">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.neg_apply"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">neg_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">E</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">F</span> : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././Mathlib/Data/ENat/Defs.html#ENat">ℕ∞</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">K</span> : <span class="fn"><a href="../../.././Mathlib/Topology/Sets/Compacts.html#TopologicalSpace.Compacts">TopologicalSpace.Compacts</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">f</span> : <span class="fn"><a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn">ContDiffMapSupportedIn</a> <span class="fn">E</span> <span class="fn">F</span> <span class="fn">n</span> <span class="fn">K</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">x</span> : <span class="fn">E</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn">(<a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">f</span>) <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></div></div></div></div><div class="decl" id="ContDiffMapSupportedIn.instSub"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/d9d1cc1012eccfc8d01215b1b7943b0e7f8b7757/Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean#L208-L211">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.instSub"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">instSub</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">E</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">F</span> : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././Mathlib/Data/ENat/Defs.html#ENat">ℕ∞</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">K</span> : <span class="fn"><a href="../../.././Mathlib/Topology/Sets/Compacts.html#TopologicalSpace.Compacts">TopologicalSpace.Compacts</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Init/Prelude.html#Sub">Sub</a> <span class="fn">(<a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn">ContDiffMapSupportedIn</a> <span class="fn">E</span> <span class="fn">F</span> <span class="fn">n</span> <span class="fn">K</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.instSub">ContDiffMapSupportedIn.instSub</a> <a href="../../.././Init/Prelude.html#Eq">=</a>   <a href="../../.././Init/Prelude.html#Sub.mk">{</a> <span class="fn">sub</span> := <span class="fn">fun (<span class="fn">f</span> <span class="fn">g</span> : <span class="fn"><a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn">ContDiffMapSupportedIn</a> <span class="fn">E</span> <span class="fn">F</span> <span class="fn">n</span> <span class="fn">K</span></span>) =&gt; <a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.mk">{</a> <span class="fn">toFun</span> := <span class="fn">⇑<span class="fn">f</span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">⇑<span class="fn">g</span></span>, <span class="fn">contDiff'</span> := <span class="fn">⋯</span>, <span class="fn">zero_on_compl'</span> := <span class="fn">⋯</span> <a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.mk">}</a></span> <a href="../../.././Init/Prelude.html#Sub.mk">}</a></li></ul></details></div></div><div class="decl" id="ContDiffMapSupportedIn.coe_sub"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/d9d1cc1012eccfc8d01215b1b7943b0e7f8b7757/Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean#L213-L215">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.coe_sub"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">coe_sub</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">E</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">F</span> : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././Mathlib/Data/ENat/Defs.html#ENat">ℕ∞</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">K</span> : <span class="fn"><a href="../../.././Mathlib/Topology/Sets/Compacts.html#TopologicalSpace.Compacts">TopologicalSpace.Compacts</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">f </span><span class="fn">g</span> : <span class="fn"><a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn">ContDiffMapSupportedIn</a> <span class="fn">E</span> <span class="fn">F</span> <span class="fn">n</span> <span class="fn">K</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">⇑(<span class="fn">f</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">g</span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⇑<span class="fn">f</span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">⇑<span class="fn">g</span></span></div></div></div></div><div class="decl" id="ContDiffMapSupportedIn.sub_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/d9d1cc1012eccfc8d01215b1b7943b0e7f8b7757/Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean#L217-L219">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.sub_apply"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">sub_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">E</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">F</span> : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././Mathlib/Data/ENat/Defs.html#ENat">ℕ∞</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">K</span> : <span class="fn"><a href="../../.././Mathlib/Topology/Sets/Compacts.html#TopologicalSpace.Compacts">TopologicalSpace.Compacts</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">f </span><span class="fn">g</span> : <span class="fn"><a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn">ContDiffMapSupportedIn</a> <span class="fn">E</span> <span class="fn">F</span> <span class="fn">n</span> <span class="fn">K</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">x</span> : <span class="fn">E</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn">(<span class="fn">f</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">g</span>) <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">g</span> <span class="fn">x</span></span></div></div></div></div><div class="decl" id="ContDiffMapSupportedIn.instSMul"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/d9d1cc1012eccfc8d01215b1b7943b0e7f8b7757/Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean#L221-L225">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.instSMul"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">instSMul</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">E</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">F</span> : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././Mathlib/Data/ENat/Defs.html#ENat">ℕ∞</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">K</span> : <span class="fn"><a href="../../.././Mathlib/Topology/Sets/Compacts.html#TopologicalSpace.Compacts">TopologicalSpace.Compacts</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">R</span> : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Action/Defs.html#SMulCommClass">SMulCommClass</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">R</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/ConstMulAction.html#ContinuousConstSMul">ContinuousConstSMul</a> <span class="fn">R</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Init/Prelude.html#SMul">SMul</a> <span class="fn">R</span> <span class="fn">(<a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn">ContDiffMapSupportedIn</a> <span class="fn">E</span> <span class="fn">F</span> <span class="fn">n</span> <span class="fn">K</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.instSMul">ContDiffMapSupportedIn.instSMul</a> <a href="../../.././Init/Prelude.html#Eq">=</a>   <a href="../../.././Init/Prelude.html#SMul.mk">{</a>     <span class="fn">smul</span> := <span class="fn">fun (<span class="fn">c</span> : <span class="fn">R</span>) (<span class="fn">f</span> : <span class="fn"><a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn">ContDiffMapSupportedIn</a> <span class="fn">E</span> <span class="fn">F</span> <span class="fn">n</span> <span class="fn">K</span></span>) =&gt;
+      <a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.mk">{</a> <span class="fn">toFun</span> := <span class="fn">c</span> <a href="../../.././Init/Prelude.html#HSMul.hSMul">•</a> <span class="fn">⇑<span class="fn">f</span></span>, <span class="fn">contDiff'</span> := <span class="fn">⋯</span>, <span class="fn">zero_on_compl'</span> := <span class="fn">⋯</span> <a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.mk">}</a></span> <a href="../../.././Init/Prelude.html#SMul.mk">}</a></li></ul></details></div></div><div class="decl" id="ContDiffMapSupportedIn.coe_smul"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/d9d1cc1012eccfc8d01215b1b7943b0e7f8b7757/Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean#L227-L230">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.coe_smul"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">coe_smul</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">E</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">F</span> : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././Mathlib/Data/ENat/Defs.html#ENat">ℕ∞</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">K</span> : <span class="fn"><a href="../../.././Mathlib/Topology/Sets/Compacts.html#TopologicalSpace.Compacts">TopologicalSpace.Compacts</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">R</span> : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Action/Defs.html#SMulCommClass">SMulCommClass</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">R</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/ConstMulAction.html#ContinuousConstSMul">ContinuousConstSMul</a> <span class="fn">R</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">c</span> : <span class="fn">R</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">f</span> : <span class="fn"><a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn">ContDiffMapSupportedIn</a> <span class="fn">E</span> <span class="fn">F</span> <span class="fn">n</span> <span class="fn">K</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">⇑(<span class="fn">c</span> <a href="../../.././Init/Prelude.html#HSMul.hSMul">•</a> <span class="fn">f</span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">c</span> <a href="../../.././Init/Prelude.html#HSMul.hSMul">•</a> <span class="fn">⇑<span class="fn">f</span></span></div></div></div></div><div class="decl" id="ContDiffMapSupportedIn.smul_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/d9d1cc1012eccfc8d01215b1b7943b0e7f8b7757/Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean#L232-L235">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.smul_apply"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">smul_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">E</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">F</span> : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././Mathlib/Data/ENat/Defs.html#ENat">ℕ∞</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">K</span> : <span class="fn"><a href="../../.././Mathlib/Topology/Sets/Compacts.html#TopologicalSpace.Compacts">TopologicalSpace.Compacts</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">R</span> : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Action/Defs.html#SMulCommClass">SMulCommClass</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">R</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/ConstMulAction.html#ContinuousConstSMul">ContinuousConstSMul</a> <span class="fn">R</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">c</span> : <span class="fn">R</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">f</span> : <span class="fn"><a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn">ContDiffMapSupportedIn</a> <span class="fn">E</span> <span class="fn">F</span> <span class="fn">n</span> <span class="fn">K</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">x</span> : <span class="fn">E</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">(<span class="fn">c</span> <a href="../../.././Init/Prelude.html#HSMul.hSMul">•</a> <span class="fn">f</span>) <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">c</span> <a href="../../.././Init/Prelude.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span></div></div></div></div><div class="decl" id="ContDiffMapSupportedIn.instAddCommGroup"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/d9d1cc1012eccfc8d01215b1b7943b0e7f8b7757/Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean#L237-L239">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.instAddCommGroup"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">instAddCommGroup</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">E</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">F</span> : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././Mathlib/Data/ENat/Defs.html#ENat">ℕ∞</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">K</span> : <span class="fn"><a href="../../.././Mathlib/Topology/Sets/Compacts.html#TopologicalSpace.Compacts">TopologicalSpace.Compacts</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">(<a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn">ContDiffMapSupportedIn</a> <span class="fn">E</span> <span class="fn">F</span> <span class="fn">n</span> <span class="fn">K</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.instAddCommGroup">ContDiffMapSupportedIn.instAddCommGroup</a> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../../.././Mathlib/Algebra/Group/InjSurj.html#Function.Injective.addCommGroup">Function.Injective.addCommGroup</a> <span class="fn">(fun (<span class="fn">f</span> : <span class="fn"><a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn">ContDiffMapSupportedIn</a> <span class="fn">E</span> <span class="fn">F</span> <span class="fn">n</span> <span class="fn">K</span></span>) =&gt; <span class="fn">⇑<span class="fn">f</span></span>)</span> <span class="fn">⋯</span> <span class="fn">⋯</span> <span class="fn">⋯</span> <span class="fn">⋯</span> <span class="fn">⋯</span> <span class="fn">⋯</span> <span class="fn">⋯</span></span></li></ul></details></div></div><div class="decl" id="ContDiffMapSupportedIn.coeHom"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/d9d1cc1012eccfc8d01215b1b7943b0e7f8b7757/Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean#L243-L247">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.coeHom"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">coeHom</span></a></span><span class="decl_args">
+<span class="fn">(<span class="fn">E</span> : <a href="../../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">F</span> : <a href="../../.././foundational_types.html">Type</a> u_3)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">n</span> : <a href="../../.././Mathlib/Data/ENat/Defs.html#ENat">ℕ∞</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">K</span> : <span class="fn"><a href="../../.././Mathlib/Topology/Sets/Compacts.html#TopologicalSpace.Compacts">TopologicalSpace.Compacts</a> <span class="fn">E</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn">ContDiffMapSupportedIn</a> <span class="fn">E</span> <span class="fn">F</span> <span class="fn">n</span> <span class="fn">K</span></span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#AddMonoidHom">→+</a> <span class="fn"><span class="fn">E</span> → <span class="fn">F</span></span></div></div><p>Coercion as an additive homomorphism.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.coeHom">ContDiffMapSupportedIn.coeHom</a> <span class="fn">E</span> <span class="fn">F</span> <span class="fn">n</span> <span class="fn">K</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#AddMonoidHom.mk">{</a> <span class="fn">toFun</span> := <span class="fn">fun (<span class="fn">f</span> : <span class="fn"><a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn">ContDiffMapSupportedIn</a> <span class="fn">E</span> <span class="fn">F</span> <span class="fn">n</span> <span class="fn">K</span></span>) =&gt; <span class="fn">⇑<span class="fn">f</span></span></span>, <span class="fn">map_zero'</span> := <span class="fn">⋯</span>, <span class="fn">map_add'</span> := <span class="fn">⋯</span> <a href="../../.././Mathlib/Algebra/Group/Hom/Defs.html#AddMonoidHom.mk">}</a></li></ul></details><details id="instances-for-list-ContDiffMapSupportedIn.coeHom" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="ContDiffMapSupportedIn.coe_coeHom"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/d9d1cc1012eccfc8d01215b1b7943b0e7f8b7757/Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean#L251-L252">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.coe_coeHom"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">coe_coeHom</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">E</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">F</span> : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">n</span> : <a href="../../.././Mathlib/Data/ENat/Defs.html#ENat">ℕ∞</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">K</span> : <span class="fn"><a href="../../.././Mathlib/Topology/Sets/Compacts.html#TopologicalSpace.Compacts">TopologicalSpace.Compacts</a> <span class="fn">E</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">⇑<span class="fn">(<a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.coeHom">coeHom</a> <span class="fn">E</span> <span class="fn">F</span> <span class="fn">n</span> <span class="fn">K</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Mathlib/Data/FunLike/Basic.html#DFunLike.coe">DFunLike.coe</a></div></div></div></div><div class="decl" id="ContDiffMapSupportedIn.coeHom_injective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/d9d1cc1012eccfc8d01215b1b7943b0e7f8b7757/Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean#L254-L256">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.coeHom_injective"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">coeHom_injective</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">E</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">F</span> : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">n</span> : <a href="../../.././Mathlib/Data/ENat/Defs.html#ENat">ℕ∞</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">K</span> : <span class="fn"><a href="../../.././Mathlib/Topology/Sets/Compacts.html#TopologicalSpace.Compacts">TopologicalSpace.Compacts</a> <span class="fn">E</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Init/Data/Function.html#Function.Injective">Function.Injective</a> <span class="fn">⇑<span class="fn">(<a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.coeHom">coeHom</a> <span class="fn">E</span> <span class="fn">F</span> <span class="fn">n</span> <span class="fn">K</span>)</span></span></span></div></div></div></div><div class="decl" id="ContDiffMapSupportedIn.instModuleOfSMulCommClassRealOfContinuousConstSMul"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/d9d1cc1012eccfc8d01215b1b7943b0e7f8b7757/Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean#L262-L264">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.instModuleOfSMulCommClassRealOfContinuousConstSMul"><span class="name">ContDiffMapSupportedIn</span>.<span class="name">instModuleOfSMulCommClassRealOfContinuousConstSMul</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">E</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">F</span> : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././Mathlib/Data/ENat/Defs.html#ENat">ℕ∞</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">K</span> : <span class="fn"><a href="../../.././Mathlib/Topology/Sets/Compacts.html#TopologicalSpace.Compacts">TopologicalSpace.Compacts</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">R</span> : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Group/Action/Defs.html#SMulCommClass">SMulCommClass</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">R</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/ConstMulAction.html#ContinuousConstSMul">ContinuousConstSMul</a> <span class="fn">R</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">R</span> <span class="fn">(<a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn">ContDiffMapSupportedIn</a> <span class="fn">E</span> <span class="fn">F</span> <span class="fn">n</span> <span class="fn">K</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.instModuleOfSMulCommClassRealOfContinuousConstSMul">ContDiffMapSupportedIn.instModuleOfSMulCommClassRealOfContinuousConstSMul</a> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Defs.html#Function.Injective.module">Function.Injective.module</a> <span class="fn">R</span> <span class="fn">(<a href="../../.././Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.html#ContDiffMapSupportedIn.coeHom">ContDiffMapSupportedIn.coeHom</a> <span class="fn">E</span> <span class="fn">F</span> <span class="fn">n</span> <span class="fn">K</span>)</span> <span class="fn">⋯</span> <span class="fn">⋯</span></span></li></ul></details></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

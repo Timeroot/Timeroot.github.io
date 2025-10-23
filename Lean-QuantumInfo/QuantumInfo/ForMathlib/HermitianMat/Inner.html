@@ -1,0 +1,871 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="icon" href="../../.././favicon.svg"></link><link rel="mask-icon" href="../../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>QuantumInfo.ForMathlib.HermitianMat.Inner</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="QuantumInfo.ForMathlib.HermitianMat.Inner";</script><script type="module" src="../../.././jump-src.js"></script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././expand-nav.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">QuantumInfo</span>.<span class="name">ForMathlib</span>.<span class="name">HermitianMat</span>.<span class="name">Inner</span></h2><form id="search_form"><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/Analysis/Convex/Contractible.html">Mathlib.Analysis.Convex.Contractible</a></li><li><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Order.html">QuantumInfo.ForMathlib.HermitianMat.Order</a></li><li><a href="../../.././Mathlib/Topology/Instances/Real/Lemmas.html">Mathlib.Topology.Instances.Real.Lemmas</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-QuantumInfo.ForMathlib.HermitianMat.Inner" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#HermitianMat.inner"><span class="name">HermitianMat</span>.<span class="name">inner</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.inner_left_distrib"><span class="name">HermitianMat</span>.<span class="name">inner_left_distrib</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.inner_right_distrib"><span class="name">HermitianMat</span>.<span class="name">inner_right_distrib</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.inner_zero"><span class="name">HermitianMat</span>.<span class="name">inner_zero</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.zero_inner"><span class="name">HermitianMat</span>.<span class="name">zero_inner</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.inner_left_neg"><span class="name">HermitianMat</span>.<span class="name">inner_left_neg</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.inner_right_neg"><span class="name">HermitianMat</span>.<span class="name">inner_right_neg</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.inner_left_sub"><span class="name">HermitianMat</span>.<span class="name">inner_left_sub</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.inner_right_sub"><span class="name">HermitianMat</span>.<span class="name">inner_right_sub</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.smul_inner"><span class="name">HermitianMat</span>.<span class="name">smul_inner</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.inner_smul"><span class="name">HermitianMat</span>.<span class="name">inner_smul</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.inner_BilinForm"><span class="name">HermitianMat</span>.<span class="name">inner_BilinForm</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.inner_BilinForm_coe_apply"><span class="name">HermitianMat</span>.<span class="name">inner_BilinForm_coe_apply</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.inner_BilinForm_apply"><span class="name">HermitianMat</span>.<span class="name">inner_BilinForm_apply</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.inner_one"><span class="name">HermitianMat</span>.<span class="name">inner_one</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.one_inner"><span class="name">HermitianMat</span>.<span class="name">one_inner</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.inner_eq_trace_mul"><span class="name">HermitianMat</span>.<span class="name">inner_eq_trace_mul</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.inner_comm"><span class="name">HermitianMat</span>.<span class="name">inner_comm</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.inner_eq_trace_trivial"><span class="name">HermitianMat</span>.<span class="name">inner_eq_trace_trivial</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.inner_eq_re_trace"><span class="name">HermitianMat</span>.<span class="name">inner_eq_re_trace</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.inner_eq_trace_rc"><span class="name">HermitianMat</span>.<span class="name">inner_eq_trace_rc</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.inner_self_nonneg"><span class="name">HermitianMat</span>.<span class="name">inner_self_nonneg</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.inner_mul_nonneg"><span class="name">HermitianMat</span>.<span class="name">inner_mul_nonneg</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.inner_ge_zero"><span class="name">HermitianMat</span>.<span class="name">inner_ge_zero</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.inner_mono"><span class="name">HermitianMat</span>.<span class="name">inner_mono</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.inner_mono'"><span class="name">HermitianMat</span>.<span class="name">inner_mono'</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.inner_le_mul_trace"><span class="name">HermitianMat</span>.<span class="name">inner_le_mul_trace</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.inner_zero_iff"><span class="name">HermitianMat</span>.<span class="name">inner_zero_iff</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.reindex_inner"><span class="name">HermitianMat</span>.<span class="name">reindex_inner</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.instContinuousSMulReal"><span class="name">HermitianMat</span>.<span class="name">instContinuousSMulReal</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.inner_bilinForm_Continuous"><span class="name">HermitianMat</span>.<span class="name">inner_bilinForm_Continuous</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.inner_continuous"><span class="name">HermitianMat</span>.<span class="name">inner_continuous</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.InnerProductCore"><span class="name">HermitianMat</span>.<span class="name">InnerProductCore</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.instNormedGroup"><span class="name">HermitianMat</span>.<span class="name">instNormedGroup</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.norm_eq_frobenius"><span class="name">HermitianMat</span>.<span class="name">norm_eq_frobenius</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.toMat_apply"><span class="name">HermitianMat</span>.<span class="name">toMat_apply</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.norm_eq_sqrt_inner_self"><span class="name">HermitianMat</span>.<span class="name">norm_eq_sqrt_inner_self</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.instNormedSpace"><span class="name">HermitianMat</span>.<span class="name">instNormedSpace</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.instInnerProductSpace"><span class="name">HermitianMat</span>.<span class="name">instInnerProductSpace</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.inner_eq"><span class="name">HermitianMat</span>.<span class="name">inner_eq</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.instCompleteSpace"><span class="name">HermitianMat</span>.<span class="name">instCompleteSpace</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.instNormedAddCommGroupReal"><span class="name">HermitianMat</span>.<span class="name">instNormedAddCommGroupReal</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.instNormedAddCommGroupComplex"><span class="name">HermitianMat</span>.<span class="name">instNormedAddCommGroupComplex</span></a></div><div class="nav_link"><a class="break_within" href="#RCLike.instOrderClosed"><span class="name">RCLike</span>.<span class="name">instOrderClosed</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.inner_ge_zero'"><span class="name">HermitianMat</span>.<span class="name">inner_ge_zero'</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.dist_le_of_mem_Icc"><span class="name">HermitianMat</span>.<span class="name">dist_le_of_mem_Icc</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.Matrix.IsHermitian_isClosed"><span class="name">HermitianMat</span>.<span class="name">Matrix</span>.<span class="name">IsHermitian_isClosed</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.Matrix.PosSemiDef_isClosed"><span class="name">HermitianMat</span>.<span class="name">Matrix</span>.<span class="name">PosSemiDef_isClosed</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.isClosed_nonneg"><span class="name">HermitianMat</span>.<span class="name">isClosed_nonneg</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.instOrderClosedTopology"><span class="name">HermitianMat</span>.<span class="name">instOrderClosedTopology</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.instCompactIccSpace"><span class="name">HermitianMat</span>.<span class="name">instCompactIccSpace</span></a></div><div class="nav_link"><a class="break_within" href="#HermitianMat.unitInterval_IsCompact"><span class="name">HermitianMat</span>.<span class="name">unitInterval_IsCompact</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Inner-product-of-Hermitian-Matrices">Inner product of Hermitian Matrices <a class="hover-link" href="#Inner-product-of-Hermitian-Matrices">#</a></h1><p>For general matrices there are multiple reasonable notions of &quot;inner product&quot; (Hilbert–Schmidt inner product,
+Frobenius inner product), and so Mathlib avoids giving a canonical <code><a href="../../.././Mathlib/Analysis/InnerProductSpace/Defs.html#InnerProductSpace">InnerProductSpace</a></code> instance. But for the
+particular case of Hermitian matrices, these all coincide, so we can put a canonical <code><a href="../../.././Mathlib/Analysis/InnerProductSpace/Defs.html#InnerProductSpace">InnerProductSpace</a></code>
+instance.</p><p>This <em>does</em> however induce a <code><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm">Norm</a></code> on <code><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a></code> as well, the Frobenius norm, and this is less obviously
+a uniquely correct choice. It is something that one essentially has to live with, with the way that Mathlib
+currently structures the instances. (Thankfully, all norms induce the same <em>topology and bornology</em> on
+finite-dimensional matrices.)</p><p>Some care to be taken so that the topology induced by the InnerProductSpace is defeq with the Subtype
+topology that HermitianMat inherits from the topology on Matrix. This can be done via
+<code><a href="../../.././Mathlib/Analysis/InnerProductSpace/Defs.html#InnerProductSpace.ofCoreOfTopology">InnerProductSpace.ofCoreOfTopology</a></code>.</p></div><div class="decl" id="HermitianMat.inner"><div class="def"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L33-L36">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner"><span class="name">HermitianMat</span>.<span class="name">inner</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">R</span> : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">α</span> : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Notation/Defs.html#Star">Star</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Star/Basic.html#TrivialStar">TrivialStar</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Star/Basic.html#StarAddMonoid">StarAddMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././QuantumInfo/ForMathlib/IsMaximalSelfAdjoint.html#IsMaximalSelfAdjoint">IsMaximalSelfAdjoint</a> <span class="fn">R</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">A </span><span class="fn">B</span> : <span class="fn"><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">n</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">R</span></div></div><p>The Hermitian inner product, <code>Tr[AB]</code>. This is equal to <code><a href="../../.././Mathlib/LinearAlgebra/Matrix/Trace.html#Matrix.trace">Matrix.trace</a> (A * B)</code>, but gives real
+values when the matrices are complex, using <code><a href="../../.././QuantumInfo/ForMathlib/IsMaximalSelfAdjoint.html#IsMaximalSelfAdjoint">IsMaximalSelfAdjoint</a></code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><span class="fn">A</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">inner</a></span> <span class="fn">B</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././QuantumInfo/ForMathlib/IsMaximalSelfAdjoint.html#IsMaximalSelfAdjoint.selfadjMap">IsMaximalSelfAdjoint.selfadjMap</a> <span class="fn">(<span class="fn">↑<span class="fn">A</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">↑<span class="fn">B</span></span>).<a href="../../.././Mathlib/LinearAlgebra/Matrix/Trace.html#Matrix.trace">trace</a></span></span></li></ul></details><details id="instances-for-list-HermitianMat.inner" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="HermitianMat.inner_left_distrib"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L43-L44">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner_left_distrib"><span class="name">HermitianMat</span>.<span class="name">inner_left_distrib</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">R</span> : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">α</span> : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Notation/Defs.html#Star">Star</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Star/Basic.html#TrivialStar">TrivialStar</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Star/Basic.html#StarAddMonoid">StarAddMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././QuantumInfo/ForMathlib/IsMaximalSelfAdjoint.html#IsMaximalSelfAdjoint">IsMaximalSelfAdjoint</a> <span class="fn">R</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">A </span><span class="fn">B </span><span class="fn">C</span> : <span class="fn"><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">n</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">A</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">inner</a></span> (<span class="fn">B</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">C</span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">A</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">inner</a></span> <span class="fn">B</span></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn"><span class="fn">A</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">inner</a></span> <span class="fn">C</span></span></div></div></div></div><div class="decl" id="HermitianMat.inner_right_distrib"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L46-L47">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner_right_distrib"><span class="name">HermitianMat</span>.<span class="name">inner_right_distrib</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">R</span> : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">α</span> : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Notation/Defs.html#Star">Star</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Star/Basic.html#TrivialStar">TrivialStar</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Star/Basic.html#StarAddMonoid">StarAddMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././QuantumInfo/ForMathlib/IsMaximalSelfAdjoint.html#IsMaximalSelfAdjoint">IsMaximalSelfAdjoint</a> <span class="fn">R</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">A </span><span class="fn">B </span><span class="fn">C</span> : <span class="fn"><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">n</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn">A</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">B</span>).<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">inner</a></span> <span class="fn">C</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">A</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">inner</a></span> <span class="fn">C</span></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn"><span class="fn">B</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">inner</a></span> <span class="fn">C</span></span></div></div></div></div><div class="decl" id="HermitianMat.inner_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L49-L51">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner_zero"><span class="name">HermitianMat</span>.<span class="name">inner_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">R</span> : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">α</span> : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Notation/Defs.html#Star">Star</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Star/Basic.html#TrivialStar">TrivialStar</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Star/Basic.html#StarAddMonoid">StarAddMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././QuantumInfo/ForMathlib/IsMaximalSelfAdjoint.html#IsMaximalSelfAdjoint">IsMaximalSelfAdjoint</a> <span class="fn">R</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">A</span> : <span class="fn"><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">n</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">A</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">inner</a></span> <span class="fn">0</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></div></div></div></div><div class="decl" id="HermitianMat.zero_inner"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L53-L55">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.zero_inner"><span class="name">HermitianMat</span>.<span class="name">zero_inner</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">R</span> : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">α</span> : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Notation/Defs.html#Star">Star</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Star/Basic.html#TrivialStar">TrivialStar</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Star/Basic.html#StarAddMonoid">StarAddMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././QuantumInfo/ForMathlib/IsMaximalSelfAdjoint.html#IsMaximalSelfAdjoint">IsMaximalSelfAdjoint</a> <span class="fn">R</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">A</span> : <span class="fn"><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">n</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">inner</a> <span class="fn">0</span> <span class="fn">A</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></div></div></div></div><div class="decl" id="HermitianMat.inner_left_neg"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L64-L66">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner_left_neg"><span class="name">HermitianMat</span>.<span class="name">inner_left_neg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">R</span> : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">α</span> : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Notation/Defs.html#Star">Star</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Star/Basic.html#TrivialStar">TrivialStar</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Star/Basic.html#StarAddMonoid">StarAddMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././QuantumInfo/ForMathlib/IsMaximalSelfAdjoint.html#IsMaximalSelfAdjoint">IsMaximalSelfAdjoint</a> <span class="fn">R</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">A </span><span class="fn">B</span> : <span class="fn"><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">n</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">A</span>).<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">inner</a></span> <span class="fn">B</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn"><span class="fn"><span class="fn">A</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">inner</a></span> <span class="fn">B</span></span></div></div></div></div><div class="decl" id="HermitianMat.inner_right_neg"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L68-L70">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner_right_neg"><span class="name">HermitianMat</span>.<span class="name">inner_right_neg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">R</span> : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">α</span> : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Notation/Defs.html#Star">Star</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Star/Basic.html#TrivialStar">TrivialStar</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Star/Basic.html#StarAddMonoid">StarAddMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././QuantumInfo/ForMathlib/IsMaximalSelfAdjoint.html#IsMaximalSelfAdjoint">IsMaximalSelfAdjoint</a> <span class="fn">R</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">A </span><span class="fn">B</span> : <span class="fn"><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">n</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">A</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">inner</a></span> (<a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">B</span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn"><span class="fn"><span class="fn">A</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">inner</a></span> <span class="fn">B</span></span></div></div></div></div><div class="decl" id="HermitianMat.inner_left_sub"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L72-L73">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner_left_sub"><span class="name">HermitianMat</span>.<span class="name">inner_left_sub</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">R</span> : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">α</span> : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Notation/Defs.html#Star">Star</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Star/Basic.html#TrivialStar">TrivialStar</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Star/Basic.html#StarAddMonoid">StarAddMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././QuantumInfo/ForMathlib/IsMaximalSelfAdjoint.html#IsMaximalSelfAdjoint">IsMaximalSelfAdjoint</a> <span class="fn">R</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">A </span><span class="fn">B </span><span class="fn">C</span> : <span class="fn"><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">n</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">A</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">inner</a></span> (<span class="fn">B</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">C</span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">A</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">inner</a></span> <span class="fn">B</span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn"><span class="fn">A</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">inner</a></span> <span class="fn">C</span></span></div></div></div></div><div class="decl" id="HermitianMat.inner_right_sub"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L75-L76">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner_right_sub"><span class="name">HermitianMat</span>.<span class="name">inner_right_sub</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">R</span> : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">α</span> : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Notation/Defs.html#Star">Star</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Star/Basic.html#TrivialStar">TrivialStar</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Star/Basic.html#StarAddMonoid">StarAddMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././QuantumInfo/ForMathlib/IsMaximalSelfAdjoint.html#IsMaximalSelfAdjoint">IsMaximalSelfAdjoint</a> <span class="fn">R</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">A </span><span class="fn">B </span><span class="fn">C</span> : <span class="fn"><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">n</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn">A</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">B</span>).<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">inner</a></span> <span class="fn">C</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">A</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">inner</a></span> <span class="fn">C</span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn"><span class="fn">B</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">inner</a></span> <span class="fn">C</span></span></div></div></div></div><div class="decl" id="HermitianMat.smul_inner"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L80-L82">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.smul_inner"><span class="name">HermitianMat</span>.<span class="name">smul_inner</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">R</span> : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">α</span> : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Notation/Defs.html#Star">Star</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Star/Basic.html#TrivialStar">TrivialStar</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Star/Basic.html#StarAddMonoid">StarAddMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././QuantumInfo/ForMathlib/IsMaximalSelfAdjoint.html#IsMaximalSelfAdjoint">IsMaximalSelfAdjoint</a> <span class="fn">R</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">A </span><span class="fn">B</span> : <span class="fn"><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">n</span> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Star/Basic.html#StarModule">StarModule</a> <span class="fn">R</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">r</span> : <span class="fn">R</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn">r</span> <a href="../../.././Init/Prelude.html#HSMul.hSMul">•</a> <span class="fn">A</span>).<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">inner</a></span> <span class="fn">B</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">r</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn"><span class="fn">A</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">inner</a></span> <span class="fn">B</span></span></div></div></div></div><div class="decl" id="HermitianMat.inner_smul"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L84-L86">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner_smul"><span class="name">HermitianMat</span>.<span class="name">inner_smul</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">R</span> : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">α</span> : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Notation/Defs.html#Star">Star</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Star/Basic.html#TrivialStar">TrivialStar</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Star/Basic.html#StarAddMonoid">StarAddMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././QuantumInfo/ForMathlib/IsMaximalSelfAdjoint.html#IsMaximalSelfAdjoint">IsMaximalSelfAdjoint</a> <span class="fn">R</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">A </span><span class="fn">B</span> : <span class="fn"><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">n</span> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Star/Basic.html#StarModule">StarModule</a> <span class="fn">R</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">r</span> : <span class="fn">R</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">A</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">inner</a></span> (<span class="fn">r</span> <a href="../../.././Init/Prelude.html#HSMul.hSMul">•</a> <span class="fn">B</span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">r</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn"><span class="fn">A</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">inner</a></span> <span class="fn">B</span></span></div></div></div></div><div class="decl" id="HermitianMat.inner_BilinForm"><div class="def"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L88-L97">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner_BilinForm"><span class="name">HermitianMat</span>.<span class="name">inner_BilinForm</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">R</span> : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">α</span> : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Notation/Defs.html#Star">Star</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Star/Basic.html#TrivialStar">TrivialStar</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Star/Basic.html#StarAddMonoid">StarAddMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././QuantumInfo/ForMathlib/IsMaximalSelfAdjoint.html#IsMaximalSelfAdjoint">IsMaximalSelfAdjoint</a> <span class="fn">R</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Star/Basic.html#StarModule">StarModule</a> <span class="fn">R</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/BilinearMap.html#LinearMap.BilinForm">LinearMap.BilinForm</a> <span class="fn">R</span> <span class="fn">(<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">n</span> <span class="fn">α</span>)</span></span></div></div><p>The Hermitian inner product as bilinear form.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner_BilinForm">HermitianMat.inner_BilinForm</a> <a href="../../.././Init/Prelude.html#Eq">=</a>   <a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap.mk">{</a> <span class="fn">toFun</span> := <span class="fn">fun (<span class="fn">A</span> : <span class="fn"><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">n</span> <span class="fn">α</span></span>) =&gt; <a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap.mk">{</a> <span class="fn">toFun</span> := <span class="fn"><span class="fn">A</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">inner</a></span>, <span class="fn">map_add'</span> := <span class="fn">⋯</span>, <span class="fn">map_smul'</span> := <span class="fn">⋯</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap.mk">}</a></span>, <span class="fn">map_add'</span> := <span class="fn">⋯</span>,
+    <span class="fn">map_smul'</span> := <span class="fn">⋯</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap.mk">}</a></li></ul></details><details id="instances-for-list-HermitianMat.inner_BilinForm" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="HermitianMat.inner_BilinForm_coe_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L99-L101">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner_BilinForm_coe_apply"><span class="name">HermitianMat</span>.<span class="name">inner_BilinForm_coe_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">R</span> : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">α</span> : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Notation/Defs.html#Star">Star</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Star/Basic.html#TrivialStar">TrivialStar</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Star/Basic.html#StarAddMonoid">StarAddMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././QuantumInfo/ForMathlib/IsMaximalSelfAdjoint.html#IsMaximalSelfAdjoint">IsMaximalSelfAdjoint</a> <span class="fn">R</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">A</span> : <span class="fn"><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">n</span> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Star/Basic.html#StarModule">StarModule</a> <span class="fn">R</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn">⇑<span class="fn">(<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner_BilinForm">inner_BilinForm</a> <span class="fn">A</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">A</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">inner</a></span></div></div></div></div><div class="decl" id="HermitianMat.inner_BilinForm_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L103-L105">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner_BilinForm_apply"><span class="name">HermitianMat</span>.<span class="name">inner_BilinForm_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">R</span> : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">α</span> : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Notation/Defs.html#Star">Star</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Star/Basic.html#TrivialStar">TrivialStar</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Star/Basic.html#StarAddMonoid">StarAddMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././QuantumInfo/ForMathlib/IsMaximalSelfAdjoint.html#IsMaximalSelfAdjoint">IsMaximalSelfAdjoint</a> <span class="fn">R</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">A </span><span class="fn">B</span> : <span class="fn"><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">n</span> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Star/Basic.html#StarModule">StarModule</a> <span class="fn">R</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner_BilinForm">inner_BilinForm</a> <span class="fn">A</span>)</span> <span class="fn">B</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">A</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">inner</a></span> <span class="fn">B</span></span></div></div></div></div><div class="decl" id="HermitianMat.inner_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L113-L115">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner_one"><span class="name">HermitianMat</span>.<span class="name">inner_one</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">R</span> : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">α</span> : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Notation/Defs.html#Star">Star</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Star/Basic.html#TrivialStar">TrivialStar</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././QuantumInfo/ForMathlib/IsMaximalSelfAdjoint.html#IsMaximalSelfAdjoint">IsMaximalSelfAdjoint</a> <span class="fn">R</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">A</span> : <span class="fn"><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">n</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">A</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">inner</a></span> <span class="fn">1</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">A</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Trace.html#HermitianMat.trace">trace</a></span></div></div></div></div><div class="decl" id="HermitianMat.one_inner"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L117-L119">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.one_inner"><span class="name">HermitianMat</span>.<span class="name">one_inner</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">R</span> : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">α</span> : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Notation/Defs.html#Star">Star</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Star/Basic.html#TrivialStar">TrivialStar</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././QuantumInfo/ForMathlib/IsMaximalSelfAdjoint.html#IsMaximalSelfAdjoint">IsMaximalSelfAdjoint</a> <span class="fn">R</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">A</span> : <span class="fn"><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">n</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">inner</a> <span class="fn">1</span> <span class="fn">A</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">A</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Trace.html#HermitianMat.trace">trace</a></span></div></div></div></div><div class="decl" id="HermitianMat.inner_eq_trace_mul"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L127-L133">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner_eq_trace_mul"><span class="name">HermitianMat</span>.<span class="name">inner_eq_trace_mul</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">R</span> : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">α</span> : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Notation/Defs.html#Star">Star</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Star/Basic.html#TrivialStar">TrivialStar</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././QuantumInfo/ForMathlib/IsMaximalSelfAdjoint.html#IsMaximalSelfAdjoint">IsMaximalSelfAdjoint</a> <span class="fn">R</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">A </span><span class="fn">B</span> : <span class="fn"><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">n</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<a href="../../.././Mathlib/Algebra/Algebra/Defs.html#algebraMap">algebraMap</a> <span class="fn">R</span> <span class="fn">α</span>)</span> <span class="fn">(<span class="fn"><span class="fn">A</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">inner</a></span> <span class="fn">B</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">(<span class="fn">↑<span class="fn">A</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">↑<span class="fn">B</span></span>).<a href="../../.././Mathlib/LinearAlgebra/Matrix/Trace.html#Matrix.trace">trace</a></span></div></div><p>The inner product for Hermtian matrices is equal to the trace of the product.</p></div></div><div class="decl" id="HermitianMat.inner_comm"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L135-L136">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner_comm"><span class="name">HermitianMat</span>.<span class="name">inner_comm</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">R</span> : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">α</span> : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Notation/Defs.html#Star">Star</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Star/Basic.html#TrivialStar">TrivialStar</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Defs.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././QuantumInfo/ForMathlib/IsMaximalSelfAdjoint.html#IsMaximalSelfAdjoint">IsMaximalSelfAdjoint</a> <span class="fn">R</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">A </span><span class="fn">B</span> : <span class="fn"><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">n</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">A</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">inner</a></span> <span class="fn">B</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">B</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">inner</a></span> <span class="fn">A</span></span></div></div></div></div><div class="decl" id="HermitianMat.inner_eq_trace_trivial"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L143-L146">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner_eq_trace_trivial"><span class="name">HermitianMat</span>.<span class="name">inner_eq_trace_trivial</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">α</span> : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Algebra/Star/Basic.html#TrivialStar">TrivialStar</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">A </span><span class="fn">B</span> : <span class="fn"><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">n</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">A</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">inner</a></span> <span class="fn">B</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">(<span class="fn">↑<span class="fn">A</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">↑<span class="fn">B</span></span>).<a href="../../.././Mathlib/LinearAlgebra/Matrix/Trace.html#Matrix.trace">trace</a></span></div></div><p><code><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">HermitianMat.inner</a></code> reduces to <code><a href="../../.././Mathlib/LinearAlgebra/Matrix/Trace.html#Matrix.trace">Matrix.trace</a> (A * B)</code> when the elements are a <code><a href="../../.././Mathlib/Algebra/Star/Basic.html#TrivialStar">TrivialStar</a></code>.</p></div></div><div class="decl" id="HermitianMat.inner_eq_re_trace"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L154-L155">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner_eq_re_trace"><span class="name">HermitianMat</span>.<span class="name">inner_eq_re_trace</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">𝕜</span> : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">A </span><span class="fn">B</span> : <span class="fn"><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">n</span> <span class="fn">𝕜</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">A</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">inner</a></span> <span class="fn">B</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike.re">RCLike.re</a> <span class="fn">(<span class="fn">↑<span class="fn">A</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">↑<span class="fn">B</span></span>).<a href="../../.././Mathlib/LinearAlgebra/Matrix/Trace.html#Matrix.trace">trace</a></span></span></div></div></div></div><div class="decl" id="HermitianMat.inner_eq_trace_rc"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L157-L161">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner_eq_trace_rc"><span class="name">HermitianMat</span>.<span class="name">inner_eq_trace_rc</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">𝕜</span> : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">A </span><span class="fn">B</span> : <span class="fn"><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">n</span> <span class="fn">𝕜</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">↑<span class="fn">(<span class="fn"><span class="fn">A</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">inner</a></span> <span class="fn">B</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">(<span class="fn">↑<span class="fn">A</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">↑<span class="fn">B</span></span>).<a href="../../.././Mathlib/LinearAlgebra/Matrix/Trace.html#Matrix.trace">trace</a></span></div></div></div></div><div class="decl" id="HermitianMat.inner_self_nonneg"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L163-L169">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner_self_nonneg"><span class="name">HermitianMat</span>.<span class="name">inner_self_nonneg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">𝕜</span> : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">A</span> : <span class="fn"><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">n</span> <span class="fn">𝕜</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn"><span class="fn">A</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">inner</a></span> <span class="fn">A</span></span></div></div></div></div><div class="decl" id="HermitianMat.inner_mul_nonneg"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L174-L176">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner_mul_nonneg"><span class="name">HermitianMat</span>.<span class="name">inner_mul_nonneg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">𝕜</span> : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">A </span><span class="fn">B</span> : <span class="fn"><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">n</span> <span class="fn">𝕜</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">h</span> : <span class="fn">0</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">↑<span class="fn">A</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">↑<span class="fn">B</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn"><span class="fn">A</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">inner</a></span> <span class="fn">B</span></span></div></div></div></div><div class="decl" id="HermitianMat.inner_ge_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L178-L185">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner_ge_zero"><span class="name">HermitianMat</span>.<span class="name">inner_ge_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">𝕜</span> : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">A </span><span class="fn">B</span> : <span class="fn"><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">n</span> <span class="fn">𝕜</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">hA</span> : <span class="fn">0</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">A</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">hB</span> : <span class="fn">0</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">B</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn"><span class="fn">A</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">inner</a></span> <span class="fn">B</span></span></div></div><p>The inner product for PSD matrices is nonnegative.</p></div></div><div class="decl" id="HermitianMat.inner_mono"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L187-L190">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner_mono"><span class="name">HermitianMat</span>.<span class="name">inner_mono</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">𝕜</span> : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">A </span><span class="fn">B </span><span class="fn">C</span> : <span class="fn"><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">n</span> <span class="fn">𝕜</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">hA</span> : <span class="fn">0</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">A</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">B</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">C</span> → <span class="fn"><span class="fn"><span class="fn">A</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">inner</a></span> <span class="fn">B</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn"><span class="fn">A</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">inner</a></span> <span class="fn">C</span></span></span></div></div></div></div><div class="decl" id="HermitianMat.inner_mono'"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L192-L194">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner_mono'"><span class="name">HermitianMat</span>.<span class="name">inner_mono'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">𝕜</span> : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">A </span><span class="fn">B </span><span class="fn">C</span> : <span class="fn"><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">n</span> <span class="fn">𝕜</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">hA</span> : <span class="fn">0</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">A</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">B</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">C</span> → <span class="fn"><span class="fn"><span class="fn">B</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">inner</a></span> <span class="fn">A</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn"><span class="fn">C</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">inner</a></span> <span class="fn">A</span></span></span></div></div></div></div><div class="decl" id="HermitianMat.inner_le_mul_trace"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L196-L199">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner_le_mul_trace"><span class="name">HermitianMat</span>.<span class="name">inner_le_mul_trace</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">𝕜</span> : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">A </span><span class="fn">B</span> : <span class="fn"><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">n</span> <span class="fn">𝕜</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">hA</span> : <span class="fn">0</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">A</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">hB</span> : <span class="fn">0</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">B</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">A</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">inner</a></span> <span class="fn">B</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">A</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Trace.html#HermitianMat.trace">trace</a></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">B</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Trace.html#HermitianMat.trace">trace</a></span></div></div><p>The inner product for PSD matrices is at most the product of their traces.</p></div></div><div class="decl" id="HermitianMat.inner_zero_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L280-L288">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner_zero_iff"><span class="name">HermitianMat</span>.<span class="name">inner_zero_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">𝕜</span> : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">A </span><span class="fn">B</span> : <span class="fn"><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">n</span> <span class="fn">𝕜</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">hA₁</span> : <span class="fn">0</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">A</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">hB₁</span> : <span class="fn">0</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">B</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">A</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">inner</a></span> <span class="fn">B</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">A</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat.support">support</a></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">B</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat.ker">ker</a></span></div></div><p>The inner product of two PSD matrices is zero iff they have disjoint support, i.e., each lives entirely
+in the other's kernel.</p></div></div><div class="decl" id="HermitianMat.reindex_inner"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L292-L300">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.reindex_inner"><span class="name">HermitianMat</span>.<span class="name">reindex_inner</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">𝕜</span> : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d</span> : <a href="../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d₂</span> : <a href="../../.././foundational_types.html">Type</a> u_7}</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">A</span> : <span class="fn"><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">d</span> <span class="fn">𝕜</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">e</span> : <span class="fn">d</span> <a href="../../.././Mathlib/Logic/Equiv/Defs.html#Equiv">≃</a> <span class="fn">d₂</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">B</span> : <span class="fn"><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">d₂</span> <span class="fn">𝕜</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">A</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Reindex.html#HermitianMat.reindex">reindex</a></span> <span class="fn">e</span>)</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">inner</a></span> <span class="fn">B</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">A</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">inner</a></span> <span class="fn">(<span class="fn"><span class="fn">B</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Reindex.html#HermitianMat.reindex">reindex</a></span> <span class="fn"><span class="fn">e</span>.<a href="../../.././Mathlib/Logic/Equiv/Defs.html#Equiv.symm">symm</a></span>)</span></span></div></div></div></div><div class="mod_doc"><p>Theorems about <code><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a></code>s that have to do with the topological structure. Pretty much everything here will
+assume these are matrices over ℂ, but changes to upgrade this to other types are welcome.</p></div><div class="decl" id="HermitianMat.instContinuousSMulReal"><div class="instance"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L318-L321">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.instContinuousSMulReal"><span class="name">HermitianMat</span>.<span class="name">instContinuousSMulReal</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d</span> : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">𝕜</span> : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Algebra/MulAction.html#ContinuousSMul">ContinuousSMul</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">(<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">d</span> <span class="fn">𝕜</span>)</span></span></div></div></div></div><div class="decl" id="HermitianMat.inner_bilinForm_Continuous"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L326-L328">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner_bilinForm_Continuous"><span class="name">HermitianMat</span>.<span class="name">inner_bilinForm_Continuous</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d</span> : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">𝕜</span> : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">A</span> : <span class="fn"><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">d</span> <span class="fn">𝕜</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#Continuous">Continuous</a> <span class="fn">⇑<span class="fn">(<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner_BilinForm">inner_BilinForm</a> <span class="fn">A</span>)</span></span></span></div></div></div></div><div class="decl" id="HermitianMat.inner_continuous"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L330-L333">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner_continuous"><span class="name">HermitianMat</span>.<span class="name">inner_continuous</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d</span> : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">𝕜</span> : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#Continuous">Continuous</a> <span class="fn">(<a href="../../.././Init/Data/Function.html#Function.uncurry">Function.uncurry</a> <a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">inner</a>)</span></span></div></div></div></div><div class="decl" id="HermitianMat.InnerProductCore"><div class="def"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L341-L368">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.InnerProductCore"><span class="name">HermitianMat</span>.<span class="name">InnerProductCore</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d</span> : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">𝕜</span> : <a href="../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/InnerProductSpace/Defs.html#InnerProductSpace.Core">InnerProductSpace.Core</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">(<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">d</span> <span class="fn">𝕜</span>)</span></span></div></div><p>We define the Hermitian inner product as our &quot;canonical&quot; inner product, which does induce a norm.
+This disagrees slightly with Mathlib convention on the <code><a href="../../.././Mathlib/LinearAlgebra/Matrix/Defs.html#Matrix">Matrix</a></code> type, which avoids asserting one norm
+as there are several reasonable ones; for Hermitian matrices, though, this seem to be the right choice.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.InnerProductCore">HermitianMat.InnerProductCore</a> <a href="../../.././Init/Prelude.html#Eq">=</a>   <a href="../../.././Mathlib/Analysis/InnerProductSpace/Defs.html#InnerProductSpace.Core.mk">{</a> <span class="fn">inner</span> := <span class="fn">fun (<span class="fn">A</span> <span class="fn">B</span> : <span class="fn"><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">d</span> <span class="fn">𝕜</span></span>) =&gt; <span class="fn"><span class="fn"><span class="fn">A</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">inner</a></span> <span class="fn">B</span></span></span>, <span class="fn">conj_inner_symm</span> := <span class="fn">⋯</span>, <span class="fn">re_inner_nonneg</span> := <span class="fn">⋯</span>, <span class="fn">add_left</span> := <span class="fn">⋯</span>,
+    <span class="fn">smul_left</span> := <span class="fn">⋯</span>, <span class="fn">definite</span> := <span class="fn">⋯</span> <a href="../../.././Mathlib/Analysis/InnerProductSpace/Defs.html#InnerProductSpace.Core.mk">}</a></li></ul></details><details id="instances-for-list-HermitianMat.InnerProductCore" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="HermitianMat.instNormedGroup"><div class="instance"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L371-L375">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.instNormedGroup"><span class="name">HermitianMat</span>.<span class="name">instNormedGroup</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d</span> : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">𝕜</span> : <a href="../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">(<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">d</span> <span class="fn">𝕜</span>)</span></span></div></div><p>The <code><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a></code> type inherits the Frobenius necessarily, since it's going to need the
+Hermitian inner product, and in Mathlib an <code><a href="../../.././Mathlib/Analysis/InnerProductSpace/Defs.html#InnerProductSpace">InnerProductSpace</a></code> always carries the corresponding
+norm.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.instNormedGroup">HermitianMat.instNormedGroup</a> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Subgroup.html#AddSubgroupClass.normedAddCommGroup">AddSubgroupClass.normedAddCommGroup</a> <span class="fn">(<a href="../../.././Mathlib/Algebra/Star/SelfAdjoint.html#selfAdjoint">selfAdjoint</a> <span class="fn">(<a href="../../.././Mathlib/LinearAlgebra/Matrix/Defs.html#Matrix">Matrix</a> <span class="fn">d</span> <span class="fn">d</span> <span class="fn">𝕜</span>)</span>)</span></span></li></ul></details></div></div><div class="decl" id="HermitianMat.norm_eq_frobenius"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L377-L380">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.norm_eq_frobenius"><span class="name">HermitianMat</span>.<span class="name">norm_eq_frobenius</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d</span> : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">𝕜</span> : <a href="../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">A</span> : <span class="fn"><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">d</span> <span class="fn">𝕜</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">A</span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">(∑ <span class="fn">i</span> : <span class="fn">d</span>, <span class="fn">∑ <span class="fn">j</span> : <span class="fn">d</span>, <a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><span class="fn">A</span> <span class="fn">i</span> <span class="fn">j</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">2</span></span>)</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">(<span class="fn">1</span> / <span class="fn">2</span>)</span></div></div></div></div><div class="decl" id="HermitianMat.toMat_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L384-L386">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.toMat_apply"><span class="name">HermitianMat</span>.<span class="name">toMat_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d</span> : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">𝕜</span> : <a href="../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">A</span> : <span class="fn"><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">d</span> <span class="fn">𝕜</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">i </span><span class="fn">j</span> : <span class="fn">d</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">A</span></span> <span class="fn">i</span> <span class="fn">j</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">A</span> <span class="fn">i</span> <span class="fn">j</span></span></div></div></div></div><div class="decl" id="HermitianMat.norm_eq_sqrt_inner_self"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L388-L396">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.norm_eq_sqrt_inner_self"><span class="name">HermitianMat</span>.<span class="name">norm_eq_sqrt_inner_self</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d</span> : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">𝕜</span> : <a href="../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">A</span> : <span class="fn"><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">d</span> <span class="fn">𝕜</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">A</span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Mathlib/Data/Real/Sqrt.html#Real.sqrt">√</a><span class="fn">(<span class="fn"><span class="fn">A</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">inner</a></span> <span class="fn">A</span>)</span></div></div></div></div><div class="decl" id="HermitianMat.instNormedSpace"><div class="instance"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L398-L402">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.instNormedSpace"><span class="name">HermitianMat</span>.<span class="name">instNormedSpace</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d</span> : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">𝕜</span> : <a href="../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">(<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">d</span> <span class="fn">𝕜</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.instNormedSpace">HermitianMat.instNormedSpace</a> <a href="../../.././Init/Prelude.html#Eq">=</a>   <a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace.mk">{</a> <span class="fn">toModule</span> := <a href="../../.././Mathlib/Algebra/Star/SelfAdjoint.html#selfAdjoint.instModuleSubtypeMemAddSubgroupOfStarModule">selfAdjoint.instModuleSubtypeMemAddSubgroupOfStarModule</a>, <span class="fn">norm_smul_le</span> := <span class="fn">⋯</span> <a href="../../.././Mathlib/Analysis/Normed/Module/Basic.html#NormedSpace.mk">}</a></li></ul></details></div></div><div class="decl" id="HermitianMat.instInnerProductSpace"><div class="instance"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L404-L411">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.instInnerProductSpace"><span class="name">HermitianMat</span>.<span class="name">instInnerProductSpace</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d</span> : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">𝕜</span> : <a href="../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/InnerProductSpace/Defs.html#InnerProductSpace">InnerProductSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">(<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">d</span> <span class="fn">𝕜</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details></div></div><div class="decl" id="HermitianMat.inner_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L413-L414">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner_eq"><span class="name">HermitianMat</span>.<span class="name">inner_eq</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d</span> : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">𝕜</span> : <a href="../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">A </span><span class="fn">B</span> : <span class="fn"><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">d</span> <span class="fn">𝕜</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/InnerProductSpace/Defs.html#Inner.inner">Inner.inner</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span> <span class="fn">B</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">A</span>.<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner">inner</a></span> <span class="fn">B</span></span></div></div></div></div><div class="decl" id="HermitianMat.instCompleteSpace"><div class="instance"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L418-L419">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.instCompleteSpace"><span class="name">HermitianMat</span>.<span class="name">instCompleteSpace</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d</span> : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">𝕜</span> : <a href="../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">(<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">d</span> <span class="fn">𝕜</span>)</span></span></div></div></div></div><div class="decl" id="HermitianMat.instNormedAddCommGroupReal"><div class="instance"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L422-L423">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.instNormedAddCommGroupReal"><span class="name">HermitianMat</span>.<span class="name">instNormedAddCommGroupReal</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d</span> : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">(<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">d</span> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.instNormedAddCommGroupReal">HermitianMat.instNormedAddCommGroupReal</a> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#inferInstance">inferInstance</a></li></ul></details></div></div><div class="decl" id="HermitianMat.instNormedAddCommGroupComplex"><div class="instance"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L425-L426">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.instNormedAddCommGroupComplex"><span class="name">HermitianMat</span>.<span class="name">instNormedAddCommGroupComplex</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d</span> : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">(<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">d</span> <a href="../../.././Mathlib/Data/Complex/Basic.html#Complex">ℂ</a>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.instNormedAddCommGroupComplex">HermitianMat.instNormedAddCommGroupComplex</a> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Init/Prelude.html#inferInstance">inferInstance</a></li></ul></details></div></div><div class="decl" id="RCLike.instOrderClosed"><div class="def"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L430-L434">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#RCLike.instOrderClosed"><span class="name">RCLike</span>.<span class="name">instOrderClosed</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">𝕜</span> : <a href="../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Order/OrderClosed.html#OrderClosedTopology">OrderClosedTopology</a> <span class="fn">𝕜</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn">⋯</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⋯</span></li></ul></details><details id="instances-for-list-RCLike.instOrderClosed" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="HermitianMat.inner_ge_zero'"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L441-L443">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.inner_ge_zero'"><span class="name">HermitianMat</span>.<span class="name">inner_ge_zero'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d</span> : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">𝕜</span> : <a href="../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">A </span><span class="fn">B</span> : <span class="fn"><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">d</span> <span class="fn">𝕜</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">hA</span> : <span class="fn">0</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">A</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">hB</span> : <span class="fn">0</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">B</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../.././Mathlib/Analysis/InnerProductSpace/Defs.html#Inner.inner">Inner.inner</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">A</span> <span class="fn">B</span></span></div></div><p>The inner product for PSD matrices is nonnegative.</p></div></div><div class="decl" id="HermitianMat.dist_le_of_mem_Icc"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L446-L453">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.dist_le_of_mem_Icc"><span class="name">HermitianMat</span>.<span class="name">dist_le_of_mem_Icc</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d</span> : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">𝕜</span> : <a href="../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">A </span><span class="fn">B</span> : <span class="fn"><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">d</span> <span class="fn">𝕜</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">x</span> : <span class="fn"><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">d</span> <span class="fn">𝕜</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">hA</span> : <span class="fn">A</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">hB</span> : <span class="fn">x</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">B</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">x</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">A</span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">B</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">A</span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></div></div></div></div><div class="decl" id="HermitianMat.Matrix.IsHermitian_isClosed"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L456-L461">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.Matrix.IsHermitian_isClosed"><span class="name">HermitianMat</span>.<span class="name">Matrix</span>.<span class="name">IsHermitian_isClosed</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">𝕜</span> : <a href="../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#IsClosed">IsClosed</a> <a href="../../.././Mathlib/Data/Set/Defs.html#setOf">{</a><span class="fn">A</span> <a href="../../.././Mathlib/Data/Set/Defs.html#setOf">:</a> <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Matrix/Defs.html#Matrix">Matrix</a> <span class="fn">n</span> <span class="fn">n</span> <span class="fn">𝕜</span></span> <a href="../../.././Mathlib/Data/Set/Defs.html#setOf">|</a> <span class="fn"><span class="fn">A</span>.<a href="../../.././Mathlib/LinearAlgebra/Matrix/Hermitian.html#Matrix.IsHermitian">IsHermitian</a></span><a href="../../.././Mathlib/Data/Set/Defs.html#setOf">}</a></span></div></div></div></div><div class="decl" id="HermitianMat.Matrix.PosSemiDef_isClosed"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L465-L469">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.Matrix.PosSemiDef_isClosed"><span class="name">HermitianMat</span>.<span class="name">Matrix</span>.<span class="name">PosSemiDef_isClosed</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">𝕜</span> : <a href="../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#IsClosed">IsClosed</a> <a href="../../.././Mathlib/Data/Set/Defs.html#setOf">{</a><span class="fn">A</span> <a href="../../.././Mathlib/Data/Set/Defs.html#setOf">:</a> <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Matrix/Defs.html#Matrix">Matrix</a> <span class="fn">n</span> <span class="fn">n</span> <span class="fn">𝕜</span></span> <a href="../../.././Mathlib/Data/Set/Defs.html#setOf">|</a> <span class="fn"><span class="fn">A</span>.<a href="../../.././Mathlib/LinearAlgebra/Matrix/PosDef.html#Matrix.PosSemidef">PosSemidef</a></span><a href="../../.././Mathlib/Data/Set/Defs.html#setOf">}</a></span></div></div></div></div><div class="decl" id="HermitianMat.isClosed_nonneg"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L471-L473">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.isClosed_nonneg"><span class="name">HermitianMat</span>.<span class="name">isClosed_nonneg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">n</span> : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">n</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">𝕜</span> : <a href="../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Defs/Basic.html#IsClosed">IsClosed</a> <a href="../../.././Mathlib/Data/Set/Defs.html#setOf">{</a><span class="fn">A</span> <a href="../../.././Mathlib/Data/Set/Defs.html#setOf">:</a> <span class="fn"><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">n</span> <span class="fn">𝕜</span></span> <a href="../../.././Mathlib/Data/Set/Defs.html#setOf">|</a> <span class="fn">0</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">A</span><a href="../../.././Mathlib/Data/Set/Defs.html#setOf">}</a></span></div></div></div></div><div class="decl" id="HermitianMat.instOrderClosedTopology"><div class="instance"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L477-L483">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.instOrderClosedTopology"><span class="name">HermitianMat</span>.<span class="name">instOrderClosedTopology</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d</span> : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">𝕜</span> : <a href="../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Order/OrderClosed.html#OrderClosedTopology">OrderClosedTopology</a> <span class="fn">(<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">d</span> <span class="fn">𝕜</span>)</span></span></div></div></div></div><div class="decl" id="HermitianMat.instCompactIccSpace"><div class="instance"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L485-L495">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.instCompactIccSpace"><span class="name">HermitianMat</span>.<span class="name">instCompactIccSpace</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d</span> : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">𝕜</span> : <a href="../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Order/Compact.html#CompactIccSpace">CompactIccSpace</a> <span class="fn">(<a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">d</span> <span class="fn">𝕜</span>)</span></span></div></div><p>Equivalently: the matrices <code>X</code> such that <code>X - A</code> is PSD and <code>B - X</code> is PSD, form a compact set.</p></div></div><div class="decl" id="HermitianMat.unitInterval_IsCompact"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/HermitianMat/Inner.lean#L497-L504">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././QuantumInfo/ForMathlib/HermitianMat/Inner.html#HermitianMat.unitInterval_IsCompact"><span class="name">HermitianMat</span>.<span class="name">unitInterval_IsCompact</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d</span> : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">𝕜</span> : <a href="../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Defs/Filter.html#IsCompact">IsCompact</a> <a href="../../.././Mathlib/Data/Set/Defs.html#setOf">{</a><span class="fn">m</span> <a href="../../.././Mathlib/Data/Set/Defs.html#setOf">:</a> <span class="fn"><a href="../../.././QuantumInfo/ForMathlib/HermitianMat/Basic.html#HermitianMat">HermitianMat</a> <span class="fn">d</span> <span class="fn">𝕜</span></span> <a href="../../.././Mathlib/Data/Set/Defs.html#setOf">|</a> <span class="fn">0</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">m</span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn">m</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">1</span><a href="../../.././Mathlib/Data/Set/Defs.html#setOf">}</a></span></div></div><p>The PSD matrices that are <code>≤ 1</code> are a compact set. More generally, this is true of any closed interval,
+but stating that is a bit different because of how numerals are treated. The <code>0</code> and <code>1</code> here are already
+directly matrices, putting in an <code>(a : ℝ) • 1 ≤ m ∧ m ≤ (b : ℝ) • 1</code> involves casts. But that theorem should follow
+easily from this. More generally <code>A ≤ m ∧ m ≤ B</code> is compact.</p></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

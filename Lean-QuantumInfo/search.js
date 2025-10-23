@@ -16,6 +16,10 @@ const SEARCH_RESULTS = document.querySelector("#search_results")
 const AC_MAX_RESULTS = 30
 const SEARCH_PAGE_MAX_RESULTS = undefined
 
+// Search results are sorted into blocks for better performance; this determines the number of search results per block.
+// Must be positive, may be infinite.
+const RESULTS_PER_BLOCK = 50
+
 // Create an `div#autocomplete_results` to hold all autocomplete results.
 let ac_results = document.createElement("div");
 ac_results.id = "autocomplete_results";
@@ -26,15 +30,18 @@ SEARCH_FORM.appendChild(ac_results);
  */
 function handleSearchCursorUpDown(down) {
   const sel = ac_results.querySelector(`.selected`);
+  const results = [...ac_results.getElementsByClassName("search_result")];
+  const selIndex = results.indexOf(sel);
+  let toSelect;
   if (sel) {
     sel.classList.remove("selected");
-    const toSelect = down
-      ? sel.nextSibling 
-      : sel.previousSibling;
-    toSelect && toSelect.classList.add("selected");
+    toSelect = results[down ? selIndex + 1 : selIndex - 1];
   } else {
-    const toSelect = down ? ac_results.firstChild : ac_results.lastChild;
-    toSelect && toSelect.classList.add("selected");
+    toSelect = down ? results[0] : results[results.length-1];
+  }
+  if (toSelect){
+    toSelect.classList.add("selected");
+    toSelect.scrollIntoView({block:"nearest"});
   }
 }
 
@@ -77,11 +84,15 @@ function removeAllChildren(node) {
   }
 }
 
+// counts how often `handleSearch` has already been called. Used to terminate the previous call whenever a new one has started.
+var handleSearchCounter = 0;
+
 /**
  * Handle user input and perform search.
  */
-function handleSearch(dataCenter, err, ev, sr, maxResults, autocomplete) {
+async function handleSearch(dataCenter, err, ev, sr, maxResults, autocomplete) {
   const text = ev.target.value;
+  const callIndex = ++handleSearchCounter;
 
   // If no input clear all.
   if (!text) {
@@ -112,15 +123,30 @@ function handleSearch(dataCenter, err, ev, sr, maxResults, autocomplete) {
   
     // update autocomplete results
     removeAllChildren(sr);
-    for (const { name, kind, docLink } of result) {
-      const row = sr.appendChild(document.createElement("div"));
-      row.classList.add("search_result")
-      const linkdiv = row.appendChild(document.createElement("div"))
-      linkdiv.classList.add("result_link")
-      const link = linkdiv.appendChild(document.createElement("a"));
-      link.innerText = name;
-      link.title = name;
-      link.href = SITE_ROOT + docLink;
+    for (let i = 0; i < result.length; i += RESULTS_PER_BLOCK) {
+      // results are grouped into blocks, each block consisting of an inner block with `display: table`
+      // and an outer block with `content-visibility: auto` that tells the browser to only render it
+      // when it gets close to the viewport. These two wrappers can't be combined into a single element
+      // because those two CSS properties are incompatible.
+      const block = document.createElement("div");
+      block.classList.add("search_result_block");
+      const innerBlock = block.appendChild(document.createElement("div"));
+      innerBlock.classList.add("search_result_block_inner");
+      // put the next batch of results into the block, then insert the block into the DOM
+      for (let j = i; j < Math.min(result.length, i + RESULTS_PER_BLOCK); j++){
+        const row = innerBlock.appendChild(document.createElement("div"));
+        row.classList.add("search_result");
+        const linkdiv = row.appendChild(document.createElement("div"))
+        linkdiv.classList.add("result_link");
+        const link = linkdiv.appendChild(document.createElement("a"));
+        link.innerText = result[j].name;
+        link.title = result[j].name;
+        link.href = SITE_ROOT + result[j].docLink;
+      }
+      sr.appendChild(block);
+      // wait a moment before adding the next block, and only do so if this method hasn't been called since.
+      await new Promise(resolve=>setTimeout(resolve,0));
+      if (handleSearchCounter!=callIndex) return;
     }
   }
   // handle error

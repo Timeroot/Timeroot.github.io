@@ -1,0 +1,243 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../.././style.css"></link><link rel="icon" href="../.././favicon.svg"></link><link rel="mask-icon" href="../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../.././/declarations/declaration-data.bmp" as="image"></link><title>QuantumInfo.ForMathlib.LinearEquiv</title><script defer="true" src="../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../.././";</script><script>const MODULE_NAME="QuantumInfo.ForMathlib.LinearEquiv";</script><script type="module" src="../.././jump-src.js"></script><script type="module" src="../.././search.js"></script><script type="module" src="../.././expand-nav.js"></script><script type="module" src="../.././how-about.js"></script><script type="module" src="../.././instances.js"></script><script type="module" src="../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">QuantumInfo</span>.<span class="name">ForMathlib</span>.<span class="name">LinearEquiv</span></h2><form id="search_form"><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../.././search.html';">Search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/LinearEquiv.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../.././Init.html">Init</a></li><li><a href="../.././Mathlib/Analysis/InnerProductSpace/PiL2.html">Mathlib.Analysis.InnerProductSpace.PiL2</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-QuantumInfo.ForMathlib.LinearEquiv" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#LinearEquiv.of_relabel"><span class="name">LinearEquiv</span>.<span class="name">of_relabel</span></a></div><div class="nav_link"><a class="break_within" href="#LinearEquiv.of_relabel_symm_apply"><span class="name">LinearEquiv</span>.<span class="name">of_relabel_symm_apply</span></a></div><div class="nav_link"><a class="break_within" href="#LinearEquiv.of_relabel_apply"><span class="name">LinearEquiv</span>.<span class="name">of_relabel_apply</span></a></div><div class="nav_link"><a class="break_within" href="#LinearEquiv.euclidean_of_relabel"><span class="name">LinearEquiv</span>.<span class="name">euclidean_of_relabel</span></a></div><div class="nav_link"><a class="break_within" href="#LinearEquiv.euclidean_of_relabel_symm_apply"><span class="name">LinearEquiv</span>.<span class="name">euclidean_of_relabel_symm_apply</span></a></div><div class="nav_link"><a class="break_within" href="#LinearEquiv.euclidean_of_relabel_apply"><span class="name">LinearEquiv</span>.<span class="name">euclidean_of_relabel_apply</span></a></div><div class="nav_link"><a class="break_within" href="#LinearEquiv.of_relabel_refl"><span class="name">LinearEquiv</span>.<span class="name">of_relabel_refl</span></a></div><div class="nav_link"><a class="break_within" href="#LinearEquiv.euclidean_of_relabel_refl"><span class="name">LinearEquiv</span>.<span class="name">euclidean_of_relabel_refl</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.reindex_toLin'"><span class="name">Matrix</span>.<span class="name">reindex_toLin'</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.reindex_toEuclideanLin"><span class="name">Matrix</span>.<span class="name">reindex_toEuclideanLin</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.reindex_right_toLin'"><span class="name">Matrix</span>.<span class="name">reindex_right_toLin'</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.reindex_right_toEuclideanLin"><span class="name">Matrix</span>.<span class="name">reindex_right_toEuclideanLin</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.reindex_left_toLin'"><span class="name">Matrix</span>.<span class="name">reindex_left_toLin'</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.reindex_left_toEuclideanLin"><span class="name">Matrix</span>.<span class="name">reindex_left_toEuclideanLin</span></a></div></nav><main>
+<div class="decl" id="LinearEquiv.of_relabel"><div class="def"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/LinearEquiv.lean#L15-L18">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumInfo/ForMathlib/LinearEquiv.html#LinearEquiv.of_relabel"><span class="name">LinearEquiv</span>.<span class="name">of_relabel</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d</span> : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d₂</span> : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">R</span> : <a href="../.././foundational_types.html">Type</a> u_7)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">e</span> : <span class="fn">d</span> <a href="../.././Mathlib/Logic/Equiv/Defs.html#Equiv">≃</a> <span class="fn">d₂</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">(<span class="fn">d₂</span> → <span class="fn">R</span>)</span> <a href="../.././Mathlib/Algebra/Module/Equiv/Defs.html#LinearEquiv">≃ₗ[</a><span class="fn">R</span><a href="../.././Mathlib/Algebra/Module/Equiv/Defs.html#LinearEquiv">]</a> <span class="fn"><span class="fn">d</span> → <span class="fn">R</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-LinearEquiv.of_relabel" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="LinearEquiv.of_relabel_symm_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/LinearEquiv.lean#L15-L15">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumInfo/ForMathlib/LinearEquiv.html#LinearEquiv.of_relabel_symm_apply"><span class="name">LinearEquiv</span>.<span class="name">of_relabel_symm_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d</span> : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d₂</span> : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">R</span> : <a href="../.././foundational_types.html">Type</a> u_7)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">e</span> : <span class="fn">d</span> <a href="../.././Mathlib/Logic/Equiv/Defs.html#Equiv">≃</a> <span class="fn">d₂</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">a✝</span> : <span class="fn"><span class="fn">d</span> → <span class="fn">R</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">a</span> : <span class="fn">d₂</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../.././QuantumInfo/ForMathlib/LinearEquiv.html#LinearEquiv.of_relabel">of_relabel</a> <span class="fn">R</span> <span class="fn">e</span>)</span>.<a href="../.././Mathlib/Algebra/Module/Equiv/Defs.html#LinearEquiv.symm">symm</a></span> <span class="fn">a✝</span> <span class="fn">a</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">(<a href="../.././Mathlib/Logic/Equiv/Basic.html#Equiv.piCongrLeft">Equiv.piCongrLeft</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">d</span>) =&gt; <span class="fn">R</span>)</span> <span class="fn"><span class="fn">e</span>.<a href="../.././Mathlib/Logic/Equiv/Defs.html#Equiv.symm">symm</a></span>)</span>.<a href="../.././Mathlib/Logic/Equiv/Defs.html#Equiv.invFun">invFun</a></span> <span class="fn">a✝</span> <span class="fn">a</span></span></div></div></div></div><div class="decl" id="LinearEquiv.of_relabel_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/LinearEquiv.lean#L15-L15">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumInfo/ForMathlib/LinearEquiv.html#LinearEquiv.of_relabel_apply"><span class="name">LinearEquiv</span>.<span class="name">of_relabel_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d</span> : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d₂</span> : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">R</span> : <a href="../.././foundational_types.html">Type</a> u_7)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">e</span> : <span class="fn">d</span> <a href="../.././Mathlib/Logic/Equiv/Defs.html#Equiv">≃</a> <span class="fn">d₂</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">a✝</span> : <span class="fn"><span class="fn">d₂</span> → <span class="fn">R</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">b</span> : <span class="fn">d</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<a href="../.././QuantumInfo/ForMathlib/LinearEquiv.html#LinearEquiv.of_relabel">of_relabel</a> <span class="fn">R</span> <span class="fn">e</span>)</span> <span class="fn">a✝</span> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">(<a href="../.././Mathlib/Logic/Equiv/Basic.html#Equiv.piCongrLeft">Equiv.piCongrLeft</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">d</span>) =&gt; <span class="fn">R</span>)</span> <span class="fn"><span class="fn">e</span>.<a href="../.././Mathlib/Logic/Equiv/Defs.html#Equiv.symm">symm</a></span>)</span>.<a href="../.././Mathlib/Logic/Equiv/Defs.html#Equiv.toFun">toFun</a></span> <span class="fn">a✝</span> <span class="fn">b</span></span></div></div></div></div><div class="decl" id="LinearEquiv.euclidean_of_relabel"><div class="def"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/LinearEquiv.lean#L21-L23">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumInfo/ForMathlib/LinearEquiv.html#LinearEquiv.euclidean_of_relabel"><span class="name">LinearEquiv</span>.<span class="name">euclidean_of_relabel</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d</span> : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d₂</span> : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">𝕜</span> : <a href="../.././foundational_types.html">Type</a> u_6)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">e</span> : <span class="fn">d</span> <a href="../.././Mathlib/Logic/Equiv/Defs.html#Equiv">≃</a> <span class="fn">d₂</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Analysis/InnerProductSpace/PiL2.html#EuclideanSpace">EuclideanSpace</a> <span class="fn">𝕜</span> <span class="fn">d₂</span></span> <a href="../.././Mathlib/Algebra/Module/Equiv/Defs.html#LinearEquiv">≃ₗ[</a><span class="fn">𝕜</span><a href="../.././Mathlib/Algebra/Module/Equiv/Defs.html#LinearEquiv">]</a> <span class="fn"><a href="../.././Mathlib/Analysis/InnerProductSpace/PiL2.html#EuclideanSpace">EuclideanSpace</a> <span class="fn">𝕜</span> <span class="fn">d</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../.././QuantumInfo/ForMathlib/LinearEquiv.html#LinearEquiv.euclidean_of_relabel">LinearEquiv.euclidean_of_relabel</a> <span class="fn">𝕜</span> <span class="fn">e</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././QuantumInfo/ForMathlib/LinearEquiv.html#LinearEquiv.of_relabel">LinearEquiv.of_relabel</a> <span class="fn">𝕜</span> <span class="fn">e</span></span></li></ul></details><details id="instances-for-list-LinearEquiv.euclidean_of_relabel" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="LinearEquiv.euclidean_of_relabel_symm_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/LinearEquiv.lean#L21-L21">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumInfo/ForMathlib/LinearEquiv.html#LinearEquiv.euclidean_of_relabel_symm_apply"><span class="name">LinearEquiv</span>.<span class="name">euclidean_of_relabel_symm_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d</span> : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d₂</span> : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">𝕜</span> : <a href="../.././foundational_types.html">Type</a> u_6)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">e</span> : <span class="fn">d</span> <a href="../.././Mathlib/Logic/Equiv/Defs.html#Equiv">≃</a> <span class="fn">d₂</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">a✝</span> : <span class="fn"><span class="fn">d</span> → <span class="fn">𝕜</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">a</span> : <span class="fn">d₂</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<a href="../.././QuantumInfo/ForMathlib/LinearEquiv.html#LinearEquiv.euclidean_of_relabel">euclidean_of_relabel</a> <span class="fn">𝕜</span> <span class="fn">e</span>)</span>.<a href="../.././Mathlib/Algebra/Module/Equiv/Defs.html#LinearEquiv.symm">symm</a></span> <span class="fn">a✝</span> <span class="fn">a</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">a✝</span> <span class="fn">(<span class="fn"><span class="fn">e</span>.<a href="../.././Mathlib/Logic/Equiv/Defs.html#Equiv.symm">symm</a></span> <span class="fn">a</span>)</span></span></div></div></div></div><div class="decl" id="LinearEquiv.euclidean_of_relabel_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/LinearEquiv.lean#L21-L21">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumInfo/ForMathlib/LinearEquiv.html#LinearEquiv.euclidean_of_relabel_apply"><span class="name">LinearEquiv</span>.<span class="name">euclidean_of_relabel_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d</span> : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d₂</span> : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">𝕜</span> : <a href="../.././foundational_types.html">Type</a> u_6)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">e</span> : <span class="fn">d</span> <a href="../.././Mathlib/Logic/Equiv/Defs.html#Equiv">≃</a> <span class="fn">d₂</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">a✝</span> : <span class="fn"><span class="fn">d₂</span> → <span class="fn">𝕜</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">b</span> : <span class="fn">d</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<a href="../.././QuantumInfo/ForMathlib/LinearEquiv.html#LinearEquiv.euclidean_of_relabel">euclidean_of_relabel</a> <span class="fn">𝕜</span> <span class="fn">e</span>)</span> <span class="fn">a✝</span> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<a href="../.././Mathlib/Logic/Equiv/Basic.html#Equiv.piCongrLeft">Equiv.piCongrLeft</a> <span class="fn">(fun (<span class="fn">x</span> : <span class="fn">d</span>) =&gt; <span class="fn">𝕜</span>)</span> <span class="fn"><span class="fn">e</span>.<a href="../.././Mathlib/Logic/Equiv/Defs.html#Equiv.symm">symm</a></span>)</span> <span class="fn">a✝</span> <span class="fn">b</span></span></div></div></div></div><div class="decl" id="LinearEquiv.of_relabel_refl"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/LinearEquiv.lean#L25-L27">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumInfo/ForMathlib/LinearEquiv.html#LinearEquiv.of_relabel_refl"><span class="name">LinearEquiv</span>.<span class="name">of_relabel_refl</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d</span> : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">R</span> : <a href="../.././foundational_types.html">Type</a> u_7}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././QuantumInfo/ForMathlib/LinearEquiv.html#LinearEquiv.of_relabel">of_relabel</a> <span class="fn">R</span> <span class="fn">(<a href="../.././Mathlib/Logic/Equiv/Defs.html#Equiv.refl">Equiv.refl</a> <span class="fn">d</span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Mathlib/Algebra/Module/Equiv/Defs.html#LinearEquiv.refl">refl</a> <span class="fn">R</span> <span class="fn">(<span class="fn">d</span> → <span class="fn">R</span>)</span></span></div></div></div></div><div class="decl" id="LinearEquiv.euclidean_of_relabel_refl"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/LinearEquiv.lean#L29-L32">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumInfo/ForMathlib/LinearEquiv.html#LinearEquiv.euclidean_of_relabel_refl"><span class="name">LinearEquiv</span>.<span class="name">euclidean_of_relabel_refl</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d</span> : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">𝕜</span> : <a href="../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././QuantumInfo/ForMathlib/LinearEquiv.html#LinearEquiv.euclidean_of_relabel">euclidean_of_relabel</a> <span class="fn">𝕜</span> <span class="fn">(<a href="../.././Mathlib/Logic/Equiv/Defs.html#Equiv.refl">Equiv.refl</a> <span class="fn">d</span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Mathlib/Algebra/Module/Equiv/Defs.html#LinearEquiv.refl">refl</a> <span class="fn">𝕜</span> <span class="fn">(<a href="../.././Mathlib/Analysis/InnerProductSpace/PiL2.html#EuclideanSpace">EuclideanSpace</a> <span class="fn">𝕜</span> <span class="fn">d</span>)</span></span></div></div></div></div><div class="decl" id="Matrix.reindex_toLin'"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/LinearEquiv.lean#L42-L46">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumInfo/ForMathlib/LinearEquiv.html#Matrix.reindex_toLin'"><span class="name">Matrix</span>.<span class="name">reindex_toLin'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d</span> : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d₁</span> : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d₂</span> : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d₃</span> : <a href="../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">R</span> : <a href="../.././foundational_types.html">Type</a> u_7}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">d₂</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">e</span> : <span class="fn">d₁</span> <a href="../.././Mathlib/Logic/Equiv/Defs.html#Equiv">≃</a> <span class="fn">d₃</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">f</span> : <span class="fn">d₂</span> <a href="../.././Mathlib/Logic/Equiv/Defs.html#Equiv">≃</a> <span class="fn">d</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">M</span> : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Matrix/Defs.html#Matrix">Matrix</a> <span class="fn">d₁</span> <span class="fn">d₂</span> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/LinearAlgebra/Matrix/ToLin.html#Matrix.toLin'">toLin'</a> <span class="fn">(<span class="fn">(<a href="../.././Mathlib/LinearAlgebra/Matrix/Defs.html#Matrix.reindex">reindex</a> <span class="fn">e</span> <span class="fn">f</span>)</span> <span class="fn">M</span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">↑<span class="fn">(<a href="../.././QuantumInfo/ForMathlib/LinearEquiv.html#LinearEquiv.of_relabel">LinearEquiv.of_relabel</a> <span class="fn">R</span> <span class="fn"><span class="fn">e</span>.<a href="../.././Mathlib/Logic/Equiv/Defs.html#Equiv.symm">symm</a></span>)</span></span> <a href="../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap.comp">∘ₗ</a> <span class="fn"><span class="fn"><a href="../.././Mathlib/LinearAlgebra/Matrix/ToLin.html#Matrix.toLin'">toLin'</a> <span class="fn">M</span></span> <a href="../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap.comp">∘ₗ</a> <span class="fn">↑<span class="fn">(<a href="../.././QuantumInfo/ForMathlib/LinearEquiv.html#LinearEquiv.of_relabel">LinearEquiv.of_relabel</a> <span class="fn">R</span> <span class="fn">f</span>)</span></span></span></span></div></div></div></div><div class="decl" id="Matrix.reindex_toEuclideanLin"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/LinearEquiv.lean#L48-L51">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumInfo/ForMathlib/LinearEquiv.html#Matrix.reindex_toEuclideanLin"><span class="name">Matrix</span>.<span class="name">reindex_toEuclideanLin</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d</span> : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d₁</span> : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d₂</span> : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d₃</span> : <a href="../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">𝕜</span> : <a href="../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">d₂</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">e</span> : <span class="fn">d₁</span> <a href="../.././Mathlib/Logic/Equiv/Defs.html#Equiv">≃</a> <span class="fn">d₃</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">f</span> : <span class="fn">d₂</span> <a href="../.././Mathlib/Logic/Equiv/Defs.html#Equiv">≃</a> <span class="fn">d</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">M</span> : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Matrix/Defs.html#Matrix">Matrix</a> <span class="fn">d₁</span> <span class="fn">d₂</span> <span class="fn">𝕜</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Analysis/InnerProductSpace/PiL2.html#Matrix.toEuclideanLin">toEuclideanLin</a> <span class="fn">(<span class="fn">(<a href="../.././Mathlib/LinearAlgebra/Matrix/Defs.html#Matrix.reindex">reindex</a> <span class="fn">e</span> <span class="fn">f</span>)</span> <span class="fn">M</span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><span class="fn">↑<span class="fn">(<a href="../.././QuantumInfo/ForMathlib/LinearEquiv.html#LinearEquiv.euclidean_of_relabel">LinearEquiv.euclidean_of_relabel</a> <span class="fn">𝕜</span> <span class="fn"><span class="fn">e</span>.<a href="../.././Mathlib/Logic/Equiv/Defs.html#Equiv.symm">symm</a></span>)</span></span> <a href="../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap.comp">∘ₗ</a> <span class="fn"><span class="fn"><a href="../.././Mathlib/Analysis/InnerProductSpace/PiL2.html#Matrix.toEuclideanLin">toEuclideanLin</a> <span class="fn">M</span></span> <a href="../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap.comp">∘ₗ</a> <span class="fn">↑<span class="fn">(<a href="../.././QuantumInfo/ForMathlib/LinearEquiv.html#LinearEquiv.euclidean_of_relabel">LinearEquiv.euclidean_of_relabel</a> <span class="fn">𝕜</span> <span class="fn">f</span>)</span></span></span></span></div></div></div></div><div class="decl" id="Matrix.reindex_right_toLin'"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/LinearEquiv.lean#L53-L56">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumInfo/ForMathlib/LinearEquiv.html#Matrix.reindex_right_toLin'"><span class="name">Matrix</span>.<span class="name">reindex_right_toLin'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d</span> : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d₂</span> : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d₃</span> : <a href="../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">R</span> : <a href="../.././foundational_types.html">Type</a> u_7}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">d₂</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">e</span> : <span class="fn">d</span> <a href="../.././Mathlib/Logic/Equiv/Defs.html#Equiv">≃</a> <span class="fn">d₂</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">M</span> : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Matrix/Defs.html#Matrix">Matrix</a> <span class="fn">d₃</span> <span class="fn">d</span> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/LinearAlgebra/Matrix/ToLin.html#Matrix.toLin'">toLin'</a> <span class="fn">(<span class="fn">(<a href="../.././Mathlib/LinearAlgebra/Matrix/Defs.html#Matrix.reindex">reindex</a> <span class="fn">(<a href="../.././Mathlib/Logic/Equiv/Defs.html#Equiv.refl">Equiv.refl</a> <span class="fn">d₃</span>)</span> <span class="fn">e</span>)</span> <span class="fn">M</span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><a href="../.././Mathlib/LinearAlgebra/Matrix/ToLin.html#Matrix.toLin'">toLin'</a> <span class="fn">M</span></span> <a href="../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap.comp">∘ₗ</a> <span class="fn">↑<span class="fn">(<a href="../.././QuantumInfo/ForMathlib/LinearEquiv.html#LinearEquiv.of_relabel">LinearEquiv.of_relabel</a> <span class="fn">R</span> <span class="fn">e</span>)</span></span></span></div></div></div></div><div class="decl" id="Matrix.reindex_right_toEuclideanLin"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/LinearEquiv.lean#L58-L61">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumInfo/ForMathlib/LinearEquiv.html#Matrix.reindex_right_toEuclideanLin"><span class="name">Matrix</span>.<span class="name">reindex_right_toEuclideanLin</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d</span> : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d₂</span> : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d₃</span> : <a href="../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">𝕜</span> : <a href="../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">d</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">d₂</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">e</span> : <span class="fn">d</span> <a href="../.././Mathlib/Logic/Equiv/Defs.html#Equiv">≃</a> <span class="fn">d₂</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">M</span> : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Matrix/Defs.html#Matrix">Matrix</a> <span class="fn">d₃</span> <span class="fn">d</span> <span class="fn">𝕜</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Analysis/InnerProductSpace/PiL2.html#Matrix.toEuclideanLin">toEuclideanLin</a> <span class="fn">(<span class="fn">(<a href="../.././Mathlib/LinearAlgebra/Matrix/Defs.html#Matrix.reindex">reindex</a> <span class="fn">(<a href="../.././Mathlib/Logic/Equiv/Defs.html#Equiv.refl">Equiv.refl</a> <span class="fn">d₃</span>)</span> <span class="fn">e</span>)</span> <span class="fn">M</span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><a href="../.././Mathlib/Analysis/InnerProductSpace/PiL2.html#Matrix.toEuclideanLin">toEuclideanLin</a> <span class="fn">M</span></span> <a href="../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap.comp">∘ₗ</a> <span class="fn">↑<span class="fn">(<a href="../.././QuantumInfo/ForMathlib/LinearEquiv.html#LinearEquiv.euclidean_of_relabel">LinearEquiv.euclidean_of_relabel</a> <span class="fn">𝕜</span> <span class="fn">e</span>)</span></span></span></div></div></div></div><div class="decl" id="Matrix.reindex_left_toLin'"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/LinearEquiv.lean#L63-L66">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumInfo/ForMathlib/LinearEquiv.html#Matrix.reindex_left_toLin'"><span class="name">Matrix</span>.<span class="name">reindex_left_toLin'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d₁</span> : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d₂</span> : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d₃</span> : <a href="../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">R</span> : <a href="../.././foundational_types.html">Type</a> u_7}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">d₂</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">e</span> : <span class="fn">d₁</span> <a href="../.././Mathlib/Logic/Equiv/Defs.html#Equiv">≃</a> <span class="fn">d₃</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">M</span> : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Matrix/Defs.html#Matrix">Matrix</a> <span class="fn">d₁</span> <span class="fn">d₂</span> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">⇑<span class="fn">(<a href="../.././Mathlib/LinearAlgebra/Matrix/ToLin.html#Matrix.toLin'">toLin'</a> <span class="fn">(<span class="fn">(<a href="../.././Mathlib/LinearAlgebra/Matrix/Defs.html#Matrix.reindex">reindex</a> <span class="fn">e</span> <span class="fn">(<a href="../.././Mathlib/Logic/Equiv/Defs.html#Equiv.refl">Equiv.refl</a> <span class="fn">d₂</span>)</span>)</span> <span class="fn">M</span>)</span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">⇑<span class="fn">(<a href="../.././QuantumInfo/ForMathlib/LinearEquiv.html#LinearEquiv.of_relabel">LinearEquiv.of_relabel</a> <span class="fn">R</span> <span class="fn"><span class="fn">e</span>.<a href="../.././Mathlib/Logic/Equiv/Defs.html#Equiv.symm">symm</a></span>)</span></span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">⇑<span class="fn">(<a href="../.././Mathlib/LinearAlgebra/Matrix/ToLin.html#Matrix.toLin'">toLin'</a> <span class="fn">M</span>)</span></span></div></div></div></div><div class="decl" id="Matrix.reindex_left_toEuclideanLin"><div class="theorem"><div class="gh_link"><a href="https://github.com/Timeroot/Lean-QuantumInfo/blob/2e4e7e9f29805059c1d2937909f19166fdf87069/QuantumInfo/ForMathlib/LinearEquiv.lean#L68-L72">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumInfo/ForMathlib/LinearEquiv.html#Matrix.reindex_left_toEuclideanLin"><span class="name">Matrix</span>.<span class="name">reindex_left_toEuclideanLin</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d₁</span> : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d₂</span> : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">d₃</span> : <a href="../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">𝕜</span> : <a href="../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Analysis/RCLike/Basic.html#RCLike">RCLike</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Data/Fintype/Defs.html#Fintype">Fintype</a> <span class="fn">d₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">d₂</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">e</span> : <span class="fn">d₁</span> <a href="../.././Mathlib/Logic/Equiv/Defs.html#Equiv">≃</a> <span class="fn">d₃</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">M</span> : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Matrix/Defs.html#Matrix">Matrix</a> <span class="fn">d₁</span> <span class="fn">d₂</span> <span class="fn">𝕜</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">⇑<span class="fn">(<a href="../.././Mathlib/Analysis/InnerProductSpace/PiL2.html#Matrix.toEuclideanLin">toEuclideanLin</a> <span class="fn">(<span class="fn">(<a href="../.././Mathlib/LinearAlgebra/Matrix/Defs.html#Matrix.reindex">reindex</a> <span class="fn">e</span> <span class="fn">(<a href="../.././Mathlib/Logic/Equiv/Defs.html#Equiv.refl">Equiv.refl</a> <span class="fn">d₂</span>)</span>)</span> <span class="fn">M</span>)</span>)</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">⇑<span class="fn">(<a href="../.././QuantumInfo/ForMathlib/LinearEquiv.html#LinearEquiv.euclidean_of_relabel">LinearEquiv.euclidean_of_relabel</a> <span class="fn">𝕜</span> <span class="fn"><span class="fn">e</span>.<a href="../.././Mathlib/Logic/Equiv/Defs.html#Equiv.symm">symm</a></span>)</span></span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">⇑<span class="fn">(<a href="../.././Mathlib/Analysis/InnerProductSpace/PiL2.html#Matrix.toEuclideanLin">toEuclideanLin</a> <span class="fn">M</span>)</span></span></div></div></div></div></main>
+<nav class="nav"><iframe src="../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>
