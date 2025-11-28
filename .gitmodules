@@ -1,3 +1,6 @@
 [submodule "ZooClasses"]
 	path = ZooClasses
 	url = https://github.com/Timeroot/ZooClasses
+[submodule "QuantumGame"]
+	path = QuantumGame
+	url = https://github.com/Timeroot/QuantumGame
