@@ -1,0 +1,129 @@
+{
+  "levels": [
+    {
+      "id": "1",
+      "name": "First Steps",
+      "description": "Two of the same cancel out. Click the × between them.",
+      "start": ["X", "X"],
+      "goal": { "type": "identity" },
+      "par": 1,
+      "allowed": { "merge": ["same-pauli"], "swap": false, "split": false }
+    },
+    {
+      "id": "1B",
+      "name": "Three Pairs",
+      "description": "Merge all three pairs",
+      "start": ["X", "X", "Y", "Y", "Z", "Z"],
+      "goal": { "type": "identity" },
+      "par": 3,
+      "allowed": { "merge": ["same-pauli"], "swap": false, "split": false }
+    },
+    {
+      "id": "2",
+      "name": "Color Mixing",
+      "description": "Any two different colors combine to make the third",
+      "start": ["X", "Y"],
+      "goal": { "type": "exact", "gates": ["Z"] },
+      "par": 1
+    },
+    {
+      "id": "2A",
+      "name": "Three's a Crowd",
+      "description": "Red + Blue + Green = White",
+      "start": ["X", "Y", "Z"],
+      "goal": { "type": "identity" },
+      "par": 2
+    },
+    {
+      "id": "2B",
+      "name": "Clear the Wire",
+      "description": "Clear it all away!",
+      "start": ["X", "Y", "Y", "X", "Z", "Y", "X"],
+      "goal": { "type": "identity" },
+      "par": 6
+    },
+    {
+      "id": "3A",
+      "name": "Splitting",
+      "description": "Click on a gate to split it into two different colors. Turn Blue into Red and Green.",
+      "start": ["Z"],
+      "goal": { "type": "exact", "gates": ["X", "Y"] },
+      "par": 1
+    },
+    {
+      "id": "3B",
+      "name": "Expansion",
+      "description": "Repeatedly split until you have eight gates",
+      "start": ["X"],
+      "goal": { "type": "length", "length": 8 },
+      "par": 7
+    },
+    {
+      "id": "4",
+      "name": "Half Measures",
+      "description": "Two halves make a whole.",
+      "start": ["Sz", "Sz"],
+      "goal": { "type": "exact", "gates": ["Z"] },
+      "hint": "S + S = Z, and Z + Z = I",
+      "par": 1
+    },
+    {
+      "id": "5",
+      "name": "The Hadamard",
+      "description": "The swirling <i>Hadamard</i> swaps colors by moving past them. Click 🔁 to swap.",
+      "start": ["Z", "Hy"],
+      "goal": { "type": "exact", "gates": ["Hy", "X"] },
+      "hint": "Commute H past Z to change Z's color",
+      "par": 1
+    },
+    {
+      "id": "5A",
+      "name": "Color Swap",
+      "description": "By changing colors, we enable new interactions",
+      "start": ["X", "Hy", "Z"],
+      "goal": { "type": "exact", "gates": ["Hy"] },
+      "par": 2
+    },
+    {
+      "id": "5B",
+      "name": "Own Worst Enemy",
+      "description": "The swirl cancels out with itself",
+      "start": ["Hx", "Hx", "Hy", "Hy", "Hz", "Hz"],
+      "goal": { "type": "identity" },
+      "par": 3
+    },
+    {
+      "id": "6",
+      "name": "Dagger Dance",
+      "description": "The block on the right is just a half-block short",
+      "start": ["Sz", "Szd"],
+      "goal": { "type": "identity" },
+      "par": 1
+    },
+    {
+      "id": "7",
+      "name": "Quarter Turns",
+      "description": "The halves move freely past their whole counterparts",
+      "start": ["Sx", "X", "Sx", "Sz", "Z", "Sz"],
+      "goal": { "type": "identity" },
+      "par": 9
+    },
+    {
+      "id": "8",
+      "name": "Swirler Sandwich",
+      "description": "A classic quantum identity",
+      "start": ["Hy", "X", "Hy", "Z"],
+      "goal": { "type": "identity" },
+      "par": 4
+    },
+    {
+      "id": "9",
+      "name": "All Three Swirlers",
+      "description": "Each H swaps different colors",
+      "start": ["Y", "Sx", "Sz", "Hx", "Sy", "Z", "Hy", "Sz", "Y", "Hz", "Z"],
+      "goal": { "type": "length", "length": 3 },
+      "hint": "Different H gates don't directly cancel",
+      "par": 13
+    }
+  ]
+}

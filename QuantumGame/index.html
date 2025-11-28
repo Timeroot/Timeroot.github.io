@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Gate Puzzle</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Quantum</h1>
+    <p class="subtitle">Clifford Gate Puzzles</p>
+
+    <div class="level-info" id="level-info">
+        <!-- Level info rendered by game.js -->
+    </div>
+
+    <div class="game-container">
+        <div class="wire-container">
+            <div class="wire-line"></div>
+            <div class="gates-row" id="gates-row">
+                <!-- Gates rendered here by game.js -->
+            </div>
+        </div>
+        <div class="status" id="status"></div>
+    </div>
+
+    <div class="controls">
+        <button onclick="prevLevel()" title="Previous Level">◀</button>
+        <button onclick="resetGame()">Reset</button>
+        <button onclick="nextLevel()" title="Next Level">▶</button>
+        <button onclick="enterSandboxMode()">Sandbox</button>
+    </div>
+
+    <details class="instructions">
+        <summary>How to Play</summary>
+        <ul>
+            <li><strong>Click ×</strong> between gates to <em>merge</em> them</li>
+            <li><strong>Click 🔁</strong> between H and Pauli to <em>swap</em> (commute) — the Pauli changes color!</li>
+            <li>Same gates annihilate; different Paulis → third color</li>
+            <li>Two half-gates (S) of same color → full gate</li>
+            <li>H×H = I (Hadamards self-annihilate)</li>
+            <li><strong>Click a gate</strong> to split into two different Paulis</li>
+            <li><kbd>Shift</kbd>+click to split reversed order</li>
+            <li><kbd>Ctrl</kbd>+click to split into two half-gates (S×S)</li>
+        </ul>
+    </details>
+
+    <label class="option-toggle">
+        <input type="checkbox" id="show-labels" onchange="toggleLabels()">
+        <span>Show advanced labels</span>
+    </label>
+
+    <script src="game.js"></script>
+</body>
+</html>

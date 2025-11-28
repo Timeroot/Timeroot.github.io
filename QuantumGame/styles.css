@@ -1,0 +1,788 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-dark: #0a0a12;
+    --bg-mid: #12121f;
+    --wire-color: #2a2a4a;
+    --glow-x: #ff3366;
+    --glow-y: #33ff88;
+    --glow-z: #3388ff;
+    --text-dim: #6a6a8a;
+    --text-bright: #e0e0ff;
+}
+
+body {
+    min-height: 100vh;
+    background: var(--bg-dark);
+    background-image: 
+        radial-gradient(ellipse at 20% 80%, rgba(255, 51, 102, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(51, 136, 255, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(51, 255, 136, 0.05) 0%, transparent 60%);
+    font-family: 'Rajdhani', sans-serif;
+    color: var(--text-bright);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    overflow-x: hidden;
+}
+
+h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(90deg, var(--glow-x), var(--glow-y), var(--glow-z));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+    0%, 100% { filter: brightness(1); }
+    50% { filter: brightness(1.3); }
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: var(--text-dim);
+    margin-bottom: 1rem;
+    letter-spacing: 0.2em;
+}
+
+/* ============================================
+   Level Info Display
+   ============================================ */
+
+.level-info {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    min-height: 60px;
+}
+
+.level-header {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.1rem;
+    color: var(--text-bright);
+    margin-bottom: 0.3rem;
+}
+
+.level-desc {
+    font-size: 0.95rem;
+    color: var(--text-dim);
+    margin-bottom: 0.3rem;
+}
+
+.level-goal {
+    font-size: 0.9rem;
+    color: var(--text-bright);
+    margin-bottom: 0.3rem;
+    opacity: 0.9;
+}
+
+.level-stats {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    opacity: 0.8;
+}
+
+/* ============================================
+   Game Container & Wire
+   ============================================ */
+
+.game-container {
+    background: var(--bg-mid);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    padding: 3rem 4rem;
+    box-shadow: 
+        0 0 60px rgba(51, 136, 255, 0.1),
+        inset 0 0 60px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.wire-container {
+    display: flex;
+    align-items: center;
+    min-height: 100px;
+    position: relative;
+}
+
+.wire-line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--wire-color);
+    transform: translateY(-50%);
+    z-index: 0;
+    border-radius: 2px;
+}
+
+.gates-row {
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    min-width: 200px;
+    justify-content: center;
+}
+
+/* ============================================
+   Gates - Base Styles
+   ============================================ */
+
+.gate {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    user-select: none;
+    overflow: hidden;
+}
+
+.gate::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 15px;
+    opacity: 0.6;
+    z-index: -1;
+    transition: opacity 0.2s ease;
+}
+
+.gate:hover::before {
+    opacity: 1;
+}
+
+.gate:hover {
+    transform: scale(1.1);
+}
+
+.gate:active {
+    transform: scale(0.95);
+}
+
+.gate-label {
+    position: relative;
+    z-index: 2;
+    text-shadow: 0 0 10px rgba(0,0,0,0.8);
+}
+
+/* ============================================
+   Gates - Full Pauli Gates (X, Y, Z)
+   ============================================ */
+
+.gate-x {
+    background: linear-gradient(135deg, #ff3366 0%, #cc1144 100%);
+    box-shadow: 0 0 20px rgba(255, 51, 102, 0.5);
+    color: #fff;
+}
+
+.gate-x::before {
+    background: var(--glow-x);
+    box-shadow: 0 0 30px var(--glow-x);
+}
+
+.gate-y {
+    background: linear-gradient(135deg, #33ff88 0%, #11cc55 100%);
+    box-shadow: 0 0 20px rgba(51, 255, 136, 0.5);
+    color: #0a0a12;
+}
+
+.gate-y::before {
+    background: var(--glow-y);
+    box-shadow: 0 0 30px var(--glow-y);
+}
+
+.gate-z {
+    background: linear-gradient(135deg, #3388ff 0%, #1155cc 100%);
+    box-shadow: 0 0 20px rgba(51, 136, 255, 0.5);
+    color: #fff;
+}
+
+.gate-z::before {
+    background: var(--glow-z);
+    box-shadow: 0 0 30px var(--glow-z);
+}
+
+/* ============================================
+   Gates - Half Gates (S gates: √X, √Y, √Z)
+   ============================================ */
+
+.gate-sx {
+    background: linear-gradient(to top, #ff3366 0%, #ff3366 50%, #1a1a2e 50%, #1a1a2e 100%);
+    box-shadow: 0 0 15px rgba(255, 51, 102, 0.3);
+    color: #fff;
+    border: 2px solid #ff3366;
+}
+
+.gate-sx::before {
+    background: var(--glow-x);
+    box-shadow: 0 0 20px var(--glow-x);
+    opacity: 0.4;
+}
+
+.gate-sy {
+    background: linear-gradient(to top, #33ff88 0%, #33ff88 50%, #1a1a2e 50%, #1a1a2e 100%);
+    box-shadow: 0 0 15px rgba(51, 255, 136, 0.3);
+    color: #33ff88;
+    border: 2px solid #33ff88;
+}
+
+.gate-sy::before {
+    background: var(--glow-y);
+    box-shadow: 0 0 20px var(--glow-y);
+    opacity: 0.4;
+}
+
+.gate-sz {
+    background: linear-gradient(to top, #3388ff 0%, #3388ff 50%, #1a1a2e 50%, #1a1a2e 100%);
+    box-shadow: 0 0 15px rgba(51, 136, 255, 0.3);
+    color: #fff;
+    border: 2px solid #3388ff;
+}
+
+.gate-sz::before {
+    background: var(--glow-z);
+    box-shadow: 0 0 20px var(--glow-z);
+    opacity: 0.4;
+}
+
+/* ============================================
+   Gates - S-dagger Gates (√X†, √Y†, S†)
+   "Three-quarters" to identity: color on bottom, white on top
+   ============================================ */
+
+.gate-sxd {
+    background: linear-gradient(to top, #ff3366 0%, #ff3366 50%, #e8e8f0 50%, #e8e8f0 100%);
+    box-shadow: 0 0 15px rgba(255, 51, 102, 0.3), 0 0 10px rgba(255, 255, 255, 0.2);
+    color: #1a1a2e;
+    border: 2px solid #ff3366;
+}
+
+.gate-sxd::before {
+    background: linear-gradient(135deg, var(--glow-x), #ffffff);
+    box-shadow: 0 0 20px var(--glow-x), 0 0 15px rgba(255, 255, 255, 0.3);
+    opacity: 0.4;
+}
+
+.gate-syd {
+    background: linear-gradient(to top, #33ff88 0%, #33ff88 50%, #e8e8f0 50%, #e8e8f0 100%);
+    box-shadow: 0 0 15px rgba(51, 255, 136, 0.3), 0 0 10px rgba(255, 255, 255, 0.2);
+    color: #1a1a2e;
+    border: 2px solid #33ff88;
+}
+
+.gate-syd::before {
+    background: linear-gradient(135deg, var(--glow-y), #ffffff);
+    box-shadow: 0 0 20px var(--glow-y), 0 0 15px rgba(255, 255, 255, 0.3);
+    opacity: 0.4;
+}
+
+.gate-szd {
+    background: linear-gradient(to top, #3388ff 0%, #3388ff 50%, #e8e8f0 50%, #e8e8f0 100%);
+    box-shadow: 0 0 15px rgba(51, 136, 255, 0.3), 0 0 10px rgba(255, 255, 255, 0.2);
+    color: #1a1a2e;
+    border: 2px solid #3388ff;
+}
+
+.gate-szd::before {
+    background: linear-gradient(135deg, var(--glow-z), #ffffff);
+    box-shadow: 0 0 20px var(--glow-z), 0 0 15px rgba(255, 255, 255, 0.3);
+    opacity: 0.4;
+}
+
+/* ============================================
+   Gates - Hadamard-type Gates (axis swaps)
+   H_Z swaps X↔Y (traditional Hadamard swaps X↔Z)
+   H_X swaps Y↔Z
+   H_Y swaps X↔Z (this is the traditional H)
+   ============================================ */
+
+@keyframes swirl {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Base hadamard style */
+.gate-h {
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    color: #fff;
+    font-size: 1.1rem;
+}
+
+.gate-h::after {
+    content: '⟲';
+    position: absolute;
+    font-size: 0.7rem;
+    bottom: 4px;
+    right: 4px;
+    opacity: 0.7;
+}
+
+.gate-h:hover::after {
+    animation: swirl 1s linear infinite;
+}
+
+/* H_Z: swaps X↔Y (Red↔Green swirl) */
+.gate-hz {
+    background: conic-gradient(
+        from 0deg,
+        var(--glow-x) 0deg,
+        var(--glow-y) 60deg,
+        var(--glow-x) 120deg,
+        var(--glow-y) 180deg,
+        var(--glow-x) 240deg,
+        var(--glow-y) 300deg,
+        var(--glow-x) 360deg
+    );
+    box-shadow: 
+        0 0 15px rgba(255, 51, 102, 0.3),
+        0 0 15px rgba(51, 255, 136, 0.3);
+}
+
+.gate-hz::before {
+    background: linear-gradient(135deg, var(--glow-x), var(--glow-y));
+    box-shadow: 0 0 25px var(--glow-x), 0 0 25px var(--glow-y);
+}
+
+/* H_X: swaps Y↔Z (Green↔Blue swirl) */
+.gate-hx {
+    background: conic-gradient(
+        from 0deg,
+        var(--glow-y) 0deg,
+        var(--glow-z) 60deg,
+        var(--glow-y) 120deg,
+        var(--glow-z) 180deg,
+        var(--glow-y) 240deg,
+        var(--glow-z) 300deg,
+        var(--glow-y) 360deg
+    );
+    box-shadow: 
+        0 0 15px rgba(51, 255, 136, 0.3),
+        0 0 15px rgba(51, 136, 255, 0.3);
+}
+
+.gate-hx::before {
+    background: linear-gradient(135deg, var(--glow-y), var(--glow-z));
+    box-shadow: 0 0 25px var(--glow-y), 0 0 25px var(--glow-z);
+}
+
+/* H_Y: swaps X↔Z (Red↔Blue swirl) - traditional Hadamard */
+.gate-hy {
+    background: conic-gradient(
+        from 0deg,
+        var(--glow-x) 0deg,
+        var(--glow-z) 60deg,
+        var(--glow-x) 120deg,
+        var(--glow-z) 180deg,
+        var(--glow-x) 240deg,
+        var(--glow-z) 300deg,
+        var(--glow-x) 360deg
+    );
+    box-shadow: 
+        0 0 15px rgba(255, 51, 102, 0.3),
+        0 0 15px rgba(51, 136, 255, 0.3);
+}
+
+.gate-hy::before {
+    background: linear-gradient(135deg, var(--glow-x), var(--glow-z));
+    box-shadow: 0 0 25px var(--glow-x), 0 0 25px var(--glow-z);
+}
+
+/* ============================================
+   Gaps (merge points between gates)
+   ============================================ */
+
+.gap {
+    width: 40px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.gap::after {
+    content: '⟨⟩';
+    font-size: 1.2rem;
+    color: var(--text-dim);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.gap:hover::after {
+    opacity: 1;
+}
+
+.gap:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+}
+
+.gap.mergeable:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.gap.mergeable::after {
+    content: '×';
+    font-size: 1.5rem;
+}
+
+.gap.swappable:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.gap.swappable::after {
+    content: '🔁';
+    font-size: 1rem;
+}
+
+.gap.disabled {
+    cursor: default;
+}
+
+.gap.disabled::after {
+    content: '';
+}
+
+.gap.disabled:hover {
+    background: transparent;
+}
+
+/* ============================================
+   Instructions Panel
+   ============================================ */
+
+.instructions {
+    margin-top: 4rem;
+    max-width: 600px;
+}
+
+.instructions summary {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.15em;
+    color: var(--text-dim);
+    cursor: pointer;
+    padding: 0.75rem 1.25rem;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 0.5rem;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.instructions summary::-webkit-details-marker {
+    display: none;
+}
+
+.instructions summary::before {
+    content: '▶';
+    font-size: 0.7rem;
+    transition: transform 0.2s ease;
+}
+
+.instructions[open] summary::before {
+    transform: rotate(90deg);
+}
+
+.instructions summary:hover {
+    background: rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-bright);
+}
+
+.instructions ul {
+    list-style: none;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    padding: 1.25rem 1.5rem;
+    margin-top: 0.5rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.instructions li {
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.instructions li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--text-dim);
+}
+
+/* ============================================
+   Color Dots (for instructions)
+   ============================================ */
+
+.color-dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin: 0 3px;
+    vertical-align: middle;
+}
+
+.color-dot.x { background: var(--glow-x); box-shadow: 0 0 8px var(--glow-x); }
+.color-dot.y { background: var(--glow-y); box-shadow: 0 0 8px var(--glow-y); }
+.color-dot.z { background: var(--glow-z); box-shadow: 0 0 8px var(--glow-z); }
+
+.color-dot.half {
+    background: linear-gradient(to top, currentColor 50%, transparent 50%);
+    border: 1px solid currentColor;
+}
+.color-dot.half.x { color: var(--glow-x); background: linear-gradient(to top, var(--glow-x) 50%, transparent 50%); }
+.color-dot.half.y { color: var(--glow-y); background: linear-gradient(to top, var(--glow-y) 50%, transparent 50%); }
+.color-dot.half.z { color: var(--glow-z); background: linear-gradient(to top, var(--glow-z) 50%, transparent 50%); }
+
+/* ============================================
+   Controls & Buttons
+   ============================================ */
+
+.controls {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+button {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 0.75rem 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-bright);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    letter-spacing: 0.1em;
+}
+
+button:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+kbd {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 3px;
+    padding: 1px 5px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.85em;
+}
+
+/* ============================================
+   Status & Empty State
+   ============================================ */
+
+.status {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    min-height: 1.5rem;
+}
+
+.empty-state {
+    font-size: 1.2rem;
+    color: var(--text-dim);
+    padding: 1rem 2rem;
+    font-style: italic;
+}
+
+/* ============================================
+   Animations
+   ============================================ */
+
+@keyframes pop-in {
+    0% { transform: scale(0); opacity: 0; }
+    70% { transform: scale(1.1); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes pop-out {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(0); opacity: 0; }
+}
+
+.gate.new {
+    animation: pop-in 0.3s ease forwards;
+}
+
+/* Merge animation */
+@keyframes merge-slide-left {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(20px); opacity: 0.5; }
+}
+
+@keyframes merge-slide-right {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-20px); opacity: 0.5; }
+}
+
+@keyframes merge-gap-collapse {
+    0% { width: 40px; opacity: 1; }
+    100% { width: 0px; opacity: 0; }
+}
+
+@keyframes merge-pop {
+    0% { transform: scale(0.5); opacity: 0; }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.gate.merging-left {
+    animation: merge-slide-left 0.1s ease forwards;
+}
+
+.gate.merging-right {
+    animation: merge-slide-right 0.1s ease forwards;
+}
+
+.gap.merging-gap {
+    animation: merge-gap-collapse 0.1s ease forwards;
+}
+
+.gate.merge-pop {
+    animation: merge-pop 0.15s ease forwards;
+}
+
+/* Annihilation animation - gates slide further and disappear */
+@keyframes annihilate-slide-left {
+    0% { transform: translateX(0); opacity: 1; }
+    100% { transform: translateX(50px); opacity: 0; }
+}
+
+@keyframes annihilate-slide-right {
+    0% { transform: translateX(0); opacity: 1; }
+    100% { transform: translateX(-50px); opacity: 0; }
+}
+
+@keyframes annihilate-gap-collapse {
+    0% { width: 40px; opacity: 1; }
+    100% { width: 0px; opacity: 0; }
+}
+
+@keyframes annihilate-pop-fade {
+    0% { transform: scale(0.3); opacity: 0; }
+    30% { transform: scale(1.1); opacity: 1; }
+    70% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(0.8); opacity: 0; }
+}
+
+.gate.annihilating-left {
+    animation: annihilate-slide-left 0.2s ease forwards;
+}
+
+.gate.annihilating-right {
+    animation: annihilate-slide-right 0.2s ease forwards;
+}
+
+.gap.annihilating-gap {
+    animation: annihilate-gap-collapse 0.1s ease forwards;
+}
+
+/* Identity gate (white) for annihilation */
+.gate-identity {
+    background: linear-gradient(135deg, #ffffff 0%, #d0d0e0 100%);
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+    color: #2a2a4a;
+}
+
+.gate-identity::before {
+    background: #ffffff;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.8);
+}
+
+.gate.annihilate-pop {
+    animation: annihilate-pop-fade 0.25s ease forwards;
+}
+
+/* ============================================
+   Options Toggle
+   ============================================ */
+
+.option-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+}
+
+.option-toggle:hover {
+    opacity: 1;
+}
+
+.option-toggle input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    border: 1px solid var(--text-dim);
+    border-radius: 3px;
+    background: transparent;
+    cursor: pointer;
+    position: relative;
+}
+
+.option-toggle input[type="checkbox"]:checked {
+    background: var(--text-dim);
+}
+
+.option-toggle input[type="checkbox"]:checked::after {
+    content: '✓';
+    position: absolute;
+    top: -1px;
+    left: 1px;
+    font-size: 0.7rem;
+    color: var(--bg-dark);
+}
+
+/* Hide labels by default */
+.gate-label {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+/* Show labels when checkbox is checked (controlled by JS adding class to body) */
+body.show-labels .gate-label {
+    opacity: 1;
+}
+
