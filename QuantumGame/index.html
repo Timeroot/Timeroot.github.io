@@ -15,13 +15,15 @@
     </div>
 
     <div class="game-container">
-        <div class="wire-container">
-            <div class="wire-line"></div>
-            <div class="gates-row" id="gates-row">
-                <!-- Gates rendered here by game.js -->
-            </div>
+        <div class="wires-container" id="wires-container">
+            <!-- Wires rendered here by game.js -->
         </div>
         <div class="status" id="status"></div>
+    </div>
+
+    <div class="global-phase-container hidden" id="global-phase-container">
+        <span class="phase-label">Global Phase:</span>
+        <span class="phase-value" id="global-phase">1</span>
     </div>
 
     <div class="controls">
@@ -29,6 +31,7 @@
         <button onclick="resetGame()">Reset</button>
         <button onclick="nextLevel()" title="Next Level">▶</button>
         <button onclick="enterSandboxMode()">Sandbox</button>
+        <button onclick="randomizeMulti()">Multisandbox</button>
     </div>
 
     <details class="instructions">
@@ -45,10 +48,21 @@
         </ul>
     </details>
 
-    <label class="option-toggle">
-        <input type="checkbox" id="show-labels" onchange="toggleLabels()">
-        <span>Show advanced labels</span>
-    </label>
+    <div class="options-row">
+        <label class="option-toggle">
+            <input type="checkbox" id="show-labels" onchange="toggleLabels()">
+            <span>Show advanced labels</span>
+        </label>
+        <label class="option-toggle">
+            <input type="checkbox" id="show-phase" onchange="togglePhase()">
+            <span>Always show phase</span>
+        </label>
+    </div>
+
+    <!--<div class="dev-tools" style="margin-top: 40px; opacity: 0.3; font-size: 0.8rem;">
+        <button onclick="runTests().then(r => alert(`Tests: ${r.passed} passed, ${r.failed} failed`))" style="font-size: 0.7rem; padding: 2px 6px;">Run Tests</button>
+        <a href="test.html" style="margin-left: 10px; color: inherit;">Test Page</a>
+    </div>-->
 
     <script src="game.js"></script>
 </body>

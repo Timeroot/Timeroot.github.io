@@ -4,7 +4,7 @@
       "id": "1",
       "name": "First Steps",
       "description": "Two of the same cancel out. Click the × between them.",
-      "start": ["X", "X"],
+      "start": ["Px", "Px"],
       "goal": { "type": "identity" },
       "par": 1,
       "allowed": { "merge": ["same-pauli"], "swap": false, "split": false }
@@ -13,7 +13,7 @@
       "id": "1B",
       "name": "Three Pairs",
       "description": "Merge all three pairs",
-      "start": ["X", "X", "Y", "Y", "Z", "Z"],
+      "start": ["Px", "Px", "Py", "Py", "Pz", "Pz"],
       "goal": { "type": "identity" },
       "par": 3,
       "allowed": { "merge": ["same-pauli"], "swap": false, "split": false }
@@ -22,15 +22,15 @@
       "id": "2",
       "name": "Color Mixing",
       "description": "Any two different colors combine to make the third",
-      "start": ["X", "Y"],
-      "goal": { "type": "exact", "gates": ["Z"] },
+      "start": ["Px", "Py"],
+      "goal": { "type": "exact", "gates": ["Pz"] },
       "par": 1
     },
     {
       "id": "2A",
       "name": "Three's a Crowd",
       "description": "Red + Blue + Green = White",
-      "start": ["X", "Y", "Z"],
+      "start": ["Px", "Py", "Pz"],
       "goal": { "type": "identity" },
       "par": 2
     },
@@ -38,7 +38,7 @@
       "id": "2B",
       "name": "Clear the Wire",
       "description": "Clear it all away!",
-      "start": ["X", "Y", "Y", "X", "Z", "Y", "X"],
+      "start": ["Px", "Py", "Py", "Px", "Pz", "Py", "Px"],
       "goal": { "type": "identity" },
       "par": 6
     },
@@ -46,15 +46,15 @@
       "id": "3A",
       "name": "Splitting",
       "description": "Click on a gate to split it into two different colors. Turn Blue into Red and Green.",
-      "start": ["Z"],
-      "goal": { "type": "exact", "gates": ["X", "Y"] },
+      "start": ["Pz"],
+      "goal": { "type": "exact", "gates": ["Px", "Py"] },
       "par": 1
     },
     {
       "id": "3B",
       "name": "Expansion",
       "description": "Repeatedly split until you have eight gates",
-      "start": ["X"],
+      "start": ["Px"],
       "goal": { "type": "length", "length": 8 },
       "par": 7
     },
@@ -63,7 +63,7 @@
       "name": "Half Measures",
       "description": "Two halves make a whole.",
       "start": ["Sz", "Sz"],
-      "goal": { "type": "exact", "gates": ["Z"] },
+      "goal": { "type": "length", "length": 1 },
       "hint": "S + S = Z, and Z + Z = I",
       "par": 1
     },
@@ -71,8 +71,8 @@
       "id": "5",
       "name": "The Hadamard",
       "description": "The swirling <i>Hadamard</i> swaps colors by moving past them. Click 🔁 to swap.",
-      "start": ["Z", "Hy"],
-      "goal": { "type": "exact", "gates": ["Hy", "X"] },
+      "start": ["Pz", "Hy"],
+      "goal": { "type": "exact", "gates": ["Hy", "Px"] },
       "hint": "Commute H past Z to change Z's color",
       "par": 1
     },
@@ -80,8 +80,8 @@
       "id": "5A",
       "name": "Color Swap",
       "description": "By changing colors, we enable new interactions",
-      "start": ["X", "Hy", "Z"],
-      "goal": { "type": "exact", "gates": ["Hy"] },
+      "start": ["Px", "Hy", "Pz"],
+      "goal": { "type": "length", "length": 1 },
       "par": 2
     },
     {
@@ -96,7 +96,7 @@
       "id": "6",
       "name": "Dagger Dance",
       "description": "The block on the right is just a half-block short",
-      "start": ["Sz", "Szd"],
+      "start": ["Sz", "Sdz"],
       "goal": { "type": "identity" },
       "par": 1
     },
@@ -104,7 +104,7 @@
       "id": "7",
       "name": "Quarter Turns",
       "description": "The halves move freely past their whole counterparts",
-      "start": ["Sx", "X", "Sx", "Sz", "Z", "Sz"],
+      "start": ["Sx", "Px", "Sx", "Sz", "Pz", "Sz"],
       "goal": { "type": "identity" },
       "par": 9
     },
@@ -112,7 +112,7 @@
       "id": "8",
       "name": "Swirler Sandwich",
       "description": "A classic quantum identity",
-      "start": ["Hy", "X", "Hy", "Z"],
+      "start": ["Hy", "Px", "Hy", "Pz"],
       "goal": { "type": "identity" },
       "par": 4
     },
@@ -120,10 +120,81 @@
       "id": "9",
       "name": "All Three Swirlers",
       "description": "Each H swaps different colors",
-      "start": ["Y", "Sx", "Sz", "Hx", "Sy", "Z", "Hy", "Sz", "Y", "Hz", "Z"],
+      "start": ["Py", "Sx", "Sz", "Hx", "Sy", "Pz", "Hy", "Sz", "Py", "Hz", "Pz"],
       "goal": { "type": "length", "length": 3 },
       "hint": "Different H gates don't directly cancel",
       "par": 13
+    },
+    {
+      "id": "Links 1",
+      "name": "More wires",
+      "description": "Blocks each live on a wire. They can't affect each other. ... Yet.",
+      "qubits": 3,
+      "circuit": [
+        { "id": "Px", "qubits": [0] },
+        { "id": "Px", "qubits": [0] },
+        { "id": "Sz", "qubits": [1] },
+        { "id": "Py", "qubits": [1] },
+        { "id": "Py", "qubits": [1] },
+        { "id": "Sz", "qubits": [1] },
+        { "id": "Pz", "qubits": [1] },
+        { "id": "Hz", "qubits": [2] },
+        { "id": "Px", "qubits": [2] },
+        { "id": "Hz", "qubits": [2] }
+      ],
+      "goal": { "type": "length", "length": 1 },
+      "par": 6
+    },
+    {
+      "id": "Links 2",
+      "name": "Links",
+      "description": "<i>Links</i> join multiple wires together. They connect two blocks. They cancel out, like individual blocks.",
+      "qubits": 2,
+      "circuit": [
+        { "id": "CG", "qubits": [0, 1], "gates": ["Pz", "Px"] },
+        { "id": "CG", "qubits": [0, 1], "gates": ["Pz", "Px"] }
+      ],
+      "goal": { "type": "identity" },
+      "par": 1
+    },
+    {
+      "id": "Links 3",
+      "name": "Moving through Links",
+      "description": "Links on different wires don't care about each other. Blocks can move past each other.",
+      "qubits": 4,
+      "circuit": [
+        { "id": "CG", "qubits": [0, 2], "gates": ["Pz", "Px"] },
+        { "id": "Px", "qubits": [1] },
+        { "id": "CG", "qubits": [0, 2], "gates": ["Pz", "Px"] },
+        { "id": "Hx", "qubits": [2] },
+        { "id": "CG", "qubits": [0, 3], "gates": ["Px", "Py"] },
+        { "id": "CG", "qubits": [0, 3], "gates": ["Py", "Pz"] },
+        { "id": "Hx", "qubits": [2] },
+        { "id": "Px", "qubits": [1] }
+      ],
+      "goal": { "type": "length", "length": 2 },
+      "par": 8
+    },
+    {
+      "id": "test",
+      "name": "Multi-Qubit Playground",
+      "description": "Test: Px commutes with CG[Px,*] on control; same CGs annihilate; gates commute past non-touching CGs!",
+      "qubits": 3,
+      "circuit": [
+        { "id": "Px", "qubits": [0] },
+        { "id": "CG", "qubits": [0, 2], "gates": ["Px", "Pz"] },
+        { "id": "CG", "qubits": [2, 0], "gates": ["Pz", "Px"] },
+        { "id": "CG", "qubits": [1, 2], "gates": ["Px", "Pz"] },
+        { "id": "CG", "qubits": [2, 1], "gates": ["Pz", "Py"] },
+        { "id": "Py", "qubits": [1] },
+        { "id": "CG", "qubits": [0, 1], "gates": ["Pz", "Px"] },
+        { "id": "CG", "qubits": [0, 1], "gates": ["Pz", "Px"] },
+        { "id": "Px", "qubits": [1] },
+        { "id": "CG", "qubits": [1, 0], "gates": ["Px", "Pz"] },
+        { "id": "CG", "qubits": [1, 2], "gates": ["Px", "Py"] }
+      ],
+      "goal": { "type": "identity" },
+      "par": 8
     }
   ]
 }
