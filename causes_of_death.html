@@ -1,0 +1,1103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Causal Pathways of Human Death</title>
+<style>
+  :root{
+    --bg:#0e1116;
+    --panel:#161b22;
+    --panel-2:#1c222b;
+    --ink:#e6edf3;
+    --ink-dim:#9ca3af;
+    --ink-faint:#6b7280;
+    --accent:#7aa2f7;
+    --line:#30363d;
+    --typical:#e5e7eb;
+    --common:#9ca3af;
+    --possible:#6b7280;
+    --rare:#4b5563;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font:13.5px/1.45 system-ui,-apple-system,Segoe UI,Inter,Roboto,sans-serif;
+  }
+  header{
+    padding:16px 22px 10px 22px;border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg,#10151b 0%,#0e1116 100%);
+  }
+  header h1{margin:0 0 4px 0;font-size:18px;font-weight:600;letter-spacing:.2px}
+  header p{margin:4px 0;color:var(--ink-dim);max-width:1100px}
+  header p.small{font-size:12px}
+  header code{background:#0b1118;border:1px solid var(--line);border-radius:3px;padding:0 4px;color:#cbd5e1}
+
+  #app{display:grid;grid-template-columns:1fr 380px;height:calc(100vh - 0px);min-height:0}
+  #left{display:flex;flex-direction:column;min-height:0;border-right:1px solid var(--line)}
+  #toolbar{
+    display:flex;gap:10px;align-items:center;padding:8px 12px;border-bottom:1px solid var(--line);
+    background:var(--panel);flex-wrap:wrap
+  }
+  #toolbar label{font-size:12px;color:var(--ink-dim);display:flex;gap:6px;align-items:center}
+  #toolbar select,#toolbar input{
+    background:#0b1118;border:1px solid var(--line);color:var(--ink);
+    border-radius:4px;padding:4px 6px;font:inherit
+  }
+  #toolbar input{min-width:200px}
+  #toolbar button{
+    background:#0b1118;border:1px solid var(--line);color:var(--ink);
+    border-radius:4px;padding:4px 10px;font:inherit;cursor:pointer
+  }
+  #toolbar button:hover{border-color:#4b5563}
+  #toolbar button.active{background:#1f2937;border-color:#4b5563}
+
+  #cy{flex:1;min-height:0;background:radial-gradient(1100px 600px at 60% 30%, #11161e 0%, #0b0e13 100%)}
+
+  #side{
+    background:var(--panel);min-width:0;display:flex;flex-direction:column
+  }
+  #side .pad{padding:14px 16px;overflow:auto}
+  #side h2{font-size:14px;margin:0 0 6px 0;letter-spacing:.2px}
+  #side h3{font-size:12px;margin:14px 0 6px 0;color:var(--ink-dim);text-transform:uppercase;letter-spacing:.6px}
+  #side .meta{font-size:11.5px;color:var(--ink-dim);margin-bottom:8px}
+  #side .pill{
+    display:inline-block;padding:2px 7px;border-radius:99px;font-size:11px;
+    border:1px solid var(--line);background:#0b1118;color:var(--ink-dim);margin-right:4px
+  }
+  #side .desc{color:#cbd5e1}
+  #side ul{margin:6px 0 6px 18px;padding:0}
+  #side li{margin:3px 0}
+  #side a.nodelink{color:var(--accent);cursor:pointer;text-decoration:none}
+  #side a.nodelink:hover{text-decoration:underline}
+  #side .edge-row{padding:5px 0;border-bottom:1px dashed var(--line)}
+  #side .edge-row:last-child{border-bottom:0}
+  #side .edge-row .lk{font-size:10px;text-transform:uppercase;letter-spacing:.7px;padding:1px 5px;border-radius:3px;border:1px solid var(--line);color:var(--ink-dim);margin-right:6px}
+  #side .edge-row .lk.typical{color:#fde68a;border-color:#a16207;background:#3a2d05}
+  #side .edge-row .lk.common{color:#bae6fd;border-color:#0369a1;background:#082338}
+  #side .edge-row .lk.possible{color:#cbd5e1;border-color:#4b5563;background:#11161e}
+  #side .edge-row .lk.rare{color:#9ca3af;border-color:#374151;background:#0b1118}
+
+  #legend{
+    border-top:1px solid var(--line);background:var(--panel-2);
+    padding:10px 14px;font-size:12px;color:var(--ink-dim);
+    display:flex;flex-wrap:wrap;gap:12px;align-items:center
+  }
+  #legend .swatch{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:middle}
+  #legend .row{display:flex;align-items:center;gap:6px}
+  #legend hr{border:0;border-left:1px solid var(--line);height:14px;margin:0 4px}
+
+  /* Toolbar likelihood toggles */
+  .lk-toggle{display:inline-flex;gap:4px}
+  .lk-toggle button{padding:3px 8px;font-size:11px}
+
+  .nodebadge{display:inline-block;padding:1px 6px;border-radius:3px;font-size:10.5px;letter-spacing:.4px;border:1px solid var(--line);color:var(--ink-dim);background:#0b1118;margin-left:6px;vertical-align:middle}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Causal Pathways of Human Death — a layered flow chart</h1>
+  <p>What we colloquially call <i>cause of death</i> sits at many different levels of indirection. This chart sorts them top → bottom from <b>upstream etiologies</b> (smoking, infection, trauma, aging) through <b>diseases / clinical syndromes</b>, then <b>acute organ-system failures</b>, then <b>cellular insult to the brain</b>, then the <b>final neurological mechanism</b>, ending at <b>death</b>. Edges are tagged <code>typical</code> / <code>common</code> / <code>possible</code> / <code>rare</code> with a short mechanism note. Click any node or edge to read commentary in the panel on the right.</p>
+  <p class="small">L4 ("disease") nodes loosely correspond to the kind of underlying cause coded on death certificates (ICD-10 chapter shown when applicable). The graph is a DAG, not a strict tree — most upstream nodes have several plausible descents, and most acute failures have several plausible upstream causes.</p>
+</header>
+
+<div id="app">
+  <div id="left">
+    <div id="toolbar">
+      <label>Search
+        <input id="search" placeholder="e.g. sepsis, stroke, hypoxia" />
+      </label>
+      <label>Show levels
+        <select id="level-filter">
+          <option value="all">all</option>
+          <option value="L5-L0">L5 → L0 (full)</option>
+          <option value="L4-L0">L4 → L0 (no etiology)</option>
+          <option value="L3-L0">L3 → L0 (mechanism only)</option>
+        </select>
+      </label>
+      <span class="lk-toggle">
+        <button data-lk="typical"  class="active">typical</button>
+        <button data-lk="common"   class="active">common</button>
+        <button data-lk="possible" class="active">possible</button>
+        <button data-lk="rare"     class="active">rare</button>
+      </span>
+      <button id="reset">Reset view</button>
+      <button id="relayout">Re-layout</button>
+      <span style="margin-left:auto;color:var(--ink-faint);font-size:11.5px">click a node for details · scroll to zoom · drag to pan</span>
+    </div>
+    <div id="cy"></div>
+    <div id="legend">
+      <div class="row"><span class="swatch" style="background:#0a0a0a;border:1px solid #fff"></span>L0 endpoint</div>
+      <div class="row"><span class="swatch" style="background:#312e81"></span>L1 final neuro mechanism</div>
+      <div class="row"><span class="swatch" style="background:#1e3a8a"></span>L2 cellular insult</div>
+      <div class="row"><span class="swatch" style="background:#155e75"></span>L3 acute org-system failure</div>
+      <div class="row"><span class="swatch" style="background:#365314"></span>L4 disease / syndrome</div>
+      <div class="row"><span class="swatch" style="background:#7c2d12"></span>L5 etiology / risk</div>
+      <hr/>
+      <div class="row"><svg width="40" height="6"><line x1="0" y1="3" x2="40" y2="3" stroke="#e5e7eb" stroke-width="3"/></svg> typical</div>
+      <div class="row"><svg width="40" height="6"><line x1="0" y1="3" x2="40" y2="3" stroke="#9ca3af" stroke-width="2"/></svg> common</div>
+      <div class="row"><svg width="40" height="6"><line x1="0" y1="3" x2="40" y2="3" stroke="#6b7280" stroke-width="1.4" stroke-dasharray="6 4"/></svg> possible</div>
+      <div class="row"><svg width="40" height="6"><line x1="0" y1="3" x2="40" y2="3" stroke="#4b5563" stroke-width="1" stroke-dasharray="2 4"/></svg> rare</div>
+    </div>
+  </div>
+
+  <aside id="side">
+    <div class="pad" id="side-content">
+      <h2>About this chart</h2>
+      <p class="desc">Click a node or edge to see commentary here.</p>
+      <h3>How to read it</h3>
+      <p class="desc">A path from any top node to <b>Death</b> is one possible mechanistic chain. Most real deaths are the simultaneous traversal of several such chains; e.g. an MI causes both an arrhythmia (one chain) and pump failure (another), and either may be the one that actually finishes you. The chart is intentionally <i>permissive</i>: the existence of an edge means that pathway is documented, not that it dominates statistically.</p>
+      <h3>Layers</h3>
+      <ul>
+        <li><b>L5 etiology</b> — the upstream insult (a chronic risk like smoking; an infection; a piece of trauma).</li>
+        <li><b>L4 disease/syndrome</b> — the named clinical condition that gets coded as the underlying cause of death.</li>
+        <li><b>L3 acute physiological failure</b> — what is actually killing you in the last minutes/hours: arrest, shock, asphyxia, herniation, lethal electrolyte derangement.</li>
+        <li><b>L2 cellular insult</b> — what those acute failures do to brain tissue: deprive it of O₂, of fuel, poison it, damage it physically, or inflame it.</li>
+        <li><b>L1 final neurological mechanism</b> — the brain‑level mode of failure: most commonly mass neuronal death; rarely transmission blockade with intact neurons; or gross structural disruption.</li>
+        <li><b>L0 death</b> — defined clinically as either irreversible cardiopulmonary cessation (which causes brain cessation within minutes) or irreversible whole‑brain function loss.</li>
+      </ul>
+    </div>
+  </aside>
+</div>
+
+<script src="https://unpkg.com/cytoscape@3.30.2/dist/cytoscape.min.js"></script>
+<script src="https://unpkg.com/dagre@0.8.5/dist/dagre.min.js"></script>
+<script src="https://unpkg.com/cytoscape-dagre@2.5.0/cytoscape-dagre.js"></script>
+
+<!-- ===== DATA ===== -->
+<script id="data" type="application/json">
+{
+  "levels": [
+    {"id":"L0","name":"Death","color":"#0a0a0a"},
+    {"id":"L1","name":"Final neurological mechanism","color":"#312e81"},
+    {"id":"L2","name":"Cellular insult to the brain","color":"#1e3a8a"},
+    {"id":"L3","name":"Acute organ-system failure","color":"#155e75"},
+    {"id":"L4","name":"Disease / clinical syndrome","color":"#365314"},
+    {"id":"L5","name":"Etiology / risk factor","color":"#7c2d12"}
+  ],
+  "nodes": [
+    {"id":"death","label":"Death","level":"L0","icd":"R99",
+     "desc":"The endpoint. Clinically and legally defined two ways: (a) irreversible cessation of circulation and respiration (cardiac death) — which causes brain death within ~5–10 min — and (b) irreversible cessation of all functions of the entire brain including the brainstem (brain death). Either route requires that the brain stop working permanently; the rest of the body can be sustained on machines for some time after."},
+
+    {"id":"mass_neuronal_death","label":"Mass neuronal death","level":"L1",
+     "desc":"Irreversible loss of enough neurons (especially brainstem and cortex) that integrated brain function cannot be restored. The dominant final mechanism: a neuron that is fully ATP‑depleted for more than ~5 minutes loses ion gradients, swells, and dies. Excitotoxic glutamate release accelerates the cascade in surrounding tissue. By the time mass neuronal death is established, no current intervention can reverse it."},
+    {"id":"transmission_blockade","label":"Synaptic transmission blockade","level":"L1",
+     "desc":"The unusual scenario the question raises: neurons are alive but cannot signal — sodium channels blocked (tetrodotoxin, saxitoxin), acetylcholine release blocked (botulinum), AChR blocked or destroyed (curare, late myasthenic crisis), or NMJ overstimulated to fatigue (organophosphates). On its own this kills by paralysing the diaphragm; if you’re ventilated through it, neurons survive. So in practice transmission blockade kills via the respiratory failure → hypoxia chain, but in principle a sufficiently global blockade is itself a final mechanism."},
+    {"id":"structural_disruption_cns","label":"Catastrophic CNS structural disruption","level":"L1",
+     "desc":"Gross destruction of brain tissue — decapitation, massive penetrating brain trauma, severe blast injury, brainstem transection. The substrate of mind is physically gone; no mechanistic chain through hypoxia is needed."},
+
+    {"id":"cerebral_hypoxia_ischemia","label":"Cerebral hypoxia / ischemia","level":"L2",
+     "desc":"The brain getting too little oxygen, either because there is too little O₂ in arterial blood (hypoxia) or because there is too little blood reaching the brain (ischemia). The brain extracts ~20% of the body’s O₂ at rest and has essentially no O₂ reserve; full ischemia knocks out consciousness in ~10 s and starts irreversible damage at ~4–6 min. The single most common pathway by which any cause-of-death actually kills."},
+    {"id":"cerebral_substrate_deprivation","label":"Substrate deprivation (glucose / ketones)","level":"L2",
+     "desc":"The brain’s ATP comes from glucose (and, after adaptation, ketone bodies). Severe hypoglycemia <~40 mg/dL produces neuroglycopenia: confusion, then seizures, then coma; sustained <~20 mg/dL kills neurons even with normal oxygenation. Distinct from hypoxia because oxygen alone is not enough — neurons are obligate consumers of fuel."},
+    {"id":"toxic_metabolic_neuron","label":"Toxic / metabolic neuronal injury","level":"L2",
+     "desc":"Neurons poisoned by something circulating: uremic toxins, ammonia (hepatic encephalopathy), endogenous metabolites in DKA or severe acidosis, exogenous neurotoxins (cyanide, CO at the cellular level, heavy metals), severe electrolyte derangement disrupting membrane potentials. Some of these blockade transmission; many directly trigger neuron death; many do both."},
+    {"id":"direct_neuron_damage","label":"Direct mechanical/thermal/radiation neuron damage","level":"L2",
+     "desc":"Physical destruction of neural tissue: contusion, laceration, shear injury, hemorrhage compressing tissue, severe burns of the head, ionising radiation at very high doses. Often also produces cerebral edema and herniation as a downstream consequence."},
+    {"id":"cerebral_inflammation","label":"Cerebral inflammation / encephalitis","level":"L2",
+     "desc":"Direct infection of brain tissue (viral, bacterial, fungal, parasitic, prion) or autoimmune attack. Kills neurons through cytokine storm, microglial activation, vasculitic ischemia, and direct cytopathic effect; usually also causes edema → herniation."},
+
+    {"id":"cardiac_arrest","label":"Cardiac arrest","level":"L3",
+     "desc":"The heart stops effective pumping — asystole, ventricular fibrillation, ventricular tachycardia without a pulse, or pulseless electrical activity (PEA). The most common immediate cause of death in any person who isn’t intubated and on life support. Once arrest is established, perfusion of the brain depends entirely on CPR, and irreversible neuronal death begins within minutes."},
+    {"id":"circulatory_collapse","label":"Circulatory shock / collapse","level":"L3",
+     "desc":"Severe global hypoperfusion despite a beating heart. Comprises hypovolemic shock (volume loss), distributive shock (vasodilation: sepsis, anaphylaxis, neurogenic), cardiogenic shock (pump failure), and obstructive shock (PE, tamponade, tension pneumothorax). The brain is starved of blood even though the heart is still moving."},
+    {"id":"exsanguination","label":"Exsanguination","level":"L3",
+     "desc":"Loss of so much circulating blood volume that the cardiovascular system can no longer fill itself. Drops cardiac output, drops oxygen-carrying capacity, and tips into hemorrhagic (hypovolemic) shock. Adults can survive ~30% blood loss; >40% is usually fatal without rapid replacement."},
+    {"id":"respiratory_failure","label":"Respiratory failure","level":"L3",
+     "desc":"Failure of gas exchange between atmosphere and blood. Type I (hypoxemic): lungs cannot oxygenate (pneumonia, ARDS, pulmonary edema). Type II (hypercapnic): minute ventilation insufficient (opioid OD, neuromuscular weakness, severe COPD). Both lead to arterial hypoxia → cerebral hypoxia."},
+    {"id":"airway_obstruction","label":"Airway obstruction","level":"L3",
+     "desc":"Mechanical occlusion of the upper airway: aspirated food/vomit, laryngeal edema, soft-tissue collapse, hanging, drowning, strangulation. No oxygen reaches the lungs at all; cerebral hypoxia is direct and rapid."},
+    {"id":"cerebral_herniation_event","label":"Cerebral herniation / raised ICP","level":"L3",
+     "desc":"The brain, encased in a fixed skull, is physically displaced when something inside expands — a hematoma, edema around an infarct or tumor, infection. Brainstem compression (uncal, tonsillar herniation) abruptly knocks out cardiorespiratory centers. Often the actual mode of death in big strokes, severe TBI, and brain tumors."},
+    {"id":"severe_hyperkalemia","label":"Severe hyperkalemia","level":"L3",
+     "desc":"Serum K⁺ above ~7 mmol/L destabilises cardiac myocyte membranes — peaked T waves, widening QRS, sine-wave pattern, then VF or asystole. The classic mode of death from acute renal failure, crush injury, tumor lysis, and hemolysis."},
+    {"id":"severe_hypoglycemia","label":"Severe hypoglycemia","level":"L3",
+     "desc":"Blood glucose low enough (~<40 mg/dL) that the brain cannot maintain function. Causes seizures, coma, and — if prolonged — neuronal death. Common in insulin overdose, alcohol intoxication on an empty stomach, fulminant hepatic failure, sepsis, sulfonylurea overdose."},
+    {"id":"severe_acidosis","label":"Severe acidemia","level":"L3",
+     "desc":"Arterial pH <~7.0 disrupts cardiac contractility, blunts catecholamine response, and impairs neuronal function. Endpoint of DKA, lactic acidosis from any shock, methanol/ethylene-glycol/cyanide poisoning, and renal failure."},
+    {"id":"severe_hypothermia_state","label":"Severe hypothermia (core <28°C)","level":"L3",
+     "desc":"Cold myocardium becomes electrically unstable — bradyarrhythmias and especially ventricular fibrillation are common; below ~22°C asystole. Coagulopathy, depressed respiratory drive, and impaired oxygen unloading also contribute."},
+    {"id":"severe_hyperthermia_state","label":"Severe hyperthermia (core >40°C)","level":"L3",
+     "desc":"Sustained core temperatures above ~40–41°C denature proteins, trigger systemic inflammatory response, DIC, rhabdomyolysis, and multi-organ failure. The brain itself is exquisitely heat-sensitive: heatstroke without rapid cooling has very high mortality."},
+    {"id":"uremic_state","label":"Uremia","level":"L3",
+     "desc":"Accumulation of nitrogenous wastes (urea, guanidines, middle molecules) when kidneys can no longer clear them. Causes encephalopathy, pericarditis, platelet dysfunction (bleeding), and immune impairment. Without dialysis, death is from a combination of hyperkalemia, fluid overload (pulmonary edema), and direct toxic encephalopathy."},
+    {"id":"hepatic_encephalopathy_state","label":"Hepatic encephalopathy","level":"L3",
+     "desc":"The failing liver cannot detoxify ammonia and other gut-derived neurotoxins; they accumulate, cross the BBB, and cause swelling of astrocytes plus altered neurotransmission. Progresses through asterixis → confusion → coma. Commonly accompanied by cerebral edema in acute hepatic failure."},
+    {"id":"multi_organ_failure","label":"Multi-organ dysfunction (MODS)","level":"L3",
+     "desc":"Two or more organ systems failing simultaneously, usually after a major systemic insult (sepsis, severe trauma, burns, pancreatitis). The endpoint of much of intensive-care medicine; mortality rises steeply with each organ that fails."},
+
+    {"id":"ischemic_heart_disease","label":"Ischemic heart disease (MI)","level":"L4","icd":"I20–I25",
+     "desc":"Acute myocardial infarction — coronary artery occlusion starves a region of myocardium of oxygen. Kills three ways: (1) the ischemic myocardium triggers ventricular fibrillation, often within the first hour; (2) enough muscle dies that the heart can no longer pump (cardiogenic shock); (3) the infarcted wall can rupture, causing tamponade or massive bleeding into the chest. Globally the leading single cause of death."},
+    {"id":"heart_failure_chronic","label":"Heart failure / cardiomyopathy","level":"L4","icd":"I50",
+     "desc":"Chronically failing pump from prior MIs, longstanding hypertension, valvular disease, alcohol, viral, or genetic cardiomyopathy. Decompensation produces pulmonary edema and/or low cardiac output; sudden death from ventricular arrhythmia is also common."},
+    {"id":"cardiac_arrhythmia","label":"Primary cardiac arrhythmia","level":"L4","icd":"I44–I49",
+     "desc":"Disorders of conduction or repolarisation that produce lethal rhythms without preceding structural damage — long-QT, Brugada, ARVC, WPW, hypertrophic cardiomyopathy, complete heart block. Sudden cardiac death is the typical presentation."},
+    {"id":"aortic_dissection_rupture","label":"Aortic dissection / aneurysm rupture","level":"L4","icd":"I71",
+     "desc":"A tear in the aortic intima propagates a false lumen along the wall, or a weakened aneurysm bursts. Mortality is dominated by exsanguination into the mediastinum/abdomen and by tamponade if the dissection reaches the pericardium."},
+    {"id":"pulmonary_embolism","label":"Pulmonary embolism","level":"L4","icd":"I26",
+     "desc":"A clot (usually from a deep vein thrombosis) lodges in the pulmonary arteries. A massive PE causes right-heart failure and obstructive shock — the right ventricle cannot push against the blocked vasculature, the left ventricle has no preload, and circulatory collapse follows within minutes."},
+    {"id":"cardiac_tamponade","label":"Cardiac tamponade","level":"L4","icd":"I31.4",
+     "desc":"Fluid (blood, exudate) in the pericardial sac compresses the heart, preventing diastolic filling. Cardiac output crashes; PEA arrest follows. Common etiologies: trauma, dissection, malignancy, post-MI rupture, uremic pericarditis."},
+    {"id":"ischemic_stroke","label":"Ischemic stroke","level":"L4","icd":"I63",
+     "desc":"Occlusion of a cerebral artery (thromboembolic, atherosclerotic, cardioembolic) infarcts a region of brain. Most strokes are not directly lethal; large strokes kill via malignant cerebral edema → herniation, or via brainstem strokes hitting cardiorespiratory centers."},
+    {"id":"hemorrhagic_stroke","label":"Hemorrhagic stroke","level":"L4","icd":"I60–I62",
+     "desc":"Spontaneous bleeding into the brain (intracerebral hemorrhage) or surrounding spaces (subarachnoid hemorrhage from a ruptured aneurysm). Kills almost entirely via mass effect → herniation; SAH additionally via abrupt, massive ICP spikes that arrest cerebral perfusion."},
+    {"id":"copd_emphysema","label":"COPD / emphysema","level":"L4","icd":"J40–J44",
+     "desc":"Chronic destruction of alveoli and small airways from cigarette smoke and air pollution. Decades of progressive hypoxemia and hypercapnia eventually fail when an exacerbation tips the patient into respiratory failure or precipitates a fatal arrhythmia."},
+    {"id":"severe_asthma","label":"Severe asthma exacerbation","level":"L4","icd":"J45–J46",
+     "desc":"Status asthmaticus: severe bronchoconstriction, mucus plugging, and air trapping. If unbroken, leads to type-II respiratory failure and hypoxic cardiac arrest; rare in absolute numbers but a long-recognised cause of sudden death in young people."},
+    {"id":"pneumonia","label":"Pneumonia","level":"L4","icd":"J12–J18",
+     "desc":"Infection of the lung parenchyma, bacterial or viral. The single largest infectious killer worldwide. Lethal pathways are: hypoxemic respiratory failure from consolidation, ARDS in severe cases, and septic shock from systemic inflammatory response."},
+    {"id":"ards","label":"Acute respiratory distress syndrome","level":"L4","icd":"J80",
+     "desc":"Diffuse alveolar damage and capillary leak, triggered by sepsis, pneumonia, aspiration, pancreatitis, trauma, or transfusion reaction. Mortality is from refractory hypoxemia and from the systemic insult that caused it."},
+    {"id":"pulmonary_edema_cardiogenic","label":"Cardiogenic pulmonary edema","level":"L4","icd":"J81",
+     "desc":"Fluid in alveoli from elevated left-heart pressures (acute MI, decompensated HF, severe valvular disease). Patients drown in their own plasma; without rapid offloading, hypoxic respiratory failure ensues."},
+    {"id":"tension_pneumothorax","label":"Tension pneumothorax","level":"L4","icd":"J93",
+     "desc":"Air enters the pleural space through a one-way leak, builds pressure, collapses the lung and shifts the mediastinum. Compresses great veins → obstructive shock + respiratory failure. Treatable in seconds with a needle, fatal in minutes if missed."},
+    {"id":"sepsis","label":"Sepsis / septic shock","level":"L4","icd":"A40–A41",
+     "desc":"A dysregulated systemic response to infection: vasodilation (hypotension), capillary leak, microvascular thrombosis, mitochondrial dysfunction in tissues. Causes distributive shock and multi-organ failure; one of the most common immediate causes of in-hospital death."},
+    {"id":"meningoencephalitis_inf","label":"Meningitis / encephalitis","level":"L4","icd":"G00–G05",
+     "desc":"Infection of the meninges and/or brain parenchyma. Bacterial meningitis can kill in hours via cerebral edema, septic shock, and DIC; viral encephalitis via direct neuron killing and edema."},
+    {"id":"tuberculosis","label":"Tuberculosis","level":"L4","icd":"A15–A19",
+     "desc":"Mycobacterium tuberculosis infection. Pulmonary TB destroys lung over years; can kill via cavitation eroding a vessel (massive hemoptysis = exsanguination), via respiratory failure from advanced disease, or via dissemination to meninges, pericardium, miliary spread."},
+    {"id":"hiv_aids_complications","label":"HIV/AIDS complications","level":"L4","icd":"B20–B24",
+     "desc":"Untreated HIV depletes CD4+ T cells, opening the door to opportunistic infections (PCP, cryptococcus, toxoplasma, MAC, CMV) and AIDS-defining cancers (Kaposi’s sarcoma, lymphoma). Death is almost always via one of these proximate processes rather than HIV directly."},
+    {"id":"malignant_neoplasm","label":"Malignant neoplasm (cancer)","level":"L4","icd":"C00–C97",
+     "desc":"A heterogeneous category. Common modes of cancer death: direct organ destruction (liver mets → hepatic failure, brain mets → herniation, lung tumor → airway obstruction or hemorrhage), systemic effects (cachexia, paraneoplastic hypercoagulability → PE, hypercalcemia → arrhythmia), and immunosuppression from disease + treatment → opportunistic sepsis. Globally the second leading cause of death."},
+    {"id":"diabetes_complications","label":"Acute diabetes complications (DKA/HHS/hypo)","level":"L4","icd":"E10–E14",
+     "desc":"Three acute lethal scenarios: diabetic ketoacidosis (severe acidosis + dehydration + hyperkalemia → arrhythmia or cerebral edema), hyperosmolar hyperglycemic state (extreme dehydration in type 2), and iatrogenic hypoglycemia. Long-term, diabetes also drives most of the ischemic heart disease and CKD on this chart."},
+    {"id":"chronic_kidney_disease","label":"Chronic kidney disease (CKD)","level":"L4","icd":"N18",
+     "desc":"Progressive nephron loss from diabetes, hypertension, glomerulonephritis, cystic disease. End-stage CKD kills via uremia, hyperkalemia, and accelerated cardiovascular disease — most patients on dialysis actually die of cardiac causes."},
+    {"id":"acute_kidney_injury","label":"Acute kidney injury","level":"L4","icd":"N17",
+     "desc":"Sudden loss of renal function from prerenal (shock), intrinsic (ATN, glomerular, interstitial) or postrenal causes. Without dialysis, kills via hyperkalemia, severe acidosis, fluid overload, and uremic encephalopathy/pericarditis."},
+    {"id":"liver_failure","label":"Liver failure (acute or end-stage)","level":"L4","icd":"K70–K76",
+     "desc":"Loss of hepatic synthetic and detoxifying function from cirrhosis (alcohol, hepatitis B/C, NASH) or acute injury (acetaminophen, viral). Kills via hepatic encephalopathy, exsanguinating variceal bleed, hepatorenal syndrome, spontaneous bacterial peritonitis, and DIC."},
+    {"id":"gi_hemorrhage","label":"Massive GI hemorrhage","level":"L4","icd":"K92.2",
+     "desc":"Bleeding into the GI tract — peptic ulcer, esophageal varices, diverticular disease, malignancy. Causes hypovolemic shock and exsanguination if uncontrolled."},
+    {"id":"bowel_perforation_ischemia","label":"Bowel perforation / ischemia","level":"L4","icd":"K56–K57",
+     "desc":"Loss of bowel integrity (perforated ulcer, ruptured appendix, diverticulitis, mesenteric ischemia, strangulated obstruction) spills enteric flora into the peritoneum → peritonitis → sepsis."},
+    {"id":"acute_pancreatitis","label":"Severe acute pancreatitis","level":"L4","icd":"K85",
+     "desc":"Autodigestion of the pancreas, usually from gallstones or alcohol. Severe cases produce ARDS, acute kidney injury, distributive shock from systemic cytokine release, and pancreatic necrosis with secondary infection → MODS."},
+    {"id":"neurodegenerative_disease","label":"Neurodegenerative disease","level":"L4","icd":"G20, G30, G12",
+     "desc":"Alzheimer’s, Parkinson’s, ALS, Huntington’s, FTD, etc. Slow, regional neuron death over years. Direct death is uncommon (e.g. ALS bulbar/diaphragmatic involvement → respiratory failure); most patients die from the complications of immobility and dysphagia — aspiration pneumonia, sepsis, malnutrition."},
+    {"id":"status_epilepticus","label":"Status epilepticus","level":"L4","icd":"G41",
+     "desc":"A seizure lasting >5 minutes or recurrent seizures without recovery. Convulsive SE drives massive cerebral metabolic demand, lactic acidosis, hyperthermia, hypoxia from impaired ventilation, and aspiration; refractory SE has high mortality."},
+    {"id":"neuromuscular_paralysis","label":"Acute neuromuscular paralysis","level":"L4","icd":"G70, G61, A05.1",
+     "desc":"Myasthenic crisis, Guillain-Barré, botulism, tick paralysis, neuromuscular toxin exposure. The diaphragm fails, producing pure neuromuscular respiratory failure — historically lethal, now usually survivable on a ventilator."},
+    {"id":"dic_coagulopathy","label":"Disseminated intravascular coagulation","level":"L4","icd":"D65",
+     "desc":"Pathological systemic activation of the clotting cascade — microthrombi everywhere consume platelets and clotting factors, then bleeding follows. Triggered by sepsis, trauma, malignancy, obstetric catastrophe, severe burns, snakebite. Kills via bleeding and via microvascular organ damage."},
+    {"id":"major_trauma_blunt","label":"Major blunt trauma","level":"L4","icd":"S/T-codes",
+     "desc":"Motor vehicle collisions, falls, crush. Lethal patterns include traumatic brain injury, intra-thoracic / abdominal hemorrhage, pulmonary contusion → ARDS, cardiac contusion / tamponade, and pelvic exsanguination."},
+    {"id":"major_trauma_penetrating","label":"Major penetrating trauma","level":"L4","icd":"S/T-codes",
+     "desc":"Stab wounds, gunshot wounds, impalement. Death is usually from rapid exsanguination, tension pneumothorax, cardiac tamponade, or direct CNS destruction."},
+    {"id":"traumatic_brain_injury","label":"Traumatic brain injury","level":"L4","icd":"S06",
+     "desc":"Direct mechanical injury to the brain — concussion through diffuse axonal injury through extra-/sub-/intra-axial hemorrhage. Lethal TBI kills via cerebral edema → herniation, and via brainstem damage knocking out cardiorespiratory drive."},
+    {"id":"severe_burns","label":"Severe burns","level":"L4","icd":"T31",
+     "desc":"Loss of skin barrier and massive inflammatory response. Early deaths are from burn shock (capillary leak, hypovolemia) and inhalation injury; later deaths are from infection of burn wounds → sepsis and MODS."},
+    {"id":"electrocution_injury","label":"Electrocution","level":"L4","icd":"T75.4",
+     "desc":"Current passing through the body. Low-voltage household AC kills primarily by inducing ventricular fibrillation; high-voltage causes deep tissue burns, rhabdomyolysis, and respiratory arrest from diaphragmatic tetany. Lightning typically causes asystole and apnea simultaneously."},
+    {"id":"drowning_event","label":"Drowning","level":"L4","icd":"T75.1",
+     "desc":"Submersion → laryngospasm and aspiration → hypoxemia → cerebral hypoxia → cardiac arrest. Pure asphyxial mechanism; salt vs fresh water makes little difference clinically."},
+    {"id":"asphyxia_hanging","label":"Hanging / strangulation","level":"L4","icd":"T71",
+     "desc":"External compression of the neck. Kills by occluding cerebral venous return and arterial supply (rapid loss of consciousness within seconds), by occluding the airway, and — in judicial-style hanging — by mechanical disruption of the cervical cord and brainstem."},
+    {"id":"choking_foreign_body","label":"Choking on foreign body","level":"L4","icd":"T17",
+     "desc":"Mechanical occlusion of the airway by food, dentures, toys. Pure asphyxial death within minutes if not relieved."},
+    {"id":"crush_injury_rhabdo","label":"Crush injury / rhabdomyolysis","level":"L4","icd":"T79.5",
+     "desc":"Massive muscle damage releases potassium, myoglobin, phosphate, urate. Hyperkalemia can stop the heart on first reperfusion (\"crush syndrome\"); myoglobin precipitates in the renal tubules → AKI; calcium sequestration and acidosis compound the picture."},
+    {"id":"envenomation","label":"Venomous bite / sting","level":"L4","icd":"T63",
+     "desc":"Snakes, scorpions, spiders, jellyfish, cone snails, etc. Mechanisms vary by species: neurotoxic (paralysis → respiratory failure, the rare classic example of transmission blockade as the literal mechanism of death), hemotoxic (DIC, exsanguination), cardiotoxic (arrhythmia), and anaphylactic on top."},
+    {"id":"opioid_overdose","label":"Opioid overdose","level":"L4","icd":"T40",
+     "desc":"μ-opioid receptor agonism in brainstem respiratory centers depresses ventilation. Patients become apneic, hypoxic, hypercapnic; aspiration of gastric contents while obtunded is also common."},
+    {"id":"alcohol_acute_overdose","label":"Acute alcohol overdose","level":"L4","icd":"T51",
+     "desc":"Severe ethanol intoxication produces CNS depression (loss of airway reflexes → aspiration; respiratory depression at very high levels), profound hypothermia (peripheral vasodilation), and hypoglycemia (especially in fasted patients). Most ethanol deaths are via aspiration or trauma rather than the ethanol itself."},
+    {"id":"co_poisoning","label":"Carbon monoxide poisoning","level":"L4","icd":"T58",
+     "desc":"CO binds hemoglobin with ~250× the affinity of O₂ and shifts the dissociation curve, so what little O₂ is bound is not released. It also binds cytochrome oxidase. Tissue hypoxia despite a normal PaO₂. Common in fires, faulty furnaces, and exhaust suicides."},
+    {"id":"cyanide_poisoning","label":"Cyanide poisoning","level":"L4","icd":"T57.3",
+     "desc":"Cyanide binds the ferric iron of cytochrome c oxidase and halts the electron transport chain. Cells cannot use oxygen even though it is delivered (\"histotoxic hypoxia\"). Lactic acidosis is severe, the brain and heart fail first."},
+    {"id":"anaphylaxis","label":"Anaphylaxis","level":"L4","icd":"T78.2",
+     "desc":"IgE-mediated mast cell degranulation produces sudden vasodilation (distributive shock), bronchospasm, laryngeal edema, and increased vascular permeability. Without epinephrine, death from airway obstruction or cardiovascular collapse can occur within minutes."},
+    {"id":"environmental_hypothermia","label":"Environmental hypothermia","level":"L4","icd":"T68",
+     "desc":"Exposure-induced fall in core temperature — cold water immersion, exposure in mountains/wilderness, intoxicated outdoor exposure, elderly with poor heating. The killer is the cardiac instability of cold myocardium."},
+    {"id":"heat_stroke","label":"Heat stroke","level":"L4","icd":"T67",
+     "desc":"Failure of thermoregulation in extreme heat (especially exertional, or in elderly during heatwaves). Core temperature climbs above ~40°C; once reached, the syndrome is self-amplifying and produces MODS, DIC, rhabdomyolysis, and direct neuronal damage."},
+    {"id":"acute_radiation_syndrome","label":"Acute radiation syndrome","level":"L4","icd":"T66",
+     "desc":"After whole-body ionising radiation: hematopoietic syndrome (1–10 Gy: pancytopenia → infection and bleeding 2–4 weeks later), GI syndrome (>~6 Gy: gut crypt cell death → fluid loss and bacterial translocation), neurovascular syndrome (>~30 Gy: cerebral edema and cardiovascular collapse within hours)."},
+    {"id":"starvation","label":"Starvation","level":"L4","icd":"E40–E46, T73.0",
+     "desc":"Prolonged absence of intake. Glycogen depletes in <24 h, fat over weeks, then the body breaks down its own muscle including diaphragm and heart. Death often comes from a fatal arrhythmia in a depleted heart, from infection in a compromised immune system, or from refeeding syndrome on resumption of nutrition."},
+    {"id":"severe_dehydration","label":"Severe dehydration","level":"L4","icd":"E86, T73.1",
+     "desc":"Profound loss of intravascular volume — diarrheal disease (still a major cause of childhood death), heat illness, diabetes insipidus, burns. Drops cardiac output → hypovolemic shock, and produces severe sodium derangement that itself injures neurons."},
+    {"id":"maternal_complications","label":"Maternal / obstetric complications","level":"L4","icd":"O00–O99",
+     "desc":"Postpartum hemorrhage (exsanguination), eclampsia and HELLP (seizures, stroke, DIC, hepatic rupture), amniotic fluid embolism (obstructive shock + DIC), peripartum cardiomyopathy, puerperal sepsis. Still a major cause of death in low-income settings."},
+    {"id":"congenital_anomaly","label":"Congenital anomaly","level":"L4","icd":"Q00–Q99",
+     "desc":"Structural malformations present at birth. The leading lethal categories are complex congenital heart disease, severe CNS malformations (anencephaly, holoprosencephaly), pulmonary hypoplasia, and chromosomal disorders incompatible with life."},
+    {"id":"neonatal_disorder","label":"Neonatal disorders","level":"L4","icd":"P00–P96",
+     "desc":"Conditions specific to the first weeks of life: prematurity and respiratory distress syndrome, hypoxic-ischemic encephalopathy from birth asphyxia, neonatal sepsis, intraventricular hemorrhage. Globally the leading single cause of under-5 mortality."},
+    {"id":"sids","label":"Sudden infant death syndrome","level":"L4","icd":"R95",
+     "desc":"Unexplained sudden death of an apparently healthy infant under 1 year. Current models invoke a triple risk: an infant with brainstem arousal/cardiorespiratory immaturity, in a critical developmental window, encountering an exogenous stressor (prone sleeping, soft bedding, overheating, cigarette smoke). The proximate mechanism is thought to be central apnea + failed arousal."},
+
+    {"id":"atherosclerosis","label":"Atherosclerosis","level":"L5",
+     "desc":"Lipid-laden plaques in artery walls, slowly narrowing the lumen and prone to rupture with overlying thrombosis. The single largest upstream substrate of cardiovascular and cerebrovascular death. Driven by a small set of risk factors that act multiplicatively: lipids (especially apoB), hypertension, smoking, diabetes, age."},
+    {"id":"chronic_hypertension","label":"Chronic hypertension","level":"L5",
+     "desc":"Sustained elevation of arterial pressure, usually \"essential\" (multifactorial) in adults. Drives left-ventricular hypertrophy → heart failure, accelerates atherosclerosis, weakens cerebral vessels (lacunar strokes, intracerebral hemorrhage), damages renal microvasculature → CKD, and stresses the aortic wall."},
+    {"id":"tobacco_use","label":"Tobacco use","level":"L5",
+     "desc":"Cigarette smoking (and other tobacco) is causally linked to virtually every disease on this chart with which it has been studied: it accelerates atherosclerosis, multiplies cancer risk (especially lung, but also bladder, head/neck, pancreas, kidney), causes COPD, and worsens outcomes from infection."},
+    {"id":"alcohol_chronic","label":"Heavy chronic alcohol use","level":"L5",
+     "desc":"Long-term heavy drinking causes alcoholic liver disease (steatosis → cirrhosis), alcoholic cardiomyopathy and arrhythmias (\"holiday heart\"), pancreatitis, esophageal varices, and increased risk of head/neck and esophageal cancers and of injury and self-harm."},
+    {"id":"drug_abuse_chronic","label":"Chronic drug misuse","level":"L5",
+     "desc":"Regular non-medical use of opioids, stimulants, sedatives, etc. Drives overdose, infectious endocarditis and sepsis (IV use), accelerated cardiovascular disease (cocaine, methamphetamine), and is a substrate for self-harm."},
+    {"id":"obesity_diet","label":"Obesity / poor diet","level":"L5",
+     "desc":"Excess adiposity and energy-dense, processed diets drive insulin resistance and type-2 diabetes, hypertension, dyslipidemia and atherosclerosis, fatty liver disease, several cancers (colorectal, endometrial, postmenopausal breast, esophageal adenocarcinoma, kidney), obstructive sleep apnea, and venous thromboembolism."},
+    {"id":"sedentary","label":"Physical inactivity","level":"L5",
+     "desc":"Independent of obesity, low physical activity worsens insulin sensitivity, vascular function, and cardiovascular fitness, raising cardiovascular and overall mortality. Often co-travels with obesity but shows independent risk in cohort studies."},
+    {"id":"genetic_inherited","label":"Genetic / inherited factors","level":"L5",
+     "desc":"Monogenic disorders (familial hypercholesterolemia, channelopathies, hypertrophic cardiomyopathy, cystic fibrosis, sickle cell, Huntington’s, BRCA, Lynch, dystrophinopathies, inborn errors of metabolism) and polygenic predisposition that modulates risk for almost every common disease."},
+    {"id":"aging","label":"Aging / senescence","level":"L5",
+     "desc":"The largest single risk factor for almost every disease on this chart. Cellular senescence, immune decline (immunosenescence), accumulated DNA damage, reduced organ reserve, and stiffened vasculature all compound. \"Death of old age\" is generally death of one of the diseases below, made fatal by reduced reserve."},
+    {"id":"bacterial_infection","label":"Bacterial infection","level":"L5",
+     "desc":"Pathogens (S. pneumoniae, S. aureus, E. coli, K. pneumoniae, M. tuberculosis, N. meningitidis, etc.) entering tissues. Outcomes depend on inoculum, virulence, and host. The proximate cause whenever pneumonia, meningitis, sepsis, peritonitis, or endocarditis appears below."},
+    {"id":"viral_infection","label":"Viral infection","level":"L5",
+     "desc":"Respiratory viruses (influenza, SARS-CoV-2, RSV), hepatitis B and C, HIV, herpesviruses, neurotropic viruses (rabies, encephalitis viruses), hemorrhagic fever viruses, etc. Some kill via the acute illness, some via chronic disease they cause years later."},
+    {"id":"fungal_parasitic","label":"Fungal / parasitic infection","level":"L5",
+     "desc":"Plasmodium (malaria), Trypanosoma, Leishmania, Schistosoma, Toxoplasma, Cryptococcus, Pneumocystis, invasive Aspergillus and Candida. Mostly relevant in tropical regions and in immunosuppression."},
+    {"id":"carcinogen_exposure","label":"Carcinogen exposure","level":"L5",
+     "desc":"Tobacco smoke, alcohol, asbestos, radon, aflatoxin, ionising radiation, certain HPV types, H. pylori, hepatitis B/C virus, processed-meat compounds, occupational chemicals. Damages DNA or chronically inflames tissue, raising the per-cell probability of malignant transformation."},
+    {"id":"malnutrition_chronic","label":"Chronic malnutrition","level":"L5",
+     "desc":"Insufficient calories or specific nutrients over time. Stunts growth, immunocompromises, and predisposes to lethal infection. The dominant pediatric risk factor in low-income settings; \"underlying cause\" in many deaths from common infections."},
+    {"id":"environmental_pollutant","label":"Environmental / occupational exposure","level":"L5",
+     "desc":"Air pollution (PM2.5, NO₂, O₃), indoor smoke, asbestos, silica, heavy metals, ionising radiation, pesticides. Drives lung disease, cardiovascular disease, lung and other cancers, and — at acute high doses — direct poisoning."},
+    {"id":"interpersonal_violence","label":"Interpersonal violence","level":"L5","icd":"X92–Y09",
+     "desc":"Assault, homicide, war. Operates through trauma — blunt or penetrating, asphyxial, thermal — at the L4 level."},
+    {"id":"self_directed_violence","label":"Self-directed violence","level":"L5","icd":"X60–X84",
+     "desc":"Suicide and self-harm. Uses a small set of L4 mechanisms: firearm/penetrating trauma, hanging, jumping (blunt trauma), drug/alcohol overdose, drowning, CO poisoning, cutting (exsanguination)."},
+    {"id":"unintentional_injury","label":"Accidental injury","level":"L5","icd":"V01–X59",
+     "desc":"Road traffic, falls, drownings, fires, choking, electrocution, poisoning, environmental exposure. The largest single L5 source of premature death in young people."}
+  ],
+  "edges": [
+    {"source":"mass_neuronal_death","target":"death","likelihood":"typical","note":"By far the dominant final mechanism; once enough neurons are gone, integrated brain function cannot return."},
+    {"source":"transmission_blockade","target":"death","likelihood":"possible","note":"In principle a global, sustained block of synaptic transmission satisfies the brain-death criterion even with neurons alive; in practice the patient suffocates first and crosses through hypoxia → mass neuronal death."},
+    {"source":"structural_disruption_cns","target":"death","likelihood":"typical","note":"Decapitation, severe penetrating brain injury, brainstem transection. The substrate is gone."},
+
+    {"source":"cerebral_hypoxia_ischemia","target":"mass_neuronal_death","likelihood":"typical","note":"Neurons starved of oxygen begin irreversible injury within ~4–6 minutes. Excitotoxic glutamate release and free-radical injury on reperfusion add insult."},
+    {"source":"cerebral_substrate_deprivation","target":"mass_neuronal_death","likelihood":"typical","note":"Severe sustained hypoglycemia kills neurons even with adequate oxygenation."},
+    {"source":"toxic_metabolic_neuron","target":"mass_neuronal_death","likelihood":"common","note":"Many toxins kill neurons outright (cyanide blocks ETC; ammonia swells astrocytes)."},
+    {"source":"toxic_metabolic_neuron","target":"transmission_blockade","likelihood":"possible","note":"Tetrodotoxin, saxitoxin, botulinum, organophosphates, curariform agents — each blocks transmission at a different point."},
+    {"source":"direct_neuron_damage","target":"mass_neuronal_death","likelihood":"typical","note":"Mechanical disruption kills neurons directly and via secondary edema/hemorrhage."},
+    {"source":"direct_neuron_damage","target":"structural_disruption_cns","likelihood":"common","note":"Catastrophic mechanical insults are themselves the structural disruption."},
+    {"source":"cerebral_inflammation","target":"mass_neuronal_death","likelihood":"common","note":"Cytokines, microglial activation, and vasculitic ischemia kill neurons; severe edema can also herniate."},
+
+    {"source":"cardiac_arrest","target":"cerebral_hypoxia_ischemia","likelihood":"typical","note":"No cardiac output → no cerebral perfusion → global hypoxia/ischemia within seconds."},
+    {"source":"circulatory_collapse","target":"cerebral_hypoxia_ischemia","likelihood":"typical","note":"Inadequate perfusion pressure and/or content of oxygen leaves the brain hypoxic even with a beating heart."},
+    {"source":"circulatory_collapse","target":"cardiac_arrest","likelihood":"common","note":"Shock that is not corrected progresses to PEA arrest as the myocardium itself becomes ischemic and acidotic."},
+    {"source":"exsanguination","target":"circulatory_collapse","likelihood":"typical","note":"Loss of preload + loss of O₂-carrying capacity → hemorrhagic shock."},
+    {"source":"exsanguination","target":"cardiac_arrest","likelihood":"common","note":"Severe blood loss leads to PEA arrest even before classic shock parameters are reached."},
+    {"source":"respiratory_failure","target":"cerebral_hypoxia_ischemia","likelihood":"typical","note":"Hypoxemia in arterial blood produces cerebral hypoxia even with good perfusion."},
+    {"source":"respiratory_failure","target":"cardiac_arrest","likelihood":"common","note":"Severe hypoxemia and acidosis precipitate myocardial failure and arrhythmia."},
+    {"source":"airway_obstruction","target":"respiratory_failure","likelihood":"typical","note":"No airflow → no gas exchange."},
+    {"source":"airway_obstruction","target":"cerebral_hypoxia_ischemia","likelihood":"typical","note":"Asphyxia bypasses the lung pathology and produces cerebral hypoxia directly."},
+    {"source":"cerebral_herniation_event","target":"direct_neuron_damage","likelihood":"typical","note":"Brainstem compression directly destroys cardiorespiratory centers."},
+    {"source":"cerebral_herniation_event","target":"cardiac_arrest","likelihood":"common","note":"Compression of medullary centers → loss of vasomotor and respiratory drive → arrest."},
+    {"source":"cerebral_herniation_event","target":"respiratory_failure","likelihood":"common","note":"Brainstem injury knocks out respiratory drive."},
+    {"source":"severe_hyperkalemia","target":"cardiac_arrest","likelihood":"typical","note":"K⁺ above ~7 mmol/L destabilises cardiac myocyte membranes — VF or asystole."},
+    {"source":"severe_hypoglycemia","target":"cerebral_substrate_deprivation","likelihood":"typical","note":"No glucose substrate for cerebral ATP production; neurons cannot use ketones quickly enough."},
+    {"source":"severe_acidosis","target":"cardiac_arrest","likelihood":"common","note":"pH < ~7.0 markedly impairs cardiac contractility and catecholamine response."},
+    {"source":"severe_acidosis","target":"toxic_metabolic_neuron","likelihood":"common","note":"Severe acidemia depresses CNS function; combined with the underlying cause (e.g. uremia, DKA, sepsis)."},
+    {"source":"severe_hypothermia_state","target":"cardiac_arrest","likelihood":"typical","note":"Cold myocardium fibrillates spontaneously below ~28°C and arrests below ~22°C."},
+    {"source":"severe_hyperthermia_state","target":"multi_organ_failure","likelihood":"typical","note":"Protein denaturation and SIRS at high core temperatures damage every system simultaneously."},
+    {"source":"severe_hyperthermia_state","target":"toxic_metabolic_neuron","likelihood":"common","note":"Direct heat injury to neurons and astrocytes."},
+    {"source":"uremic_state","target":"toxic_metabolic_neuron","likelihood":"typical","note":"Uremic toxins cause encephalopathy, seizures, coma."},
+    {"source":"uremic_state","target":"severe_hyperkalemia","likelihood":"common","note":"Failure to excrete K⁺."},
+    {"source":"hepatic_encephalopathy_state","target":"toxic_metabolic_neuron","likelihood":"typical","note":"Ammonia and other gut-derived toxins swell astrocytes and disrupt neurotransmission."},
+    {"source":"hepatic_encephalopathy_state","target":"cerebral_herniation_event","likelihood":"common","note":"Acute liver failure produces frank cerebral edema → herniation, especially in younger patients."},
+    {"source":"multi_organ_failure","target":"cardiac_arrest","likelihood":"common","note":"The terminal event in much of late-stage MODS."},
+    {"source":"multi_organ_failure","target":"circulatory_collapse","likelihood":"typical","note":"Cardiovascular failure is one of the systems by definition; vasopressor refractoriness is a frequent endpoint."},
+    {"source":"multi_organ_failure","target":"respiratory_failure","likelihood":"common","note":"Lung is one of the most commonly involved systems in MODS."},
+
+    {"source":"ischemic_heart_disease","target":"cardiac_arrhythmia","likelihood":"typical","note":"Acute ischemia is the single most arrhythmogenic state of the myocardium — VF in the first hour is the classic mode of death from MI."},
+    {"source":"ischemic_heart_disease","target":"cardiac_arrest","likelihood":"typical","note":"Sudden cardiac death directly from ischemic VF/VT, without time for compensation."},
+    {"source":"ischemic_heart_disease","target":"heart_failure_chronic","likelihood":"common","note":"Loss of viable myocardium drops EF; acutely → cardiogenic shock, chronically → ischemic cardiomyopathy."},
+    {"source":"ischemic_heart_disease","target":"cardiac_tamponade","likelihood":"possible","note":"Free-wall rupture days after MI bleeds into the pericardium."},
+    {"source":"ischemic_heart_disease","target":"pulmonary_edema_cardiogenic","likelihood":"common","note":"Ischemic LV dysfunction and acute mitral regurgitation from papillary muscle dysfunction back up into the lungs."},
+
+    {"source":"heart_failure_chronic","target":"cardiac_arrhythmia","likelihood":"typical","note":"Failing ventricles are arrhythmogenic; sudden cardiac death is one of the two main exits from chronic HF."},
+    {"source":"heart_failure_chronic","target":"pulmonary_edema_cardiogenic","likelihood":"typical","note":"Decompensation = backward failure into the lungs."},
+    {"source":"heart_failure_chronic","target":"circulatory_collapse","likelihood":"common","note":"Forward failure = cardiogenic shock."},
+
+    {"source":"cardiac_arrhythmia","target":"cardiac_arrest","likelihood":"typical","note":"VF and pulseless VT are arrest by definition; complete heart block can degenerate to asystole."},
+
+    {"source":"aortic_dissection_rupture","target":"exsanguination","likelihood":"typical","note":"Free rupture into the mediastinum, pleura, or retroperitoneum bleeds out massively."},
+    {"source":"aortic_dissection_rupture","target":"cardiac_tamponade","likelihood":"common","note":"Type A dissections rupture into the pericardium → tamponade."},
+    {"source":"aortic_dissection_rupture","target":"ischemic_stroke","likelihood":"possible","note":"Dissection extending into a carotid causes a stroke."},
+    {"source":"aortic_dissection_rupture","target":"ischemic_heart_disease","likelihood":"possible","note":"Dissection involving a coronary ostium causes acute MI."},
+
+    {"source":"pulmonary_embolism","target":"circulatory_collapse","likelihood":"typical","note":"Massive central PE blocks pulmonary circulation → obstructive shock; the LV gets no preload."},
+    {"source":"pulmonary_embolism","target":"respiratory_failure","likelihood":"typical","note":"V/Q mismatch and increased dead space → severe hypoxemia."},
+    {"source":"pulmonary_embolism","target":"cardiac_arrest","likelihood":"common","note":"Saddle embolus is a classic cause of sudden PEA arrest."},
+
+    {"source":"cardiac_tamponade","target":"cardiac_arrest","likelihood":"typical","note":"Pericardial pressure exceeds filling pressures → no diastolic filling → PEA."},
+    {"source":"cardiac_tamponade","target":"circulatory_collapse","likelihood":"typical","note":"Obstructive shock from inability to fill."},
+
+    {"source":"ischemic_stroke","target":"cerebral_herniation_event","likelihood":"common","note":"Large MCA infarcts produce malignant edema; brainstem strokes herniate via posterior fossa swelling."},
+    {"source":"ischemic_stroke","target":"respiratory_failure","likelihood":"common","note":"Brainstem strokes hit medullary respiratory centers."},
+    {"source":"ischemic_stroke","target":"direct_neuron_damage","likelihood":"typical","note":"The infarct itself is direct ischemic neuronal death — but typically not enough to kill on its own without herniation/brainstem involvement."},
+    {"source":"ischemic_stroke","target":"pneumonia","likelihood":"common","note":"Bedbound, dysphagic stroke patients aspirate; pneumonia is a frequent later cause of stroke-related death."},
+
+    {"source":"hemorrhagic_stroke","target":"cerebral_herniation_event","likelihood":"typical","note":"The hematoma adds volume to a fixed compartment → herniation."},
+    {"source":"hemorrhagic_stroke","target":"direct_neuron_damage","likelihood":"typical","note":"The bleed itself destroys local tissue and produces toxic blood-breakdown products."},
+    {"source":"hemorrhagic_stroke","target":"cardiac_arrhythmia","likelihood":"possible","note":"Massive subarachnoid hemorrhage produces neurogenic stunned myocardium and arrhythmia."},
+
+    {"source":"copd_emphysema","target":"respiratory_failure","likelihood":"typical","note":"Exacerbations on a background of poor reserve tip into hypercapnic respiratory failure."},
+    {"source":"copd_emphysema","target":"cardiac_arrhythmia","likelihood":"common","note":"Hypoxemia, cor pulmonale, and right-heart strain are arrhythmogenic."},
+    {"source":"copd_emphysema","target":"pneumonia","likelihood":"common","note":"COPD predisposes to bacterial pneumonia, often the precipitant of fatal exacerbation."},
+    {"source":"copd_emphysema","target":"tension_pneumothorax","likelihood":"possible","note":"Bullous disease ruptures."},
+
+    {"source":"severe_asthma","target":"respiratory_failure","likelihood":"typical","note":"Bronchoconstriction + mucus plugging → hypoxia → cardiac arrest."},
+
+    {"source":"pneumonia","target":"respiratory_failure","likelihood":"typical","note":"Consolidated lung doesn’t exchange gas; severe pneumonia is hypoxemic respiratory failure."},
+    {"source":"pneumonia","target":"sepsis","likelihood":"typical","note":"Pneumonia is the most common single cause of sepsis."},
+    {"source":"pneumonia","target":"ards","likelihood":"common","note":"Severe pneumonia (especially viral and influenza) is a leading trigger of ARDS."},
+
+    {"source":"ards","target":"respiratory_failure","likelihood":"typical","note":"Refractory hypoxemia is the defining feature."},
+    {"source":"ards","target":"multi_organ_failure","likelihood":"common","note":"ARDS rarely kills alone; the underlying systemic insult and ventilator-related complications cause MODS."},
+
+    {"source":"pulmonary_edema_cardiogenic","target":"respiratory_failure","likelihood":"typical","note":"Alveoli filled with fluid cannot exchange gas — patients drown in their own plasma."},
+
+    {"source":"tension_pneumothorax","target":"circulatory_collapse","likelihood":"typical","note":"Mediastinal shift and increased intrathoracic pressure compress the great veins → obstructive shock."},
+    {"source":"tension_pneumothorax","target":"respiratory_failure","likelihood":"typical","note":"Lung collapse + impaired ventilation."},
+
+    {"source":"sepsis","target":"circulatory_collapse","likelihood":"typical","note":"Septic shock is distributive — vasodilation, capillary leak, microvascular dysfunction."},
+    {"source":"sepsis","target":"multi_organ_failure","likelihood":"typical","note":"Defining feature of severe sepsis: kidneys, lungs, liver, heart, brain in some combination."},
+    {"source":"sepsis","target":"ards","likelihood":"common","note":"Sepsis is the single largest trigger of ARDS."},
+    {"source":"sepsis","target":"dic_coagulopathy","likelihood":"common","note":"Cytokine-driven activation of coagulation; classic in meningococcal and gram-negative sepsis."},
+    {"source":"sepsis","target":"severe_acidosis","likelihood":"common","note":"Lactic acidosis from impaired tissue O₂ utilization."},
+    {"source":"sepsis","target":"acute_kidney_injury","likelihood":"common","note":"Sepsis is the most common cause of AKI in ICU patients."},
+
+    {"source":"meningoencephalitis_inf","target":"cerebral_inflammation","likelihood":"typical","note":"Direct cytokine and pathogen-mediated CNS damage."},
+    {"source":"meningoencephalitis_inf","target":"cerebral_herniation_event","likelihood":"common","note":"Cerebral edema + impaired CSF flow → raised ICP → herniation."},
+    {"source":"meningoencephalitis_inf","target":"sepsis","likelihood":"common","note":"Bacterial meningitis is often part of a fulminant septicemia."},
+
+    {"source":"tuberculosis","target":"respiratory_failure","likelihood":"common","note":"Advanced cavitary disease destroys lung."},
+    {"source":"tuberculosis","target":"exsanguination","likelihood":"possible","note":"Cavity erodes a pulmonary artery — catastrophic hemoptysis."},
+    {"source":"tuberculosis","target":"meningoencephalitis_inf","likelihood":"possible","note":"TB meningitis is an especially lethal form."},
+    {"source":"tuberculosis","target":"sepsis","likelihood":"possible","note":"Miliary / disseminated TB can present with septic shock."},
+
+    {"source":"hiv_aids_complications","target":"pneumonia","likelihood":"typical","note":"Pneumocystis and other opportunistic pneumonias are leading causes of death in untreated AIDS."},
+    {"source":"hiv_aids_complications","target":"sepsis","likelihood":"common","note":"Bacterial sepsis on a background of immune failure."},
+    {"source":"hiv_aids_complications","target":"meningoencephalitis_inf","likelihood":"common","note":"Cryptococcal meningitis, toxoplasmic encephalitis, CMV encephalitis."},
+    {"source":"hiv_aids_complications","target":"malignant_neoplasm","likelihood":"common","note":"Kaposi sarcoma, CNS and systemic lymphoma."},
+    {"source":"hiv_aids_complications","target":"tuberculosis","likelihood":"common","note":"HIV is the largest single risk factor for active TB and for TB death."},
+
+    {"source":"malignant_neoplasm","target":"multi_organ_failure","likelihood":"common","note":"Advanced cancer reaches MODS via cachexia, treatment toxicity, and infections in immunocompromised hosts."},
+    {"source":"malignant_neoplasm","target":"liver_failure","likelihood":"common","note":"Liver-predominant disease (mets or primary HCC) ends as hepatic failure."},
+    {"source":"malignant_neoplasm","target":"acute_kidney_injury","likelihood":"possible","note":"Obstructive uropathy, tumor lysis, paraproteins, treatment nephrotoxicity."},
+    {"source":"malignant_neoplasm","target":"sepsis","likelihood":"common","note":"Neutropenic sepsis on chemotherapy is one of the most common immediate causes of cancer death."},
+    {"source":"malignant_neoplasm","target":"cerebral_herniation_event","likelihood":"possible","note":"Brain mets, primary brain tumors, leptomeningeal disease."},
+    {"source":"malignant_neoplasm","target":"pulmonary_embolism","likelihood":"common","note":"Cancer is profoundly hypercoagulable (Trousseau syndrome)."},
+    {"source":"malignant_neoplasm","target":"exsanguination","likelihood":"possible","note":"Tumor erodes a large vessel (carotid blowout in head/neck cancer; classical massive hemoptysis from lung cancer)."},
+    {"source":"malignant_neoplasm","target":"airway_obstruction","likelihood":"possible","note":"Head/neck and central lung tumors obstruct the airway."},
+    {"source":"malignant_neoplasm","target":"severe_hyperkalemia","likelihood":"possible","note":"Tumor lysis syndrome on initiation of chemotherapy."},
+    {"source":"malignant_neoplasm","target":"starvation","likelihood":"common","note":"Cachexia and inability to eat (esophageal/gastric/HN tumors) lead to terminal nutritional failure."},
+
+    {"source":"diabetes_complications","target":"severe_acidosis","likelihood":"typical","note":"Diabetic ketoacidosis."},
+    {"source":"diabetes_complications","target":"severe_hypoglycemia","likelihood":"common","note":"Iatrogenic insulin and sulfonylurea overdose."},
+    {"source":"diabetes_complications","target":"severe_hyperkalemia","likelihood":"common","note":"DKA produces marked K⁺ shifts; can precipitate arrhythmia."},
+    {"source":"diabetes_complications","target":"multi_organ_failure","likelihood":"possible","note":"Hyperosmolar hyperglycemic state in elderly type-2 patients can present in MODS."},
+    {"source":"diabetes_complications","target":"cerebral_inflammation","likelihood":"rare","note":"Pediatric DKA is occasionally complicated by fatal cerebral edema."},
+
+    {"source":"chronic_kidney_disease","target":"uremic_state","likelihood":"typical","note":"End-stage CKD without dialysis = uremia."},
+    {"source":"chronic_kidney_disease","target":"severe_hyperkalemia","likelihood":"common","note":"Failure to excrete K⁺ — most common direct mode of dialysis-dependent death."},
+    {"source":"chronic_kidney_disease","target":"ischemic_heart_disease","likelihood":"common","note":"Massively accelerated atherosclerosis; CV disease is the leading cause of death in dialysis patients."},
+    {"source":"chronic_kidney_disease","target":"cardiac_arrhythmia","likelihood":"common","note":"Electrolyte shifts around dialysis."},
+    {"source":"chronic_kidney_disease","target":"sepsis","likelihood":"common","note":"Vascular access infections; uremic immune dysfunction."},
+
+    {"source":"acute_kidney_injury","target":"uremic_state","likelihood":"common","note":"If renal replacement is unavailable, uremia develops within days."},
+    {"source":"acute_kidney_injury","target":"severe_hyperkalemia","likelihood":"typical","note":"Most common direct lethal mechanism in untreated AKI."},
+    {"source":"acute_kidney_injury","target":"severe_acidosis","likelihood":"common","note":"Failure to excrete acid load."},
+    {"source":"acute_kidney_injury","target":"pulmonary_edema_cardiogenic","likelihood":"common","note":"Volume overload from oliguria → flash pulmonary edema."},
+
+    {"source":"liver_failure","target":"hepatic_encephalopathy_state","likelihood":"typical","note":"Failure to clear nitrogenous toxins."},
+    {"source":"liver_failure","target":"exsanguination","likelihood":"common","note":"Variceal bleeding plus coagulopathy."},
+    {"source":"liver_failure","target":"sepsis","likelihood":"common","note":"Cirrhotic immune dysfunction; spontaneous bacterial peritonitis is a classic terminal event."},
+    {"source":"liver_failure","target":"dic_coagulopathy","likelihood":"common","note":"The cirrhotic loses both procoagulant and anticoagulant proteins; fragile balance tips to catastrophic bleeding or thrombosis."},
+    {"source":"liver_failure","target":"acute_kidney_injury","likelihood":"common","note":"Hepatorenal syndrome."},
+    {"source":"liver_failure","target":"gi_hemorrhage","likelihood":"common","note":"Esophageal varices on portal hypertension."},
+
+    {"source":"gi_hemorrhage","target":"exsanguination","likelihood":"typical","note":"Massive variceal or arterial-source bleeds bleed out the patient."},
+    {"source":"gi_hemorrhage","target":"circulatory_collapse","likelihood":"common","note":"Hypovolemic shock."},
+
+    {"source":"bowel_perforation_ischemia","target":"sepsis","likelihood":"typical","note":"Spillage of gut flora into peritoneum → peritonitis → septic shock."},
+    {"source":"bowel_perforation_ischemia","target":"severe_acidosis","likelihood":"common","note":"Mesenteric ischemia produces severe lactic acidosis."},
+
+    {"source":"acute_pancreatitis","target":"ards","likelihood":"common","note":"Pancreatitis is among the classic non-pulmonary triggers of ARDS."},
+    {"source":"acute_pancreatitis","target":"sepsis","likelihood":"common","note":"Infected pancreatic necrosis."},
+    {"source":"acute_pancreatitis","target":"multi_organ_failure","likelihood":"common","note":"Severe pancreatitis is a systemic inflammatory disease."},
+    {"source":"acute_pancreatitis","target":"circulatory_collapse","likelihood":"common","note":"Distributive + hypovolemic shock from third-spacing."},
+
+    {"source":"neurodegenerative_disease","target":"respiratory_failure","likelihood":"common","note":"ALS (and late Parkinson’s/MND) → diaphragmatic weakness."},
+    {"source":"neurodegenerative_disease","target":"pneumonia","likelihood":"typical","note":"Aspiration pneumonia is the single most common immediate cause of death in advanced dementia."},
+    {"source":"neurodegenerative_disease","target":"starvation","likelihood":"common","note":"Inability to feed in late dementia, ALS bulbar disease."},
+    {"source":"neurodegenerative_disease","target":"mass_neuronal_death","likelihood":"typical","note":"Slow, regional neuron death is the disease itself, but the patient typically dies of the complications above before diffuse cortical death is reached."},
+
+    {"source":"status_epilepticus","target":"respiratory_failure","likelihood":"common","note":"Impaired ventilation during convulsion + post-ictal apnea + aspiration."},
+    {"source":"status_epilepticus","target":"cerebral_substrate_deprivation","likelihood":"common","note":"Massively increased neuronal metabolic demand outstrips supply; neurons die from ATP depletion."},
+    {"source":"status_epilepticus","target":"severe_acidosis","likelihood":"common","note":"Lactic acidosis from convulsive activity."},
+    {"source":"status_epilepticus","target":"severe_hyperthermia_state","likelihood":"possible","note":"Sustained motor activity raises core temperature."},
+    {"source":"status_epilepticus","target":"cardiac_arrhythmia","likelihood":"possible","note":"Possible mechanism in sudden unexpected death in epilepsy (SUDEP)."},
+
+    {"source":"neuromuscular_paralysis","target":"respiratory_failure","likelihood":"typical","note":"Diaphragmatic paralysis is the killer; if mechanically ventilated, prognosis depends on the underlying disease."},
+    {"source":"neuromuscular_paralysis","target":"transmission_blockade","likelihood":"common","note":"At the synapse it IS transmission blockade — botulism, NMJ-blocking venoms — though death usually arrives via the respiratory route first."},
+
+    {"source":"dic_coagulopathy","target":"exsanguination","likelihood":"common","note":"Consumption of platelets and factors → catastrophic bleeding."},
+    {"source":"dic_coagulopathy","target":"multi_organ_failure","likelihood":"common","note":"Microvascular thrombi infarct kidneys, lungs, brain, skin."},
+
+    {"source":"major_trauma_blunt","target":"exsanguination","likelihood":"common","note":"Pelvic, intra-abdominal (spleen, liver), aortic injury bleeds out."},
+    {"source":"major_trauma_blunt","target":"traumatic_brain_injury","likelihood":"common","note":"Most common single mode of death in MVCs and falls."},
+    {"source":"major_trauma_blunt","target":"tension_pneumothorax","likelihood":"possible","note":"Rib fractures with parenchymal injury."},
+    {"source":"major_trauma_blunt","target":"cardiac_tamponade","likelihood":"possible","note":"Blunt cardiac rupture or aortic dissection bleeding into pericardium."},
+    {"source":"major_trauma_blunt","target":"crush_injury_rhabdo","likelihood":"possible","note":"Particularly entrapment, building collapse, prolonged immobilisation under loads."},
+    {"source":"major_trauma_blunt","target":"ards","likelihood":"common","note":"Pulmonary contusion, transfusion-related, fat embolism."},
+
+    {"source":"major_trauma_penetrating","target":"exsanguination","likelihood":"typical","note":"Vascular and solid-organ disruption — the dominant lethal mechanism."},
+    {"source":"major_trauma_penetrating","target":"traumatic_brain_injury","likelihood":"common","note":"GSW to head."},
+    {"source":"major_trauma_penetrating","target":"tension_pneumothorax","likelihood":"common","note":"Open pneumothorax can become tension if dressed without venting."},
+    {"source":"major_trauma_penetrating","target":"cardiac_tamponade","likelihood":"common","note":"Stab wound to the heart most often presents with tamponade rather than exsanguination because the pericardium contains the bleed."},
+
+    {"source":"traumatic_brain_injury","target":"direct_neuron_damage","likelihood":"typical","note":"Contusion, shear, hemorrhage."},
+    {"source":"traumatic_brain_injury","target":"cerebral_herniation_event","likelihood":"common","note":"Hematoma plus edema in a fixed compartment."},
+    {"source":"traumatic_brain_injury","target":"respiratory_failure","likelihood":"common","note":"Brainstem injury or central depression of respiratory drive."},
+    {"source":"traumatic_brain_injury","target":"structural_disruption_cns","likelihood":"common","note":"In catastrophic injuries the CNS is grossly disrupted."},
+
+    {"source":"severe_burns","target":"circulatory_collapse","likelihood":"typical","note":"Burn shock — massive capillary leak in the first 24–48 h."},
+    {"source":"severe_burns","target":"ards","likelihood":"common","note":"Inhalation injury and SIRS."},
+    {"source":"severe_burns","target":"sepsis","likelihood":"common","note":"Burn wound and ventilator-associated infections; immune impairment."},
+    {"source":"severe_burns","target":"multi_organ_failure","likelihood":"common","note":"Common late outcome of large burns."},
+    {"source":"severe_burns","target":"co_poisoning","likelihood":"common","note":"Closed-space fires expose the victim to CO and cyanide as well as heat."},
+
+    {"source":"electrocution_injury","target":"cardiac_arrhythmia","likelihood":"typical","note":"Mains-frequency AC across the chest is highly arrhythmogenic — VF the classic mode."},
+    {"source":"electrocution_injury","target":"cardiac_arrest","likelihood":"common","note":"Lightning strike often causes simultaneous asystole and apnea."},
+    {"source":"electrocution_injury","target":"severe_burns","likelihood":"common","note":"High-voltage electrocution causes deep thermal injury along the current path."},
+    {"source":"electrocution_injury","target":"respiratory_failure","likelihood":"common","note":"Diaphragmatic tetany during current flow."},
+    {"source":"electrocution_injury","target":"crush_injury_rhabdo","likelihood":"common","note":"Massive muscle injury along the current path."},
+
+    {"source":"drowning_event","target":"cerebral_hypoxia_ischemia","likelihood":"typical","note":"Asphyxial mechanism: laryngospasm or fluid in the lungs → no gas exchange → hypoxia."},
+    {"source":"drowning_event","target":"respiratory_failure","likelihood":"typical","note":"Aspirated water destroys surfactant → ARDS-like picture even after rescue."},
+    {"source":"drowning_event","target":"cardiac_arrhythmia","likelihood":"common","note":"Cold-water immersion induces vagal arrhythmia and VF."},
+
+    {"source":"asphyxia_hanging","target":"airway_obstruction","likelihood":"common","note":"Mechanical compression of the upper airway."},
+    {"source":"asphyxia_hanging","target":"cerebral_hypoxia_ischemia","likelihood":"typical","note":"Compression of carotid arteries and jugular veins → loss of consciousness in seconds."},
+    {"source":"asphyxia_hanging","target":"cardiac_arrest","likelihood":"common","note":"Vasovagal arrest from carotid sinus pressure."},
+    {"source":"asphyxia_hanging","target":"structural_disruption_cns","likelihood":"possible","note":"Long-drop hanging fractures the cervical spine and disrupts the cord."},
+
+    {"source":"choking_foreign_body","target":"airway_obstruction","likelihood":"typical","note":"Mechanical FB occlusion — nothing else needed."},
+
+    {"source":"crush_injury_rhabdo","target":"severe_hyperkalemia","likelihood":"typical","note":"K⁺ released from damaged muscle on reperfusion can stop the heart immediately on extrication (\"smiling death\")."},
+    {"source":"crush_injury_rhabdo","target":"acute_kidney_injury","likelihood":"typical","note":"Myoglobin precipitates in tubules → ATN."},
+    {"source":"crush_injury_rhabdo","target":"severe_acidosis","likelihood":"common","note":"Lactic and other organic acids from injured tissue."},
+
+    {"source":"envenomation","target":"transmission_blockade","likelihood":"possible","note":"Many snake (elapid), cone snail, and pufferfish venoms block sodium channels or NMJ — neurons stay alive but transmission stops; the rare clean example."},
+    {"source":"envenomation","target":"respiratory_failure","likelihood":"possible","note":"Diaphragmatic paralysis from neurotoxic venoms."},
+    {"source":"envenomation","target":"dic_coagulopathy","likelihood":"possible","note":"Viper, brown-snake, and pit-viper venoms activate coagulation pathways."},
+    {"source":"envenomation","target":"cardiac_arrhythmia","likelihood":"possible","note":"Cardiotoxic venoms — scorpion, some snakes, jellyfish."},
+    {"source":"envenomation","target":"anaphylaxis","likelihood":"possible","note":"Hymenoptera (bee/wasp) anaphylaxis is the dominant venom death in many regions."},
+
+    {"source":"opioid_overdose","target":"respiratory_failure","likelihood":"typical","note":"μ-receptor agonism in brainstem respiratory centers."},
+    {"source":"opioid_overdose","target":"airway_obstruction","likelihood":"common","note":"Aspiration of vomit while obtunded."},
+    {"source":"opioid_overdose","target":"cardiac_arrest","likelihood":"common","note":"Hypoxia-induced PEA after sustained apnea."},
+
+    {"source":"alcohol_acute_overdose","target":"respiratory_failure","likelihood":"common","note":"Central respiratory depression at high blood ethanol."},
+    {"source":"alcohol_acute_overdose","target":"airway_obstruction","likelihood":"common","note":"Aspiration of vomit while obtunded — the mechanism the user mentions, very common in actual ethanol deaths."},
+    {"source":"alcohol_acute_overdose","target":"severe_hypothermia_state","likelihood":"common","note":"Peripheral vasodilation + outdoor exposure + impaired thermoregulatory behaviour."},
+    {"source":"alcohol_acute_overdose","target":"severe_hypoglycemia","likelihood":"common","note":"Especially in fasted patients, alcohol blocks gluconeogenesis."},
+
+    {"source":"co_poisoning","target":"cerebral_hypoxia_ischemia","likelihood":"typical","note":"COHb cannot carry O₂ and shifts the dissociation curve, so what little is bound is not released."},
+    {"source":"co_poisoning","target":"cardiac_arrhythmia","likelihood":"common","note":"Myocardial hypoxia provokes arrhythmia."},
+    {"source":"co_poisoning","target":"toxic_metabolic_neuron","likelihood":"common","note":"CO also binds cytochrome oxidase; delayed neuropsychiatric injury is a signature."},
+
+    {"source":"cyanide_poisoning","target":"toxic_metabolic_neuron","likelihood":"typical","note":"Halts oxidative phosphorylation in neurons; \"histotoxic hypoxia\"."},
+    {"source":"cyanide_poisoning","target":"cardiac_arrest","likelihood":"typical","note":"Myocardial cytochrome oxidase inhibition → rapid arrest at high doses."},
+    {"source":"cyanide_poisoning","target":"severe_acidosis","likelihood":"typical","note":"Profound lactic acidosis from anaerobic metabolism."},
+
+    {"source":"anaphylaxis","target":"airway_obstruction","likelihood":"typical","note":"Laryngeal edema."},
+    {"source":"anaphylaxis","target":"circulatory_collapse","likelihood":"typical","note":"Distributive shock from systemic vasodilation."},
+    {"source":"anaphylaxis","target":"respiratory_failure","likelihood":"common","note":"Severe bronchospasm."},
+
+    {"source":"environmental_hypothermia","target":"severe_hypothermia_state","likelihood":"typical","note":"Direct mapping: exposure produces the physiological state."},
+    {"source":"environmental_hypothermia","target":"cardiac_arrhythmia","likelihood":"common","note":"Cold-induced VF."},
+
+    {"source":"heat_stroke","target":"severe_hyperthermia_state","likelihood":"typical","note":"Direct mapping."},
+    {"source":"heat_stroke","target":"multi_organ_failure","likelihood":"common","note":"Heat denatures proteins everywhere; renal, hepatic, cardiac, brain failure follow."},
+    {"source":"heat_stroke","target":"dic_coagulopathy","likelihood":"common","note":"Endothelial heat injury triggers DIC."},
+    {"source":"heat_stroke","target":"crush_injury_rhabdo","likelihood":"common","note":"Exertional heat stroke produces severe rhabdomyolysis."},
+
+    {"source":"acute_radiation_syndrome","target":"sepsis","likelihood":"typical","note":"Pancytopenia 2–4 weeks after exposure → infection."},
+    {"source":"acute_radiation_syndrome","target":"exsanguination","likelihood":"common","note":"Thrombocytopenia + GI denudation → bleeding."},
+    {"source":"acute_radiation_syndrome","target":"multi_organ_failure","likelihood":"typical","note":"Higher doses → GI then neurovascular syndrome → MODS."},
+    {"source":"acute_radiation_syndrome","target":"direct_neuron_damage","likelihood":"possible","note":"Doses >~30 Gy cause rapid neurovascular syndrome with cerebral edema."},
+
+    {"source":"starvation","target":"cardiac_arrhythmia","likelihood":"typical","note":"Cardiac muscle is catabolised; refeeding shifts cause fatal arrhythmia (refeeding syndrome)."},
+    {"source":"starvation","target":"multi_organ_failure","likelihood":"typical","note":"Late protein-energy malnutrition is global organ failure."},
+    {"source":"starvation","target":"severe_hypoglycemia","likelihood":"common","note":"Glycogen exhausted, gluconeogenesis impaired."},
+    {"source":"starvation","target":"sepsis","likelihood":"common","note":"Severe immune dysfunction in late malnutrition."},
+
+    {"source":"severe_dehydration","target":"circulatory_collapse","likelihood":"typical","note":"Pure hypovolemic shock — the classical mechanism of cholera death."},
+    {"source":"severe_dehydration","target":"acute_kidney_injury","likelihood":"common","note":"Prerenal AKI from sustained underperfusion."},
+    {"source":"severe_dehydration","target":"toxic_metabolic_neuron","likelihood":"common","note":"Severe hypernatremia from free-water loss damages neurons."},
+
+    {"source":"maternal_complications","target":"exsanguination","likelihood":"typical","note":"Postpartum hemorrhage is the single largest cause of maternal mortality globally."},
+    {"source":"maternal_complications","target":"sepsis","likelihood":"common","note":"Puerperal sepsis."},
+    {"source":"maternal_complications","target":"hemorrhagic_stroke","likelihood":"possible","note":"Eclamptic intracerebral hemorrhage."},
+    {"source":"maternal_complications","target":"status_epilepticus","likelihood":"possible","note":"Eclampsia."},
+    {"source":"maternal_complications","target":"pulmonary_embolism","likelihood":"common","note":"Pregnancy is markedly hypercoagulable; PE is a leading direct maternal death in high-income settings."},
+    {"source":"maternal_complications","target":"dic_coagulopathy","likelihood":"common","note":"Amniotic fluid embolism, abruption, severe preeclampsia."},
+
+    {"source":"congenital_anomaly","target":"cardiac_arrhythmia","likelihood":"common","note":"Complex CHD, channelopathies."},
+    {"source":"congenital_anomaly","target":"respiratory_failure","likelihood":"common","note":"Pulmonary hypoplasia, severe airway anomalies, neurologic anomalies."},
+    {"source":"congenital_anomaly","target":"multi_organ_failure","likelihood":"common","note":"Trisomy 13/18 and severe metabolic disorders."},
+    {"source":"congenital_anomaly","target":"cardiac_arrest","likelihood":"common","note":"Univentricular and other unrepairable lesions."},
+
+    {"source":"neonatal_disorder","target":"respiratory_failure","likelihood":"typical","note":"Respiratory distress syndrome of prematurity, meconium aspiration."},
+    {"source":"neonatal_disorder","target":"sepsis","likelihood":"common","note":"Early- and late-onset neonatal sepsis."},
+    {"source":"neonatal_disorder","target":"cerebral_hypoxia_ischemia","likelihood":"common","note":"Birth asphyxia / hypoxic-ischemic encephalopathy."},
+    {"source":"neonatal_disorder","target":"cardiac_arrhythmia","likelihood":"possible","note":"In neonatal cardiomyopathies and CHD."},
+
+    {"source":"sids","target":"cerebral_hypoxia_ischemia","likelihood":"typical","note":"Best-supported model: central apnea + impaired arousal → terminal hypoxia."},
+    {"source":"sids","target":"airway_obstruction","likelihood":"possible","note":"Positional asphyxia in unsafe sleep environments."},
+
+    {"source":"atherosclerosis","target":"ischemic_heart_disease","likelihood":"typical","note":"Plaque rupture in a coronary artery is the proximate cause of most acute MIs."},
+    {"source":"atherosclerosis","target":"ischemic_stroke","likelihood":"typical","note":"Carotid and intracranial atherosclerosis; aortic-arch atheroma → embolic stroke."},
+    {"source":"atherosclerosis","target":"aortic_dissection_rupture","likelihood":"common","note":"Atherosclerotic aneurysm formation."},
+    {"source":"atherosclerosis","target":"bowel_perforation_ischemia","likelihood":"common","note":"Mesenteric ischemia."},
+
+    {"source":"chronic_hypertension","target":"ischemic_heart_disease","likelihood":"common","note":"Pressure-driven myocardial demand and vascular injury."},
+    {"source":"chronic_hypertension","target":"heart_failure_chronic","likelihood":"common","note":"Concentric LV hypertrophy → diastolic and later systolic failure."},
+    {"source":"chronic_hypertension","target":"ischemic_stroke","likelihood":"common","note":"Lacunar infarcts; accelerated atherosclerosis."},
+    {"source":"chronic_hypertension","target":"hemorrhagic_stroke","likelihood":"typical","note":"The single largest risk factor for spontaneous ICH."},
+    {"source":"chronic_hypertension","target":"chronic_kidney_disease","likelihood":"common","note":"Hypertensive nephrosclerosis."},
+    {"source":"chronic_hypertension","target":"aortic_dissection_rupture","likelihood":"common","note":"Most common single risk factor for type B dissection."},
+    {"source":"chronic_hypertension","target":"atherosclerosis","likelihood":"typical","note":"Accelerates atherogenesis throughout the arterial tree."},
+
+    {"source":"tobacco_use","target":"atherosclerosis","likelihood":"typical","note":"Endothelial dysfunction, oxidative LDL modification, prothrombotic state."},
+    {"source":"tobacco_use","target":"malignant_neoplasm","likelihood":"typical","note":"~85–90% of lung cancer; bladder, head/neck, pancreas, kidney also strongly linked."},
+    {"source":"tobacco_use","target":"copd_emphysema","likelihood":"typical","note":"~80% of COPD in high-income settings."},
+    {"source":"tobacco_use","target":"ischemic_heart_disease","likelihood":"common","note":"Plus direct platelet-activating effect independent of atherosclerosis."},
+    {"source":"tobacco_use","target":"aortic_dissection_rupture","likelihood":"common","note":"Strong independent risk for AAA in particular."},
+
+    {"source":"alcohol_chronic","target":"liver_failure","likelihood":"typical","note":"Steatosis → steatohepatitis → cirrhosis."},
+    {"source":"alcohol_chronic","target":"malignant_neoplasm","likelihood":"common","note":"Oral, pharyngeal, laryngeal, esophageal, hepatic, breast (and others)."},
+    {"source":"alcohol_chronic","target":"cardiac_arrhythmia","likelihood":"common","note":"Atrial fibrillation (\"holiday heart\"); alcoholic cardiomyopathy is arrhythmogenic."},
+    {"source":"alcohol_chronic","target":"heart_failure_chronic","likelihood":"common","note":"Alcoholic dilated cardiomyopathy."},
+    {"source":"alcohol_chronic","target":"acute_pancreatitis","likelihood":"common","note":"Alcohol is one of the two leading causes."},
+    {"source":"alcohol_chronic","target":"gi_hemorrhage","likelihood":"common","note":"Esophageal varices, Mallory-Weiss, alcoholic gastritis."},
+    {"source":"alcohol_chronic","target":"alcohol_acute_overdose","likelihood":"common","note":"Pattern of binge use."},
+    {"source":"alcohol_chronic","target":"unintentional_injury","likelihood":"common","note":"A large fraction of \"alcohol-related death\" is via injury, not direct toxicity."},
+
+    {"source":"drug_abuse_chronic","target":"opioid_overdose","likelihood":"typical","note":"The dominant immediate killer in opioid use disorder."},
+    {"source":"drug_abuse_chronic","target":"sepsis","likelihood":"common","note":"IV use → endocarditis, abscesses."},
+    {"source":"drug_abuse_chronic","target":"cardiac_arrhythmia","likelihood":"possible","note":"Cocaine, methamphetamine."},
+    {"source":"drug_abuse_chronic","target":"ischemic_heart_disease","likelihood":"possible","note":"Cocaine causes coronary spasm and accelerated atherosclerosis."},
+
+    {"source":"obesity_diet","target":"atherosclerosis","likelihood":"typical","note":"Through insulin resistance, dyslipidemia, hypertension."},
+    {"source":"obesity_diet","target":"chronic_hypertension","likelihood":"typical","note":"One of the strongest modifiable risk factors."},
+    {"source":"obesity_diet","target":"diabetes_complications","likelihood":"typical","note":"Type 2 diabetes is mostly downstream of obesity."},
+    {"source":"obesity_diet","target":"ischemic_heart_disease","likelihood":"common","note":"Via the cluster of risks above."},
+    {"source":"obesity_diet","target":"malignant_neoplasm","likelihood":"common","note":"Colorectal, endometrial, postmenopausal breast, esophageal adenocarcinoma, kidney, liver."},
+    {"source":"obesity_diet","target":"pulmonary_embolism","likelihood":"common","note":"Obesity is independently prothrombotic."},
+    {"source":"obesity_diet","target":"liver_failure","likelihood":"common","note":"NAFLD/NASH cirrhosis."},
+
+    {"source":"sedentary","target":"atherosclerosis","likelihood":"common","note":"Independent of weight, low fitness raises cardiovascular mortality."},
+    {"source":"sedentary","target":"obesity_diet","likelihood":"common","note":"Often co-travels."},
+    {"source":"sedentary","target":"diabetes_complications","likelihood":"common","note":"Lower insulin sensitivity."},
+    {"source":"sedentary","target":"pulmonary_embolism","likelihood":"possible","note":"Long immobility (postoperative, long flights) is a discrete risk."},
+
+    {"source":"genetic_inherited","target":"ischemic_heart_disease","likelihood":"common","note":"Familial hypercholesterolemia; polygenic CAD risk."},
+    {"source":"genetic_inherited","target":"cardiac_arrhythmia","likelihood":"common","note":"Long-QT, Brugada, ARVC, HCM, CPVT."},
+    {"source":"genetic_inherited","target":"malignant_neoplasm","likelihood":"common","note":"BRCA1/2, Lynch, Li-Fraumeni, p53, RB, FAP, MEN syndromes."},
+    {"source":"genetic_inherited","target":"congenital_anomaly","likelihood":"common","note":"Chromosomal and monogenic syndromes."},
+    {"source":"genetic_inherited","target":"neurodegenerative_disease","likelihood":"possible","note":"Huntington, familial Alzheimer/PD, familial ALS."},
+    {"source":"genetic_inherited","target":"neuromuscular_paralysis","likelihood":"possible","note":"Dystrophinopathies, congenital myasthenic syndromes."},
+    {"source":"genetic_inherited","target":"liver_failure","likelihood":"possible","note":"Hemochromatosis, Wilson, α1-antitrypsin deficiency."},
+
+    {"source":"aging","target":"ischemic_heart_disease","likelihood":"typical","note":"Single largest risk factor."},
+    {"source":"aging","target":"ischemic_stroke","likelihood":"typical","note":"Same."},
+    {"source":"aging","target":"malignant_neoplasm","likelihood":"typical","note":"Cumulative DNA damage and immunosenescence."},
+    {"source":"aging","target":"neurodegenerative_disease","likelihood":"typical","note":"Strongest risk factor for Alzheimer’s and Parkinson’s."},
+    {"source":"aging","target":"chronic_kidney_disease","likelihood":"common","note":"GFR declines with age."},
+    {"source":"aging","target":"copd_emphysema","likelihood":"common","note":"Cumulative exposure plus loss of pulmonary reserve."},
+    {"source":"aging","target":"heart_failure_chronic","likelihood":"common","note":"Loss of cardiac reserve + cumulative ischemic and hypertensive damage."},
+    {"source":"aging","target":"atherosclerosis","likelihood":"typical","note":"Cumulative vascular injury."},
+    {"source":"aging","target":"pneumonia","likelihood":"common","note":"Aspiration risk + immunosenescence."},
+
+    {"source":"bacterial_infection","target":"pneumonia","likelihood":"typical","note":"S. pneumoniae, H. influenzae, atypicals; the largest single class of pneumonia."},
+    {"source":"bacterial_infection","target":"meningoencephalitis_inf","likelihood":"common","note":"Pneumococcus, meningococcus, Hib, Listeria, mycobacterium."},
+    {"source":"bacterial_infection","target":"sepsis","likelihood":"typical","note":"The dominant trigger of sepsis."},
+    {"source":"bacterial_infection","target":"tuberculosis","likelihood":"common","note":"M. tuberculosis specifically."},
+    {"source":"bacterial_infection","target":"bowel_perforation_ischemia","likelihood":"common","note":"Peritonitis from gut flora."},
+
+    {"source":"viral_infection","target":"pneumonia","likelihood":"common","note":"Influenza, RSV, SARS-CoV-2, hantavirus."},
+    {"source":"viral_infection","target":"meningoencephalitis_inf","likelihood":"common","note":"HSV, enteroviruses, arboviruses, rabies."},
+    {"source":"viral_infection","target":"hiv_aids_complications","likelihood":"typical","note":"HIV → AIDS-related complications."},
+    {"source":"viral_infection","target":"liver_failure","likelihood":"common","note":"Hepatitis B and C → cirrhosis; hepatitis A/E → fulminant in some."},
+    {"source":"viral_infection","target":"malignant_neoplasm","likelihood":"common","note":"HPV → cervix/HN; HBV/HCV → HCC; EBV → lymphomas; HHV-8 → KS."},
+
+    {"source":"fungal_parasitic","target":"pneumonia","likelihood":"common","note":"Pneumocystis, invasive aspergillosis, endemic mycoses."},
+    {"source":"fungal_parasitic","target":"meningoencephalitis_inf","likelihood":"common","note":"Cryptococcus, cerebral toxoplasmosis, cerebral malaria."},
+    {"source":"fungal_parasitic","target":"sepsis","likelihood":"common","note":"Severe malaria and invasive candidiasis."},
+    {"source":"fungal_parasitic","target":"liver_failure","likelihood":"possible","note":"Schistosomiasis, hepatic amebiasis."},
+
+    {"source":"carcinogen_exposure","target":"malignant_neoplasm","likelihood":"typical","note":"By definition: substances and exposures that cause cancer."},
+
+    {"source":"malnutrition_chronic","target":"starvation","likelihood":"typical","note":"Severe chronic malnutrition tips into the acute starvation syndrome under any added stress."},
+    {"source":"malnutrition_chronic","target":"bacterial_infection","likelihood":"common","note":"Profound immunocompromise."},
+    {"source":"malnutrition_chronic","target":"neonatal_disorder","likelihood":"common","note":"Maternal malnutrition → low birthweight, prematurity."},
+    {"source":"malnutrition_chronic","target":"pneumonia","likelihood":"common","note":"Largest pediatric infectious killer in low-income settings."},
+
+    {"source":"environmental_pollutant","target":"malignant_neoplasm","likelihood":"common","note":"Asbestos, radon, diesel exhaust, PM2.5, arsenic."},
+    {"source":"environmental_pollutant","target":"copd_emphysema","likelihood":"common","note":"Indoor biomass smoke, occupational dusts."},
+    {"source":"environmental_pollutant","target":"atherosclerosis","likelihood":"common","note":"Air pollution drives cardiovascular mortality."},
+    {"source":"environmental_pollutant","target":"acute_radiation_syndrome","likelihood":"possible","note":"Acute high-dose accidents; nuclear events."},
+
+    {"source":"interpersonal_violence","target":"major_trauma_blunt","likelihood":"common","note":"Beating, blunt weapons."},
+    {"source":"interpersonal_violence","target":"major_trauma_penetrating","likelihood":"typical","note":"Stab, gunshot."},
+    {"source":"interpersonal_violence","target":"asphyxia_hanging","likelihood":"common","note":"Strangulation."},
+    {"source":"interpersonal_violence","target":"severe_burns","likelihood":"possible","note":"Arson, acid attacks."},
+
+    {"source":"self_directed_violence","target":"major_trauma_penetrating","likelihood":"common","note":"Firearm self-harm."},
+    {"source":"self_directed_violence","target":"asphyxia_hanging","likelihood":"typical","note":"Hanging is the most common method globally."},
+    {"source":"self_directed_violence","target":"opioid_overdose","likelihood":"common","note":"Intentional overdose."},
+    {"source":"self_directed_violence","target":"drowning_event","likelihood":"possible","note":""},
+    {"source":"self_directed_violence","target":"co_poisoning","likelihood":"possible","note":"Vehicle exhaust, charcoal burning."},
+    {"source":"self_directed_violence","target":"major_trauma_blunt","likelihood":"common","note":"Jumping from heights."},
+
+    {"source":"unintentional_injury","target":"major_trauma_blunt","likelihood":"typical","note":"Road traffic, falls."},
+    {"source":"unintentional_injury","target":"major_trauma_penetrating","likelihood":"common","note":"Industrial, agricultural injuries."},
+    {"source":"unintentional_injury","target":"drowning_event","likelihood":"common","note":""},
+    {"source":"unintentional_injury","target":"severe_burns","likelihood":"common","note":"House fires, scalds."},
+    {"source":"unintentional_injury","target":"electrocution_injury","likelihood":"common","note":""},
+    {"source":"unintentional_injury","target":"choking_foreign_body","likelihood":"common","note":""},
+    {"source":"unintentional_injury","target":"environmental_hypothermia","likelihood":"common","note":"Cold exposure incidents."},
+    {"source":"unintentional_injury","target":"heat_stroke","likelihood":"common","note":"Heatwave events."},
+    {"source":"unintentional_injury","target":"co_poisoning","likelihood":"common","note":"Faulty heaters, fires."},
+    {"source":"unintentional_injury","target":"alcohol_acute_overdose","likelihood":"common","note":""},
+    {"source":"unintentional_injury","target":"opioid_overdose","likelihood":"common","note":"Most overdose deaths are coded unintentional."}
+  ]
+}
+</script>
+
+<script>
+const DATA = JSON.parse(document.getElementById('data').textContent);
+
+const LEVEL_RANK = {L0:0, L1:1, L2:2, L3:3, L4:4, L5:5};
+const LEVEL_COLOR = Object.fromEntries(DATA.levels.map(l => [l.id, l.color]));
+
+const LK = {
+  typical:  {weight:3.2, color:"#e5e7eb", style:"solid",  opacity:0.95, label:"typical"},
+  common:   {weight:2.0, color:"#9ca3af", style:"solid",  opacity:0.85, label:"common"},
+  possible: {weight:1.4, color:"#6b7280", style:"dashed", opacity:0.75, label:"possible"},
+  rare:     {weight:1.0, color:"#4b5563", style:"dotted", opacity:0.65, label:"rare"}
+};
+
+cytoscape.use(cytoscapeDagre);
+
+const elements = [];
+DATA.nodes.forEach(n => {
+  elements.push({
+    group: 'nodes',
+    data: {
+      id: n.id, label: n.label, level: n.level, icd: n.icd || '',
+      desc: n.desc, levelColor: LEVEL_COLOR[n.level],
+      rank: LEVEL_RANK[n.level]
+    }
+  });
+});
+DATA.edges.forEach((e,i) => {
+  elements.push({
+    group: 'edges',
+    data: {
+      id: 'e'+i, source: e.source, target: e.target,
+      lk: e.likelihood, note: e.note || ''
+    }
+  });
+});
+
+const cy = cytoscape({
+  container: document.getElementById('cy'),
+  elements,
+  wheelSensitivity: 0.25,
+  minZoom: 0.18, maxZoom: 2.4,
+  style: [
+    {
+      selector: 'node',
+      style: {
+        'background-color': 'data(levelColor)',
+        'border-width': 1,
+        'border-color': '#9ca3af',
+        'color': '#f3f4f6',
+        'label': 'data(label)',
+        'font-size': 11,
+        'text-valign': 'center',
+        'text-halign': 'center',
+        'text-wrap': 'wrap',
+        'text-max-width': 130,
+        'shape': 'round-rectangle',
+        'padding': '10px',
+        'width': 'label',
+        'height': 'label',
+        'min-zoomed-font-size': 6
+      }
+    },
+    {
+      selector: 'node[level="L0"]',
+      style: { 'border-width': 2, 'border-color': '#ffffff', 'font-weight': 700 }
+    },
+    {
+      selector: 'node:selected',
+      style: { 'border-width': 3, 'border-color': '#fbbf24' }
+    },
+    {
+      selector: 'node.faded',
+      style: { 'opacity': 0.18 }
+    },
+    {
+      selector: 'node.highlighted',
+      style: { 'border-width': 2, 'border-color': '#fbbf24' }
+    },
+    {
+      selector: 'edge',
+      style: {
+        'width': 'data(weight)',
+        'line-color': 'data(color)',
+        'target-arrow-color': 'data(color)',
+        'target-arrow-shape': 'triangle',
+        'curve-style': 'bezier',
+        'arrow-scale': 0.9,
+        'opacity': 'data(opacity)',
+        'line-style': 'data(style)',
+        'control-point-step-size': 30
+      }
+    },
+    {
+      selector: 'edge.faded',
+      style: { 'opacity': 0.05 }
+    },
+    {
+      selector: 'edge.highlighted',
+      style: { 'opacity': 1, 'line-color': '#fbbf24', 'target-arrow-color':'#fbbf24' }
+    },
+    {
+      selector: 'edge:selected',
+      style: { 'line-color': '#fbbf24', 'target-arrow-color':'#fbbf24', 'opacity':1 }
+    }
+  ]
+});
+
+cy.edges().forEach(e => {
+  const lk = LK[e.data('lk')] || LK.possible;
+  e.data('weight', lk.weight);
+  e.data('color', lk.color);
+  e.data('style', lk.style);
+  e.data('opacity', lk.opacity);
+});
+
+function runLayout(){
+  cy.layout({
+    name: 'dagre',
+    rankDir: 'TB',
+    nodeSep: 14,
+    edgeSep: 8,
+    rankSep: 80,
+    ranker: 'longest-path'
+  }).run();
+  // After layout, push nodes vertically toward their assigned level so levels align
+  alignToLevels();
+  cy.fit(undefined, 30);
+}
+function alignToLevels(){
+  // Find vertical positions by level: average current y per level, then snap each node
+  const byLevel = {};
+  cy.nodes().forEach(n=>{
+    const lv = n.data('level');
+    (byLevel[lv] = byLevel[lv] || []).push(n);
+  });
+  // Order levels top->bottom: L5,L4,L3,L2,L1,L0
+  const order = ['L5','L4','L3','L2','L1','L0'];
+  let y = 0;
+  const gap = 130;
+  order.forEach((lv,i)=>{
+    const ns = byLevel[lv] || [];
+    if(!ns.length) return;
+    ns.forEach(n=>{
+      const p = n.position();
+      n.position({x:p.x, y: y});
+    });
+    y += gap;
+  });
+  // After snapping, re-distribute X within a level around dagre's computed average
+  // (Already from dagre, but the snap may overlap. Quick conflict resolution:)
+  Object.values(byLevel).forEach(ns=>{
+    ns.sort((a,b)=>a.position('x')-b.position('x'));
+    let lastRight = -Infinity;
+    ns.forEach(n=>{
+      const w = n.outerWidth();
+      let x = n.position('x');
+      if(x - w/2 < lastRight + 6){
+        x = lastRight + 6 + w/2;
+        n.position({x, y:n.position('y')});
+      }
+      lastRight = n.position('x') + w/2;
+    });
+  });
+}
+
+runLayout();
+
+// ---- side panel ----
+const sideEl = document.getElementById('side-content');
+
+function renderNode(n){
+  const inc = n.incomers('edge');
+  const out = n.outgoers('edge');
+  const desc = n.data('desc') || '';
+  const icd = n.data('icd');
+  const level = n.data('level');
+  const levelName = (DATA.levels.find(l=>l.id===level)||{}).name || level;
+
+  function edgeRows(coll, dir){
+    if(!coll.length) return '<div style="color:var(--ink-faint);font-size:12px">none</div>';
+    const sorted = coll.sort((a,b)=>{
+      const order = {typical:0, common:1, possible:2, rare:3};
+      return order[a.data('lk')]-order[b.data('lk')];
+    });
+    return sorted.map(e=>{
+      const other = (dir==='in') ? e.source() : e.target();
+      const lk = e.data('lk');
+      const note = e.data('note') || '';
+      return `<div class="edge-row">
+        <span class="lk ${lk}">${lk}</span>
+        <a class="nodelink" data-id="${other.id()}">${other.data('label')}</a>
+        ${note ? `<div style="color:var(--ink-dim);font-size:12px;margin-top:2px">${escapeHtml(note)}</div>` : ''}
+      </div>`;
+    }).join('');
+  }
+
+  sideEl.innerHTML = `
+    <h2>${escapeHtml(n.data('label'))} <span class="nodebadge">${level}</span> ${icd?`<span class="nodebadge">ICD-10 ${escapeHtml(icd)}</span>`:''}</h2>
+    <div class="meta">${escapeHtml(levelName)}</div>
+    <p class="desc">${escapeHtml(desc)}</p>
+    <h3>Upstream causes (incoming)</h3>
+    ${edgeRows(inc,'in')}
+    <h3>Downstream consequences (outgoing)</h3>
+    ${edgeRows(out,'out')}
+  `;
+  bindNodeLinks();
+}
+
+function renderEdge(e){
+  const s = e.source(); const t = e.target();
+  const note = e.data('note')||'';
+  sideEl.innerHTML = `
+    <h2>Pathway <span class="nodebadge">${e.data('lk')}</span></h2>
+    <div class="meta"><a class="nodelink" data-id="${s.id()}">${escapeHtml(s.data('label'))}</a>
+       &rarr; <a class="nodelink" data-id="${t.id()}">${escapeHtml(t.data('label'))}</a></div>
+    <p class="desc">${escapeHtml(note) || '<i>(no note)</i>'}</p>
+    <h3>${escapeHtml(s.data('label'))}</h3>
+    <p class="desc">${escapeHtml(s.data('desc')||'')}</p>
+    <h3>${escapeHtml(t.data('label'))}</h3>
+    <p class="desc">${escapeHtml(t.data('desc')||'')}</p>
+  `;
+  bindNodeLinks();
+}
+
+function bindNodeLinks(){
+  sideEl.querySelectorAll('a.nodelink').forEach(a=>{
+    a.addEventListener('click', ev=>{
+      ev.preventDefault();
+      const id = a.getAttribute('data-id');
+      const node = cy.getElementById(id);
+      if(node && node.length){
+        cy.elements().unselect();
+        node.select();
+        focusNode(node);
+        cy.animate({center:{eles:node}, zoom: Math.max(cy.zoom(), 0.7)}, {duration:400});
+      }
+    });
+  });
+}
+
+function escapeHtml(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+function focusNode(n){
+  cy.elements().removeClass('highlighted faded');
+  const neigh = n.closedNeighborhood();
+  cy.elements().not(neigh).addClass('faded');
+  neigh.addClass('highlighted');
+  renderNode(n);
+}
+
+cy.on('tap', 'node', evt => focusNode(evt.target));
+cy.on('tap', 'edge', evt => {
+  const e = evt.target;
+  cy.elements().removeClass('highlighted faded');
+  const set = e.union(e.source()).union(e.target());
+  cy.elements().not(set).addClass('faded');
+  set.addClass('highlighted');
+  renderEdge(e);
+});
+cy.on('tap', evt => {
+  if(evt.target === cy){
+    cy.elements().removeClass('highlighted faded');
+  }
+});
+
+// ---- toolbar ----
+document.getElementById('reset').addEventListener('click', () => {
+  cy.elements().removeClass('highlighted faded');
+  cy.fit(undefined, 30);
+});
+document.getElementById('relayout').addEventListener('click', runLayout);
+
+document.getElementById('search').addEventListener('input', ev => {
+  const q = ev.target.value.trim().toLowerCase();
+  cy.elements().removeClass('faded highlighted');
+  if(!q) return;
+  const matches = cy.nodes().filter(n =>
+    n.data('label').toLowerCase().includes(q) ||
+    (n.data('desc')||'').toLowerCase().includes(q) ||
+    n.id().toLowerCase().includes(q)
+  );
+  if(!matches.length) return;
+  const set = matches.union(matches.connectedEdges()).union(matches.neighborhood());
+  cy.elements().not(set).addClass('faded');
+  matches.addClass('highlighted');
+  if(matches.length===1) renderNode(matches[0]);
+});
+
+document.getElementById('level-filter').addEventListener('change', ev => {
+  const v = ev.target.value;
+  let allowed;
+  if(v==='all'||v==='L5-L0') allowed = ['L0','L1','L2','L3','L4','L5'];
+  else if(v==='L4-L0') allowed = ['L0','L1','L2','L3','L4'];
+  else if(v==='L3-L0') allowed = ['L0','L1','L2','L3'];
+  cy.batch(()=>{
+    cy.nodes().forEach(n=>{
+      n.style('display', allowed.includes(n.data('level')) ? 'element' : 'none');
+    });
+  });
+  runLayout();
+});
+
+document.querySelectorAll('.lk-toggle button').forEach(btn=>{
+  btn.addEventListener('click', () => {
+    btn.classList.toggle('active');
+    const enabled = new Set(
+      Array.from(document.querySelectorAll('.lk-toggle button.active')).map(b=>b.getAttribute('data-lk'))
+    );
+    cy.edges().forEach(e=>{
+      e.style('display', enabled.has(e.data('lk')) ? 'element' : 'none');
+    });
+  });
+});
+</script>
+
+</body>
+</html>
