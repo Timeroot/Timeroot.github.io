@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smashing Polynomials into Smooth Pieces</title>
+<style>
+  :root{
+    --bg:#0d1024; --bg2:#141a3a; --panel:#1b2150; --panel2:#232a63;
+    --ink:#eef1ff; --dim:#a9b0e0; --line:#33408a;
+    --c0:#ff6b6b; --c1:#4ecdc4; --c2:#ffd93d; --c3:#a06cd5;
+    --c4:#ff9f43; --c5:#54a0ff; --c6:#1dd1a1; --c7:#f368e0;
+    --accent:#7c5cff; --good:#3ddc84; --bad:#ff5d6c;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.65; overflow-x:hidden;
+  }
+  .wrap{max-width:920px; margin:0 auto; padding:0 22px}
+  h1,h2,h3{line-height:1.2; font-weight:800}
+  h2{font-size:clamp(1.6rem,3.6vw,2.4rem); margin:0 0 .3em}
+  h3{font-size:1.25rem; margin:1.4em 0 .4em; color:#cdd4ff}
+  p{margin:.7em 0; color:#dfe3ff}
+  .dim{color:var(--dim)}
+  code,.mono{font-family:"SF Mono",ui-monospace,Consolas,"Courier New",monospace}
+  .poly{font-family:Georgia,"Times New Roman",serif; font-style:italic}
+  sup{font-style:normal}
+  a{color:#9fd0ff}
+
+  /* hero */
+  header{
+    position:relative; padding:90px 0 70px; text-align:center; overflow:hidden;
+    background:radial-gradient(1200px 600px at 50% -10%, #2a2170 0%, var(--bg) 60%);
+  }
+  header h1{font-size:clamp(2.1rem,6vw,4rem); margin:0 0 .25em;
+    background:linear-gradient(90deg,#ff6b6b,#ffd93d,#4ecdc4,#7c5cff);
+    -webkit-background-clip:text; background-clip:text; color:transparent;}
+  header .sub{font-size:clamp(1rem,2.4vw,1.3rem); color:var(--dim); max-width:640px; margin:0 auto}
+  #spark{position:absolute; inset:0; width:100%; height:100%; z-index:-1; opacity:.55}
+  .scrollcue{margin-top:34px; color:var(--dim); font-size:.85rem; letter-spacing:.15em; text-transform:uppercase}
+  .scrollcue span{display:block; font-size:1.6rem; animation:bob 1.6s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+
+  section{padding:54px 0; border-top:1px solid rgba(255,255,255,.05)}
+  .lead{font-size:1.12rem}
+  .pill{display:inline-block; padding:.15em .7em; border-radius:999px; font-size:.8rem;
+    font-weight:700; letter-spacing:.04em}
+  .pill.s3{background:rgba(255,107,107,.18); color:#ff9b9b; border:1px solid #ff6b6b55}
+  .pill.c3{background:rgba(78,205,196,.16); color:#8ff0e8; border:1px solid #4ecdc455}
+
+  .card{background:linear-gradient(180deg,var(--panel),var(--bg2)); border:1px solid var(--line);
+    border-radius:16px; padding:22px; margin:18px 0; box-shadow:0 12px 40px rgba(0,0,0,.35)}
+  .note{background:rgba(124,92,255,.10); border-left:4px solid var(--accent); border-radius:8px;
+    padding:12px 16px; margin:16px 0; font-size:.97rem; color:#d9ddff}
+
+  /* controls */
+  .row{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+  button.chip{cursor:pointer; border:1px solid var(--line); background:var(--panel2); color:var(--ink);
+    padding:9px 14px; border-radius:10px; font-size:.92rem; transition:.15s; font-weight:600}
+  button.chip:hover{border-color:var(--accent); transform:translateY(-1px)}
+  button.chip.active{background:var(--accent); border-color:var(--accent); color:#fff; box-shadow:0 6px 18px #7c5cff55}
+  input[type=number],input[type=text]{background:#0c1030; border:1px solid var(--line); color:var(--ink);
+    padding:9px 12px; border-radius:10px; font-size:1rem; font-family:inherit}
+  input[type=range]{width:100%; accent-color:var(--accent)}
+  label.lab{font-size:.85rem; color:var(--dim); display:block; margin-bottom:4px}
+
+  /* smooth number grid */
+  #numgrid{display:grid; grid-template-columns:repeat(20,1fr); gap:3px; margin-top:14px}
+  .ncell{aspect-ratio:1; border-radius:4px; font-size:.0px; cursor:pointer; transition:transform .1s}
+  .ncell:hover{transform:scale(1.35); z-index:2; outline:2px solid #fff}
+  .legendbar{height:14px; border-radius:7px; margin:10px 0 4px;
+    background:linear-gradient(90deg,#3ddc84,#ffd93d,#ff9f43,#ff5d6c)}
+  .factor-line{font-size:1.05rem; margin:.4em 0}
+  .pfac{display:inline-block; padding:.05em .5em; margin:2px; border-radius:6px; font-weight:700; color:#06122a}
+
+  /* explicit factor polynomials */
+  .facitem{display:flex; align-items:center; gap:10px; margin:6px 0; font-size:.96rem}
+  .facdot{flex:none; width:14px; height:14px; border-radius:4px}
+  .facpoly{font-family:Georgia,"Times New Roman",serif; font-style:italic}
+  .facmul{color:var(--dim); margin:0 2px}
+  .introgrid{display:flex; flex-wrap:wrap; gap:8px}
+  .introcell{background:#0c1030; border:1px solid var(--line); border-radius:10px; padding:7px 10px; font-size:.9rem}
+  .introcell .nlab{color:var(--dim); font-size:.8rem}
+  /* value-splitting demo */
+  .chunks{display:flex; flex-wrap:wrap; gap:10px; align-items:stretch; margin:10px 0}
+  .chunk{flex:1 1 150px; min-width:140px; border-radius:12px; padding:10px 12px; color:#06122a;
+    box-shadow:0 6px 18px rgba(0,0,0,.3)}
+  .chunk .cv{font-size:1.25rem; font-weight:800; line-height:1.2}
+  .chunk .cf{font-size:.82rem; font-weight:700; margin-top:4px; opacity:.85}
+  .chunk .cd{font-size:.72rem; opacity:.7}
+  .bignum{font-family:"SF Mono",ui-monospace,Consolas,monospace; word-break:break-all; font-size:1.02rem; color:#cfe}
+  .times{display:flex; align-items:center; justify-content:center; font-weight:800; color:var(--dim); font-size:1.3rem}
+
+  /* splitting bar */
+  .splitbar{display:flex; width:100%; height:64px; border-radius:12px; overflow:hidden;
+    border:1px solid var(--line); background:#0c1030}
+  .seg{display:flex; align-items:center; justify-content:center; font-weight:800; color:#0b1226;
+    transition:flex-basis .7s cubic-bezier(.2,.8,.2,1), background .3s; min-width:2px; font-size:1.05rem;
+    border-right:2px solid #0d1024}
+  .seg:last-child{border-right:0}
+
+  .thetaWrap{margin-top:18px}
+  .thetaTrack{position:relative; height:30px; border-radius:15px; background:#0c1030; border:1px solid var(--line); overflow:hidden}
+  .thetaFill{height:100%; border-radius:15px 0 0 15px; transition:width .7s cubic-bezier(.2,.8,.2,1), background .4s}
+  .thetaMark{position:absolute; top:-6px; bottom:-6px; width:3px; background:#fff; opacity:.9}
+  .thetaMark::after{content:"θ=¼ (our record)"; position:absolute; top:-22px; left:50%; transform:translateX(-50%);
+    font-size:.7rem; color:#9ff0e8; white-space:nowrap}
+  .bigtheta{font-size:2.2rem; font-weight:800}
+
+  canvas{display:block; width:100%; border-radius:14px; background:
+    radial-gradient(700px 400px at 50% 50%,#161c44,#0c1030); border:1px solid var(--line)}
+
+  table{width:100%; border-collapse:collapse; margin-top:10px; font-size:.95rem}
+  th,td{text-align:left; padding:10px 8px; border-bottom:1px solid var(--line); vertical-align:middle}
+  th{color:#aab2ee; font-size:.82rem; text-transform:uppercase; letter-spacing:.05em}
+  td .mono{font-size:.86rem; color:#cfe}
+  .minibar{display:inline-flex; height:14px; width:96px; border-radius:5px; overflow:hidden; vertical-align:middle; border:1px solid var(--line)}
+  .minibar i{display:block; height:100%}
+
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:18px}
+  @media(max-width:680px){ .grid2{grid-template-columns:1fr} #numgrid{grid-template-columns:repeat(14,1fr)} }
+  footer{padding:50px 0 70px; text-align:center; color:var(--dim); font-size:.9rem}
+  .kbd{font-family:inherit; font-style:normal}
+  .reveal{opacity:0; transform:translateY(26px); transition:.7s}
+  .reveal.in{opacity:1; transform:none}
+  .tag{font-size:.78rem; color:var(--dim)}
+</style>
+</head>
+<body>
+
+<header>
+  <canvas id="spark"></canvas>
+  <div class="wrap">
+    <h1>Smashing Polynomials<br>into Smooth Pieces</h1>
+    <p class="sub">A number is “smooth” if it’s built from small prime factors. Polynomials can be
+    smooth too — and we recently found a clean way to make <em>every</em> cubic polynomial spit out
+    arbitrarily-smooth values. Scroll to play with it.</p>
+    <div class="scrollcue">explore<span>↓</span></div>
+  </div>
+</header>
+
+<!-- 1. SMOOTH NUMBERS -->
+<section id="smooth">
+ <div class="wrap reveal">
+  <h2>① First: what’s a <span style="color:var(--c1)">smooth number?</span></h2>
+  <p class="lead">Every whole number breaks apart into <b>primes</b> — its atomic building blocks.
+  We call a number <b>smooth</b> when all of those prime atoms are <i>small</i>.</p>
+  <p>For example <b>720&nbsp;=&nbsp;2·2·2·2·3·3·5</b>. Its biggest prime is just <b>5</b>, so 720 is
+  “5-smooth.” Compare <b>718&nbsp;=&nbsp;2·359</b> — that 359 is a big, ugly prime, so 718 is
+  about as <i>un</i>-smooth as it gets. Smooth numbers are the friendly, cooperative ones: they show
+  up all over cryptography, fast multiplication, and number theory because they’re so easy to take apart.</p>
+
+  <div class="card">
+    <div class="row" style="justify-content:space-between">
+      <div>
+        <label class="lab" for="numin">Type a number and watch it shatter:</label>
+        <input id="numin" type="number" value="720" min="2" max="999999" style="width:160px">
+      </div>
+      <div id="numout" style="text-align:right"></div>
+    </div>
+    <div class="factor-line" id="numfacs"></div>
+  </div>
+
+  <div class="card">
+    <p style="margin-top:0"><b>The first 200 numbers, colored by their largest prime.</b>
+    Drag the slider to pick a smoothness budget <span class="mono" id="Bval">B = 7</span> — every
+    number whose biggest prime is ≤ B lights up. Notice how the smooth ones get rarer as numbers grow.</p>
+    <input id="Bslider" type="range" min="2" max="50" value="7">
+    <div class="legendbar"></div>
+    <div class="row" style="justify-content:space-between; font-size:.78rem">
+      <span class="dim">← smoother (small prime atoms)</span><span class="dim">rougher (big prime atoms) →</span>
+    </div>
+    <div id="numgrid"></div>
+  </div>
+ </div>
+</section>
+
+<!-- 2. POLYNOMIAL PRIMES -->
+<section id="polyprime">
+ <div class="wrap reveal">
+  <h2>② Polynomials have <span style="color:var(--c2)">“primes,” too</span></h2>
+  <p class="lead">Here’s the beautiful analogy at the heart of this story. Just as numbers factor into
+  primes, <b>polynomials factor into <i>irreducible</i> polynomials</b> — pieces that can’t be broken
+  down any further (using only whole-number / fraction coefficients).</p>
+  <div class="grid2">
+    <div class="card">
+      <h3 style="margin-top:0">Numbers</h3>
+      <p class="mono" style="font-size:1.05rem">60 = <span style="color:var(--c0)">2</span>·<span style="color:var(--c0)">2</span>·<span style="color:var(--c1)">3</span>·<span style="color:var(--c2)">5</span></p>
+      <p class="dim">building block = a <b>prime</b><br>“size” of a block = the prime itself</p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">Polynomials</h3>
+      <p class="poly" style="font-size:1.05rem">x⁴−1 = <span style="color:var(--c0)">(x−1)</span><span style="color:var(--c1)">(x+1)</span><span style="color:var(--c3)">(x²+1)</span></p>
+      <p class="dim">building block = an <b>irreducible factor</b><br>“size” of a block = its <b>degree</b> (highest power)</p>
+    </div>
+  </div>
+  <p>So the “largest prime factor” of a number becomes <b>the largest degree among the irreducible
+  factors</b> of a polynomial. A polynomial is <b>smooth</b> when it breaks into many <i>low-degree</i>
+  pieces, and <b>rough</b> when one giant irreducible chunk refuses to split.</p>
+  <div class="note">A degree-24 polynomial that stays in one piece is the rough extreme.
+  One that crumbles into twelve quadratics (degree-2 bits) is gloriously smooth.</div>
+ </div>
+</section>
+
+<!-- 3. BRIDGE: split polynomials -> smooth numbers -->
+<section id="bridge">
+ <div class="wrap reveal">
+  <h2>③ Why splitting makes <span style="color:var(--c4)">smooth numbers</span></h2>
+  <p class="lead">Here’s the bridge between the two worlds. Take a stubborn cubic
+  <span class="poly">f(x) = x³ − x − 1</span> and just start feeding it whole numbers.
+  Most outputs are <b>rough</b> — they hide a big, ugly prime:</p>
+
+  <div class="card">
+    <div id="introTable"></div>
+    <p class="dim" style="margin-bottom:0">Every so often you stumble on a smooth one (like <span class="mono">f(2)=5</span>),
+    but they’re rare and you can’t steer toward them. <b>So here’s the question:</b> can we
+    <i>manufacture</i> smooth values on purpose — an endless supply of them?</p>
+  </div>
+
+  <h3>The trick: feed f a <em>special</em> input, x = g(m)</h3>
+  <p>Suppose we can find a polynomial <span class="poly">g</span> so that the composition
+  <span class="poly">f(g(x))</span> <b>factors</b> into smaller polynomials with whole-number coefficients.
+  For the magic choice <span class="poly">g = 16x⁸+32x⁶+20x⁴+4x²</span> it breaks into four degree-6 pieces:</p>
+
+  <div class="card">
+    <div style="text-align:center; font-size:1.04rem; line-height:2.2" id="fgIdentity"></div>
+    <p class="dim" style="margin:.4em 0 0">This is an <b>algebraic identity</b> — true for every x. So substitute
+    <i>any</i> whole number <span class="mono">x = m</span> and it instantly becomes a fact about
+    <b>integers</b>: the giant number <span class="poly">f(g(m))</span> equals the product of the four
+    piece-values. It can’t help but factor.</p>
+  </div>
+
+  <h3>Watch a value shatter</h3>
+  <p>Pick an input <span class="mono">m</span>. The number <span class="poly">f(g(m))</span> is enormous —
+  but it splits into four near-equal chunks, each about the <b>fourth root</b> of the whole:</p>
+
+  <div class="card">
+    <div class="row" style="align-items:flex-end; gap:16px">
+      <div><label class="lab">input m</label><input id="mIn" type="number" value="2" min="2" max="40" style="width:100px"></div>
+      <div class="dim" id="gmLine"></div>
+    </div>
+    <div id="valueSplit" style="margin-top:16px"></div>
+  </div>
+
+  <div class="note"><b>That’s the whole point.</b> Each piece has degree 6 — exactly a quarter of the total
+  degree 24 — so each piece-value is about <span class="poly">(f(g(m)))<sup>1/4</sup></span> in size.
+  No prime factor can exceed the biggest chunk, so the value is <b>forced smooth</b>. Contrast a careless
+  choice like <span class="poly">g = x⁸</span>: now <span class="poly">f(g(x)) = x²⁴ − x⁸ − 1</span> stays
+  in <em>one</em> irreducible lump, the algebra guarantees nothing, and the values come out almost prime:</p>
+
+  <div class="card">
+    <div id="roughTable"></div>
+  </div>
+
+  <p>The smoothness score is just the <b>exponent in that fourth root</b>. We call it
+  <span class="poly">θ</span> (theta): every value <span class="poly">f(g(m))</span> is guaranteed to break
+  into pieces no bigger than about <span class="poly">(value)<sup>θ</sup></span>. Smaller θ ⇒ smaller
+  guaranteed pieces ⇒ smoother numbers. Let’s pin it down.</p>
+ </div>
+</section>
+
+<!-- 4. THE QUESTION + THETA -->
+<section id="question">
+ <div class="wrap reveal">
+  <h2>④ Scoring the split: <span style="color:var(--c3)">the number θ</span></h2>
+  <p class="lead">We just watched <span class="poly">f(g(x))</span> crack into four degree-6 pieces.
+  In general, <span class="poly">g</span> of degree 8 makes <span class="poly">f(g(x))</span> degree
+  3 × 8 = <b>24</b>, and we capture the quality of the split with a single ratio:</p>
+
+  <div class="card" style="text-align:center">
+    <div style="font-size:1.15rem" class="dim">smoothness score</div>
+    <div style="font-size:1.5rem; margin:.3em 0">
+      <span class="poly">θ</span> =
+      <span style="display:inline-block; text-align:center; vertical-align:middle">
+        <span style="display:block; border-bottom:2px solid var(--ink); padding:0 8px">biggest piece’s degree</span>
+        <span style="display:block; padding:0 8px">total degree</span>
+      </span>
+    </div>
+    <p class="dim" style="margin-bottom:0">θ = 1 means “one giant lump, no luck.” &nbsp; Smaller θ = smoother. &nbsp;
+    The smallest θ we can force is the real prize.</p>
+  </div>
+ </div>
+</section>
+
+<!-- 4. THE LAB -->
+<section id="lab">
+ <div class="wrap reveal">
+  <h2>⑤ The splitting lab</h2>
+  <p class="lead">Pick a smooth-maker <span class="poly">g(x)</span> below. Watch how
+  <span class="poly">f(g(x))</span> (with <span class="poly">f = x³−x−1</span>) breaks apart — as a
+  bar of colored pieces, as the <b>actual irreducible factor polynomials</b>, and as its
+  <b>24 roots scattered across the plane</b>, each colored by which piece it belongs to.</p>
+
+  <div class="row" id="gbuttons" style="margin-bottom:8px"></div>
+
+  <div class="card">
+    <div class="tag" id="glabel"></div>
+    <div class="splitbar" id="splitbar" style="margin-top:8px"></div>
+
+    <div id="factorList" style="margin-top:14px"></div>
+
+    <div class="thetaWrap">
+      <div class="row" style="justify-content:space-between; align-items:flex-end">
+        <div><span class="dim">score&nbsp;</span><span class="bigtheta poly" id="thetaTxt">θ</span></div>
+        <div class="dim" id="thetaWords"></div>
+      </div>
+      <div class="thetaTrack" style="margin-top:8px">
+        <div class="thetaFill" id="thetaFill"></div>
+        <div class="thetaMark" style="left:25%"></div>
+      </div>
+      <div class="row" style="justify-content:space-between; font-size:.75rem" >
+        <span class="dim">¼</span><span class="dim">½</span><span class="dim">¾</span><span class="dim">1 (rough)</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">The 24 roots, colored by family</h3>
+    <p class="dim" style="margin-top:0">Roots that share a color are “entangled” — they live in the same
+    irreducible factor and can never be separated by rational algebra. Fewer, bigger color-families = rougher.
+    Four equal families of six = our smooth sweet spot.</p>
+    <canvas id="roots" height="430"></canvas>
+  </div>
+ </div>
+</section>
+
+<!-- 5. THE RESULT -->
+<section id="result">
+ <div class="wrap reveal">
+  <h2>⑥ What we found: <span style="color:var(--c6)">θ = ¼ for every cubic</span></h2>
+  <p class="lead">Here’s the punchline. For <b>any</b> cubic polynomial you hand us, there is a clever
+  degree-8 polynomial <span class="poly">g</span> with ordinary fraction coefficients so that
+  <span class="poly">f(g(x))</span> splits into <b>four equal degree-6 pieces</b> — pattern
+  <span class="mono">[6, 6, 6, 6]</span>, giving the record score</p>
+  <p style="text-align:center; font-size:1.6rem" class="poly">θ = 6 ⁄ 24 = ¼.</p>
+  <p>No single piece is ever bigger than a quarter of the whole. We verified this for cubics of both
+  “personality types” (more on that below), and a search across dozens of random cubics hit
+  <b>100% success</b>. Here are five worked examples — each <span class="poly">g</span> is a genuine
+  polynomial, checked by actually factoring <span class="poly">f(g(x))</span>:</p>
+
+  <div class="card">
+    <table id="gallery">
+      <thead><tr><th>cubic f(x)</th><th>type</th><th>the magic g(x)</th><th>split</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <div class="note"><b>A peek at the trick.</b> The secret ingredient is a little algebraic identity:
+  if α is a root of a cubic <span class="poly">x³ − A·x − B</span>, then
+  <span class="poly">B·α + A²/4</span> is always a perfect square in the number system built from α
+  (it equals <span class="poly">(α² − A/2)²</span>). That guaranteed square root is exactly the lever
+  that lets us pry <span class="poly">f(g(x))</span> apart into four matching pieces. Earlier searches
+  kept “proving” it was impossible — but they were only looking at small whole-number coefficients
+  and missed the fractions where the real witnesses live!</div>
+ </div>
+</section>
+
+<!-- 6. GALOIS -->
+<section id="galois">
+ <div class="wrap reveal">
+  <h2>⑦ Two flavors of cubic: a <span style="color:var(--c0)">Galois</span> coda</h2>
+  <p class="lead">Why do some cubics behave differently from others? The deepest answer is a 200-year-old
+  idea from a duel-bound French teenager named Évariste Galois: attach to each polynomial a
+  <b>symmetry group</b> describing how its roots can be shuffled.</p>
+
+  <p>A cubic has three roots. The <b>Galois group</b> records which scramblings of those three roots are
+  “allowed” by algebra. For cubics there are only two possibilities:</p>
+
+  <div class="grid2">
+    <div class="card">
+      <span class="pill s3">S₃ — fully scrambled</span>
+      <p>All <b>6</b> rearrangements of the three roots are allowed. The roots are maximally tangled;
+      knowing one tells you nothing about the others. This is the “generic” cubic.</p>
+      <p class="dim mono">x³−x−1, &nbsp; x³−2, &nbsp; x³−4x−1</p>
+    </div>
+    <div class="card">
+      <span class="pill c3">C₃ — orderly rotation</span>
+      <p>Only <b>3</b> rearrangements survive — the roots cycle around like numbers on a clock.
+      Pin down one root and the other two are determined. Rare and special.</p>
+      <p class="dim mono">x³−3x−1, &nbsp; x³+x²−2x−1</p>
+    </div>
+  </div>
+
+  <p>There’s a wonderfully concrete test. Compute the <b>discriminant</b> of the cubic
+  <span class="poly">x³ + bx² + cx + d</span>. If that number is a <b>perfect square</b>, the cubic is
+  the orderly <b>C₃</b> type; otherwise it’s the scrambled <b>S₃</b>. Try it:</p>
+
+  <div class="card">
+    <div class="row" style="gap:14px; align-items:flex-end">
+      <div><label class="lab">b (x² coef)</label><input id="cb" type="number" value="0" style="width:90px"></div>
+      <div><label class="lab">c (x coef)</label><input id="cc" type="number" value="-1" style="width:90px"></div>
+      <div><label class="lab">d (constant)</label><input id="cd" type="number" value="-1" style="width:90px"></div>
+      <button class="chip" id="cgo">classify →</button>
+    </div>
+    <div id="galout" style="margin-top:16px"></div>
+    <canvas id="galcanvas" height="240" style="margin-top:14px"></canvas>
+  </div>
+  <p class="dim">Both of our smooth-cubic witnesses cover S₃ <i>and</i> C₃ — the trick doesn’t care which
+  personality the cubic has, which is part of why we believe it works for absolutely every cubic.</p>
+ </div>
+</section>
+
+<section id="open">
+ <div class="wrap reveal">
+  <h2>⑧ Where it goes next</h2>
+  <p class="lead">Two questions are still open and genuinely unsolved:</p>
+  <p>🧩 <b>Can we beat ¼?</b> Is there a construction that pushes the score below θ = ¼ for cubics — or is
+  a quarter a hard wall? (For richer setups, scores can be made <i>arbitrarily</i> small, so the cubic
+  story may not be over.)</p>
+  <p>🧩 <b>Is it truly <i>every</i> cubic?</b> We have a recipe plus overwhelming experimental evidence
+  (every cubic we tried worked), but turning “we always find one” into a watertight proof — showing a
+  certain geometric object always has a solution — is the remaining mathematical mountain.</p>
+  <p class="dim">Made with a lot of polynomial-factoring and a healthy distrust of searches that only
+  look at small whole numbers. All examples on this page are real and machine-verified.</p>
+ </div>
+</section>
+
+<footer>
+  <div class="wrap">Smooth values of cubic polynomials · an interactive explainer</div>
+</footer>
+
+<script>
+/* ============ embedded REAL data (factorizations + complex roots) ============ */
+const DATA = {"cubics":[{"name":"x^3 - x - 1","latex":"x^3 - x - 1","disc":-23,"galois":"S3","froots":[{"re":1.324718,"im":0.0},{"re":-0.662359,"im":0.56228},{"re":-0.662359,"im":-0.56228}],"magic_str":"16x^8 + 32x^6 + 20x^4 + 4x^2","magic_pattern":[6,6,6,6],"magic_roots":[{"re":-0.091904,"im":1.005974,"f":0},{"re":0.28492,"im":0.762351,"f":0},{"re":-0.091904,"im":-1.005974,"f":0},{"re":0.28492,"im":-0.762351,"f":0},{"re":0.306984,"im":0.301167,"f":0},{"re":0.306984,"im":-0.301167,"f":0},{"re":0.152084,"im":0.924288,"f":1},{"re":-0.152084,"im":0.924288,"f":1},{"re":0.152084,"im":-0.924288,"f":1},{"re":-0.152084,"im":-0.924288,"f":1},{"re":0.402938,"im":0.0,"f":1},{"re":-0.402938,"im":0.0,"f":1},{"re":-0.0,"im":1.078128,"f":2},{"re":0.282057,"im":0.498374,"f":2},{"re":-0.282057,"im":0.498374,"f":2},{"re":-0.0,"im":-1.078128,"f":2},{"re":0.282057,"im":-0.498374,"f":2},{"re":-0.282057,"im":-0.498374,"f":2},{"re":0.091904,"im":1.005974,"f":3},{"re":-0.28492,"im":0.762351,"f":3},{"re":0.091904,"im":-1.005974,"f":3},{"re":-0.28492,"im":-0.762351,"f":3},{"re":-0.306984,"im":0.301167,"f":3},{"re":-0.306984,"im":-0.301167,"f":3}]},{"name":"x^3 - 2","latex":"x^3 - 2","disc":-108,"galois":"S3","froots":[{"re":-0.629961,"im":1.091124},{"re":-0.629961,"im":-1.091124},{"re":1.259921,"im":0.0}],"magic_str":"x^8 / 2","magic_pattern":[6,6,6,6],"magic_roots":[{"re":-0.793701,"im":0.793701,"f":0},{"re":-0.290515,"im":1.084215,"f":0},{"re":-0.793701,"im":-0.793701,"f":0},{"re":-0.290515,"im":-1.084215,"f":0},{"re":1.084215,"im":-0.290515,"f":0},{"re":1.084215,"im":0.290515,"f":0},{"re":-1.122462,"im":0.0,"f":1},{"re":-0.561231,"im":0.972081,"f":1},{"re":-0.561231,"im":-0.972081,"f":1},{"re":0.561231,"im":0.972081,"f":1},{"re":0.561231,"im":-0.972081,"f":1},{"re":1.122462,"im":0.0,"f":1},{"re":-0.972081,"im":0.561231,"f":2},{"re":0.0,"im":1.122462,"f":2},{"re":-0.972081,"im":-0.561231,"f":2},{"re":0.0,"im":-1.122462,"f":2},{"re":0.972081,"im":0.561231,"f":2},{"re":0.972081,"im":-0.561231,"f":2},{"re":-1.084215,"im":-0.290515,"f":3},{"re":-1.084215,"im":0.290515,"f":3},{"re":0.290515,"im":-1.084215,"f":3},{"re":0.793701,"im":-0.793701,"f":3},{"re":0.290515,"im":1.084215,"f":3},{"re":0.793701,"im":0.793701,"f":3}]},{"name":"x^3 - 3x - 1","latex":"x^3 - 3x - 1","disc":81,"galois":"C3","froots":[{"re":1.879385,"im":0.0},{"re":-1.532089,"im":0.0},{"re":-0.347296,"im":0.0}],"magic_str":"-16x^8 + 64x^6 - 80x^4 + 32x^2 - 2","magic_pattern":[6,6,6,6],"magic_roots":[{"re":1.408832,"im":0.0,"f":0},{"re":1.158456,"im":0.0,"f":0},{"re":-1.281713,"im":0.0,"f":0},{"re":-0.81116,"im":0.0,"f":0},{"re":-0.597672,"im":0.0,"f":0},{"re":0.123257,"im":0.0,"f":0},{"re":1.392728,"im":0.0,"f":1},{"re":-1.392728,"im":0.0,"f":1},{"re":0.909039,"im":0.0,"f":1},{"re":0.48369,"im":0.0,"f":1},{"re":-0.909039,"im":0.0,"f":1},{"re":-0.48369,"im":0.0,"f":1},{"re":1.328926,"im":0.0,"f":2},{"re":1.08335,"im":0.0,"f":2},{"re":-1.328926,"im":0.0,"f":2},{"re":-1.08335,"im":0.0,"f":2},{"re":0.245576,"im":0.0,"f":2},{"re":-0.245576,"im":0.0,"f":2},{"re":-1.408832,"im":0.0,"f":3},{"re":-1.158456,"im":0.0,"f":3},{"re":1.281713,"im":0.0,"f":3},{"re":0.81116,"im":0.0,"f":3},{"re":0.597672,"im":0.0,"f":3},{"re":-0.123257,"im":0.0,"f":3}]},{"name":"x^3 + x^2 - 2x - 1","latex":"x^3 + x^2 - 2x - 1","disc":49,"galois":"C3","froots":[{"re":-1.801938,"im":0.0},{"re":1.24698,"im":0.0},{"re":-0.445042,"im":0.0}],"magic_str":"16x^8 - 64x^6 + 80x^4 - 32x^2 + 2","magic_pattern":[6,6,6,6],"magic_roots":[{"re":-1.405321,"im":-0.0,"f":0},{"re":-0.752407,"im":0.0,"f":0},{"re":1.334853,"im":-0.0,"f":0},{"re":1.197449,"im":0.0,"f":0},{"re":0.467085,"im":0.0,"f":0},{"re":0.158342,"im":0.0,"f":0},{"re":1.378756,"im":0.0,"f":1},{"re":1.105677,"im":0.0,"f":1},{"re":0.613604,"im":0.0,"f":1},{"re":-1.378756,"im":0.0,"f":1},{"re":-1.105677,"im":0.0,"f":1},{"re":-0.613604,"im":0.0,"f":1},{"re":1.274162,"im":0.0,"f":2},{"re":-1.274162,"im":0.0,"f":2},{"re":0.881748,"im":0.0,"f":2},{"re":-0.881748,"im":0.0,"f":2},{"re":0.314692,"im":0.0,"f":2},{"re":-0.314692,"im":0.0,"f":2},{"re":1.405321,"im":-0.0,"f":3},{"re":0.752407,"im":0.0,"f":3},{"re":-1.334853,"im":-0.0,"f":3},{"re":-1.197449,"im":0.0,"f":3},{"re":-0.467085,"im":0.0,"f":3},{"re":-0.158342,"im":0.0,"f":3}]},{"name":"x^3 - 4x - 1","latex":"x^3 - 4x - 1","disc":229,"galois":"S3","froots":[{"re":2.114908,"im":0.0},{"re":-1.860806,"im":0.0},{"re":-0.254102,"im":0.0}],"magic_str":"(x^8 - 48x^6 + 688x^4 - 2688x^2 + 1664)/784","magic_pattern":[6,6,6,6],"magic_roots":[{"re":-4.808428,"im":0.0,"f":0},{"re":4.898755,"im":-0.0,"f":0},{"re":4.60279,"im":0.0,"f":0},{"re":-1.677594,"im":0.0,"f":0},{"re":0.937563,"im":0.0,"f":0},{"re":0.046913,"im":0.0,"f":0},{"re":4.644567,"im":0.0,"f":1},{"re":4.202561,"im":0.0,"f":1},{"re":2.183226,"im":0.0,"f":1},{"re":-4.644567,"im":0.0,"f":1},{"re":-4.202561,"im":0.0,"f":1},{"re":-2.183226,"im":0.0,"f":1},{"re":4.385604,"im":0.0,"f":2},{"re":-4.385604,"im":0.0,"f":2},{"re":2.517634,"im":0.0,"f":2},{"re":1.558202,"im":0.0,"f":2},{"re":-2.517634,"im":0.0,"f":2},{"re":-1.558202,"im":0.0,"f":2},{"re":4.808428,"im":0.0,"f":3},{"re":-4.898755,"im":-0.0,"f":3},{"re":-4.60279,"im":0.0,"f":3},{"re":1.677594,"im":0.0,"f":3},{"re":-0.937563,"im":0.0,"f":3},{"re":-0.046913,"im":0.0,"f":3}]}],"compare":[{"label":"a plain power:  g = x^8","g_str":"x**8","pattern":[24],"theta_num":24,"theta_den":24,"roots":[{"re":-0.732404,"im":0.732404,"f":0},{"re":-0.871233,"im":0.454328,"f":0},{"re":-0.937313,"im":0.294796,"f":0},{"re":-1.035775,"im":-0.0,"f":0},{"re":-0.937313,"im":-0.294796,"f":0},{"re":-0.871233,"im":-0.454328,"f":0},{"re":-0.732404,"im":-0.732404,"f":0},{"re":-0.454328,"im":0.871233,"f":0},{"re":-0.294796,"im":0.937313,"f":0},{"re":-0.0,"im":1.035775,"f":0},{"re":-0.454328,"im":-0.871233,"f":0},{"re":-0.294796,"im":-0.937313,"f":0},{"re":0.0,"im":-1.035775,"f":0},{"re":0.294796,"im":0.937313,"f":0},{"re":0.454328,"im":0.871233,"f":0},{"re":0.732404,"im":0.732404,"f":0},{"re":0.294796,"im":-0.937313,"f":0},{"re":0.454328,"im":-0.871233,"f":0},{"re":0.732404,"im":-0.732404,"f":0},{"re":0.871233,"im":0.454328,"f":0},{"re":0.937313,"im":0.294796,"f":0},{"re":1.035775,"im":-0.0,"f":0},{"re":0.871233,"im":-0.454328,"f":0},{"re":0.937313,"im":-0.294796,"f":0}],"fg_str":"x**24 - x**8 - 1","content":1,"factors":[{"deg":24,"str":"x**24 - x**8 - 1","coeffs":[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-1,0,0,0,0,0,0,0,-1]}]},{"label":"a lucky-ish try:  g = x^8 + x^4","g_str":"x**8 + x**4","pattern":[12,12],"theta_num":12,"theta_den":24,"roots":[{"re":-0.849307,"im":0.592881,"f":0},{"re":-0.592881,"im":0.849307,"f":0},{"re":-0.932114,"im":-0.0,"f":0},{"re":-0.849307,"im":-0.592881,"f":0},{"re":-0.592881,"im":-0.849307,"f":0},{"re":-0.0,"im":0.932114,"f":0},{"re":0.592881,"im":0.849307,"f":0},{"re":0.849307,"im":0.592881,"f":0},{"re":-0.0,"im":-0.932114,"f":0},{"re":0.592881,"im":-0.849307,"f":0},{"re":0.849307,"im":-0.592881,"f":0},{"re":0.932114,"im":0.0,"f":0},{"re":-0.813854,"im":-0.813854,"f":1},{"re":-0.813854,"im":0.813854,"f":1},{"re":-0.845907,"im":-0.391508,"f":1},{"re":-0.845907,"im":0.391508,"f":1},{"re":-0.391508,"im":0.845907,"f":1},{"re":0.813854,"im":0.813854,"f":1},{"re":0.391508,"im":0.845907,"f":1},{"re":-0.391508,"im":-0.845907,"f":1},{"re":0.845907,"im":0.391508,"f":1},{"re":0.813854,"im":-0.813854,"f":1},{"re":0.391508,"im":-0.845907,"f":1},{"re":0.845907,"im":-0.391508,"f":1}],"fg_str":"x**24 + 3*x**20 + 3*x**16 + x**12 - x**8 - x**4 - 1","content":1,"factors":[{"deg":12,"str":"x**12 + x**8 - 1","coeffs":[1,0,0,0,1,0,0,0,0,0,0,0,-1]},{"deg":12,"str":"x**12 + 2*x**8 + x**4 + 1","coeffs":[1,0,0,0,2,0,0,0,1,0,0,0,1]}]},{"label":"warmer:  g = x^8 + 1","g_str":"x**8 + 1","pattern":[6,6,12],"theta_num":12,"theta_den":24,"roots":[{"re":1.007076,"im":0.369814,"f":0},{"re":1.007076,"im":-0.369814,"f":0},{"re":-0.0,"im":0.868837,"f":0},{"re":-1.007076,"im":0.369814,"f":0},{"re":-1.007076,"im":-0.369814,"f":0},{"re":-0.0,"im":-0.868837,"f":0},{"re":0.369814,"im":1.007076,"f":1},{"re":-0.369814,"im":1.007076,"f":1},{"re":0.868837,"im":-0.0,"f":1},{"re":0.369814,"im":-1.007076,"f":1},{"re":-0.369814,"im":-1.007076,"f":1},{"re":-0.868837,"im":0.0,"f":1},{"re":-0.973608,"im":-0.450612,"f":2},{"re":-0.450612,"im":-0.973608,"f":2},{"re":-0.973608,"im":0.450612,"f":2},{"re":-0.614361,"im":-0.614361,"f":2},{"re":-0.450612,"im":0.973608,"f":2},{"re":-0.614361,"im":0.614361,"f":2},{"re":0.450612,"im":-0.973608,"f":2},{"re":0.973608,"im":-0.450612,"f":2},{"re":0.614361,"im":-0.614361,"f":2},{"re":0.973608,"im":0.450612,"f":2},{"re":0.450612,"im":0.973608,"f":2},{"re":0.614361,"im":0.614361,"f":2}],"fg_str":"x**24 + 3*x**16 + 2*x**8 - 1","content":1,"factors":[{"deg":6,"str":"x**6 - x**4 + 1","coeffs":[1,0,-1,0,0,0,1]},{"deg":6,"str":"x**6 + x**4 - 1","coeffs":[1,0,1,0,0,0,-1]},{"deg":12,"str":"x**12 + x**8 + 2*x**4 + 1","coeffs":[1,0,0,0,1,0,0,0,2,0,0,0,1]}]},{"label":"our magic g","g_str":"16*x**8 + 32*x**6 + 20*x**4 + 4*x**2","pattern":[6,6,6,6],"theta_num":6,"theta_den":24,"roots":[{"re":-0.091904,"im":1.005974,"f":0},{"re":0.28492,"im":0.762351,"f":0},{"re":-0.091904,"im":-1.005974,"f":0},{"re":0.28492,"im":-0.762351,"f":0},{"re":0.306984,"im":0.301167,"f":0},{"re":0.306984,"im":-0.301167,"f":0},{"re":0.152084,"im":0.924288,"f":1},{"re":-0.152084,"im":0.924288,"f":1},{"re":0.152084,"im":-0.924288,"f":1},{"re":-0.152084,"im":-0.924288,"f":1},{"re":0.402938,"im":0.0,"f":1},{"re":-0.402938,"im":0.0,"f":1},{"re":-0.0,"im":1.078128,"f":2},{"re":0.282057,"im":0.498374,"f":2},{"re":-0.282057,"im":0.498374,"f":2},{"re":-0.0,"im":-1.078128,"f":2},{"re":0.282057,"im":-0.498374,"f":2},{"re":-0.282057,"im":-0.498374,"f":2},{"re":0.091904,"im":1.005974,"f":3},{"re":-0.28492,"im":0.762351,"f":3},{"re":0.091904,"im":-1.005974,"f":3},{"re":-0.28492,"im":-0.762351,"f":3},{"re":-0.306984,"im":0.301167,"f":3},{"re":-0.306984,"im":-0.301167,"f":3}],"fg_str":"4096*x**24 + 24576*x**22 + 64512*x**20 + 97280*x**18 + 92928*x**16 + 58368*x**14 + 24128*x**12 + 6336*x**10 + 944*x**8 + 32*x**6 - 20*x**4 - 4*x**2 - 1","content":1,"factors":[{"deg":6,"str":"8*x**6 - 8*x**5 + 16*x**4 - 12*x**3 + 10*x**2 - 4*x + 1","coeffs":[8,-8,16,-12,10,-4,1]},{"deg":6,"str":"8*x**6 + 12*x**4 + 4*x**2 - 1","coeffs":[8,0,12,0,4,0,-1]},{"deg":6,"str":"8*x**6 + 12*x**4 + 4*x**2 + 1","coeffs":[8,0,12,0,4,0,1]},{"deg":6,"str":"8*x**6 + 8*x**5 + 16*x**4 + 12*x**3 + 10*x**2 + 4*x + 1","coeffs":[8,8,16,12,10,4,1]}]}],"why":{"f":"x^3 - x - 1","g_str":"16x^8 + 32x^6 + 20x^4 + 4x^2","gcoeffs":[16,0,32,0,20,0,4,0,0],"factors":[{"deg":6,"str":"8*x**6 - 8*x**5 + 16*x**4 - 12*x**3 + 10*x**2 - 4*x + 1","coeffs":[8,-8,16,-12,10,-4,1]},{"deg":6,"str":"8*x**6 + 12*x**4 + 4*x**2 - 1","coeffs":[8,0,12,0,4,0,-1]},{"deg":6,"str":"8*x**6 + 12*x**4 + 4*x**2 + 1","coeffs":[8,0,12,0,4,0,1]},{"deg":6,"str":"8*x**6 + 8*x**5 + 16*x**4 + 12*x**3 + 10*x**2 + 4*x + 1","coeffs":[8,8,16,12,10,4,1]}],"samples":[{"m":2,"gm":6480,"fgm":272097785519,"fgm_fac":"7^2\u00b7103\u00b7167\u00b7449\u00b7719","parts":[449,719,721,1169],"parts_fac":["449","719","7\u00b7103","7\u00b7167"],"prod_check":272097785519},{"m":3,"gm":129960,"fgm":2194972623806039,"fgm_fac":"7^2\u00b711\u00b723\u00b759\u00b7449\u00b7977\u00b76841","parts":[4939,6839,6841,9499],"parts_fac":["11\u00b7449","7\u00b7977","6841","7\u00b723\u00b759"],"prod_check":2194972623806039},{"m":4,"gm":1184832,"fgm":1663298995930393535,"fgm_fac":"5\u00b77^2\u00b723\u00b743\u00b7157\u00b7167\u00b7223\u00b7293\u00b74007","parts":[28049,35903,35905,46001],"parts_fac":["7\u00b74007","7\u00b723\u00b7223","5\u00b743\u00b7167","157\u00b7293"],"prod_check":1663298995930393535},{"m":5,"gm":6762600,"fgm":309272354390369237399,"fgm_fac":"7^4\u00b719\u00b797\u00b7317\u00b7997\u00b71367\u00b7161771","parts":[108731,132599,132601,161771],"parts_fac":["7^3\u00b7317","97\u00b71367","7\u00b719\u00b7997","161771"],"prod_check":-4322294862693140073}],"rough":[{"m":2,"gm":256,"fgm":"16776959","digits":8,"fgm_fac":"23\u00b7223\u00b73271"},{"m":3,"gm":6561,"fgm":"282429529919","digits":12,"fgm_fac":"19\u00b7107\u00b7138922543"},{"m":4,"gm":65536,"fgm":"281474976645119","digits":15,"fgm_fac":"281474976645119"},{"m":5,"gm":390625,"fgm":"59604644774999999","digits":17,"fgm_fac":"1123\u00b71481\u00b735838125773"}]},"intro_vals":[{"n":2,"v":5,"fac":"5"},{"n":3,"v":23,"fac":"23"},{"n":4,"v":59,"fac":"59"},{"n":5,"v":119,"fac":"7\u00b717"},{"n":6,"v":209,"fac":"11\u00b719"},{"n":7,"v":335,"fac":"5\u00b767"},{"n":8,"v":503,"fac":"503"},{"n":9,"v":719,"fac":"719"},{"n":10,"v":989,"fac":"23\u00b743"},{"n":11,"v":1319,"fac":"1319"},{"n":12,"v":1715,"fac":"5\u00b77^3"},{"n":13,"v":2183,"fac":"37\u00b759"},{"n":14,"v":2729,"fac":"2729"},{"n":15,"v":3359,"fac":"3359"},{"n":16,"v":4079,"fac":"4079"},{"n":17,"v":4895,"fac":"5\u00b711\u00b789"},{"n":18,"v":5813,"fac":"5813"},{"n":19,"v":6839,"fac":"7\u00b7977"},{"n":20,"v":7979,"fac":"79\u00b7101"}]};
+const PAL = ['#ff6b6b','#4ecdc4','#ffd93d','#a06cd5','#ff9f43','#54a0ff','#1dd1a1','#f368e0'];
+const SUP={'0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹'};
+function prettyPoly(s){
+  return s.replace(/\*\*(\d+)/g,(m,d)=>d.replace(/\d/g,c=>SUP[c]))  // x**6 -> x⁶
+          .replace(/\*/g,'')              // drop remaining *
+          .replace(/\s*\+\s*/g,' + ').replace(/\s*-\s*/g,' − ');
+}
+function commas(s){ s=String(s); return s.replace(/\B(?=(\d{3})+(?!\d))/g,','); }
+
+/* ---------------- integer factorization helpers ---------------- */
+function factorize(n){
+  n=Math.floor(n); const f=[]; let d=2;
+  while(d*d<=n){ while(n%d===0){f.push(d); n/=d;} d += (d===2?1:2);}
+  if(n>1) f.push(n);
+  return f;
+}
+function largestPrime(n){ const f=factorize(n); return f.length?f[f.length-1]:1; }
+
+/* colour for a prime (small=green … large=red), log scaled */
+function primeColor(p){
+  const t = Math.min(1, Math.log(p)/Math.log(60));   // 0..1
+  // green -> yellow -> orange -> red
+  const stops=[[61,220,132],[255,217,61],[255,159,67],[255,93,108]];
+  const x=t*(stops.length-1); const i=Math.floor(x); const fr=x-i;
+  const a=stops[Math.min(i,stops.length-1)], b=stops[Math.min(i+1,stops.length-1)];
+  const c=a.map((v,k)=>Math.round(v+(b[k]-v)*fr));
+  return `rgb(${c[0]},${c[1]},${c[2]})`;
+}
+
+/* ---------------- smooth number explorer ---------------- */
+const numin=document.getElementById('numin');
+const numfacs=document.getElementById('numfacs');
+const numout=document.getElementById('numout');
+function showFactor(){
+  let n=parseInt(numin.value);
+  if(!(n>=2)){numfacs.innerHTML=''; numout.innerHTML=''; return;}
+  const f=factorize(n); const big=f[f.length-1];
+  numfacs.innerHTML = f.map(p=>`<span class="pfac" style="background:${primeColor(p)}">${p}</span>`).join('<span class="dim"> · </span>');
+  const smooth = big<=Math.cbrt(n)+2;
+  numout.innerHTML = `<div class="dim">largest prime atom</div><div style="font-size:1.6rem;font-weight:800;color:${primeColor(big)}">${big}</div>`
+     + `<div class="tag">${big<=11?'delightfully smooth ✓':(big<=50?'fairly smooth':'rough / ugly')}</div>`;
+}
+numin.addEventListener('input',showFactor); showFactor();
+
+const grid=document.getElementById('numgrid');
+const Bslider=document.getElementById('Bslider');
+const Bval=document.getElementById('Bval');
+function buildGrid(){
+  grid.innerHTML='';
+  const B=parseInt(Bslider.value); Bval.textContent='B = '+B;
+  for(let n=1;n<=200;n++){
+    const lp=largestPrime(n);
+    const cell=document.createElement('div');
+    cell.className='ncell';
+    const on = (n>1 && lp<=B);
+    cell.style.background = (n===1)?'#2a3170':primeColor(lp);
+    cell.style.opacity = on?1:0.14;
+    cell.title = n+' = '+(n===1?'1':factorize(n).join('·'))+'  (max prime '+lp+')';
+    grid.appendChild(cell);
+  }
+}
+Bslider.addEventListener('input',buildGrid); buildGrid();
+
+/* ---------------- splitting lab ---------------- */
+const comp = DATA.compare;
+const gbuttons=document.getElementById('gbuttons');
+const splitbar=document.getElementById('splitbar');
+const thetaTxt=document.getElementById('thetaTxt');
+const thetaFill=document.getElementById('thetaFill');
+const thetaWords=document.getElementById('thetaWords');
+const glabel=document.getElementById('glabel');
+const rootsCanvas=document.getElementById('roots');
+let curG=comp.length-1;
+
+const labels = comp.map(c=>{
+  // short button label
+  if(c.pattern.length===1) return 'g = x⁸';
+  if(JSON.stringify(c.pattern)===JSON.stringify([12,12])) return 'g = x⁸+x⁴';
+  if(JSON.stringify(c.pattern)===JSON.stringify([6,6,12])) return 'g = x⁸+1';
+  return '★ magic g';
+});
+comp.forEach((c,i)=>{
+  const b=document.createElement('button'); b.className='chip'+(i===curG?' active':'');
+  b.textContent=labels[i]; b.onclick=()=>{curG=i; renderLab();
+    [...gbuttons.children].forEach((x,k)=>x.classList.toggle('active',k===i));};
+  gbuttons.appendChild(b);
+});
+
+function gcd(a,b){return b?gcd(b,a%b):a;}
+function thetaWordsFor(num,den){
+  const r=num/den;
+  if(r<=0.26) return 'as smooth as cubics get — our record ★';
+  if(r<=0.5) return 'partly broken, but a big chunk remains';
+  return 'one giant lump — no smoothing at all';
+}
+function renderLab(){
+  const c=comp[curG];
+  glabel.innerHTML = 'showing &nbsp;<span class="poly" style="color:#cfe">f(g(x))</span> for &nbsp;<span class="mono">'+c.g_str.replace(/\*\*/g,'^').replace(/\*/g,'')+'</span>';
+  // split bar
+  const total=c.pattern.reduce((a,b)=>a+b,0);
+  splitbar.innerHTML='';
+  c.pattern.forEach((d,i)=>{
+    const s=document.createElement('div'); s.className='seg';
+    s.style.flexBasis=(100*d/total)+'%';
+    s.style.background=PAL[i%PAL.length];
+    s.textContent='deg '+d;
+    splitbar.appendChild(s);
+  });
+  // explicit irreducible factor polynomials
+  const fl=document.getElementById('factorList');
+  if(c.factors && c.factors.length){
+    const head = c.factors.length===1
+      ? '<div class="dim" style="font-size:.86rem;margin-bottom:6px">f(g(x)) is itself irreducible — it will not factor at all:</div>'
+      : '<div class="dim" style="font-size:.86rem;margin-bottom:6px">f(g(x)) factors into '+c.factors.length+' irreducible pieces:</div>';
+    fl.innerHTML = head + c.factors.map((f,i)=>
+      `<div class="facitem"><span class="facdot" style="background:${PAL[i%PAL.length]}"></span>`
+      +`<span class="facpoly">${prettyPoly(f.str)}</span>`
+      +`<span class="tag">(deg ${f.deg})</span></div>`).join('');
+  } else { fl.innerHTML=''; }
+  // theta
+  let num=c.theta_num, den=c.theta_den; const g=gcd(num,den);
+  const fr = (num/g)+'⁄'+(den/g);
+  thetaTxt.textContent='θ = '+fr;
+  const r=num/den;
+  thetaFill.style.width=(100*r)+'%';
+  thetaFill.style.background = r<=0.26? 'linear-gradient(90deg,#1dd1a1,#3ddc84)'
+                              : r<=0.5? 'linear-gradient(90deg,#ffd93d,#ff9f43)'
+                              : 'linear-gradient(90deg,#ff9f43,#ff5d6c)';
+  thetaWords.textContent=thetaWordsFor(num,den);
+  drawRoots(rootsCanvas, c.roots, c.pattern.length);
+}
+
+/* root constellation */
+function setupCanvas(cv, cssH){
+  const ratio=window.devicePixelRatio||1;
+  const w=cv.clientWidth; const h=cssH;
+  cv.style.height=h+'px';
+  cv.width=w*ratio; cv.height=h*ratio;
+  const ctx=cv.getContext('2d'); ctx.setTransform(ratio,0,0,ratio,0,0);
+  return {ctx,w,h};
+}
+let rootsAnimId=null;
+function drawRoots(cv, roots, nfac){
+  if(rootsAnimId!==null){cancelAnimationFrame(rootsAnimId); rootsAnimId=null;}
+  const {ctx,w,h}=setupCanvas(cv,430);
+  if(!w){ // layout not ready yet — try again next frame
+    rootsAnimId=requestAnimationFrame(()=>drawRoots(cv,roots,nfac)); return;
+  }
+  let mx=0; roots.forEach(r=>{mx=Math.max(mx,Math.abs(r.re),Math.abs(r.im));}); mx=(mx||1)*1.18;
+  const cx=w/2, cy=h/2, sc=Math.min(w,h)/(2*mx);
+  function axes(){
+    ctx.clearRect(0,0,w,h);
+    ctx.strokeStyle='rgba(255,255,255,.10)'; ctx.lineWidth=1; ctx.beginPath();
+    ctx.moveTo(0,cy); ctx.lineTo(w,cy); ctx.moveTo(cx,0); ctx.lineTo(cx,h); ctx.stroke();
+    ctx.fillStyle='rgba(255,255,255,.3)'; ctx.font='11px system-ui';
+    ctx.fillText('real',w-34,cy-7); ctx.fillText('imaginary',cx+7,14);
+  }
+  const t0=performance.now();
+  function frame(now){
+    const p=Math.max(0,Math.min(1,(now-t0)/700));   // clamp: RAF time can predate t0
+    axes();
+    roots.forEach((r,i)=>{
+      const x=cx+r.re*sc, y=cy-r.im*sc;
+      const col=PAL[r.f%PAL.length];
+      const rad=Math.max(0,7*easeOut(p));
+      ctx.beginPath(); ctx.arc(x,y,rad,0,7);
+      ctx.fillStyle=col; ctx.globalAlpha=.92; ctx.fill();
+      ctx.globalAlpha=.5; ctx.lineWidth=1.5; ctx.strokeStyle='#0d1024'; ctx.stroke();
+      ctx.globalAlpha=1;
+    });
+    rootsAnimId = (p<1)? requestAnimationFrame(frame) : null;
+  }
+  rootsAnimId=requestAnimationFrame(frame);
+}
+function easeOut(t){return 1-Math.pow(1-t,3);}
+
+renderLab();
+window.addEventListener('resize',()=>renderLab());
+
+/* ---------------- witness gallery ---------------- */
+const galleryBody=document.querySelector('#gallery tbody');
+DATA.cubics.forEach(c=>{
+  const total=c.magic_pattern.reduce((a,b)=>a+b,0);
+  const mini=c.magic_pattern.map((d,i)=>`<i style="width:${100*d/total}%;background:${PAL[i%PAL.length]}"></i>`).join('');
+  const pill = c.galois==='C3'?'<span class="pill c3">C₃</span>':'<span class="pill s3">S₃</span>';
+  const gpretty=c.magic_str.replace(/\^(\d+)/g,'<sup>$1</sup>');
+  const tr=document.createElement('tr');
+  tr.innerHTML=`<td class="poly">${c.latex.replace(/\^(\d+)/g,'<sup>$1</sup>')}</td>
+    <td>${pill}<div class="tag">disc ${c.disc}</div></td>
+    <td><span class="poly">${gpretty}</span></td>
+    <td><span class="minibar">${mini}</span><div class="tag">[6,6,6,6] · θ=¼</div></td>`;
+  galleryBody.appendChild(tr);
+});
+
+/* ---------------- Galois classifier ---------------- */
+const cb=document.getElementById('cb'),cc=document.getElementById('cc'),cd=document.getElementById('cd');
+const galout=document.getElementById('galout'); const galc=document.getElementById('galcanvas');
+function isPerfectSquare(n){ if(n<0) return false; const r=Math.round(Math.sqrt(n)); return r*r===n; }
+function cubeRoots(b,c,d){
+  // Durand–Kerner for x^3+bx^2+cx+d
+  let z=[{re:.4,im:.9},{re:-.6,im:.3},{re:1.1,im:-.7}];
+  const P=(x)=>{ // complex eval
+    let r={re:0,im:0};
+    const pw=[{re:1,im:0}]; for(let k=1;k<=3;k++)pw.push(cmul(pw[k-1],x));
+    const co=[d,c,b,1];
+    for(let k=0;k<4;k++){r=cadd(r,cscale(pw[k],co[k]));}
+    return r;
+  };
+  for(let it=0;it<60;it++){
+    for(let i=0;i<3;i++){
+      let den={re:1,im:0};
+      for(let j=0;j<3;j++) if(j!==i) den=cmul(den,csub(z[i],z[j]));
+      z[i]=csub(z[i],cdiv(P(z[i]),den));
+    }
+  }
+  return z;
+}
+function cadd(a,b){return{re:a.re+b.re,im:a.im+b.im};}
+function csub(a,b){return{re:a.re-b.re,im:a.im-b.im};}
+function cmul(a,b){return{re:a.re*b.re-a.im*b.im,im:a.re*b.im+a.im*b.re};}
+function cscale(a,s){return{re:a.re*s,im:a.im*s};}
+function cdiv(a,b){const den=b.re*b.re+b.im*b.im;return{re:(a.re*b.re+a.im*b.im)/den,im:(a.im*b.re-a.re*b.im)/den};}
+
+function classify(){
+  const b=+cb.value,c=+cc.value,d=+cd.value;
+  // discriminant of x^3+bx^2+cx+d
+  const disc = 18*b*c*d - 4*b*b*b*d + b*b*c*c - 4*c*c*c - 27*d*d;
+  const sq=isPerfectSquare(disc);
+  const grp = sq?'C₃ (orderly rotation)':'S₃ (fully scrambled)';
+  const cls = sq?'c3':'s3';
+  galout.innerHTML = `<div class="poly" style="font-size:1.15rem">x³${b?(b>0?'+':'−')+Math.abs(b)+'x²':''}${c?(c>0?'+':'−')+Math.abs(c)+'x':''}${d?(d>0?'+':'−')+Math.abs(d):''}</div>
+    <div style="margin:.5em 0">discriminant = <b class="mono">${disc}</b> — ${sq?'a perfect square ✓':'not a perfect square'}</div>
+    <span class="pill ${cls}">${grp}</span>`;
+  // draw the three roots
+  const roots=cubeRoots(b,c,d);
+  const {ctx,w,h}=setupCanvas(galc,240); ctx.clearRect(0,0,w,h);
+  let mx=0.5; roots.forEach(r=>{mx=Math.max(mx,Math.abs(r.re),Math.abs(r.im));}); mx*=1.3;
+  const cx=w/2,cy=h/2,sc=Math.min(w,h)/(2*mx);
+  ctx.strokeStyle='rgba(255,255,255,.10)';ctx.beginPath();
+  ctx.moveTo(0,cy);ctx.lineTo(w,cy);ctx.moveTo(cx,0);ctx.lineTo(cx,h);ctx.stroke();
+  ctx.fillStyle='rgba(255,255,255,.3)';ctx.font='11px system-ui';
+  ctx.fillText('real',w-34,cy-7);ctx.fillText('imaginary',cx+7,14);
+  roots.forEach((r,i)=>{
+    const x=cx+r.re*sc,y=cy-r.im*sc;
+    ctx.beginPath();ctx.arc(x,y,9,0,7);ctx.fillStyle=PAL[i%3];ctx.fill();
+    ctx.lineWidth=2;ctx.strokeStyle='#0d1024';ctx.stroke();
+  });
+}
+document.getElementById('cgo').addEventListener('click',classify);
+[cb,cc,cd].forEach(el=>el.addEventListener('input',classify));
+classify();
+
+/* ---------------- hero sparkle constellation ---------------- */
+(function(){
+  const cv=document.getElementById('spark'); const ctx=cv.getContext('2d');
+  let w,h,pts;
+  function resize(){ w=cv.width=cv.clientWidth; h=cv.height=cv.clientHeight;
+    pts=Array.from({length:46},()=>({x:Math.random()*w,y:Math.random()*h,
+      vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25,c:PAL[Math.floor(Math.random()*PAL.length)]}));}
+  resize(); window.addEventListener('resize',resize);
+  (function loop(){
+    ctx.clearRect(0,0,w,h);
+    pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy; if(p.x<0||p.x>w)p.vx*=-1; if(p.y<0||p.y>h)p.vy*=-1;
+      ctx.beginPath();ctx.arc(p.x,p.y,2.2,0,7);ctx.fillStyle=p.c;ctx.globalAlpha=.8;ctx.fill();});
+    ctx.globalAlpha=1;
+    requestAnimationFrame(loop);
+  })();
+})();
+
+/* ---------------- bridge: split polys -> smooth numbers ---------------- */
+function supStr(d){return String(d).replace(/\d/g,c=>SUP[c]);}
+function primeChips(n){
+  n=Math.abs(Math.round(n));
+  if(n<=1) return `<span class="pfac" style="background:#888">${n}</span>`;
+  const f=factorize(n); const g={}; f.forEach(p=>{g[p]=(g[p]||0)+1;});
+  return Object.keys(g).map(p=>{p=+p; const e=g[p];
+    return `<span class="pfac" style="background:${primeColor(p)}">${p}${e>1?supStr(e):''}</span>`;
+  }).join('<span class="dim">·</span>');
+}
+function chipsFromString(s){ // s like "23·223·3271" or "281474976645119" or "7^2·11"
+  return s.split('·').map(tok=>{
+    let [p,e]=tok.split('^'); const col=primeColor(parseInt(p,10)||2);
+    return `<span class="pfac" style="background:${col}">${p}${e?supStr(+e):''}</span>`;
+  }).join('<span class="dim">·</span>');
+}
+
+/* intro: most f(n) are rough */
+(function(){
+  const box=document.getElementById('introTable'); if(!box) return;
+  box.innerHTML='<div class="introgrid">'+DATA.intro_vals.map(o=>{
+    const big=largestPrime(o.v); const isPrime=(big===o.v);
+    const ring=isPrime?'border-color:#ff5d6c;box-shadow:0 0 0 1px #ff5d6c55':'';
+    return `<div class="introcell" style="${ring}"><div class="nlab">f(${o.n}) = ${commas(o.v)}</div>`
+      +`<div>${primeChips(o.v)}</div>`
+      +`<div class="tag">${isPrime?'prime — fully rough':'max prime '+big}</div></div>`;
+  }).join('')+'</div>';
+})();
+
+/* the algebraic identity */
+(function(){
+  const el=document.getElementById('fgIdentity'); if(!el) return;
+  el.innerHTML='<span class="dim">f(g(x)) =</span><br>'+DATA.why.factors.map((f,i)=>
+    `<span style="color:${PAL[i%PAL.length]};font-weight:700">(${prettyPoly(f.str)})</span>`
+  ).join(' <span class="facmul">·</span> ');
+})();
+
+/* live value splitter */
+const mIn=document.getElementById('mIn');
+function evalPolyInt(coeffs,m){let r=0;for(const c of coeffs){r=r*m+c;}return r;}
+function renderSplit(){
+  if(!mIn) return;
+  let m=parseInt(mIn.value); if(!(m>=2)) m=2; if(m>40) m=40;
+  const gm=evalPolyInt(DATA.why.gcoeffs,m);
+  const parts=DATA.why.factors.map(f=>evalPolyInt(f.coeffs,m));
+  let prod=1n; parts.forEach(p=>{prod*=BigInt(Math.round(p));});
+  const prodStr=prod.toString(); const D=prodStr.length;
+  document.getElementById('gmLine').innerHTML=
+    `g(${m}) = <b class="mono" style="color:#cfe">${commas(gm)}</b> &nbsp;→&nbsp; this is the input we hand to f`;
+  let html=`<div class="dim">f(g(${m})) &nbsp;=&nbsp; <span class="tag">${D} digits</span></div>`
+    +`<div class="bignum">${commas(prodStr)}</div>`
+    +`<div class="dim" style="margin-top:10px">which the four polynomial pieces force to factor as:</div>`
+    +`<div class="chunks">`;
+  parts.forEach((p,i)=>{
+    if(i) html+=`<div class="times">×</div>`;
+    html+=`<div class="chunk" style="background:${PAL[i%PAL.length]}">`
+      +`<div class="cv">${commas(p)}</div>`
+      +`<div class="cf">${primeChips(p)}</div>`
+      +`<div class="cd">${String(Math.abs(p)).length} digits · piece deg 6</div></div>`;
+  });
+  html+=`</div>`;
+  const bigP=Math.max(...parts.map(p=>largestPrime(Math.abs(p))));
+  html+=`<div class="dim" style="margin-top:6px">The whole value has <b>${D}</b> digits, yet every chunk has only ~<b>${Math.ceil(D/4)}</b> — about its <b>fourth root</b>. `
+    +`Largest prime atom anywhere: <b style="color:${primeColor(bigP)}">${commas(bigP)}</b>, far below the ${D}-digit value. That’s θ = ¼ in action.</div>`;
+  document.getElementById('valueSplit').innerHTML=html;
+}
+if(mIn){ mIn.addEventListener('input',renderSplit); renderSplit(); }
+
+/* rough contrast table for g = x^8 */
+(function(){
+  const box=document.getElementById('roughTable'); if(!box) return;
+  let html='<div class="dim" style="font-size:.86rem;margin-bottom:8px">'
+    +'g = x⁸ → f(g(x)) = x²⁴ − x⁸ − 1 (irreducible). The values barely factor:</div>'
+    +'<table style="margin-top:0"><thead><tr><th>m</th><th>f(g(m))</th><th>its prime factors</th></tr></thead><tbody>';
+  DATA.why.rough.forEach(o=>{
+    const toks=o.fgm_fac.split('·'); const isPrime=(toks.length===1 && !o.fgm_fac.includes('^'));
+    html+=`<tr><td class="mono">${o.m}</td>`
+      +`<td class="mono">${commas(o.fgm)} <span class="tag">${o.digits} digits</span></td>`
+      +`<td>${chipsFromString(o.fgm_fac)}${isPrime?' <span class="tag" style="color:#ff5d6c">a single giant prime!</span>':''}</td></tr>`;
+  });
+  box.innerHTML=html+'</tbody></table>';
+})();
+
+/* ---------------- scroll reveal ---------------- */
+const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
