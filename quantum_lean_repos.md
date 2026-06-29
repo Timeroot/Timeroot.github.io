@@ -23,7 +23,7 @@ Chronological order.
 2. [Digitalizing Wick's theorem](https://arxiv.org/abs/2505.07939). Joseph Tooby-Smith.
 3. [A Formalization of the Generalized Quantum Stein's Lemma in Lean](https://arxiv.org/abs/2510.08672). Alex Meiburg, Leonardo A. Lessa, Rodolfo R. Soldati.
 4. [Co-Designing Quantum Codes with Transversal Diagonal Gates via Multi-Agent Systems](https://arxiv.org/abs/2510.20728). Xi He, Sirui Lu, Bei Zeng.
-5. [MerLean: An Agentic Framework for Autoformalization in Quantum Computation]()https://arxiv.org/abs/2602.16554. Yuanjie Ren, Jinzheng Li, Yidi Qi.
+5. [MerLean: An Agentic Framework for Autoformalization in Quantum Computation](https://arxiv.org/abs/2602.16554). Yuanjie Ren, Jinzheng Li, Yidi Qi.
 6. [Formalization of QFT](https://arxiv.org/abs/2603.15770). Michael R. Douglas, Sarah Hoback, Anna Mei, Ron Nissim.
 7. [End-to-End Formalization of Quantum Error Correction](https://arxiv.org/abs/2605.16523). Mattias Ehatamm, Yi Lee, Xiaodi Wu, Runzhou Tao.
 
