@@ -5,13 +5,15 @@ This list is _very loosely_ sorted by some combination of scale, age, ongoign co
 1. [Physlib](https://github.com/leanprover-community/physlib) ([Website](https://physlib.io/)). Broad collection of physics. Includes quantum mechanics (Schrödinger equation, Harmonic oscillator) and some quantum field theory. Absorbed the Lean-QuantumInfo repository (and so has quantum entropy, capacity, and so on). Previously known as _Physlean_ and before that _HEPLean_.
 4. [OSforGFF](https://github.com/mrdouglasny/OSforGFF). Lean formalization of the Osterwalder-Schrader axioms for Quantum Field Theory, and a particular model (four-dimensional Gaussian Free Field) that satisfies these.
 2. [Lean-QuantumInfo](https://github.com/Timeroot/Lean-QuantumInfo). _Archived for the time being._ Focused on finite-dimensional quantum information: channels, entropy, capacities, and a lot of mathematical machinery for more efficiently manipulating Hermitian matrices. Culminated in quantum generalized Stein's Lemma. Now merged into Physlib.
-3. [LeanQuantum](https://github.com/inQWIRE/LeanQuantum). Focused on qubits and qubit-gates. From the same group as the [SQIR / VOQC](https://github.com/inQWIRE/SQIR) verified quantum compiler in Roqc, although the Lean repo is much smaller.
-5. [Lean-QEC](https://github.com/VerifiedQC/Lean-QEC). Companion to [https://arxiv.org/abs/2605.16523](End-to-End Formalization of Quantum Error Correction).
-6. [Algolean](https://github.com/Shreyas4991/Algolean) ([Website](https://shreyas4991.github.io/Algolean/)). Repository of various algorithms and their complexity; includes some quantum algorithms and circuits.
+3. [LeanQuantum](https://github.com/inQWIRE/LeanQuantum). Focused on qubits and qubit-gates. From the same group (Xiaodi Wu) as the [SQIR / VOQC](https://github.com/inQWIRE/SQIR) verified quantum compiler in Roqc, although the Lean repo is much smaller.
+5. [Lean-QEC](https://github.com/VerifiedQC/Lean-QEC). Companion to [https://arxiv.org/abs/2605.16523](End-to-End Formalization of Quantum Error Correction), also from Xiaodi Wu's group.
+6. [Algolean](https://github.com/Shreyas4991/Algolean) ([Website](https://shreyas4991.github.io/Algolean/)). Repository of various algorithms and their complexity; includes some quantum algorithms and circuits. Largely organized by Shreyas Srinivas.
 7. [lean-quantum](https://github.com/Hayata-Yamasaki-Group/lean-quantum). Hayata Yamasaki's group work on a (very mathematical) treatment of quantum mechanics, mostly in the context of operator inequalities.
-8. [Spectra](https://github.com/adambornemann-glitch/Spectra). Highly mathematical treatment of quantum mechanics, including infinite-dimensional systems.
-9. [MerLean: Examples](https://github.com/doxtor6/MerLean-examples) ([Website](https://arthurmerlean.com/)). Companion repository to [https://arxiv.org/abs/2602.16554](MerLean: An Agentic Framework for Autoformalization in Quantum Computation).
-12. [lean-qec-sslp](https://github.com/LionSR/lean-qec-sslp). Companion repository to [https://arxiv.org/abs/2510.20728](Co-Designing Quantum Codes with Transversal Diagonal Gates via Multi-Agent Systems.
+8. [QuantumOptimization](https://github.com/urikol/QuantumOptimization). Dirk Englund's group work on QAOA. Companion repository to [A Machine-Verified Proof of a Quantum-Optimization Conjecture](https://arxiv.org/abs/2606.29687).
+9. [Spectra](https://github.com/adambornemann-glitch/Spectra). Highly mathematical treatment of quantum mechanics, including infinite-dimensional systems. By Adam Bornemann.
+10. [MerLean: Examples](https://github.com/doxtor6/MerLean-examples) ([Website](https://arthurmerlean.com/)). Companion repository to [MerLean: An Agentic Framework for Autoformalization in Quantum Computation](https://arxiv.org/abs/2602.16554).
+11. [QLean](https://github.com/Paul-Lez/QLean/tree/main). More quantum algorithms focused, downstream of CSLib. By Paul Lezau.
+12. [lean-qec-sslp](https://github.com/LionSR/lean-qec-sslp). Companion repository to [Co-Designing Quantum Codes with Transversal Diagonal Gates via Multi-Agent Systems](https://arxiv.org/abs/2510.20728).
 13. [lean4-quantum](https://github.com/guest2180/lean4-quantum). Port from Lean 3 of no-cloning and the uncertainty principle.
 10. [Lean-QuantumAlg](https://github.com/QudeLeap/Lean-QuantumAlg). Quantum algorithms.
 11. [QECLean](https://github.com/Stavan-Jain/QECLean). Quantum error correction.
@@ -26,6 +28,7 @@ Chronological order.
 5. [MerLean: An Agentic Framework for Autoformalization in Quantum Computation](https://arxiv.org/abs/2602.16554). Yuanjie Ren, Jinzheng Li, Yidi Qi.
 6. [Formalization of QFT](https://arxiv.org/abs/2603.15770). Michael R. Douglas, Sarah Hoback, Anna Mei, Ron Nissim.
 7. [End-to-End Formalization of Quantum Error Correction](https://arxiv.org/abs/2605.16523). Mattias Ehatamm, Yi Lee, Xiaodi Wu, Runzhou Tao.
+8. [A Machine-Verified Proof of a Quantum-Optimization Conjecture](https://arxiv.org/abs/2606.29687). Uri Kol, Maor Ben-Shahar, Kfir Sulimany, Dirk Englund.
 
 # Relevant Papers not in Lean (Roqc, Isabelle)
 Chronological order.
