@@ -16,7 +16,10 @@ This list is _very loosely_ sorted by some combination of scale, age, ongoign co
 12. [lean-qec-sslp](https://github.com/LionSR/lean-qec-sslp). Companion repository to [Co-Designing Quantum Codes with Transversal Diagonal Gates via Multi-Agent Systems](https://arxiv.org/abs/2510.20728).
 13. [lean4-quantum](https://github.com/guest2180/lean4-quantum). Port from Lean 3 of no-cloning and the uncertainty principle.
 10. [Lean-QuantumAlg](https://github.com/QudeLeap/Lean-QuantumAlg). Quantum algorithms.
-11. [QECLean](https://github.com/Stavan-Jain/QECLean). Quantum error correction.
+11. [QCLib](https://github.com/QuCompLean/QCLib). Framework for quantum circuits and computations. David Gross and Davood Tehrani.
+12. [QuantSem](https://github.com/Carson-9/QuantSem). Mathematical semantics of quantum computing.
+13. [Quantum4Lean](https://github.com/Alektronnik/Quantum4Lean). State vector and density matrix simulation of quantum circuits. Has a DSL for QASM. No Mathlib dependency, uses `Float` for calculation.
+14. [QECLean](https://github.com/Stavan-Jain/QECLean). Quantum error correction.
 
 # Relevant Papers in Lean
 Chronological order.
