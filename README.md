@@ -2,7 +2,7 @@
 
 Hi! My name's Alex Meiburg.
 
-I'm at postdoc at [University of Waterloo's IQC](https://uwaterloo.ca/institute-for-quantum-computing/) and the [Perimeter Institute](https://perimeterinstitute.ca/). My interests generally consist of quantum information and quantum complexity theory. I got my physics PhD at [UC Santa Barbara](https://www.physics.ucsb.edu/) in June 2023, advised by [Bela Bauer](https://scholar.google.com/citations?user=38AoAQ8AAAAJ&hl=en), funded by [Microsoft Station Q](https://www.microsoft.com/en-us/research/people/belabaue/). My undergrad was at Caltech where I earned a dual B.S. in Math and Physics.
+I'm an Assistant Professor of Applied Math at [University of Waterloo's IQC](https://uwaterloo.ca/institute-for-quantum-computing/) and the [Perimeter Institute](https://perimeterinstitute.ca/). My interests generally consist of quantum information and quantum complexity theory. I got my physics PhD at [UC Santa Barbara](https://www.physics.ucsb.edu/) in June 2023, advised by [Bela Bauer](https://scholar.google.com/citations?user=38AoAQ8AAAAJ&hl=en), funded by [Microsoft Station Q](https://www.microsoft.com/en-us/research/people/belabaue/). My undergrad was at Caltech where I earned a dual B.S. in Math and Physics.
 
 ## This site
 
